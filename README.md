@@ -7,4 +7,5 @@ Dalton Wiebold - dwiebold@msudenver.edu
 Alex Whitlatch - awhitlat@msudenver.edu
 
 Dan Zapfel - dzapfel@msudenver.edu
+
 Justin Wu - jwu@msudenver.edu
