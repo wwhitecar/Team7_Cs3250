@@ -9,3 +9,5 @@ Alex Whitlatch - awhitlat@msudenver.edu
 Dan Zapfel - dzapfel@msudenver.edu
 
 Justin Wu - jwu@msudenver.edu
+
+Nathanael Whitney 0 nwhitne3@msudenver.edu
