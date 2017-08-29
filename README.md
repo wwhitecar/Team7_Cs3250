@@ -1,4 +1,4 @@
-# Team7_Cs3250
+# Team6_Cs3250
 William Whitecar - wwhitecar@msudenver.edu
 
 Dalton Wiebold - dwiebold@msudenver.edu 
@@ -10,4 +10,4 @@ Dan Zapfel - dzapfel@msudenver.edu
 
 Justin Wu - jwu@msudenver.edu
 
-Nathanael Whitney 0 nwhitne3@msudenver.edu
+Nathanael Whitney - nwhitne3@msudenver.edu
