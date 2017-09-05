@@ -11,3 +11,5 @@ Dan Zapfel - dzapfel@msudenver.edu
 Justin Wu - jwu@msudenver.edu
 
 Nathanael Whitney - nwhitne3@msudenver.edu
+
+Alex Whitlatch - Pushed initial application to GitHub Sept. 5, 2017
