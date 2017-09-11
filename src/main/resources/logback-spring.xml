@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+  <springProfile name="win-log">
+    <appender name="WINDOWS-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <file>C:/logs/cc-template/application.log</file>
+      <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+        <fileNamePattern>
+          C:/logs/cc-template/application-%d{yyyy-MM-dd}.%i.log
+        </fileNamePattern>
+        <maxHistory>5</maxHistory>
+        <maxFileSize>500MB</maxFileSize>
+        <totalSizeCap>5GB</totalSizeCap>
+      </rollingPolicy>
+
+      <encoder>
+        <Pattern>
+          %date{HH:mm:ss.SSS} [%thread] %-5level %logger{15} %msg%n>
+        </Pattern>
+      </encoder>
+    </appender>
+    <logger name="com.ticketmaster.cctm" level="debug"
+            additivity="true">
+      <appender-ref ref="WINDOWS-FILE"/>
+    </logger>
+  </springProfile>
+
+  <springProfile name="mac-log">
+    <appender name="MAC-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <file>${HOME}/logs/cc-template/application.log</file>
+      <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+        <fileNamePattern>
+          ${HOME}/logs/cc-template/application-%d{yyyy-MM-dd}.%i.log
+        </fileNamePattern>
+        <maxHistory>5</maxHistory>
+        <maxFileSize>500MB</maxFileSize>
+        <totalSizeCap>5GB</totalSizeCap>
+      </rollingPolicy>
+
+      <encoder>
+        <Pattern>
+          %date{HH:mm:ss.SSS} [%thread] %-5level %logger{15} %msg%n>
+        </Pattern>
+      </encoder>
+    </appender>
+
+    <logger name="com.ticketmaster.cctm" level="debug"
+            additivity="true">
+      <appender-ref ref="MAC-FILE"/>
+    </logger>
+  </springProfile>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <Pattern>
+        <![CDATA[%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %level %logger{15} %msg%n]]>
+      </Pattern>
+    </encoder>
+  </appender>
+
+  <root level="info">
+    <appender-ref ref="STDOUT"/>
+  </root>
+
+</configuration>

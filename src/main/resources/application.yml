@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: default
+test:
+  description: Description for cc-template
+example:
+  hello_msg: hello from main/resources/application.yml
+  hello_password: "My!Main!Resources!Password"
+
+
+
+#server:
+#  port: 8443
+#  ssl:
+#    key-store: classpath:2017Keystore.p12
+#    key-store-password: changeit
+#    keyStoreType: PKCS12
+#    keyAlias: tomcat
+#  tomcat:
+#    accesslog:
+#      enabled: true
+
+---
+spring:
+  profiles: prod
+test:
+  description: Description for cc-template
