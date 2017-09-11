@@ -21,13 +21,6 @@
       <version>1.4.3.RELEASE</version>
     </dependency>
 
-    <!-- Auto-code generation -->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.16.12</version>
-    </dependency>
-
     <!-- REST API Documentation -->
     <dependency>
       <groupId>io.springfox</groupId>
@@ -52,7 +45,6 @@
         </exclusion>
       </exclusions>
     </dependency>
-
     <dependency>
       <groupId>io.springfox</groupId>
       <artifactId>springfox-swagger-ui</artifactId>
@@ -83,7 +75,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <mainClass>com.team7.Application</mainClass>
+          <mainClass>com.team7.Team7Application</mainClass>
           <layout>ZIP</layout>
         </configuration>
         <executions>
