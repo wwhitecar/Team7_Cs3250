@@ -11,7 +11,7 @@ import com.team7.app.business.dto.UserDto;
 @RestController("/user")
 public class UserController {
 
-	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@RequestMapping(value = "/test", method = RequestMethod.POST)
 	  public String createUser(@RequestBody UserDto user) {
 	 //do work
 	    return "Success";
