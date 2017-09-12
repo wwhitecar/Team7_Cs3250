@@ -33,6 +33,13 @@
          <groupId>com.h2database</groupId>
          <artifactId>h2</artifactId>
      </dependency>
+     <!-- https://mvnrepository.com/artifact/com.github.sps.mustache/mustache-spring-view -->
+	<dependency>
+   	 <groupId>com.github.sps.mustache</groupId>
+    	<artifactId>mustache-spring-view</artifactId>
+    	<version>1.0</version>
+	</dependency>
+     
 
     <!-- REST API Documentation -->
     <dependency>
