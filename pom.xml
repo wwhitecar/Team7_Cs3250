@@ -13,32 +13,45 @@
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>1.4.3.RELEASE</version>
   </parent>
-
+  
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <tomcat.version>8.5.9</tomcat.version>
+  </properties>
+  
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
       <version>1.4.3.RELEASE</version>
     </dependency>
-    
+
     <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-rest</artifactId>
-     </dependency>
-     <dependency>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-starter-data-jpa</artifactId>
-     </dependency>
-     <dependency>
-         <groupId>com.h2database</groupId>
-         <artifactId>h2</artifactId>
-     </dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <version>1.4.3.RELEASE</version>
+    </dependency>
+
      <!-- https://mvnrepository.com/artifact/com.github.sps.mustache/mustache-spring-view -->
 	<dependency>
    	 <groupId>com.github.sps.mustache</groupId>
     	<artifactId>mustache-spring-view</artifactId>
     	<version>1.0</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	<dependency>
+   		<groupId>mysql</groupId>
+    	<artifactId>mysql-connector-java</artifactId>
+    	<version>6.0.6</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-jdbc</artifactId>
+	    <version>4.3.11.RELEASE</version>
+	</dependency>
+	
      
 
     <!-- REST API Documentation -->
@@ -95,7 +108,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <mainClass>com.team7.Team7Application</mainClass>
+          <mainClass>com.team7.Application</mainClass>
           <layout>ZIP</layout>
         </configuration>
         <executions>
