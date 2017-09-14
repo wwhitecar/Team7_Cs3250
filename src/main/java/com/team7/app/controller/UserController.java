@@ -25,7 +25,7 @@ public class UserController {
 	@Autowired //Wires from the configuration class 'BaseConfig' 
 	NamedParameterJdbcTemplate namedJdbcTemplate;
 	
-	@Value("${sql.insertUserSql}") //basically sql.insertUserSql = insertUser controlelled via yml file
+	@Value("${sql.insertUserSql}") //basically sql.insertUserSql = insertUser controlelled via yml file. Look at yml file to see how these variables are added (Under resources folder)
 	String insertUserSql;
 	@Value("${sql.getUserByLastNameSql}")
 	String getUserByLastNameSql;
