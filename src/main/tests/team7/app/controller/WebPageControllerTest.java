@@ -1,4 +1,4 @@
-package test.team7.app.controller;
+package team7.app.controller;
 
 import org.junit.Test;
 

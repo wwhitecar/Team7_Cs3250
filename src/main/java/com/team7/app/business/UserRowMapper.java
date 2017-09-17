@@ -14,24 +14,24 @@ import com.team7.app.business.dto.UserDto;
 public class UserRowMapper implements RowMapper<UserDto> {
 
     /**
-     * Empty Constructer
+     * Empty Constructer.
      */
-	public UserRowMapper() {
+    public UserRowMapper() {
+    }
 
-	}
-
-	/**
-	 * This is responsible for iterating through result set
-	 * @param rs - A result set
-	 * @param rowNum - the row number
-	 * @return Userdto - User
-	 * @throws SQLException
-	 */
-	@Override
-	public UserDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-		UserDto dto = new UserDto(rs.getString("first_name"),
-                rs.getString("last_name"), rs.getInt("student_id"));
-		return dto;
-	}
-
+    /**
+    * This is responsible for iterating through result set.
+    * @param rs - A result set
+    * @param rowNum - the row number
+    * @return Userdto - User
+    * @throws SQLException
+    */
+    @Override
+    public UserDto mapRow(final ResultSet rs,
+            final int rowNum) throws SQLException {
+        UserDto dto = new UserDto(rs.getString("first_name"),
+                rs.getString("last_name"),
+                rs.getInt("student_id"));
+        return dto;
+    }
 }

@@ -1,4 +1,4 @@
-package test.team7.app.business.dto;
+package team7.app.business.dto;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
