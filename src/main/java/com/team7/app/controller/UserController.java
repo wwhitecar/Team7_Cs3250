@@ -29,6 +29,8 @@ public class UserController {
 	String insertUserSql;
 	@Value("${sql.getUserByLastNameSql}")
 	String getUserByLastNameSql;
+	@Value("${sql.deleteUserByIdSql}")
+	String deleteUserByIdSql;
 	@RequestMapping(value = "/", method = RequestMethod.POST) //Creates a student and puts it in the database
 	  public String createUser(@RequestBody UserDto user) {
 		Map<String,Object> params = new HashMap<>();
@@ -65,6 +67,9 @@ public class UserController {
 	
 	  @RequestMapping(value = "/id/{id}", method = RequestMethod.DELETE)//delete user by "student_id"  this will be similar to CREATE method
 	  public String deleteUserById(@PathVariable(value="id") String id) {
+		  Map<String,Object> params = new HashMap<>();
+		  params.put("student_id", id);
+		  namedJdbcTemplate.update(deleteUserByIdSql, params);
 	 
 	    return "Success";
 	  }
