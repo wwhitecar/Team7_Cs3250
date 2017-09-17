@@ -1,32 +1,48 @@
 package com.team7.app.business.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
 public class UserDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	private String name;
+	private String firstName;
+	private String lastName;
 	private int id;
 
-	public String getName() {
-		return name;
+    /**
+     * Empty Constructer
+     */
+    public UserDto(){
+
+    }
+
+    public UserDto(String firstName, String lastName, int id){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = id;
+    }
+    /**
+     * get the first name of user
+     * @return String - first name of user
+     */
+	public String getFirstName() {
+
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+    /**
+     * Gets the last name of the user
+     * @return String - Last name of the user
+     */
+	public String getLastName() {
+
+		return lastName;
 	}
 
+    /**
+     * Get id of the user
+     * @return Int - the id for the user
+     */
 	public int getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
+	    return id;
 	}
 
 }

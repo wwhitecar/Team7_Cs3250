@@ -1,27 +1,31 @@
 spring:
   profiles:
     active: default
-test:
-  description: Description for cc-template
-example:
-  hello_msg: hello from main/resources/application.yml
-  hello_password: "My!Main!Resources!Password"
 
+sql:
+  insertUserSql: insert into users (student_id, first_name, last_name) values (:student_id,:first_name,:last_name)
+  getUserByIdSql: select * from users where student_id = :student_id
+  deleteUserByIdSql: delete from users where student_id = :student_id
+  updateUserByIdSql: update users set first_name = :first_name, last_name = :last_name where student_id = :student_id
 
-
-#server:
-#  port: 8443
-#  ssl:
-#    key-store: classpath:2017Keystore.p12
-#    key-store-password: changeit
-#    keyStoreType: PKCS12
-#    keyAlias: tomcat
-#  tomcat:
-#    accesslog:
-#      enabled: true
+schedule:
+  database:
+    url: jdbc:mysql://localhost:3306/schedule
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    test-on-borrow: true
+    validation-query: SELECT 1
 
 ---
 spring:
-  profiles: prod
-test:
-  description: Description for cc-template
+  profiles: mac
+
+schedule:
+  database:
+    url: jdbc:mysql://localhost:3306/schedule?autoReconnect=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: otis.missouri
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    test-on-borrow: true
+    validation-query: SELECT 1
