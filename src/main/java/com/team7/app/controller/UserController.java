@@ -36,7 +36,6 @@ public class UserController {
 	@RequestMapping(value = "/", method = RequestMethod.POST) //Creates a student and puts it in the database
 	  public String createUser(@RequestParam("Id")int id, @RequestParam("First Name")String firstName,
 							   @RequestParam("Last Name")String lastName) {
-		System.out.println("here:");
 		Map<String,Object> params = new HashMap<>();
 		params.put("student_id", id);
 		params.put("first_name", firstName);
@@ -47,11 +46,13 @@ public class UserController {
 	  }
 	  
 	  @RequestMapping(value = "/student_id/{id}", method = RequestMethod.GET)
-	  public List<UserDto> readUserById(@PathVariable(value="id") String id) {
+	  public String readUserById(@PathVariable(value="id") String id) {
 		  Map<String,Object> params = new HashMap<>();
 		  params.put("student_id", id);
 		  List<UserDto> dto = namedJdbcTemplate.query(getUserByIdSql, params, new UserRowMapper());
-	    return dto;
+		  UserDto user = dto.get(0);
+		  return ("Name: " + user.getFirstName() +" " + user.getLastName()
+				  + "\nUser Id: " + user.getId());
 	  }
 
 	  @RequestMapping(value = "/update", method = RequestMethod.PUT) //Update first and last name by "student_id"  this will be similar to CREATE method
