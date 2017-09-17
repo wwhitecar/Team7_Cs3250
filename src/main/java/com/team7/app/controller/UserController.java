@@ -34,6 +34,7 @@ public class UserController {
 	@RequestMapping(value = "/", method = RequestMethod.POST) //Creates a student and puts it in the database
 	  public String createUser(@RequestParam("Id")int id, @RequestParam("First Name")String firstName,
 							   @RequestParam("Last Name")String lastName) {
+		System.out.println("here:");
 		Map<String,Object> params = new HashMap<>();
 		params.put("student_id", id);
 		params.put("first_name", firstName);
@@ -50,24 +51,24 @@ public class UserController {
 		  List<UserDto> dto = namedJdbcTemplate.query(getUserByIdSql, params, new UserRowMapper());
 	    return dto;
 	  }
-	  
-	  @RequestMapping(value = "/id/{id}", method = RequestMethod.GET) //create queries (reference yml file) 
+
+	  @RequestMapping(value = "/id/{id}", method = RequestMethod.GET) //create queries (reference yml file)
 	  public UserDto readUserById(@PathVariable(value="id") int id) {
 		  UserDto dto = new UserDto();//Grab data from database and fill this
 		 // dto.setName("bob");
 		  dto.setId(1);
 	    return dto;
 	  }
-	  
-	  
+
+
 	  @RequestMapping(value = "/update", method = RequestMethod.PUT) //Update first and last name by "student_id"  this will be similar to CREATE method
 	  public String updateHello(@RequestBody UserDto user) {
 	 
 	    return "Success";
 	  }
 	
-	  @RequestMapping(value = "/id/{id}", method = RequestMethod.DELETE)//delete user by "student_id"  this will be similar to CREATE method
-	  public String deleteUserById(@PathVariable(value="id") String id) {
+	  @RequestMapping(value = "/id/", method = RequestMethod.GET)//delete user by "student_id"  this will be similar to CREATE method
+	  public String deleteUserById(@RequestParam("Id") int id) {
 		  Map<String,Object> params = new HashMap<>();
 		  params.put("student_id", id);
 		  namedJdbcTemplate.update(deleteUserByIdSql, params);
