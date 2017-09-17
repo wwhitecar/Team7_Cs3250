@@ -1,48 +1,69 @@
 package com.team7.app.business.dto;
 
+/**
+ * User for the database to keep track of.
+ */
 public class UserDto {
 
-	private String firstName;
-	private String lastName;
-	private int id;
-
     /**
-     * Empty Constructer
+     * First name of user.
      */
-    public UserDto(){
+    private String firstName;
+
+    /**
+     * Last name of user.
+     */
+    private String lastName;
+
+    /**
+     * Id of user.
+     */
+    private int id;
+
+    /**
+     * Empty Constructer.
+     */
+    public UserDto() {
 
     }
 
-    public UserDto(String firstName, String lastName, int id){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.id = id;
+    /**
+     * Full param constructer.
+     * @param fName - firts name of user
+     * @param lName - last name of user
+     * @param iD - id of user
+     */
+    public UserDto(final String fName,
+                   final String lName, final int iD) {
+        this.firstName = fName;
+        this.lastName = lName;
+        this.id = iD;
     }
     /**
-     * get the first name of user
+     * Get the first name of user.
      * @return String - first name of user
      */
-	public String getFirstName() {
+    public String getFirstName() {
 
-		return firstName;
-	}
+        return firstName;
+    }
 
     /**
-     * Gets the last name of the user
+     * Gets the last name of the user.
      * @return String - Last name of the user
      */
-	public String getLastName() {
+    public String getLastName() {
 
-		return lastName;
-	}
+        return lastName;
+    }
 
     /**
-     * Get id of the user
+     * Get id of the user.
      * @return Int - the id for the user
      */
-	public int getId() {
+    public int getId() {
 
-	    return id;
-	}
+        return id;
+    }
 
 }
