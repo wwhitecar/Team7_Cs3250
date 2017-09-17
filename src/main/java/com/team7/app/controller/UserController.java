@@ -32,11 +32,12 @@ public class UserController {
 	@Value("${sql.deleteUserByIdSql}")
 	String deleteUserByIdSql;
 	@RequestMapping(value = "/", method = RequestMethod.POST) //Creates a student and puts it in the database
-	  public String createUser(@RequestBody UserDto user) {
+	  public String createUser(@RequestParam("Id")int id, @RequestParam("First Name")String firstName,
+							   @RequestParam("Last Name")String lastName) {
 		Map<String,Object> params = new HashMap<>();
-		params.put("student_id", user.getId());
-		params.put("first_name", user.getFirstName());
-		params.put("last_name", user.getLastName());
+		params.put("student_id", id);
+		params.put("first_name", firstName);
+		params.put("last_name", lastName);
 		namedJdbcTemplate.update(insertUserSql, params);
 	    return "Success";
 	    

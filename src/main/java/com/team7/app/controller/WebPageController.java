@@ -15,15 +15,4 @@ public class WebPageController {
 	@RequestMapping("/greeting")
 	String home() {return "Hello world!";}
 
-    @RequestMapping(value="/createUser", method=RequestMethod.GET)
-    public String createUser(@RequestParam("Id")int id, @RequestParam("First Name")String firstName,
-                             @RequestParam("Last Name")String lastName) {
-        UserDto user = new UserDto();
-        UserController uC = new UserController();
-        user.setFirstName(firstName);
-        user.setId(id);
-        user.setLastName(lastName);
-
-        return uC.createUser(user);
-    }
 }
