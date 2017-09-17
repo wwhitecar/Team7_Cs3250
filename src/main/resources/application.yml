@@ -4,7 +4,7 @@ spring:
 
 sql:
   insertUserSql: insert into users (student_id, first_name, last_name) values (:student_id,:first_name,:last_name)
-  getUserByLastNameSql: select * from users where last_name = :last_name
+  getUserByIdSql: select * from users where student_id = :student_id
   deleteUserByIdSql: delete from users where student_id = :student_id
 
 schedule:

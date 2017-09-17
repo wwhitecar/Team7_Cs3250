@@ -27,8 +27,8 @@ public class UserController {
 	
 	@Value("${sql.insertUserSql}") //basically sql.insertUserSql = insertUser controlelled via yml file. Look at yml file to see how these variables are added (Under resources folder)
 	String insertUserSql;
-	@Value("${sql.getUserByLastNameSql}")
-	String getUserByLastNameSql;
+	@Value("${sql.getUserByIdSql}")
+	String getUserByIdSql;
 	@Value("${sql.deleteUserByIdSql}")
 	String deleteUserByIdSql;
 	@RequestMapping(value = "/", method = RequestMethod.POST) //Creates a student and puts it in the database
@@ -43,11 +43,11 @@ public class UserController {
 	    
 	  }
 	  
-	  @RequestMapping(value = "/lastName/{lastName}", method = RequestMethod.GET)
-	  public List<UserDto> readUserByLastName(@PathVariable(value="lastName") String name) {
+	  @RequestMapping(value = "/student_id/{id}", method = RequestMethod.GET)
+	  public List<UserDto> readUserById(@PathVariable(value="id") String id) {
 		  Map<String,Object> params = new HashMap<>();
-		  params.put("last_name", name);
-		  List<UserDto> dto = namedJdbcTemplate.query(getUserByLastNameSql, params, new UserRowMapper());
+		  params.put("student_id", id);
+		  List<UserDto> dto = namedJdbcTemplate.query(getUserByIdSql, params, new UserRowMapper());
 	    return dto;
 	  }
 	  
