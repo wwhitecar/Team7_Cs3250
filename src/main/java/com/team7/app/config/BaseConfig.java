@@ -11,14 +11,25 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 @Configuration //Enables Spring to instantiate each object 
 public class BaseConfig {
-	@Bean(name="scheduleDataSource") //There are only SINGLE instance of a given bean. 
-	@ConfigurationProperties(prefix = "schedule.database")//Wires the YAML file configurations to the data source
-	public DataSource scheduleDataSource() {//
+
+	@Bean(name="scheduleDataSource") //There are only SINGLE instance of a given bean.
+
+    /**
+     * Wires the YAML file configurations to the data source
+     * @return DataSource
+     */
+    @ConfigurationProperties(prefix = "schedule.database")
+	public DataSource scheduleDataSource() {
 		System.out.println("Try");
 		return DataSourceBuilder.create().build();
 	}
 
-	@Bean // Uses the above DataSource on instantiation
+    /**
+     * Uses the above DataSource on instantiation
+     * @param scheduleDataSource
+     * @return NamedParameterJdbcTemplate - for acess to the sql DB
+     */
+	@Bean
 	public NamedParameterJdbcTemplate namedJdbcTemplate(@Autowired DataSource scheduleDataSource) {//Used to open a connection to the database. Allows names for parameters.
 		return new NamedParameterJdbcTemplate(scheduleDataSource);
 	}

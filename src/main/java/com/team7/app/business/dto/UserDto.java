@@ -6,28 +6,43 @@ public class UserDto {
 	private String lastName;
 	private int id;
 
+    /**
+     * Empty Constructer
+     */
+    public UserDto(){
+
+    }
+
+    public UserDto(String firstName, String lastName, int id){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.id = id;
+    }
+    /**
+     * get the first name of user
+     * @return String - first name of user
+     */
 	public String getFirstName() {
+
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	
+    /**
+     * Gets the last name of the user
+     * @return String - Last name of the user
+     */
 	public String getLastName() {
+
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
+    /**
+     * Get id of the user
+     * @return Int - the id for the user
+     */
 	public int getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
+	    return id;
 	}
 
 }
