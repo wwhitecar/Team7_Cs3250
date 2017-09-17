@@ -6,6 +6,7 @@ sql:
   insertUserSql: insert into users (student_id, first_name, last_name) values (:student_id,:first_name,:last_name)
   getUserByIdSql: select * from users where student_id = :student_id
   deleteUserByIdSql: delete from users where student_id = :student_id
+  updateUserByIdSql: update users set first_name = :first_name, last_name = :last_name where student_id = :student_id
 
 schedule:
   database:

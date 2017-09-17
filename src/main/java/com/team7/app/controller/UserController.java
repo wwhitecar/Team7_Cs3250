@@ -31,6 +31,8 @@ public class UserController {
 	String getUserByIdSql;
 	@Value("${sql.deleteUserByIdSql}")
 	String deleteUserByIdSql;
+	@Value("${sql.updateUserByIdSql}")
+	String updateUserByIdSql;
 	@RequestMapping(value = "/", method = RequestMethod.POST) //Creates a student and puts it in the database
 	  public String createUser(@RequestParam("Id")int id, @RequestParam("First Name")String firstName,
 							   @RequestParam("Last Name")String lastName) {
@@ -52,17 +54,15 @@ public class UserController {
 	    return dto;
 	  }
 
-	  @RequestMapping(value = "/id/{id}", method = RequestMethod.GET) //create queries (reference yml file)
-	  public UserDto readUserById(@PathVariable(value="id") int id) {
-		  UserDto dto = new UserDto();//Grab data from database and fill this
-		 // dto.setName("bob");
-		  dto.setId(1);
-	    return dto;
-	  }
-
-
 	  @RequestMapping(value = "/update", method = RequestMethod.PUT) //Update first and last name by "student_id"  this will be similar to CREATE method
-	  public String updateHello(@RequestBody UserDto user) {
+	  public String updateUserById(@RequestParam("Id")int id, @RequestParam("First Name")String firstName,
+			   @RequestParam("Last Name")String lastName) {
+		  Map<String,Object> params = new HashMap<>();
+		  params.put("student_id", id);
+		  params.put("first_name", firstName);
+		  params.put("last_name", lastName);
+		  System.out.println(firstName);
+		  namedJdbcTemplate.update(updateUserByIdSql, params);
 	 
 	    return "Success";
 	  }
