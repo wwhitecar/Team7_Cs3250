@@ -18,11 +18,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2 //This enables swagger
 public class Application {
 
+   //Checkstyle calls for private constructer but does
+   //not work with configuration
+
   /**
    * Main method for the application.
    * @param args - list of arguments
    */
-  public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
+  public static void main(final String[] args) {
+      SpringApplication.run(Application.class, args);
   }
 }

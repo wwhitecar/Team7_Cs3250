@@ -9,6 +9,8 @@ public class ApplicationTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void emptyApplicationContext() throws Exception {
-        Application.main(null);
+        Application app = new Application();
+        app.main(null);
+
     }
 }

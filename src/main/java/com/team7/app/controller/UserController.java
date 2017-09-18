@@ -26,7 +26,7 @@ public class UserController {
      * Wires from the configuration class 'BaseConfig'.
      */
     @Autowired
-    private NamedParameterJdbcTemplate namedJdbcTemplate;
+    public NamedParameterJdbcTemplate namedJdbcTemplate;
 
     /**
      * Basically sql.insertUserSql = insertUser
