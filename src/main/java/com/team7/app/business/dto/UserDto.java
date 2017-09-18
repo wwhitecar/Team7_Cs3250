@@ -1,32 +1,69 @@
 package com.team7.app.business.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
+/**
+ * User for the database to keep track of.
+ */
 public class UserDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	private String name;
-	private int id;
+    /**
+     * First name of user.
+     */
+    private String firstName;
 
-	public String getName() {
-		return name;
-	}
+    /**
+     * Last name of user.
+     */
+    private String lastName;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * Id of user.
+     */
+    private int id;
 
-	public int getId() {
-		return id;
-	}
+    /**
+     * Empty Constructer.
+     */
+    public UserDto() {
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    }
+
+    /**
+     * Full param constructer.
+     * @param fName - firts name of user
+     * @param lName - last name of user
+     * @param iD - id of user
+     */
+    public UserDto(final String fName,
+                   final String lName, final int iD) {
+        this.firstName = fName;
+        this.lastName = lName;
+        this.id = iD;
+    }
+    /**
+     * Get the first name of user.
+     * @return String - first name of user
+     */
+    public String getFirstName() {
+
+        return firstName;
+    }
+
+    /**
+     * Gets the last name of the user.
+     * @return String - Last name of the user
+     */
+    public String getLastName() {
+
+        return lastName;
+    }
+
+    /**
+     * Get id of the user.
+     * @return Int - the id for the user
+     */
+    public int getId() {
+
+        return id;
+    }
 
 }

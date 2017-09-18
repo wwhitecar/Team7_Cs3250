@@ -1,56 +1,125 @@
 package com.team7.app.controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.team7.app.business.UserRowMapper;
 import com.team7.app.business.dto.UserDto;
 
-@RestController("/user")
+/**
+ * Class that will communicate with both the webapplication
+ * and the data base to transfer information.
+ */
+@RestController
+@RequestMapping(value = "/user")
 public class UserController {
 
-	@RequestMapping(value = "/test", method = RequestMethod.POST)
-	  public String createUser(@RequestBody UserDto user) {
-	 //do work
-	    return "Success";
-	    
-	  }
-	  
-	  @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
-	  public UserDto readUserByName(@PathVariable(value="name") String name) {
-		  UserDto dto = new UserDto();//Grab data from database and fill this
-		  dto.setName("bob");
-		  dto.setId(1);
-	    return dto;
-	  }
-	  
-	  @RequestMapping(value = "/id/{id}", method = RequestMethod.GET)
-	  public UserDto readUserById(@PathVariable(value="id") String id) {
-		  UserDto dto = new UserDto();//Grab data from database and fill this
-		  dto.setName("bob");
-		  dto.setId(1);
-	    return dto;
-	  }
-	  
-	  
-	  @RequestMapping(value = "/update", method = RequestMethod.PUT)
-	  public String updateHello(@RequestBody UserDto user) {
-	 
-	    return "Success";
-	  }
-	  
-	  @RequestMapping(value = "/name/{name}", method = RequestMethod.DELETE)
-	  public String deleteUserByName(@PathVariable(value="name") String name) {
-	 
-	    return "Success";
-	  }
-	  
-	  @RequestMapping(value = "/id/{id}", method = RequestMethod.DELETE)
-	  public String deleteUserById(@PathVariable(value="id") String id) {
-	 
-	    return "Success";
-	  }
+    /**
+     * Wires from the configuration class 'BaseConfig'.
+     */
+    @Autowired
+    public NamedParameterJdbcTemplate namedJdbcTemplate;
 
+    /**
+     * Basically sql.insertUserSql = insertUser
+     * controlled via yml file.
+     */
+    @Value("${sql.insertUserSql}")
+    private String insertUserSql;
+
+    /**
+     * Basically sql.getUserSql = getUser
+     * controlled via yml file.
+     */
+    @Value("${sql.getUserByIdSql}")
+    private String getUserByIdSql;
+
+    /**
+     * Basically sql.deleteUserSql = deleteUser
+     * controlled via yml file.
+     */
+    @Value("${sql.deleteUserByIdSql}")
+    private String deleteUserByIdSql;
+
+    /**
+     *Basically sql.updateUserSql = updateUser
+     * controlled via yml file.
+     */
+    @Value("${sql.updateUserByIdSql}")
+    private String updateUserByIdSql;
+
+    /**
+     * Creates a student and puts it in the database.
+     * @param id - id of the student
+     * @param firstName - first name of the student
+     * @param lastName - last name of student
+     * @return String - message to be displayed after entry
+     */
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String createUser(final @RequestParam("Id")int id,
+                   final @RequestParam("First Name")String firstName,
+                   final @RequestParam("Last Name")String lastName) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("student_id", id);
+        params.put("first_name", firstName);
+        params.put("last_name", lastName);
+        namedJdbcTemplate.update(insertUserSql, params);
+        return "Success";
+      }
+
+    /**
+     * Read a user from the database.
+     * @param id - Value to search for user with
+     * @return String with user infromation
+     */
+    @RequestMapping(value = "/student_id/", method = RequestMethod.GET)
+      public String readUserById(final @RequestParam("Id") int id) {
+          Map<String, Object> params = new HashMap<>();
+          params.put("student_id", id);
+          List<UserDto> dto = namedJdbcTemplate.query(getUserByIdSql,
+                params, new UserRowMapper());
+          UserDto user = dto.get(0);
+          return ("Name: " + user.getFirstName() + " " + user.getLastName()
+                  + "\nUser Id: " + user.getId());
+      }
+
+    /**
+     * Update a user already in the database.
+     * @param id - id of the user to be found
+     * @param firstName - new first name of the user
+     * @param lastName - new last name of the user
+     * @return String to be displayed to user after trying to update
+     */
+      @RequestMapping(value = "/update", method = RequestMethod.GET)
+      public String updateUserById(final @RequestParam("Id")int id,
+             final @RequestParam("First Name")String firstName,
+             final @RequestParam("Last Name")String lastName) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("student_id", id);
+        params.put("first_name", firstName);
+        params.put("last_name", lastName);
+        namedJdbcTemplate.update(updateUserByIdSql, params);
+        return "Success";
+      }
+
+    /**
+     * Delete a user that is in the database.
+     * @param id - id of the user to be deleted
+     * @return String to be displayed to user after deleteing them
+     */
+    @RequestMapping(value = "/id/", method = RequestMethod.GET)
+    public String deleteUserById(final @RequestParam("Id") int id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("student_id", id);
+        namedJdbcTemplate.update(deleteUserByIdSql, params);
+        return "Success";
+      }
 }
