@@ -1,6 +1,5 @@
 package com.team7.app.business.dto;
 
-import java.util.ArrayList;
 
 /**
  * CourseDto is a course that will be avalable for the students
@@ -44,7 +43,7 @@ public class CourseDto {
     /**
      * The coreqs for the course.
      */
-    private ArrayList<CourseDto> coreqs;
+    private Object coreqs;
 
     /**
      * Empty Constructer.
@@ -64,7 +63,7 @@ public class CourseDto {
     public CourseDto(final String depart, final int courseNum,
                      final int credit, final String desctip,
                      final String learningObj, final String preReqs,
-                     final ArrayList<CourseDto> coReqs) {
+                     final Object coReqs) {
         this.department = depart;
         this.courseNumber = courseNum;
         this.credits = credit;
@@ -126,7 +125,7 @@ public class CourseDto {
      * The coreqs requird for the course.
      * @return corequs for thee course
      */
-    public ArrayList<CourseDto> getCoreqs() {
+    public Object getCoreqs() {
         return coreqs;
     }
 }
