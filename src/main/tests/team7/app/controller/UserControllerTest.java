@@ -7,6 +7,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ public class UserControllerTest {
 
     @Test
     public void createUser() throws Exception {
-            	userController.createUser(1, "tom", "Bradey");
+        assertNotNull(userController.createUser(33, "Alex", "Whitlatch"));
     }
 
     @Test
@@ -40,16 +42,18 @@ public class UserControllerTest {
         List<UserDto> result =new ArrayList<>();
         result.add(new UserDto());
         when(mockTemplate.query(anyString(), anyMapOf(String.class, Object.class), any(UserRowMapper.class))).thenReturn(result);
-        userController.readUserById(33);
+        assertNotNull(userController.readUserById(33));
     }
 
     @Test
     public void updateUserById() throws Exception {
-	    userController.updateUserById(33, "Alex", "Whitlatch");
+	    assertNotNull(userController.updateUserById(0, "Alex", "Whitlatch"));
+	    assertNotNull(userController.updateUserById(33, "Alex", "Whitlatch"));
     }
 
     @Test
     public void deleteUserById() throws Exception {
+        assertNotNull(userController.deleteUserById(33));
         userController.deleteUserById(33);
     }
 }

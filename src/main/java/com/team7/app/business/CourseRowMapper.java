@@ -1,5 +1,6 @@
-package com.team7.app.business.dto;
+package com.team7.app.business;
 
+import com.team7.app.business.dto.CourseDto;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 public class CourseRowMapper implements RowMapper<CourseDto> {
 
     /**
-     * Empty Constructer
+     * Empty Constructor.
      */
     public CourseRowMapper() {
 
@@ -28,10 +29,7 @@ public class CourseRowMapper implements RowMapper<CourseDto> {
     @Override
     public CourseDto mapRow(final ResultSet rs,
                             final int rowNumber) throws SQLException {
-        CourseDto course = new CourseDto(rs.getString("descripion"),
-                rs.getInt("course_number"), rs.getInt("credits"),
-                rs.getString("description"), rs.getString("learning_objective"),
-                rs.getString("prereqs"), rs.getObject("coreqs"));
+        CourseDto course = new CourseDto(rs.getString("descripion"), rs.getInt("course_number"), rs.getInt("credits"), rs.getString("description"), rs.getString("learning_objective"), rs.getString("prereqs"), rs.getObject("coreqs"));
         return course;
     }
 }

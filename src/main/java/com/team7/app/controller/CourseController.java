@@ -3,11 +3,15 @@ package com.team7.app.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Controlles communication between the webpages in the application
  * and the database for the courses.
  */
+@RestController
+@RequestMapping("/course")
 public class CourseController {
 
     /**
