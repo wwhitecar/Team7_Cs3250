@@ -152,7 +152,7 @@ public class CourseController {
         if (rowsChanged == 0){
             return ("Failed to find the course you are trying to update, please try again.");
         }
-        return "Success";
+        return "Successfully Updated";
     }
 
     /**
@@ -171,6 +171,6 @@ public class CourseController {
         if (rowsChanged == 0) {
             return ("Unable to find course to remove, please try again");
         }
-        return "Success";
+        return "Successfully Removed";
     }
 }

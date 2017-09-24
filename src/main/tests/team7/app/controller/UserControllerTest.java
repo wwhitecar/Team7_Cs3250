@@ -1,6 +1,7 @@
 package team7.app.controller;
 
 import com.team7.app.controller.UserController;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -8,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
@@ -26,6 +28,7 @@ public class UserControllerTest {
 	@Mock
     private NamedParameterJdbcTemplate mockTemplate;
 	UserController userController = new UserController();
+	UserDto user = new UserDto("Alex","Whitlatch", 33);
 
 	@Before
 	public void before(){
@@ -34,26 +37,32 @@ public class UserControllerTest {
 
     @Test
     public void createUser() throws Exception {
-        assertNotNull(userController.createUser(33, "Alex", "Whitlatch"));
+        assertEquals(userController.createUser(33, "Alex", "Whitlatch"), "Success");
     }
 
     @Test
     public void readUserById() throws Exception {
-        List<UserDto> result =new ArrayList<>();
-        result.add(new UserDto());
+        List<UserDto> result = new ArrayList<>();
+        result.add(user);
         when(mockTemplate.query(anyString(), anyMapOf(String.class, Object.class), any(UserRowMapper.class))).thenReturn(result);
-        assertNotNull(userController.readUserById(33));
+        assertEquals(userController.readUserById(33), "Name: Alex Whitlatch" + "\nUser Id: 33");
+
     }
 
     @Test
     public void updateUserById() throws Exception {
-	    assertNotNull(userController.updateUserById(0, "Alex", "Whitlatch"));
-	    assertNotNull(userController.updateUserById(33, "Alex", "Whitlatch"));
+        assertEquals(userController.updateUserById(33, "Alex", "Whitlatch"),
+                "Unable to find user to update, try again with different id.");
+	    when(mockTemplate.update(anyString(), anyMapOf(String.class, Object.class))).thenReturn(1);
+	    assertEquals(userController.updateUserById(33, "Trevor", "Whitecar"), "Successfully Updated");
+
     }
 
     @Test
     public void deleteUserById() throws Exception {
-        assertNotNull(userController.deleteUserById(33));
-        userController.deleteUserById(33);
+	    assertEquals(userController.deleteUserById(33),
+                "Unable to remove user, try again with different id");
+	    when(mockTemplate.update(anyString(), anyMapOf(String.class, Object.class))).thenReturn(1);
+        assertEquals(userController.deleteUserById(33), "Successfully Removed");
     }
 }
