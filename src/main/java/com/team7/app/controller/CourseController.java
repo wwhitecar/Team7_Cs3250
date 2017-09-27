@@ -76,8 +76,8 @@ public class CourseController {
             final @RequestParam("credits") int credits,
             final @RequestParam("description") String description,
             final @RequestParam("learning objective") String learningObjective,
-            final @RequestParam("prereqs") String prereqs,
-            final @RequestParam("coreqs") Object coreqs) {
+            final @RequestParam("prereqs") int prereqs,
+            final @RequestParam("coreqs") int coreqs) {
 
         Map<String, Object> params = new HashMap<>();
         params.put("department", department);
@@ -85,8 +85,26 @@ public class CourseController {
         params.put("credits", credits);
         params.put("description", description);
         params.put("learning_objective", learningObjective);
-        params.put("prereqs", prereqs);
-        params.put("coreqs", coreqs);
+
+        List<CourseDto> courseList = namedJdbcTemplate.query(getCourseByNumber, new CourseRowMapper());
+        boolean foundPreReq = false;
+        boolean foundCoReq = false;
+        for (CourseDto course : courseList) {
+            if (course.getCourseNumber() == prereqs) {
+                params.put("prereqs", course.getCourseNumber());
+                foundPreReq = true;
+            }
+            if (course.getCourseNumber() == coreqs) {
+                params.put("coreqs", course.getCourseNumber());
+                foundCoReq = true;
+            }
+        }
+        if (!foundPreReq) {
+            params.put("prereqs", 0000);
+        }
+        if (!foundCoReq) {
+            params.put("coreqs", 0000);
+        }
 
         int rowsChanged = namedJdbcTemplate.update(insertCourseSql, params);
         return ("Success");
@@ -137,16 +155,35 @@ public class CourseController {
             final @RequestParam("credits") int credits,
             final @RequestParam("description") String description,
             final @RequestParam("learning objective") String learningObjective,
-            final @RequestParam("prereqs") String prereqs,
-            final @RequestParam("coreqs") Object coreqs) {
+            final @RequestParam("prereqs") int prereqs,
+            final @RequestParam("coreqs") int coreqs) {
         Map<String, Object> params = new HashMap<>();
         params.put("department", department);
         params.put("course_number", courseNumber);
         params.put("credits", credits);
         params.put("description", description);
         params.put("learning_objective", learningObjective);
-        params.put("prereqs", prereqs);
-        params.put("coreqs", coreqs);
+
+        List<CourseDto> courseList = namedJdbcTemplate.query(getCourseByNumber, new CourseRowMapper());
+
+        boolean foundPreReq = false;
+        boolean foundCoReq = false;
+        for (CourseDto course : courseList)  {
+            if (course.getCourseNumber() == prereqs){
+                params.put("prereqs", course.getCourseNumber());
+                foundPreReq = true;
+            }
+            if (course.getCourseNumber() == course.getCourseNumber()) {
+                params.put("coreqs", course.getCourseNumber());
+                foundCoReq = true;
+            }
+        }
+        if (!foundPreReq){
+            params.put("prereqs", 0000);
+        }
+        if (!foundCoReq){
+            params.put("coreqs", 0000);
+        }
 
         int rowsChanged = namedJdbcTemplate.update(updateCourseByNumber, params);
         if (rowsChanged == 0){
