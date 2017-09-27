@@ -9,14 +9,14 @@
 <h2>Please enter a User Id</h2>
 <form action="/user/update" method="GET">
     <label>Cannont change User id
-    <br/>User Id:<br/> <input type="number" name="Id" size="30" /></label>
+    <br/>User Id:<br/> <input type="number" name="Id" required size="30" /></label>
     <br/>
     <p>New Names:</p><br/>
     <label>First Name: <br/>
-    <input type="text" name="First Name" size="30" /></label>
+    <input type="text" name="First Name" required size="30" /></label>
     <br/>
     <label>
-        <br/>Last Name: <br/><input type="text" name="Last Name" size="30" />
+        <br/>Last Name: <br/><input type="text" name="Last Name" required size="30" />
     </label>
     <input type="submit" name="doit" value="Update User" />
 </form>

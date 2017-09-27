@@ -106,8 +106,11 @@ public class UserController {
         params.put("student_id", id);
         params.put("first_name", firstName);
         params.put("last_name", lastName);
-        namedJdbcTemplate.update(updateUserByIdSql, params);
-        return "Success";
+        int rowsChanged = namedJdbcTemplate.update(updateUserByIdSql, params);
+        if (rowsChanged < 1) {
+            return ("Unable to find user to update, try again with different id.");
+        }
+        return "Successfully Updated";
       }
 
     /**
@@ -119,7 +122,10 @@ public class UserController {
     public String deleteUserById(final @RequestParam("Id") int id) {
         Map<String, Object> params = new HashMap<>();
         params.put("student_id", id);
-        namedJdbcTemplate.update(deleteUserByIdSql, params);
-        return "Success";
+        int rowsChanged = namedJdbcTemplate.update(deleteUserByIdSql, params);
+        if (rowsChanged >= 1){
+            return "Successfully Removed";
+        }
+        return ("Unable to remove user, try again with different id");
       }
 }
