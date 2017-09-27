@@ -36,12 +36,12 @@ public class CourseDto {
     /**
      * Prerequs for the course. Decided by class standing.
      */
-    private CourseDto prereqs;
+    private int prereqs;
 
     /**
      * The coreqs for the course.
      */
-    private CourseDto coreqs;
+    private int coreqs;
     /**
      * Empty Constructer.
      */
@@ -59,8 +59,8 @@ public class CourseDto {
      */
     public CourseDto(final String depart, final int courseNum,
                      final int credit, final String desctip,
-                     final String learningObj, final CourseDto preReqs,
-                     final CourseDto coReqs) {
+                     final String learningObj, final int preReqs,
+                     final int coReqs) {
         this.department = depart;
         this.courseNumber = courseNum;
         this.credits = credit;
@@ -114,7 +114,7 @@ public class CourseDto {
      * Getter for the prereqs of the course.
      * @return prereqs of the course
      */
-    public CourseDto getPrereqs() {
+    public int getPrereqs() {
         return prereqs;
     }
 
@@ -122,7 +122,7 @@ public class CourseDto {
      * The coreqs requird for the course.
      * @return corequs for thee course
      */
-    public CourseDto getCoreqs() {
+    public int getCoreqs() {
         return coreqs;
     }
 }
