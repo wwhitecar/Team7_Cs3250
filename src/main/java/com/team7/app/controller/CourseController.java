@@ -75,7 +75,7 @@ public class CourseController {
             final @RequestParam("course_number") int courseNumber,
             final @RequestParam("credits") int credits,
             final @RequestParam("description") String description,
-            final @RequestParam("learning objective") String learningObjective,
+            final @RequestParam("learning_objective") String learningObjective,
             final @RequestParam("prereqs") int prereqs,
             final @RequestParam("coreqs") int coreqs) {
 
