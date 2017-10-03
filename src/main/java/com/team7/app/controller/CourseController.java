@@ -33,28 +33,31 @@ public class CourseController {
      * Basically sql.insertUserSql = insertUser
      * controlled via yml file.
      */
-    @Value("${sql.insertCourseSql}")
+    @Value("${sql.course.insertCourseSql}")
     private String insertCourseSql;
+    
+    @Value("${sql.course.getAllCoursesSql}")
+    private String getAllCoursesSql;
 
     /**
      * Basically sql.getCourseSql = getCourse
      * controlled via yml file.
      */
-    @Value("${sql.getCourseByNumber}")
+    @Value("${sql.course.getCourseByNumber}")
     private String getCourseByNumber;
 
     /**
      * Basically sql.deleteUserSql = deleteUser
      * controlled via yml file.
      */
-    @Value("${sql.deleteCourseByNumber}")
+    @Value("${sql.course.deleteCourseByNumber}")
     private String deleteCourseByNumber;
 
     /**
      *Basically sql.updateUserSql = updateUser
      * controlled via yml file.
      */
-    @Value("${sql.updateCourseByNumber}")
+    @Value("${sql.course.updateCourseByNumber}")
     private String updateCourseByNumber;
 
     /**
@@ -86,7 +89,7 @@ public class CourseController {
         params.put("description", description);
         params.put("learning_objective", learningObjective);
 
-        List<CourseDto> courseList = namedJdbcTemplate.query(getCourseByNumber, new CourseRowMapper());
+        List<CourseDto> courseList = namedJdbcTemplate.query(getAllCoursesSql, new CourseRowMapper());
         boolean foundPreReq = false;
         boolean foundCoReq = false;
         for (CourseDto course : courseList) {

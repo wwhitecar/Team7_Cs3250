@@ -32,28 +32,28 @@ public class UserController {
      * Basically sql.insertUserSql = insertUser
      * controlled via yml file.
      */
-    @Value("${sql.insertUserSql}")
+    @Value("${sql.user.insertUserSql}")
     private String insertUserSql;
 
     /**
      * Basically sql.getUserSql = getUser
      * controlled via yml file.
      */
-    @Value("${sql.getUserByIdSql}")
+    @Value("${sql.user.getUserByIdSql}")
     private String getUserByIdSql;
 
     /**
      * Basically sql.deleteUserSql = deleteUser
      * controlled via yml file.
      */
-    @Value("${sql.deleteUserByIdSql}")
+    @Value("${sql.user.deleteUserByIdSql}")
     private String deleteUserByIdSql;
 
     /**
      *Basically sql.updateUserSql = updateUser
      * controlled via yml file.
      */
-    @Value("${sql.updateUserByIdSql}")
+    @Value("${sql.user.updateUserByIdSql}")
     private String updateUserByIdSql;
 
     /**

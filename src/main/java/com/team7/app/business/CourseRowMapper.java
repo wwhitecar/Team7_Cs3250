@@ -29,7 +29,7 @@ public class CourseRowMapper implements RowMapper<CourseDto> {
     @Override
     public CourseDto mapRow(final ResultSet rs,
                             final int rowNumber) throws SQLException {
-        CourseDto course = new CourseDto(rs.getString("descripion"), rs.getInt("course_number"), rs.getInt("credits"), rs.getString("description"), rs.getString("learning_objective"), rs.getInt("prereqs"), rs.getInt("coreqs"));
+        CourseDto course = new CourseDto(rs.getString("department"), rs.getInt("course_number"), rs.getInt("credits"), rs.getString("description"), rs.getString("learning_objective"), rs.getInt("prereqs"), rs.getInt("coreqs"));
         return course;
     }
 }
