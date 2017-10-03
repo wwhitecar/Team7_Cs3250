@@ -130,13 +130,7 @@ public class CourseController {
             return ("Course not found, please try again with another Course Number");
         }
         CourseDto course = dto.get(0);
-        return ("Course Information: \r\n Dept: " + course.getDepartment()
-                + "\r\n Course Number: " + course.getCourseNumber()
-                + "\r\n Credits : " + course.getCredits()
-                + "\r\n Description: " + course.getDescription()
-                + "\r\n Learning Objective: " + course.getLearningObjectives()
-                + "\r\n Prereqs: " + course.getPrereqs()
-                + "\r\n Coreqs: " + course.getCoreqs());
+        return course.toString();
     }
 
     /**
@@ -157,7 +151,7 @@ public class CourseController {
             final @RequestParam("course_number") int courseNumber,
             final @RequestParam("credits") int credits,
             final @RequestParam("description") String description,
-            final @RequestParam("learning objective") String learningObjective,
+            final @RequestParam("learning_objective") String learningObjective,
             final @RequestParam("prereqs") int prereqs,
             final @RequestParam("coreqs") int coreqs) {
         Map<String, Object> params = new HashMap<>();
@@ -167,7 +161,7 @@ public class CourseController {
         params.put("description", description);
         params.put("learning_objective", learningObjective);
 
-        List<CourseDto> courseList = namedJdbcTemplate.query(getCourseByNumber, new CourseRowMapper());
+        List<CourseDto> courseList = namedJdbcTemplate.query(getCourseByNumber, params,  new CourseRowMapper());
 
         boolean foundPreReq = false;
         boolean foundCoReq = false;
@@ -201,7 +195,7 @@ public class CourseController {
      * @param courseNumber - number of the course we would like to delete
      * @return status of the delete request
      */
-    @RequestMapping (value = "/deletecoure", method = RequestMethod.GET)
+    @RequestMapping (value = "/deletecourse", method = RequestMethod.GET)
     public String deleteCourseByNumber(
             final @RequestParam("course_number") int courseNumber) {
         Map<String, Object> params = new HashMap<>();

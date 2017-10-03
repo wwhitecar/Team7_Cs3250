@@ -13,8 +13,8 @@ sql:
     getAllCoursesSql: SELECT * from course
     insertCourseSql: insert into course (department, course_number, credits, description, learning_objective, prereqs, coreqs) values (:description, :course_number, :credits, :description, :learning_objective, :prereqs, :coreqs)
     getCourseByNumber: select * from course where course_number =:course_number
-    deleteCourseByNumber: delete from course where course_number
-    updateCourseByNumber : update course set department = :department, credits = :credits, description =:description, learning_objectives = :learning_objectives, prereqs = :prereqs, coreqs = :coreqs
+    deleteCourseByNumber: delete from course where course_number = :course_number
+    updateCourseByNumber : update course set department = :department, credits = :credits, description =:description, learning_objective = :learning_objective, prereqs = :prereqs, coreqs = :coreqs
 schedule:
   database:
     url: jdbc:mysql://localhost:3306/schedule

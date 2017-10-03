@@ -125,4 +125,18 @@ public class CourseDto {
     public int getCoreqs() {
         return coreqs;
     }
+
+    /**
+     * Overiding the tostring function
+     */
+    @Override
+    public String toString(){
+        return ("Course Information: <br /> Dept: " + getDepartment()
+                + "<br /> Course Number: " + getCourseNumber()
+                + "<br /> Credits : " + getCredits()
+                + "<br /> Description: " + getDescription()
+                + "<br /> Learning Objective: " + getLearningObjectives()
+                + "<br /> Prereqs: " + getPrereqs()
+                + "<br />Coreqs: " + getCoreqs());
+    }
 }
