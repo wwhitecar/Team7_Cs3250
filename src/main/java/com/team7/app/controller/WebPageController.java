@@ -6,110 +6,159 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * Mapping for web pages to be called with
+ * mustache templating.
+ */
 @Controller
 public class WebPageController {
 
-	// inject via application.properties
-	@Value("${app.welcome.message}")
-	private String MESSAGE = "";
+    /**
+     * inject via application.properties.
+     */
+    @Value("${app.welcome.title}")
+    private String title = "";
 
-	@Value("${app.welcome.title}")
-	private String TITLE = "";
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/create")
+    public String create(final Map<String, Object> model) {
+        model.put("title", title);
+        return "create";
+    }
 
-	@Value("${app.welcome.message2}")
-	private String MESSAGE2 = "";
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/courseCreate")
+    public String courseCreate(final Map<String, Object> model) {
+        model.put("title", title);
+        return "courseCreate";
+    }
 
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/courseUpdate")
+    public String courseUpdate(final Map<String, Object> model) {
+        model.put("title", title);
+        return "courseUpdate";
+    }
 
-	@RequestMapping("/welcome")
-	public String welcome(Map<String, Object> model) {
-		model.put("title", TITLE);
-		model.put("message", MESSAGE);
-		model.put("message2", MESSAGE2);
-		return "welcome";
-	}
-	
-	@RequestMapping("/create")
-	public String create(Map<String, Object> model) {
-		model.put("title", TITLE);
-		return "create";
-	}
-	
-	@RequestMapping("/courseCreate")
-	public String courseCreate(Map<String, Object> model) {
-		model.put("title", TITLE);
-		return "courseCreate";
-	}
-	
-	@RequestMapping("/courseUpdate")
-	public String courseUpdate(Map<String, Object> model) {
-		model.put("title", TITLE);
-		return "courseUpdate";
-	}
-	
-	@RequestMapping("/courseDelete")
-	public String courseDelete(Map<String, Object> model) {
-		model.put("title", TITLE);
-		return "courseDelete";
-	}
-	
-	@RequestMapping("/courseRead")
-	public String courseRead(Map<String, Object> model) {
-		model.put("title", TITLE);
-		return "courseRead";
-	}
-	
-	@RequestMapping("/delete")
-	public String delete(Map<String, Object> model) {
-		model.put("title", TITLE);
-		return "delete";
-	}
-	
-	@RequestMapping("/")
-	public String index(Map<String, Object> model) {
-		model.put("title", TITLE);
-		return "index";
-	}
-	
-	@RequestMapping("/professorCreate")
-	public String professorCreate(Map<String, Object> model) {
-		model.put("title", TITLE);
-		return "professorCreate";
-	}
-	
-	@RequestMapping("/professorDelete")
-	public String professorDelete(Map<String, Object> model) {
-		model.put("title", TITLE);
-		return "professorDelete";
-	}
-	
-	@RequestMapping("/professorRead")
-	public String professorRead(Map<String, Object> model) {
-		model.put("title", TITLE);
-		return "professorRead";
-	}
-	
-	@RequestMapping("/professorUpdate")
-	public String professorUpdate(Map<String, Object> model) {
-		model.put("title", TITLE);
-		return "professorUpdate";
-	}
-	
-	@RequestMapping("/read")
-	public String read(Map<String, Object> model) {
-		model.put("title", TITLE);
-		return "read";
-	}
-	
-	@RequestMapping("/update")
-	public String update(Map<String, Object> model) {
-		model.put("title", TITLE);
-		return "update";
-	}
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/courseDelete")
+    public String courseDelete(final Map<String, Object> model) {
+        model.put("title", title);
+        return "courseDelete";
+    }
 
-	// test 5xx errors
-	@RequestMapping("/5xx")
-	public String ServiceUnavailable() {
-		throw new RuntimeException("ABC");
-	}
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/courseRead")
+    public String courseRead(final Map<String, Object> model) {
+        model.put("title", title);
+        return "courseRead";
+    }
 
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/delete")
+    public String delete(final Map<String, Object> model) {
+        model.put("title", title);
+        return "delete";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/")
+    public String index(final Map<String, Object> model) {
+        model.put("title", title);
+        return "index";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/professorCreate")
+    public String professorCreate(final Map<String, Object> model) {
+        model.put("title", title);
+        return "professorCreate";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/professorDelete")
+    public String professorDelete(final Map<String, Object> model) {
+        model.put("title", title);
+        return "professorDelete";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/professorRead")
+    public String professorRead(final Map<String, Object> model) {
+        model.put("title", title);
+        return "professorRead";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/professorUpdate")
+    public String professorUpdate(final Map<String, Object> model) {
+        model.put("title", title);
+        return "professorUpdate";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/read")
+    public String read(final Map<String, Object> model) {
+        model.put("title", title);
+        return "read";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/update")
+    public String update(final Map<String, Object> model) {
+        model.put("title", title);
+        return "update";
+    }
 }

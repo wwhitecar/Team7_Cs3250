@@ -1,7 +1,9 @@
 package com.team7.app.business.dto;
 
+/**
+ * Professors to be added to the database.
+ */
 public class ProfessorDto {
-
 
     /**
      * First name of professor.
@@ -63,5 +65,4 @@ public class ProfessorDto {
 
         return id;
     }
-
 }

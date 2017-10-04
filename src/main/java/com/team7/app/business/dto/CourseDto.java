@@ -127,10 +127,10 @@ public class CourseDto {
     }
 
     /**
-     * Overiding the tostring function
+     * Overiding the tostring function.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return ("Course Information: <br /> Dept: " + getDepartment()
                 + "<br /> Course Number: " + getCourseNumber()
                 + "<br /> Credits : " + getCredits()

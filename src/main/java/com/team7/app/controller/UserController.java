@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -110,7 +109,8 @@ public class UserController {
         params.put("last_name", lastName);
         int rowsChanged = namedJdbcTemplate.update(updateUserByIdSql, params);
         if (rowsChanged < 1) {
-            return ("Unable to find user to update, try again with different id.");
+            return ("Unable to find user to update,"
+                    + " try again with different id.");
         }
         return "Successfully Updated";
       }
@@ -125,7 +125,7 @@ public class UserController {
         Map<String, Object> params = new HashMap<>();
         params.put("student_id", id);
         int rowsChanged = namedJdbcTemplate.update(deleteUserByIdSql, params);
-        if (rowsChanged >= 1){
+        if (rowsChanged >= 1) {
             return "Successfully Removed";
         }
         return ("Unable to remove user, try again with different id");

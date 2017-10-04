@@ -14,6 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controller for the professorDto to be mapped
+ * to the database.
+ */
 @RestController
 @RequestMapping(value = "/professor")
 public class ProfessorController {
@@ -61,8 +65,8 @@ public class ProfessorController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String createProfessor(final @RequestParam("Id")int id,
-                                  final @RequestParam("First Name")String firstName,
-                                  final @RequestParam("Last Name")String lastName) {
+                     final @RequestParam("First Name")String firstName,
+                     final @RequestParam("Last Name")String lastName) {
         Map<String, Object> params = new HashMap<>();
         params.put("professor_id", id);
         params.put("first_name", firstName);
@@ -80,10 +84,11 @@ public class ProfessorController {
     public String readProfessorById(final @RequestParam("Id") int id) {
         Map<String, Object> params = new HashMap<>();
         params.put("professor_id", id);
-        List<ProfessorDto> dto = namedJdbcTemplate.query(getProfessorByIdSql,
-                params, new ProfessorRowMapper());
+        List<ProfessorDto> dto = namedJdbcTemplate.query(
+                getProfessorByIdSql, params, new ProfessorRowMapper());
         ProfessorDto professor = dto.get(0);
-        return ("Name: " + professor.getFirstName() + " " + professor.getLastName()
+        return ("Name: " + professor.getFirstName()
+                + " " + professor.getLastName()
                 + "\nProfessor Id: " + professor.getId());
     }
 
@@ -96,15 +101,17 @@ public class ProfessorController {
      */
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String updateProfessorById(final @RequestParam("Id")int id,
-                                      final @RequestParam("First Name")String firstName,
-                                      final @RequestParam("Last Name")String lastName) {
+                       final @RequestParam("First Name")String firstName,
+                       final @RequestParam("Last Name")String lastName) {
         Map<String, Object> params = new HashMap<>();
         params.put("professor_id", id);
         params.put("first_name", firstName);
         params.put("last_name", lastName);
-        int rowsChanged = namedJdbcTemplate.update(updateProfessorByIdSql, params);
+        int rowsChanged = namedJdbcTemplate.update(
+                updateProfessorByIdSql, params);
         if (rowsChanged < 1) {
-            return ("Unable to find professor to update, try again with different id.");
+            return ("Unable to find professor to update,"
+                    + " try again with different id.");
         }
         return "Successfully Updated";
     }
@@ -118,8 +125,9 @@ public class ProfessorController {
     public String deleteProfessorById(final @RequestParam("Id") int id) {
         Map<String, Object> params = new HashMap<>();
         params.put("professor_id", id);
-        int rowsChanged = namedJdbcTemplate.update(deleteProfessorByIdSql, params);
-        if (rowsChanged >= 1){
+        int rowsChanged = namedJdbcTemplate.update(deleteProfessorByIdSql,
+                params);
+        if (rowsChanged >= 1) {
             return "Successfully Removed";
         }
         return ("Unable to remove professor, try again with different id");

@@ -29,7 +29,8 @@ public class UserRowMapper implements RowMapper<UserDto> {
     @Override
     public UserDto mapRow(final ResultSet rs,
             final int rowNum) throws SQLException {
-        UserDto dto = new UserDto(rs.getString("first_name"), rs.getString("last_name"), rs.getInt("student_id"));
+        UserDto dto = new UserDto(rs.getString("first_name"),
+                rs.getString("last_name"), rs.getInt("student_id"));
         return dto;
     }
 }

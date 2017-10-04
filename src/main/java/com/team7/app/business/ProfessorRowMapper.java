@@ -1,12 +1,14 @@
 package com.team7.app.business;
 
-import com.team7.app.business.dto.CourseDto;
 import com.team7.app.business.dto.ProfessorDto;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Maps professor to the database.
+ */
 public class ProfessorRowMapper implements RowMapper<ProfessorDto> {
 
     /**
@@ -25,7 +27,8 @@ public class ProfessorRowMapper implements RowMapper<ProfessorDto> {
     @Override
     public ProfessorDto mapRow(final ResultSet rs,
                                final int rowNum) throws SQLException {
-        ProfessorDto dto = new ProfessorDto(rs.getString("first_name"), rs.getString("last_name"), rs.getInt("professor_id"));
+        ProfessorDto dto = new ProfessorDto(rs.getString("first_name"),
+                rs.getString("last_name"), rs.getInt("professor_id"));
         return dto;
     }
 }

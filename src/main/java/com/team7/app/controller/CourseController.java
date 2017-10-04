@@ -35,7 +35,10 @@ public class CourseController {
      */
     @Value("${sql.course.insertCourseSql}")
     private String insertCourseSql;
-    
+
+    /**
+     * Gets all the courses from the db.
+     */
     @Value("${sql.course.getAllCoursesSql}")
     private String getAllCoursesSql;
 
@@ -89,7 +92,9 @@ public class CourseController {
         params.put("description", description);
         params.put("learning_objective", learningObjective);
 
-        List<CourseDto> courseList = namedJdbcTemplate.query(getAllCoursesSql, new CourseRowMapper());
+        List<CourseDto> courseList =
+                namedJdbcTemplate.query(getAllCoursesSql,
+                        new CourseRowMapper());
         boolean foundPreReq = false;
         boolean foundCoReq = false;
         for (CourseDto course : courseList) {
@@ -108,8 +113,6 @@ public class CourseController {
         if (!foundCoReq) {
             params.put("coreqs", 0000);
         }
-
-        int rowsChanged = namedJdbcTemplate.update(insertCourseSql, params);
         return ("Success");
     }
 
@@ -126,8 +129,9 @@ public class CourseController {
         params.put("course_number", courseNumber);
         List<CourseDto> dto = namedJdbcTemplate.query(getCourseByNumber,
                 params, new CourseRowMapper());
-        if (dto.size() == 0){
-            return ("Course not found, please try again with another Course Number");
+        if (dto.size() == 0) {
+            return ("Course not found, please try "
+                    + "again with another Course Number");
         }
         CourseDto course = dto.get(0);
         return course.toString();
@@ -161,12 +165,13 @@ public class CourseController {
         params.put("description", description);
         params.put("learning_objective", learningObjective);
 
-        List<CourseDto> courseList = namedJdbcTemplate.query(getCourseByNumber, params,  new CourseRowMapper());
+        List<CourseDto> courseList = namedJdbcTemplate.query(
+                getCourseByNumber, params,  new CourseRowMapper());
 
         boolean foundPreReq = false;
         boolean foundCoReq = false;
-        for (CourseDto course : courseList)  {
-            if (course.getCourseNumber() == prereqs){
+        for (CourseDto course : courseList) {
+            if (course.getCourseNumber() == prereqs) {
                 params.put("prereqs", course.getCourseNumber());
                 foundPreReq = true;
             }
@@ -175,16 +180,18 @@ public class CourseController {
                 foundCoReq = true;
             }
         }
-        if (!foundPreReq){
+        if (!foundPreReq) {
             params.put("prereqs", 0000);
         }
-        if (!foundCoReq){
+        if (!foundCoReq) {
             params.put("coreqs", 0000);
         }
 
-        int rowsChanged = namedJdbcTemplate.update(updateCourseByNumber, params);
-        if (rowsChanged == 0){
-            return ("Failed to find the course you are trying to update, please try again.");
+        int rowsChanged = namedJdbcTemplate.update(updateCourseByNumber,
+                params);
+        if (rowsChanged == 0) {
+            return ("Failed to find the course "
+                    + "you are trying to update, please try again.");
         }
         return "Successfully Updated";
     }
