@@ -42,7 +42,7 @@ public class CourseControllerTest {
         assertTrue(courseController.createCourse("CS", 3250,
                 8, "Wish a course was worth 8 creds",
                 "Don't matter 8 credit swill be a fail :)",
-                "Junior", null).equals("Success"));
+                0000, 0000).equals("Success"));
     }
 
     @Test
@@ -50,12 +50,12 @@ public class CourseControllerTest {
         assertTrue(courseController.updateCourseByNumber("CS", 3250,
                 8, "Wish a course was worth 8 creds",
                 "Don't matter 8 credit swill be a fail :)",
-                "Junior", null)
+                0000, 0000)
                 .equals("Failed to find the course you are trying to update, please try again."));
 
         when(mockTemplate.update(anyString(), anyMapOf(String.class, Object.class))).thenReturn(1);
         assertEquals(courseController.updateCourseByNumber("Math", 3250, 4, "Learn how to triangle",
-                "Be better at math", "Freshman", null),  "Successfully Updated");
+                "Be better at math", 0000, 0000),  "Successfully Updated");
     }
 
     @Test
@@ -75,18 +75,13 @@ public class CourseControllerTest {
         CourseDto course = new CourseDto("CS", 3250,
                 8, "Wish a course was worth 8 creds",
                 "Don't matter 8 credits will be a fail :)",
-                "Junior", null);
+                0000, 0000);
 
         List<CourseDto> result = new ArrayList<>();
         result.add(course);
         when(mockTemplate.query(anyString(), anyMapOf(String.class, Object.class),
                 any(CourseRowMapper.class))).thenReturn(result);
 
-        assertEquals(courseController.readCourseByNumber(3250), ("Course Information: \r\n Dept: CS"
-                + "\r\n Course Number: 3250" + "\r\n Credits : 8"
-                + "\r\n Description: Wish a course was worth 8 creds"
-                + "\r\n Learning Objective: Don't matter 8 credits will be a fail :)"
-                + "\r\n Prereqs: Junior"
-                + "\r\n Coreqs: null"));
+        assertEquals(courseController.readCourseByNumber(3250), course.toString());
     }
 }

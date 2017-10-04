@@ -1,0 +1,64 @@
+package com.team7.app.business.dto;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+public class SectionDto {
+
+    /**
+     * The course number to identify a course by more then
+     * just the name.
+     */
+    private int sectionNumber;
+
+
+    /**
+     * The course number to identify a course by more then
+     * just the name.
+     */
+    private int courseNumber;
+
+    /**
+     * The professor?
+     */
+    private String professor;
+
+    /**
+     * Param constructer.
+     * @param courseNumber -coursenumber
+     * @param professor - professor of the class/section
+     */
+    public SectionDto(final int sectionNumber,
+                      final int courseNumber,
+                      final String professor) {
+        this.sectionNumber = sectionNumber;
+        this.courseNumber = courseNumber;
+        this.professor = professor;
+    }
+
+    /**
+     * Getter for coursenumber.
+     * @return number for the course.
+     */
+    public int getSectionNumber() {
+        return sectionNumber;
+    }
+
+
+    /**
+     * Getter for coursenumber.
+     * @return number for the course.
+     */
+    public int getCourseNumber() {
+        return courseNumber;
+    }
+
+    /**
+     * Getter for the prof of the section.
+     * @return the professor of the section.
+     */
+    public String getProfessor() {
+        return professor;
+    }
+
+}

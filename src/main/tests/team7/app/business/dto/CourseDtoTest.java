@@ -14,7 +14,7 @@ public class CourseDtoTest {
     @Before
     public void before(){
         course = new CourseDto("Computer Science", 3210, 4,
-                "Learn stuffs", "Be better at computer", null, null);
+                "Learn stuffs", "Be better at computer", 0000, 0000);
         course2 = new CourseDto();
 
     }
@@ -53,14 +53,14 @@ public class CourseDtoTest {
 
     @Test
     public void getPrereqs() throws Exception {
-        assertTrue(course2.getPrereqs() == null);
-        assertTrue(course.getPrereqs() == null);
+        assertTrue(course2.getPrereqs() == 0000);
+        assertTrue(course.getPrereqs() == 0000);
     }
 
     @Test
     public void getCoreqs() throws Exception {
-        assertTrue(course2.getCoreqs() == null);
-        assertTrue(course.getCoreqs() == null);
+        assertTrue(course2.getCoreqs() == 0000);
+        assertTrue(course.getCoreqs() == 0000);
     }
 
 }
