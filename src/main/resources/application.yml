@@ -15,6 +15,18 @@ sql:
     getCourseByNumber: select * from course where course_number =:course_number
     deleteCourseByNumber: delete from course where course_number = :course_number
     updateCourseByNumber : update course set department = :department, credits = :credits, description =:description, learning_objective = :learning_objective, prereqs = :prereqs, coreqs = :coreqs
+
+  sqlsection:
+    insertSectionSql: insert into sections (section_number, course_number, professor) values (:section_number :course_number, :professor)
+    getSectionByNumber: select * from sections where section_number = :sectionNumber
+    deleteSectionByNumber: delete from sections where section_number = :sectionNumber
+
+  sqlprofessor:
+    insertProfessorSql: insert into professor (professor_id, first_name, last_name) values (:professor_id, :first_name, :last_name)
+    getProfessorByIdSql: select * from professor where professor_id = :professor_id
+    deleteProfessorByIdSql: delete from professor where professor_id = :professor_id
+    updateProfessorByIdSql: update professor set first_name = :first_name, last_name = :last_name where professor_id = :professor_id
+
 schedule:
   database:
     url: jdbc:mysql://localhost:3306/schedule

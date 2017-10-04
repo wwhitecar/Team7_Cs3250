@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UpdateProfessor</title>
+</head>
+<body>
+<h1>Update data for professor</h1>
+<h2>Please enter a Professor Id</h2>
+<form action="/professor/update" method="GET">
+    <label>Cannont change Professor id
+        <br/Professor Id:<br/> <input type="number" name="Id" required size="30" /></label>
+    <br/>
+    <p>New Names:</p><br/>
+    <label>First Name: <br/>
+        <input type="text" name="First Name" required size="30" /></label>
+    <br/>
+    <label>
+        <br/>Last Name: <br/><input type="text" name="Last Name" required size="30" />
+    </label>
+    <input type="submit" name="doit" value="Update Professor" />
+</form>
+
+</body>
+</html>
