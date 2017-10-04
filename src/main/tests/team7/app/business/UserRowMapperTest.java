@@ -11,10 +11,9 @@ import static org.junit.Assert.*;
 
 public class UserRowMapperTest {
 
-    @Test (expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void mapRowTest() throws SQLException {
         UserRowMapper userRM = new UserRowMapper();
         userRM.mapRow(null, 0);
     }
-
 }

@@ -30,7 +30,7 @@ public class CourseController {
     public NamedParameterJdbcTemplate namedJdbcTemplate;
 
     /**
-     * Basically sql.insertUserSql = insertUser
+     * Basically sql.insertCourseSql = insertCourse
      * controlled via yml file.
      */
     @Value("${sql.course.insertCourseSql}")
@@ -47,14 +47,14 @@ public class CourseController {
     private String getCourseByNumber;
 
     /**
-     * Basically sql.deleteUserSql = deleteUser
+     * Basically sql.deleteCourseByNumber = deleteCoures
      * controlled via yml file.
      */
     @Value("${sql.course.deleteCourseByNumber}")
     private String deleteCourseByNumber;
 
     /**
-     *Basically sql.updateUserSql = updateUser
+     *Basically sql.updateCourseByNumber = updateCourse
      * controlled via yml file.
      */
     @Value("${sql.course.updateCourseByNumber}")
