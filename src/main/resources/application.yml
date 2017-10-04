@@ -16,6 +16,12 @@ sql:
     deleteCourseByNumber: delete from course where course_number = :course_number
     updateCourseByNumber : update course set department = :department, credits = :credits, description =:description, learning_objective = :learning_objective, prereqs = :prereqs, coreqs = :coreqs
 
+  global:
+    insertGlobalSql: insert into global (school_name, credit_Hour) values (:school_name, :credit_Hour)
+    getGlobalByUniNameSql: select * from global where school_name = :school_name
+    deleteGlobalByUniNameSql: delete from global where school_name = :school_name
+    updateGlobalByUniNameSql: update global set school_name = :school_name, credit_hour = :credit_Hour
+
   sqlsection:
     insertSectionSql: insert into sections (section_number, course_number, professor) values (:section_number :course_number, :professor)
     getSectionByNumber: select * from sections where section_number = :sectionNumber
