@@ -18,7 +18,8 @@ public class WelcomeController {
 
 	@Value("${app.welcome.message2}")
 	private String MESSAGE2 = "";
-	
+
+
 	@RequestMapping("/welcome")
 	public String welcome(Map<String, Object> model) {
 		model.put("title", TITLE);
