@@ -15,6 +15,14 @@ sql:
     getCourseByNumber: select * from course where course_number =:course_number
     deleteCourseByNumber: delete from course where course_number
     updateCourseByNumber : update course set department = :department, credits = :credits, description =:description, learning_objectives = :learning_objectives, prereqs = :prereqs, coreqs = :coreqs
+
+  global:
+    insertGlobalSql: insert into global (school_name, credit_Hour) values (:school_name, :credit_Hour)
+    getGlobalByUniNameSql: select * from global where school_name = :school_name
+    deleteGlobalByUniNameSql: delete from global where school_name = :school_name
+    updateGlobalByUniNameSql: update global set school_name = :school_name, credit_hour = :credit_Hour
+
+
 schedule:
   database:
     url: jdbc:mysql://localhost:3306/schedule
