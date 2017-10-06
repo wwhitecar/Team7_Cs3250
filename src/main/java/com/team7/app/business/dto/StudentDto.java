@@ -1,8 +1,12 @@
 package com.team7.app.business.dto;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * User for the database to keep track of.
  */
+@Entity
 public class UserDto {
 
     /**
@@ -18,6 +22,7 @@ public class UserDto {
     /**
      * Id of user.
      */
+    @Id
     private int id;
 
     /**
