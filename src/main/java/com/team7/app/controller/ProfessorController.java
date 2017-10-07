@@ -1,6 +1,5 @@
 package com.team7.app.controller;
 
-import com.team7.app.business.ProfessorRowMapper;
 import com.team7.app.business.dto.ProfessorDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -84,12 +83,7 @@ public class ProfessorController {
     public String readProfessorById(final @RequestParam("Id") int id) {
         Map<String, Object> params = new HashMap<>();
         params.put("professor_id", id);
-        List<ProfessorDto> dto = namedJdbcTemplate.query(
-                getProfessorByIdSql, params, new ProfessorRowMapper());
-        ProfessorDto professor = dto.get(0);
-        return ("Name: " + professor.getFirstName()
-                + " " + professor.getLastName()
-                + "\nProfessor Id: " + professor.getId());
+        return "";
     }
 
     /**

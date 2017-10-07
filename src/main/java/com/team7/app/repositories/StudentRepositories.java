@@ -1,4 +1,7 @@
 package com.team7.app.repositories;
 
-public interface StudentRepositorie {
+import com.team7.app.business.dto.StudentDto;
+import org.springframework.data.repository.CrudRepository;
+
+public interface StudentRepositories extends CrudRepository<StudentDto, Integer>{
 }

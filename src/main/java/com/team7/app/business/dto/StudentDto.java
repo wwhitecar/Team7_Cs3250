@@ -7,7 +7,7 @@ import javax.persistence.Id;
  * User for the database to keep track of.
  */
 @Entity
-public class UserDto {
+public class StudentDto {
 
     /**
      * First name of user.
@@ -28,7 +28,7 @@ public class UserDto {
     /**
      * Empty Constructer.
      */
-    public UserDto() {
+    public StudentDto() {
 
     }
 
@@ -38,8 +38,8 @@ public class UserDto {
      * @param lName - last name of user
      * @param iD - id of user
      */
-    public UserDto(final String fName,
-                   final String lName, final int iD) {
+    public StudentDto(final String fName,
+                      final String lName, final int iD) {
         this.firstName = fName;
         this.lastName = lName;
         this.id = iD;
@@ -71,4 +71,12 @@ public class UserDto {
         return id;
     }
 
+    @Override
+    public String toString(){
+        if (firstName == null || lastName == null || id == 0) {
+            return "Student not configured correctly";
+        }
+        return "Name: " + firstName + lastName +
+                " Id: " + id;
+    }
 }

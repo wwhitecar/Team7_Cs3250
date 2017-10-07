@@ -1,7 +1,6 @@
 package com.team7.app.controller;
 
 
-import com.team7.app.business.CourseRowMapper;
 import com.team7.app.business.dto.CourseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -92,21 +91,8 @@ public class CourseController {
         params.put("description", description);
         params.put("learning_objective", learningObjective);
 
-        List<CourseDto> courseList =
-                namedJdbcTemplate.query(getAllCoursesSql,
-                        new CourseRowMapper());
         boolean foundPreReq = false;
         boolean foundCoReq = false;
-        for (CourseDto course : courseList) {
-            if (course.getCourseNumber() == prereqs) {
-                params.put("prereqs", course.getCourseNumber());
-                foundPreReq = true;
-            }
-            if (course.getCourseNumber() == coreqs) {
-                params.put("coreqs", course.getCourseNumber());
-                foundCoReq = true;
-            }
-        }
         if (!foundPreReq) {
             params.put("prereqs", 0000);
         }
@@ -127,14 +113,7 @@ public class CourseController {
             final @RequestParam("course_number") int courseNumber) {
         Map<String, Object> params = new HashMap<>();
         params.put("course_number", courseNumber);
-        List<CourseDto> dto = namedJdbcTemplate.query(getCourseByNumber,
-                params, new CourseRowMapper());
-        if (dto.size() == 0) {
-            return ("Course not found, please try "
-                    + "again with another Course Number");
-        }
-        CourseDto course = dto.get(0);
-        return course.toString();
+        return "";
     }
 
     /**
@@ -165,21 +144,9 @@ public class CourseController {
         params.put("description", description);
         params.put("learning_objective", learningObjective);
 
-        List<CourseDto> courseList = namedJdbcTemplate.query(
-                getCourseByNumber, params,  new CourseRowMapper());
 
         boolean foundPreReq = false;
         boolean foundCoReq = false;
-        for (CourseDto course : courseList) {
-            if (course.getCourseNumber() == prereqs) {
-                params.put("prereqs", course.getCourseNumber());
-                foundPreReq = true;
-            }
-            if (course.getCourseNumber() == course.getCourseNumber()) {
-                params.put("coreqs", course.getCourseNumber());
-                foundCoReq = true;
-            }
-        }
         if (!foundPreReq) {
             params.put("prereqs", 0000);
         }

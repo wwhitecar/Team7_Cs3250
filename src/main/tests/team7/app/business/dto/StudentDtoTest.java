@@ -1,32 +1,43 @@
 package team7.app.business.dto;
 
-import com.team7.app.business.dto.UserDto;
+import com.team7.app.business.dto.StudentDto;
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class UserDtoTest {
+public class StudentDtoTest {
+
+    StudentDto student;
+    StudentDto student2;
+
+    @Before
+    public void before(){
+        student = new StudentDto("First Name", "Last Name", 3322);
+        student2 = new StudentDto();
+    }
 
     @Test
     public void getFirstName() throws Exception {
-        UserDto user = new UserDto("First Name", "Last Name", 3322);
-        UserDto user2 = new UserDto();
-        assertEquals("First Name", user.getFirstName());
-        assertEquals(null, user2.getLastName());
+
+        assertEquals("First Name", student.getFirstName());
+        assertEquals(null, student2.getLastName());
     }
 
     @Test
     public void getLastName() throws Exception {
-        UserDto user = new UserDto("First name", "Last Name", 3322);
-        UserDto user2 = new UserDto();
-        assertEquals("Last Name", user.getLastName());
-        assertEquals(null, user2.getLastName());
+        assertEquals("Last Name", student.getLastName());
+        assertEquals(null, student2.getLastName());
         }
 
     @Test
     public void getId() throws Exception {
-        UserDto user = new UserDto("First name", "Last Name", 3322);
-        UserDto user2 = new UserDto();
-        assertEquals(user.getId(), 3322);
-        assertEquals(0, user2.getId());
+        assertEquals(student.getId(), 3322);
+        assertEquals(0, student2.getId());
         }
+
+    @Test
+    public void toStringTest() {
+        assertTrue(student.toString().equals("Name: First NameLast Name Id: 3322"));
+        assertTrue(student2.toString().equals("Student not configured correctly"));
+    }
 }

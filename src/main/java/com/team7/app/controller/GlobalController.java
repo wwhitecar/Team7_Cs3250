@@ -3,7 +3,6 @@ package com.team7.app.controller;
 
 
 import com.team7.app.business.dto.GlobalDto;
-import com.team7.app.business.GlobalRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -85,13 +84,7 @@ public class GlobalController {
             final @RequestParam("School Name") String name) {
         Map<String, Object> params = new HashMap<>();
         params.put("school_name", name);
-        List<GlobalDto> dto = namedJdbcTemplate.query(
-                getGlobalByUniNameSql, params,
-                new GlobalRowMapper());
-        GlobalDto global = dto.get(0);
-        return ("Name: " + global.getSchoolName() + " "
-                + global.getLevelByHour());
-
+        return  "";
     }
 
     /**
@@ -128,7 +121,7 @@ public class GlobalController {
         int rowsChanged = namedJdbcTemplate.update(deleteGlobalByUniNameSql,
                 params);
         if (rowsChanged >= 1) {
-            return "successfully Removed";
+            return "Successfully Removed";
         }
         return ("Unable to remove global");
 

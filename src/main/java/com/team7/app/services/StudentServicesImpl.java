@@ -1,4 +1,36 @@
 package com.team7.app.services;
 
-public class StudentServicesImpl {
+import com.team7.app.business.dto.StudentDto;
+import com.team7.app.repositories.StudentRepositories;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class StudentServicesImpl implements StudentServices {
+    private StudentRepositories studentRepository;
+
+    @Autowired
+    public void setProductRepository(StudentRepositories studentRepository) {
+        this.studentRepository = studentRepository;
+    }
+
+    @Override
+    public Iterable<StudentDto> listAllStudent() {
+        return studentRepository.findAll();
+    }
+
+    @Override
+    public StudentDto getStudentById(Integer id) {
+        return studentRepository.findOne(id);
+    }
+
+    @Override
+    public StudentDto saveStudent(StudentDto product) {
+        return studentRepository.save(product);
+    }
+
+    @Override
+    public void deleteStudent(Integer id) {
+        studentRepository.delete(id);
+    }
 }
