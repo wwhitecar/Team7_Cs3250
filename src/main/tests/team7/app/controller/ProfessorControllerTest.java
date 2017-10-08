@@ -31,7 +31,7 @@ public class ProfessorControllerTest {
 
     @Before
     public void before(){
-        professorController.namedJdbcTemplate = mockTemplate; // Made mock object of a jdbc template
+
     }
 
     @Test

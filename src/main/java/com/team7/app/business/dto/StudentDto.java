@@ -76,7 +76,7 @@ public class StudentDto {
         if (firstName == null || lastName == null || id == 0) {
             return "Student not configured correctly";
         }
-        return "Name: " + firstName + lastName +
+        return "Name: " + firstName + " " + lastName +
                 " Id: " + id;
     }
 }

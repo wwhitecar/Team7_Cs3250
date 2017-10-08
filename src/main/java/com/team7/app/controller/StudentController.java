@@ -2,10 +2,11 @@ package com.team7.app.controller;
 
 import com.team7.app.services.StudentServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
 import com.team7.app.business.dto.StudentDto;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Class that will communicate with both the webapplication
@@ -19,7 +20,7 @@ public class StudentController {
     private StudentServices studentServices;
 
     @Autowired
-    public void setProductService(StudentServices studService) {
+    public void setProductService(final StudentServices studService) {
         this.studentServices = studService;
     }
 
@@ -42,11 +43,12 @@ public class StudentController {
     @RequestMapping(value = "/student_id")
       public String readStudentById(final @RequestParam("Id") Integer id) {
           StudentDto student = studentServices.getStudentById(id);
-          if (student == null){
+          if (student == null) {
               return "Unable to find Student";
           }
           String string = "/";
-          return student.toString()  + "<br/> <a href=" + string + ">Go Back to main screen</a>";
+          return student.toString()  + "<br/> <a href="
+                  + string + ">Go Back to main screen</a>";
       }
 
     /**
@@ -54,11 +56,12 @@ public class StudentController {
      * @return String to be displayed to user after trying to update
      */
       @RequestMapping(value = "/update", method = RequestMethod.GET)
-      public StudentDto updateStudentById(final @RequestParam("Id")int id,
-                                   final @RequestParam("First Name")String firstName,
-                                   final @RequestParam("Last Name")String lastName) {
+      public String updateStudentById(final @RequestParam("Id")int id,
+                              final @RequestParam("First Name")String firstName,
+                              final @RequestParam("Last Name")String lastName) {
           StudentDto student = new StudentDto(firstName, lastName, id);
-          return studentServices.saveStudent(student);
+          studentServices.saveStudent(student);
+          return ("Successfully updated: <br/>" + readStudentById(student.getId()));
       }
 
     /**
@@ -69,7 +72,7 @@ public class StudentController {
     public String deleteStudentById(final @RequestParam("Id") Integer id) {
         studentServices.deleteStudent(id);
         String string = "/";
-        return ("I dunno how to check....but its not in the database if it was " +
-                "<br/> <a href=" + string + ">Go Back to main screen</a>");
+        return ("I dunno how to check....but its not in the database if it was "
+                + "<br/> <a href=" + string + ">Go Back to main screen</a>");
       }
 }

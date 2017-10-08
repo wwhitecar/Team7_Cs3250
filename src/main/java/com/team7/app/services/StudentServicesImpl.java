@@ -1,16 +1,16 @@
 package com.team7.app.services;
 
 import com.team7.app.business.dto.StudentDto;
-import com.team7.app.repositories.StudentRepositories;
+import com.team7.app.repositories.StudentRepositorie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StudentServicesImpl implements StudentServices {
-    private StudentRepositories studentRepository;
+    private StudentRepositorie studentRepository;
 
     @Autowired
-    public void setProductRepository(StudentRepositories studentRepository) {
+    public void setStudentRepository(StudentRepositorie studentRepository) {
         this.studentRepository = studentRepository;
     }
 
@@ -25,8 +25,8 @@ public class StudentServicesImpl implements StudentServices {
     }
 
     @Override
-    public StudentDto saveStudent(StudentDto product) {
-        return studentRepository.save(product);
+    public StudentDto saveStudent(StudentDto student) {
+        return studentRepository.save(student);
     }
 
     @Override
