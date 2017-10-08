@@ -1,16 +1,16 @@
 package com.team7.app.services;
 
 import com.team7.app.business.dto.CourseDto;
-import com.team7.app.repositories.CourseRepositorie;
+import com.team7.app.repositories.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CourseServicesImpl implements CourseServices {
-    private CourseRepositorie courseRepository;
+    private CourseRepository courseRepository;
 
     @Autowired
-    public void setCourseRepository(CourseRepositorie courseRepository) {
+    public void setCourseRepository(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
     }
 

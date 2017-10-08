@@ -1,16 +1,16 @@
 package com.team7.app.services;
 
 import com.team7.app.business.dto.ProfessorDto;
-import com.team7.app.repositories.ProfessorRepositorie;
+import com.team7.app.repositories.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProfessorServicesImpl implements ProfessorServices {
-    private ProfessorRepositorie professorRepository;
+    private ProfessorRepository professorRepository;
 
     @Autowired
-    public void setProfessorRepository(ProfessorRepositorie professorRepository) {
+    public void setProfessorRepository(ProfessorRepository professorRepository) {
         this.professorRepository = professorRepository;
     }
 

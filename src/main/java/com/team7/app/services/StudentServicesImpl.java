@@ -1,16 +1,16 @@
 package com.team7.app.services;
 
 import com.team7.app.business.dto.StudentDto;
-import com.team7.app.repositories.StudentRepositorie;
+import com.team7.app.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StudentServicesImpl implements StudentServices {
-    private StudentRepositorie studentRepository;
+    private StudentRepository studentRepository;
 
     @Autowired
-    public void setStudentRepository(StudentRepositorie studentRepository) {
+    public void setStudentRepository(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
