@@ -5,8 +5,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
 /**
  * This application is references in the POM file
  * to kick the application off.
@@ -15,7 +13,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
-@EnableSwagger2 //This enables swagger
 public class Application {
 
   /**

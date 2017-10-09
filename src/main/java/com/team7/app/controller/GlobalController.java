@@ -22,40 +22,6 @@ import java.util.Map;
 public class GlobalController {
 
     /**
-     * Wires from the configuration class 'BaseConfig'.
-     */
-    @Autowired
-    public NamedParameterJdbcTemplate namedJdbcTemplate;
-
-    /**
-     * Basically sql.insertGlobalSql = insertGlobal
-     * controlled via yml file.
-     */
-    @Value ("${sql.global.insertGlobalSql}")
-    private String insertGlobalSql;
-
-    /**
-     * Basically sql.getGlobalSql = getGlobal
-     * controlled via yml file.
-     */
-    @Value ("${sql.global.getGlobalByUniNameSql}")
-    private String getGlobalByUniNameSql;
-
-    /**
-     * Basically sql.deleteGlobalSql = deleteGlobal
-     * controlled via yml file.
-     */
-    @Value ("${sql.global.deleteGlobalByUniNameSql")
-    private String deleteGlobalByUniNameSql;
-
-    /**
-     *Basically sql.updateUserSql = updateUser
-     * controlled via yml file.
-     */
-    @Value ("${sql.global.updateGlobalByUniNameSql")
-    private String updateGlobalByUniNameSql;
-
-    /**
      * Mapping to create a new global value in database.
      * @param schoolName - name of the school
      * @param creditHours - credit hours.
@@ -69,7 +35,6 @@ public class GlobalController {
         Map<String, Object> params = new HashMap<>();
         params.put("school_name", schoolName);
         params.put("credit_Hour", creditHours);
-        namedJdbcTemplate.update(insertGlobalSql, params);
         return "Success";
 
     }
@@ -100,11 +65,6 @@ public class GlobalController {
         Map<String, Object> params = new HashMap<>();
         params.put("school_name", schoolName);
         params.put("credit_Hour", creditHours);
-        int rowsChanged = namedJdbcTemplate.update(updateGlobalByUniNameSql,
-                params);
-        if (rowsChanged < 1) {
-            return ("Unable to update");
-        }
         return "Update Successful";
     }
 
@@ -118,11 +78,6 @@ public class GlobalController {
             final @RequestParam("School Name") String schoolName) {
         Map<String, Object> params = new HashMap<>();
         params.put("school_name", schoolName);
-        int rowsChanged = namedJdbcTemplate.update(deleteGlobalByUniNameSql,
-                params);
-        if (rowsChanged >= 1) {
-            return "Successfully Removed";
-        }
         return ("Unable to remove global");
 
     }

@@ -27,7 +27,7 @@ public class GlobalControllerTest {
     GlobalController globalController = new GlobalController();
 
     @Before
-    public void before() { globalController.namedJdbcTemplate = mockTemplate;}
+    public void before() { }
 
 
     @Test

@@ -14,11 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/professor")
 public class ProfessorController {
 
+    /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
     private ProfessorServices professorServices;
 
+    /**
+     * Bean to be used throughout the professor class.
+     * @param profService - bean to be created
+     */
     @Autowired
     public void setProfessorService(final ProfessorServices profService) {
         this.professorServices = profService;
@@ -26,19 +34,28 @@ public class ProfessorController {
 
     /**
      * Creates a professor and puts it in the database.
-     * @return String - message to be displayed after entry
+     * @param id - id of the professor.
+     * @param firstName - first name of the professor.
+     * @param lastName - last name of the professor.
+     * @return message to be displayed after entry
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ProfessorDto createProfessor(final @RequestParam("Id")int id,
-                                        final @RequestParam("First Name")String firstName,
-                                        final @RequestParam("Last Name")String lastName) {
+    public String createProfessor(final @RequestParam("Id")int id,
+                         final @RequestParam("First Name")String firstName,
+                         final @RequestParam("Last Name")String lastName) {
         ProfessorDto professor = new ProfessorDto(firstName, lastName, id);
-        return professorServices.saveProfessor(professor);
+        professorServices.saveProfessor(professor);
+        if (!readProfessorById(id).equals("Unable to find Student")) {
+            return (professor.toString()  + " Added Successfully <br/> <a href="
+                    + "/" + ">Go Back to main screen</a>");
+        }
+        return ("Error adding Professor for some reason");
     }
 
     /**
      * Read a user from the database.
-     * @return String with user information
+     * @param id - id of hte professor to be found in database
+     * @return information about the professor found
      */
     @RequestMapping(value = "/professor_id")
     public String readProfessorById(final @RequestParam("Id") Integer id) {
@@ -53,26 +70,34 @@ public class ProfessorController {
 
     /**
      * Update a user already in the database.
+     * @param id - id of the professor.
+     * @param firstName - first name of the professor
+     * @param lastName - the last name of hte professor.
      * @return String to be displayed to user after trying to update
      */
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String updateProfessorById(final @RequestParam("Id")int id,
-                                    final @RequestParam("First Name")String firstName,
-                                    final @RequestParam("Last Name")String lastName) {
+                              final @RequestParam("First Name")String firstName,
+                              final @RequestParam("Last Name")String lastName) {
         ProfessorDto professor = new ProfessorDto(firstName, lastName, id);
         professorServices.saveProfessor(professor);
-        return ("Successfully updated: <br/>" + readProfessorById(professor.getId()));
+        return ("Successfully updated: <br/>"
+                + readProfessorById(professor.getId()));
     }
 
     /**
      * Delete a user that is in the database.
+     * @param id - id to find and remove the professor from database
      * @return String to be displayed to user after deleting them
      */
     @RequestMapping(value = "/id/", method = RequestMethod.GET)
     public String deleteProfessorById(final @RequestParam("Id") Integer id) {
         professorServices.deleteProfessor(id);
-        String string = "/";
-        return ("I dunno how to check....but its not in the database if it was "
-                + "<br/> <a href=" + string + ">Go Back to main screen</a>");
+        if (readProfessorById(id).equals("Unable to find Professor")) {
+            return ("Removed Student"
+                    + "<br/> <a href=" + "/"
+                    + ">Go Back to main screen</a>");
+        }
+        return "Unable to find student, plz try again";
     }
 }

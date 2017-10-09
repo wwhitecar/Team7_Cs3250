@@ -1,17 +1,14 @@
 package com.team7.app.controller;
 
-
 import com.team7.app.business.dto.CourseDto;
+import com.team7.app.services.CourseServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,44 +20,19 @@ import java.util.Map;
 public class CourseController {
 
     /**
-     * Wires from the configuration class 'BaseConfig'.
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
+    private CourseServices courseServices;
+
+    /**
+     * Bean to be used throughout the professor class.
+     * @param profService - bean to be created
      */
     @Autowired
-    public NamedParameterJdbcTemplate namedJdbcTemplate;
-
-    /**
-     * Basically sql.insertCourseSql = insertCourse
-     * controlled via yml file.
-     */
-    @Value("${sql.course.insertCourseSql}")
-    private String insertCourseSql;
-
-    /**
-     * Gets all the courses from the db.
-     */
-    @Value("${sql.course.getAllCoursesSql}")
-    private String getAllCoursesSql;
-
-    /**
-     * Basically sql.getCourseSql = getCourse
-     * controlled via yml file.
-     */
-    @Value("${sql.course.getCourseByNumber}")
-    private String getCourseByNumber;
-
-    /**
-     * Basically sql.deleteCourseByNumber = deleteCoures
-     * controlled via yml file.
-     */
-    @Value("${sql.course.deleteCourseByNumber}")
-    private String deleteCourseByNumber;
-
-    /**
-     *Basically sql.updateCourseByNumber = updateCourse
-     * controlled via yml file.
-     */
-    @Value("${sql.course.updateCourseByNumber}")
-    private String updateCourseByNumber;
+    public void setProfessorService(final CourseServices profService) {
+        this.courseServices = profService;
+    }
 
     /**
      * Will pull information from the webpages to create a
@@ -84,20 +56,12 @@ public class CourseController {
             final @RequestParam("prereqs") int prereqs,
             final @RequestParam("coreqs") int coreqs) {
 
-        Map<String, Object> params = new HashMap<>();
-        params.put("department", department);
-        params.put("course_number", courseNumber);
-        params.put("credits", credits);
-        params.put("description", description);
-        params.put("learning_objective", learningObjective);
-
-        boolean foundPreReq = false;
-        boolean foundCoReq = false;
-        if (!foundPreReq) {
-            params.put("prereqs", 0000);
-        }
-        if (!foundCoReq) {
-            params.put("coreqs", 0000);
+        CourseDto course = new CourseDto(department, courseNumber, credits,
+                description, learningObjective, prereqs, coreqs);
+        courseServices.saveCourse(course);
+        if (!readCourseByNumber(courseNumber).equals("Unable to find Course")) {
+            return (course.toString() + " Added Successfully <br/> <a href="
+                    + "/" + ">Go Back to main screen</a>");
         }
         return ("Success");
     }
@@ -111,9 +75,12 @@ public class CourseController {
     @RequestMapping(value = "/getcourse", method = RequestMethod.GET)
     public String readCourseByNumber(
             final @RequestParam("course_number") int courseNumber) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("course_number", courseNumber);
-        return "";
+        CourseDto course = courseServices.getCourseById(courseNumber);
+        if (course == null) {
+            return "Unable to find Course";
+        }
+        return (course.toString() + " Added Successfully <br/> <a href="
+                + "/" + ">Go Back to main screen</a>");
     }
 
     /**
@@ -137,30 +104,14 @@ public class CourseController {
             final @RequestParam("learning_objective") String learningObjective,
             final @RequestParam("prereqs") int prereqs,
             final @RequestParam("coreqs") int coreqs) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("department", department);
-        params.put("course_number", courseNumber);
-        params.put("credits", credits);
-        params.put("description", description);
-        params.put("learning_objective", learningObjective);
-
-
-        boolean foundPreReq = false;
-        boolean foundCoReq = false;
-        if (!foundPreReq) {
-            params.put("prereqs", 0000);
+        CourseDto course = new CourseDto(department, courseNumber, credits,
+                description, learningObjective, prereqs, coreqs);
+        courseServices.saveCourse(course);
+        if (!readCourseByNumber(courseNumber).equals("Unable to find Course")) {
+            return (course.toString() + " Added Successfully <br/> <a href="
+                    + "/" + ">Go Back to main screen</a>");
         }
-        if (!foundCoReq) {
-            params.put("coreqs", 0000);
-        }
-
-        int rowsChanged = namedJdbcTemplate.update(updateCourseByNumber,
-                params);
-        if (rowsChanged == 0) {
-            return ("Failed to find the course "
-                    + "you are trying to update, please try again.");
-        }
-        return "Successfully Updated";
+        return ("Unable to find Course");
     }
 
     /**
@@ -172,13 +123,13 @@ public class CourseController {
     @RequestMapping (value = "/deletecourse", method = RequestMethod.GET)
     public String deleteCourseByNumber(
             final @RequestParam("course_number") int courseNumber) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("course_number", courseNumber);
-        int rowsChanged =
-                namedJdbcTemplate.update(deleteCourseByNumber, params);
-        if (rowsChanged == 0) {
-            return ("Unable to find course to remove, please try again");
+        courseServices.deleteCourse(courseNumber);
+        if (readCourseByNumber(courseNumber).equals("Unable to find Course")) {
+            return ("Removed Course"
+                    + "<br/> <a href=" + "/"
+                    + ">Go Back to main screen</a>");
         }
-        return "Successfully Removed";
+        return ("Unable to remove course, plz try again"
+                + "<br/> <a href=" + "/" + ">Go Back to main screen</a>");
     }
 }

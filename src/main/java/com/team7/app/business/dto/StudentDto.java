@@ -71,12 +71,16 @@ public class StudentDto {
         return id;
     }
 
+    /**
+     * Overrides the to string method.
+     * @return information about the student.
+     */
     @Override
-    public String toString(){
+    public String toString() {
         if (firstName == null || lastName == null || id == 0) {
             return "Student not configured correctly";
         }
-        return "Name: " + firstName + " " + lastName +
-                " Id: " + id;
+        return "Name: " + firstName + " " + lastName
+                + " Id: " + id;
     }
 }

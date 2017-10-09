@@ -30,7 +30,6 @@ public class CourseControllerTest {
 
     @Before
     public void before(){
-        courseController.namedJdbcTemplate = mockTemplate; // Made mock object of a jdbc template
     }
 
     @Test
