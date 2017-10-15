@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Controlles communication between the webpages in the application
  * and the database for the courses.
@@ -26,12 +23,12 @@ public class CourseController {
     private CourseServices courseServices;
 
     /**
-     * Bean to be used throughout the professor class.
-     * @param profService - bean to be created
+     * Bean to be used throughout the course controller class.
+     * @param cService - bean to be created
      */
     @Autowired
-    public void setProfessorService(final CourseServices profService) {
-        this.courseServices = profService;
+    public void setCourseService(final CourseServices cService) {
+        this.courseServices = cService;
     }
 
     /**

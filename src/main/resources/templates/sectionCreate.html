@@ -1,0 +1,23 @@
+{{>layout/header}}
+<body>
+<h1>Team 7</h1>
+<h2>Create a Professor</h2>
+<br/>
+<form action="/section/" method="POST">
+    <div>
+        <label>
+            <br/>Section Number: <br/> <input type="number" name="section_number" required/></label>
+        <br/>
+        <label>
+            <br/>Course: <br/><input type="number" name="course" required/></label>
+        <br/>
+        <label>
+            <br/>Professor:<br/> <input type="number" name="professor" required /></label>
+        <br/>
+        <input type="submit" name="doit" value="Create Section" />
+    </div>
+</form>
+
+<a href="/">Return to home Screen</a>
+</body>
+{{>layout/footer}}

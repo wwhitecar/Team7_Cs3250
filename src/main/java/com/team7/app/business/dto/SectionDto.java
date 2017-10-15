@@ -12,28 +12,34 @@ public class SectionDto {
     @Id
     private int sectionNumber;
 
-
     /**
      * The course number to identify a course by more then
      * just the name.
      */
-    @OneToOne
+    @ManyToOne
     private CourseDto course;
 
     /**
      * The professor?
      */
-    @OneToOne
+    @ManyToOne
     private ProfessorDto professor;
+
+    /**
+     * Empty Constructer.
+     */
+    public SectionDto() {
+
+    }
 
     /**
      * Param constructer.
      * @param course - course to be tied to this section
      * @param professor - professor of the class/section
      */
-    public SectionDto(final int sectionNumber,
-                      final CourseDto course,
-                      final ProfessorDto professor) {
+    public SectionDto( final int sectionNumber,
+                       final CourseDto course,
+                       final ProfessorDto professor) {
         this.sectionNumber = sectionNumber;
         this.course = course;
         this.professor = professor;
