@@ -17,13 +17,13 @@ public class SectionDto {
      * The course number to identify a course by more then
      * just the name.
      */
-    @OneToMany
+    @OneToOne(cascade = CascadeType.ALL)
     private int courseNumber;
 
     /**
      * The professor?
      */
-    @OneToMany
+    @OneToOne
     private String professor;
 
     /**

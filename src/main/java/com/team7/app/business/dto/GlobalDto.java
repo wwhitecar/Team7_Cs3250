@@ -53,36 +53,22 @@ public class GlobalDto {
      * Enum class to determine the level of the students.
      */
     public enum HoursPerLevel {
-        /**
-         * Freshman if less then 40 credits.
-         */
-        Freshman(29),
-        /**
-         * Sophomore if less then 80 credits.
-         */
-        Sophomore(59),
-        /**
-         * Junior if less then 120 credits.
-         */
-        Junior(89),
-        /**
-         * Senior if over 120 credits.
-         */
-        Senior(120);
+
+        Freshman(29), Sophomore(59), Junior(89), Senior(120);
 
         /**
          * Holds the number of hours.
          */
-      // private final int hours;
+       private final int hours;
 
 
         /**
          * HoursePerLevel.
          * @param theseHours integer of hours
          */
-    //    HoursPerLevel(final int theseHours) {
-     //       this.hours = theseHours;
-    //    }
+        HoursPerLevel(final int theseHours) {
+            this.hours = theseHours;
+        }
 
         /**
          * Getter for hours.
