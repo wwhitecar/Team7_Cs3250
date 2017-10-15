@@ -70,7 +70,7 @@ public class BuildingController {
         CourseDto course = courseServices.getCourseById(courseNumber);
         ProfessorDto professor = professorServices.getProfessorById(professorId);
         BuildingDto building = new BuildingDto(buildingNumber, course, professor);
-        BuildingServices.saveBuilding(building);
+        buildingServices.saveBuilding(building);
         return ("Success");
     }
 
