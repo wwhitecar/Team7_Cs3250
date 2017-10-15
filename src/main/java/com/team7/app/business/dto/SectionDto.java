@@ -17,25 +17,25 @@ public class SectionDto {
      * The course number to identify a course by more then
      * just the name.
      */
-    @OneToOne(cascade = CascadeType.ALL)
-    private int courseNumber;
+    @OneToOne
+    private CourseDto course;
 
     /**
      * The professor?
      */
     @OneToOne
-    private String professor;
+    private ProfessorDto professor;
 
     /**
      * Param constructer.
-     * @param courseNumber -coursenumber
+     * @param course - course to be tied to this section
      * @param professor - professor of the class/section
      */
     public SectionDto(final int sectionNumber,
-                      final int courseNumber,
-                      final String professor) {
+                      final CourseDto course,
+                      final ProfessorDto professor) {
         this.sectionNumber = sectionNumber;
-        this.courseNumber = courseNumber;
+        this.course = course;
         this.professor = professor;
     }
 
@@ -52,15 +52,15 @@ public class SectionDto {
      * Getter for coursenumber.
      * @return number for the course.
      */
-    public int getCourseNumber() {
-        return courseNumber;
+    public CourseDto getCourseNumber() {
+        return course;
     }
 
     /**
      * Getter for the prof of the section.
      * @return the professor of the section.
      */
-    public String getProfessor() {
+    public ProfessorDto getProfessor() {
         return professor;
     }
 

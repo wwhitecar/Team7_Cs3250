@@ -13,13 +13,6 @@ import java.util.Map;
 public class SectionController {
 
     /**
-     * sql.updateSectionSql = updateSection
-     * controlled via yml file.
-     */
-    @Value("${sql.updateSectionByNumber}")
-    private String updateSectionByNumber;
-
-    /**
      * Will pull information from the webpages to create a
      * new class to be store into the database.
      * @param courseNumber - course specific number
