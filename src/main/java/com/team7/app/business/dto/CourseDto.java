@@ -1,10 +1,14 @@
 package com.team7.app.business.dto;
 
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * CourseDto is a course that will be avalable for the students
  * to be offered.
  */
+@Entity
 public class CourseDto {
 
     /**
@@ -16,6 +20,7 @@ public class CourseDto {
      * The course number to identify a course by more then
      * just the name.
      */
+    @Id
     private int courseNumber;
 
     /**

@@ -1,8 +1,12 @@
 package com.team7.app.business.dto;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Professors to be added to the database.
  */
+@Entity
 public class ProfessorDto {
 
     /**
@@ -18,17 +22,16 @@ public class ProfessorDto {
     /**
      * Id of professor.
      */
+    @Id
     private int id;
 
     /**
-     * Empty Constructer.
+     * Empty constructor.
      */
-    public ProfessorDto() {
-
-    }
+    public ProfessorDto(){}
 
     /**
-     * Full param constructer.
+     * Full param constructor.
      * @param fName - firts name of professor
      * @param lName - last name of professor
      * @param iD - id of professor
@@ -44,7 +47,6 @@ public class ProfessorDto {
      * @return String - first name of professor
      */
     public String getFirstName() {
-
         return firstName;
     }
 
@@ -53,7 +55,6 @@ public class ProfessorDto {
      * @return String - Last name of the professor
      */
     public String getLastName() {
-
         return lastName;
     }
 
@@ -62,7 +63,19 @@ public class ProfessorDto {
      * @return Int - the id for the professor
      */
     public int getId() {
-
         return id;
+    }
+
+    /**
+     * Overrides the to string method.
+     * @return information about the professor.
+     */
+    @Override
+    public String toString() {
+        if (firstName == null || lastName == null || id == 0) {
+            return "Professor not configured correctly";
+        }
+        return "Name: " + firstName + " " + lastName
+                + " Id: " + id;
     }
 }

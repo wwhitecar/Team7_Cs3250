@@ -1,135 +1,103 @@
 package com.team7.app.controller;
 
-import com.team7.app.business.ProfessorRowMapper;
 import com.team7.app.business.dto.ProfessorDto;
+import com.team7.app.services.ProfessorServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
- * Controller for the professorDto to be mapped
- * to the database.
+ * Class that will communicate with both the webapplication
+ * and the data base to transfer information.
  */
+
 @RestController
 @RequestMapping(value = "/professor")
 public class ProfessorController {
 
     /**
-     * Wires from the configuration class 'BaseConfig'.
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
+    private ProfessorServices professorServices;
+
+    /**
+     * Bean to be used throughout the professor class.
+     * @param profService - bean to be created
      */
     @Autowired
-    public NamedParameterJdbcTemplate namedJdbcTemplate;
-
-    /**
-     * Basically sql.insertProfessorSql = insertProfessor
-     * controlled via yml file.
-     */
-    @Value("${sql.sqlprofessor.insertProfessorSql}")
-    private String insertProfessorSql;
-
-    /**
-     * Basically sql.getProfessorSql = getProfessor
-     * controlled via yml file.
-     */
-    @Value("${sql.sqlprofessor.getProfessorByIdSql}")
-    private String getProfessorByIdSql;
-
-    /**
-     * Basically sql.deleteProfessorSql = deleteProfessor
-     * controlled via yml file.
-     */
-    @Value("${sql.sqlprofessor.deleteProfessorByIdSql}")
-    private String deleteProfessorByIdSql;
-
-    /**
-     *Basically sql.updateProfessorSql = updateProfessor
-     * controlled via yml file.
-     */
-    @Value("${sql.sqlprofessor.updateProfessorByIdSql}")
-    private String updateProfessorByIdSql;
+    public void setProfessorService(final ProfessorServices profService) {
+        this.professorServices = profService;
+    }
 
     /**
      * Creates a professor and puts it in the database.
-     * @param id - id of the professor
-     * @param firstName - first name of the professor
-     * @param lastName - last name of professor
-     * @return String - message to be displayed after entry
+     * @param id - id of the professor.
+     * @param firstName - first name of the professor.
+     * @param lastName - last name of the professor.
+     * @return message to be displayed after entry
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String createProfessor(final @RequestParam("Id")int id,
-                     final @RequestParam("First Name")String firstName,
-                     final @RequestParam("Last Name")String lastName) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("professor_id", id);
-        params.put("first_name", firstName);
-        params.put("last_name", lastName);
-        namedJdbcTemplate.update(insertProfessorSql, params);
-        return "Success";
-    }
-
-     /**
-     * Read a Professor from the database.
-     * @param id - Value to search for Professor with
-     * @return String with Professor infromation
-      */
-    @RequestMapping(value = "/getprofessor/", method = RequestMethod.GET)
-    public String readProfessorById(final @RequestParam("Id") int id) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("professor_id", id);
-        List<ProfessorDto> dto = namedJdbcTemplate.query(
-                getProfessorByIdSql, params, new ProfessorRowMapper());
-        ProfessorDto professor = dto.get(0);
-        return ("Name: " + professor.getFirstName()
-                + " " + professor.getLastName()
-                + "\nProfessor Id: " + professor.getId());
+                         final @RequestParam("First Name")String firstName,
+                         final @RequestParam("Last Name")String lastName) {
+        ProfessorDto professor = new ProfessorDto(firstName, lastName, id);
+        professorServices.saveProfessor(professor);
+        if (!readProfessorById(id).equals("Unable to find Student")) {
+            return (professor.toString()  + " Added Successfully <br/> <a href="
+                    + "/" + ">Go Back to main screen</a>");
+        }
+        return ("Error adding Professor for some reason");
     }
 
     /**
-     * Update a professor already in the database.
-     * @param id - id of the professor to be found
-     * @param firstName - new first name of the professor
-     * @param lastName - new last name of the professor
-     * @return String to be displayed to professor after trying to update
+     * Read a user from the database.
+     * @param id - id of hte professor to be found in database
+     * @return information about the professor found
+     */
+    @RequestMapping(value = "/professor_id")
+    public String readProfessorById(final @RequestParam("Id") Integer id) {
+        ProfessorDto professor = professorServices.getProfessorById(id);
+        if (professor == null) {
+            return "Unable to find Professor";
+        }
+        String string = "/";
+        return professor.toString()  + "<br/> <a href="
+                + string + ">Go Back to main screen</a>";
+    }
+
+    /**
+     * Update a user already in the database.
+     * @param id - id of the professor.
+     * @param firstName - first name of the professor
+     * @param lastName - the last name of hte professor.
+     * @return String to be displayed to user after trying to update
      */
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String updateProfessorById(final @RequestParam("Id")int id,
-                       final @RequestParam("First Name")String firstName,
-                       final @RequestParam("Last Name")String lastName) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("professor_id", id);
-        params.put("first_name", firstName);
-        params.put("last_name", lastName);
-        int rowsChanged = namedJdbcTemplate.update(
-                updateProfessorByIdSql, params);
-        if (rowsChanged < 1) {
-            return ("Unable to find professor to update,"
-                    + " try again with different id.");
-        }
-        return "Successfully Updated";
+                              final @RequestParam("First Name")String firstName,
+                              final @RequestParam("Last Name")String lastName) {
+        ProfessorDto professor = new ProfessorDto(firstName, lastName, id);
+        professorServices.saveProfessor(professor);
+        return ("Successfully updated: <br/>"
+                + readProfessorById(professor.getId()));
     }
 
     /**
-     * Delete a professor that is in the database.
-     * @param id - id of the professor to be deleted
-     * @return String to be displayed to professor after deleteing them
+     * Delete a user that is in the database.
+     * @param id - id to find and remove the professor from database
+     * @return String to be displayed to user after deleting them
      */
     @RequestMapping(value = "/id/", method = RequestMethod.GET)
-    public String deleteProfessorById(final @RequestParam("Id") int id) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("professor_id", id);
-        int rowsChanged = namedJdbcTemplate.update(deleteProfessorByIdSql,
-                params);
-        if (rowsChanged >= 1) {
-            return "Successfully Removed";
+    public String deleteProfessorById(final @RequestParam("Id") Integer id) {
+        professorServices.deleteProfessor(id);
+        if (readProfessorById(id).equals("Unable to find Professor")) {
+            return ("Removed Student"
+                    + "<br/> <a href=" + "/"
+                    + ">Go Back to main screen</a>");
         }
-        return ("Unable to remove professor, try again with different id");
+        return "Unable to find student, plz try again";
     }
 }
