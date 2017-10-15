@@ -56,48 +56,48 @@ public class GlobalDto {
         /**
          * Freshman if less then 40 credits.
          */
-        Freshman(39),
+        Freshman(29),
         /**
          * Sophomore if less then 80 credits.
          */
-        Sophomore(79),
+        Sophomore(59),
         /**
          * Junior if less then 120 credits.
          */
-        Junior(119),
+        Junior(89),
         /**
          * Senior if over 120 credits.
          */
-        Senior(1000);
+        Senior(120);
 
         /**
          * Holds the number of hours.
          */
-        private final int hours;
+      // private final int hours;
 
 
         /**
          * HoursePerLevel.
          * @param theseHours integer of hours
          */
-        HoursPerLevel(final int theseHours) {
-            this.hours = theseHours;
-        }
+    //    HoursPerLevel(final int theseHours) {
+     //       this.hours = theseHours;
+    //    }
 
         /**
          * Getter for hours.
          * @param hours - hours student currently has.
          * @return students current level
          */
-        public static HoursPerLevel getHours(final int hours) {
-            HoursPerLevel credits = Freshman;
-            for (HoursPerLevel h : values()) {
-                if (h.hours <= hours) {
-                    credits = h;
-                }
-            }
-            return credits;
-        }
+ //       public static HoursPerLevel getHours(final int hours) {
+  //          HoursPerLevel credits = Freshman;
+  //          for (HoursPerLevel h : values()) {
+   //             if (h.hours <= hours) {
+    //                credits = h;
+   //             }
+   //         }
+   //         return credits;
+  //     }
     }
 }
 
