@@ -5,6 +5,7 @@ import javax.persistence.Id;
 
 /**
  * User for the database to keep track of.
+ * Entity tag is for adding something to the database.
  */
 @Entity
 public class StudentDto {
@@ -20,7 +21,7 @@ public class StudentDto {
     private String lastName;
 
     /**
-     * Id of user.
+     * Id of user, also the primary key for the database.
      */
     @Id
     private int id;

@@ -5,6 +5,10 @@ import com.team7.app.repositories.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implementation to communicate to the database.
+ * JDBC implementation.
+ */
 @Service
 public class CourseServicesImpl implements CourseServices {
     private CourseRepository courseRepository;
