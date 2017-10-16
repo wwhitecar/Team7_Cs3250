@@ -1,5 +1,7 @@
 package com.team7.app.controller;
 
+import com.team7.app.services.CourseServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,21 @@ public class WebPageController {
      */
     @Value("${app.welcome.title}")
     private String title = "";
+
+    /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
+    private CourseServices courseServices;
+
+    /**
+     * Bean to be used throughout the course controller class.
+     * @param cService - bean to be created
+     */
+    @Autowired
+    public void setCourseService(final CourseServices cService) {
+        this.courseServices = cService;
+    }
 
     /**
      * Mapping for a web page.
@@ -171,5 +188,17 @@ public class WebPageController {
     public String sectionCreate (final Map<String, Object> model) {
         model.put("title", title);
         return "sectionCreate";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/section/update")
+    public String sectionUpdate (final Map<String, Object> model) {
+        model.put("title", title);
+        model.put("courses", courseServices.listAllCourse());
+        return "sectionUpdate";
     }
 }

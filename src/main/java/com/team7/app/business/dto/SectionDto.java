@@ -70,4 +70,12 @@ public class SectionDto {
         return professor;
     }
 
+    /**
+     * Overrides the tostring method.
+     * @return the new string of information
+     */
+    @Override
+    public String toString(){
+        return "Course: </br>" + course.toString() + "</br>Professor: </br>" + professor.toString();
+    }
 }

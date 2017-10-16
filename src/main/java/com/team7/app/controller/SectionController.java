@@ -55,6 +55,7 @@ public class SectionController {
     public void setSectionServices(final SectionServices sServices) {
         this.sectionServices = sServices;
     }
+
     /**
      * Will pull information from the webpages to create a
      * new class to be store into the database.
@@ -71,6 +72,35 @@ public class SectionController {
         ProfessorDto professor = professorServices.getProfessorById(professorId);
         SectionDto section = new SectionDto(sectionNumber, course, professor);
         sectionServices.saveSection(section);
+        if (!readSectionByNumber(sectionNumber).equals("Unable to find Section")) {
+            return (section.toString() + " Added Successfully <br/> <a href="
+                    + "/" + ">Go Back to main screen</a>");
+        }
+        return ("Unable to find Section, plz try again </br> <a href="
+                + "/" + "> Back to Section menu </a>");
+    }
+
+    /**
+     * Will pull information from the webpages to update a
+     * section to be store into the database.
+     * @param sectionNumber - the number for the course
+     * @param courseNumber - course specific number
+     * @param professorId - professor teaching the section
+     * @return state of the create request
+     */
+    @RequestMapping(value = "/updatesection", method = RequestMethod.POST)
+    public String updateSection(
+            final @RequestParam ("section_number") int sectionNumber,
+            final @RequestParam("course") int courseNumber,
+            final @RequestParam("professor") int professorId) {
+        CourseDto course = courseServices.getCourseById(courseNumber);
+        ProfessorDto professor = professorServices.getProfessorById(professorId);
+        SectionDto section = new SectionDto(sectionNumber, course, professor);
+        sectionServices.saveSection(section);
+        if (!readSectionByNumber(sectionNumber).equals("Unable to find Section")) {
+            return (section.toString() + " Updated Section Successfully <br/> <a href="
+                    + "/" + ">Go Back to main screen</a>");
+        }
         return ("Success");
     }
 
@@ -84,6 +114,30 @@ public class SectionController {
     @RequestMapping(value = "/getsection", method = RequestMethod.GET)
     public String readSectionByNumber(
             final @RequestParam("course_number") int sectionNumber) {
-        return "";
+        SectionDto  section = sectionServices.getSectionById(sectionNumber);
+        if (section == null) {
+            return "Unable to find Section";
+        }
+        return (section.toString() + "<br/> <a href="
+                + "/" + ">Go Back to main screen</a>");
+    }
+
+    /**
+     * Will attempt to remove a section from the database that corresponds
+     * to section number provided to the webpage.
+     * @param sectionNumber - number of the course we would like to delete
+     * @return status of the delete request
+     */
+    @RequestMapping (value = "/deletesection", method = RequestMethod.GET)
+    public String deleteCourseByNumber(
+            final @RequestParam("section_number") int sectionNumber) {
+        courseServices.deleteCourse(sectionNumber);
+        if (readSectionByNumber(sectionNumber).equals("Unable to find Course")) {
+            return ("Removed Section"
+                    + "<br/> <a href=" + "/"
+                    + ">Go Back to main screen</a>");
+        }
+        return ("Unable to remove Section, plz try again"
+                + "<br/> <a href=" + "/" + ">Go Back to main screen</a>");
     }
 }

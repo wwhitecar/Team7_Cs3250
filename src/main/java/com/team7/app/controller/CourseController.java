@@ -76,7 +76,7 @@ public class CourseController {
         if (course == null) {
             return "Unable to find Course";
         }
-        return (course.toString() + " Added Successfully <br/> <a href="
+        return (course.toString() + "<br/> <a href="
                 + "/" + ">Go Back to main screen</a>");
     }
 

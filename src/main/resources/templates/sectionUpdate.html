@@ -1,0 +1,29 @@
+{{>layout/header}}
+<body>
+<h1>Update data for Section</h1>
+<h2>Please enter a Section Id</h2>
+<form id="update" action="/section/update" method="GET">
+    <label>Can't chang; Section id
+        <br/>Section Id <input type="number" name="section_number" required size="30" /></label>
+
+    <input type="submit" name="doit" value="Update Section" />
+</form>
+
+    <br/>
+    <p>New Course:</p>
+    <select name="course" form="update"required>
+           {{#courses}}
+        <option>
+        <li> {{courses}} </li>
+        </option>
+        {{/courses}}
+    </select>
+
+    <br/>
+    <p>New Professor:</p>
+        <select name="courses" form="update" required>
+            <option>8675309</option>
+        </select>
+
+</body>
+{{>layout/footer}}
