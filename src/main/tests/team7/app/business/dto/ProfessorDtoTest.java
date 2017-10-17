@@ -18,23 +18,28 @@ public class ProfessorDtoTest {
     }
 
     @Test
-    public void getFirstName() throws Exception {
+    public void getFirstNameTest() throws Exception {
         assertEquals(professor.getFirstName(), "Donald");
         assertFalse(professor.getFirstName().equals("Barack"));
         assertTrue(professor2.getFirstName() == null);
     }
 
     @Test
-    public void getLastName() throws Exception {
+    public void getLastNameTest() throws Exception {
         assertEquals(professor.getLastName(), "Trump");
         assertFalse(professor.getLastName().equals("Obama"));
         assertTrue(professor2.getLastName() == null);
     }
 
     @Test
-    public void getId() throws Exception {
+    public void getIdTest() throws Exception {
         assertEquals(professor.getId(), 123);
         assertFalse(professor.getId() == 23);
         assertTrue(professor2.getId() == 0);
+    }
+
+    @Test
+    public void toStringTest(){
+        assertTrue(professor2.toString().equals("Professor not configured correctly"));
     }
 }
