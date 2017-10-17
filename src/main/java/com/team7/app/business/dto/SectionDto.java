@@ -66,7 +66,7 @@ public class SectionDto {
      * Getter for coursenumber.
      * @return number for the course.
      */
-    public CourseDto getCourseNumber() {
+    public CourseDto getCourse() {
         return course;
     }
 

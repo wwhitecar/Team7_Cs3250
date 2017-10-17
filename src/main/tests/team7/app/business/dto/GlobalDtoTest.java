@@ -16,8 +16,13 @@ public class GlobalDtoTest {
     public void before() {
         global = new GlobalDto("School Name", 25);
         global2 = new GlobalDto();
+
     }
 
+    @Test
+    public void hoursPerLevelTest(){
+        GlobalDto.HoursPerLevel hPL = GlobalDto.HoursPerLevel.Freshman;
+    }
 
     @Test
     public void getSchoolName() throws Exception {
