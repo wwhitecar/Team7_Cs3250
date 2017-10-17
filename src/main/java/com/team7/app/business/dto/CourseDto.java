@@ -21,7 +21,7 @@ public class CourseDto {
      * just the name.
      */
     @Id
-    public int courseNumber;
+    private int courseNumber;
 
     /**
      * The amount of credits the course is worth.

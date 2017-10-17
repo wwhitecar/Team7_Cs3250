@@ -17,15 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class SectionController {
 
     /**
-     * Services to be used by hibernate to correctly add
+     * Services to be used by hibernate to correctly add/remove
      * information to the database.
      */
     private SectionServices sectionServices;
 
+    /**
+     * Services to be used by hibernate to correctly add/remove
+     * information to the database.
+     */
     private CourseServices courseServices;
 
     /**
-     * Services to be used by hibernate to correctly add
+     * Services to be used by hibernate to correctly add/remove
      * information to the database.
      */
     private ProfessorServices professorServices;
@@ -97,7 +101,8 @@ public class SectionController {
         ProfessorDto professor = professorServices.getProfessorById(professorId);
         SectionDto section = new SectionDto(sectionNumber, course, professor);
         sectionServices.saveSection(section);
-        if (!readSectionByNumber(sectionNumber).equals("Unable to find Section")) {
+        if (!readSectionByNumber(sectionNumber).equals("Unable to find Section"
+                + "<br/> <a href=" + "/" + ">Go Back to main screen</a>")) {
             return (section.toString() + " Updated Section Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
         }
@@ -113,10 +118,11 @@ public class SectionController {
      */
     @RequestMapping(value = "/getsection", method = RequestMethod.GET)
     public String readSectionByNumber(
-            final @RequestParam("course_number") int sectionNumber) {
+            final @RequestParam("section_number") int sectionNumber) {
         SectionDto  section = sectionServices.getSectionById(sectionNumber);
         if (section == null) {
-            return "Unable to find Section";
+            return "Unable to find Section" + "<br/> <a href="
+                    + "/" + ">Go Back to main screen</a>";
         }
         return (section.toString() + "<br/> <a href="
                 + "/" + ">Go Back to main screen</a>");
@@ -128,16 +134,13 @@ public class SectionController {
      * @param sectionNumber - number of the course we would like to delete
      * @return status of the delete request
      */
-    @RequestMapping (value = "/deletesection", method = RequestMethod.GET)
+    @RequestMapping (value = "/deleteSection", method = RequestMethod.GET)
     public String deleteCourseByNumber(
             final @RequestParam("section_number") int sectionNumber) {
-        courseServices.deleteCourse(sectionNumber);
-        if (readSectionByNumber(sectionNumber).equals("Unable to find Course")) {
+        sectionServices.deleteSection(sectionNumber);
             return ("Removed Section"
                     + "<br/> <a href=" + "/"
                     + ">Go Back to main screen</a>");
-        }
-        return ("Unable to remove Section, plz try again"
-                + "<br/> <a href=" + "/" + ">Go Back to main screen</a>");
+
     }
 }

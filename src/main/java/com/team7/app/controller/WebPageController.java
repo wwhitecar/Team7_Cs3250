@@ -1,6 +1,8 @@
 package com.team7.app.controller;
 
 import com.team7.app.services.CourseServices;
+import com.team7.app.services.ProfessorServices;
+import com.team7.app.services.SectionServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -28,12 +30,43 @@ public class WebPageController {
     private CourseServices courseServices;
 
     /**
-     * Bean to be used throughout the course controller class.
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
+    private ProfessorServices professorServices;
+
+    /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
+    private SectionServices sectionServices;
+
+
+    /**
+     * Bean to be used throughout the controller class.
      * @param cService - bean to be created
      */
     @Autowired
     public void setCourseService(final CourseServices cService) {
         this.courseServices = cService;
+    }
+
+    /**
+     * Bean to be used throughout the controller class.
+     * @param pService - bean to be created
+     */
+    @Autowired
+    public void setProfessorService(final ProfessorServices pService) {
+        this.professorServices = pService;
+    }
+
+    /**
+     * Bean to be used throughout the course controller class.
+     * @param sServices - bean to be created
+     */
+    @Autowired
+    public void setSectionServices(final SectionServices sServices) {
+        this.sectionServices = sServices;
     }
 
     /**
@@ -187,6 +220,8 @@ public class WebPageController {
     @RequestMapping("/section")
     public String sectionCreate (final Map<String, Object> model) {
         model.put("title", title);
+        model.put("courses", courseServices.listAllCourse());
+        model.put("professors", professorServices.listAllProfessor());
         return "sectionCreate";
     }
 
@@ -199,6 +234,30 @@ public class WebPageController {
     public String sectionUpdate (final Map<String, Object> model) {
         model.put("title", title);
         model.put("courses", courseServices.listAllCourse());
+        model.put("professors", professorServices.listAllProfessor());
+        model.put("sections", sectionServices.listAllSection());
         return "sectionUpdate";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/section/sectionRead")
+    public String sectionRead(final Map<String, Object> model) {
+        model.put("title", title);
+        return "sectionRead";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/section/sectionDelete")
+    public String sectionDelete(final Map<String, Object> model) {
+        model.put("title", title);
+        return "sectionDelete";
     }
 }
