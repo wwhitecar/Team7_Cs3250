@@ -1,7 +1,7 @@
 package com.team7.app.business.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  * User for the database to keep track of.
@@ -22,11 +22,21 @@ public class RoomDto {
     private int roomCapacity;
 
     /**
+     *  Set of all rooms
+     */
+    private Set roomSet;
+
+    /**
+     *  many rooms have a building
+     */
+    @ManyToOne
+    @JoinColumn(name="building_name", nullable=false)
+    private BuildingDto building;
+
+    /**
      * Empty Constructer.
      */
-    public RoomDto() {
-
-    }
+    public RoomDto() {}
 
     /**
      * Full param constructer.
@@ -34,10 +44,13 @@ public class RoomDto {
      * @param rCapacity - room capacity
      */
     public RoomDto(final int rNumber,
-                      final int rCapacity) {
+                   final int rCapacity) {
         this.roomNumber = rNumber;
         this.roomCapacity = rCapacity;
     }
+
+    public Set setRoom() {roomSet.add(getRoomNumber());}
+
     /**
      * Get the number of the room.
      * @return int - number of the room

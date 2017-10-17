@@ -1,10 +1,7 @@
 package com.team7.app.controller;
 
-import com.team7.app.business.dto.CourseDto;
 import com.team7.app.business.dto.RoomDto;
 import com.team7.app.business.dto.BuildingDto;
-import com.team7.app.services.CourseServices;
-import com.team7.app.services.ProfessorServices;
 import com.team7.app.services.BuildingServices;
 import com.team7.app.services.RoomServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/building")
@@ -49,20 +48,34 @@ public class BuildingController {
     /**
      * Will pull information from the webpages to create a
      * new class to be store into the database.
-     * @param roomNumber - course specific number
      * @param buildingName - professor teaching the building
      * @return state of the create request
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String createBuilding(
             final @RequestParam ("building_name") String buildingName,
-            final @RequestParam("room_Number") int roomNumber) {
-        RoomDto room = roomServices.getRoomByNumber(roomNumber);
-        BuildingDto building = new BuildingDto(buildingName, room);
+            final @RequestParam ("room") Set rooms) {
+        Set Arooms = roomServices.getRooms(rooms);
+        BuildingDto building = new BuildingDto(buildingName, Arooms);
         buildingServices.saveBuilding(building);
         return ("Success");
     }
 
+    /**
+     * Will pull information from the webpages to update a
+     * building to be store into the database.
+     * @param buildingName - course specific number
+     * @return state of the create request
+     */
+    @RequestMapping(value = "/updatebuilding", method = RequestMethod.POST)
+    public String updateBuilding(
+            final @RequestParam ("building_name") String buildingName,
+            final @RequestParam ("rooms") Set rooms){
+        Set Arooms = roomServices.getRooms(rooms);
+        BuildingDto building = new BuildingDto(buildingName, Arooms);
+        buildingServices.saveBuilding(building);
+        return ("Success");
+    }
 
     /**
      * Will quarry the data base to pull the specific building
@@ -75,4 +88,6 @@ public class BuildingController {
             final @RequestParam("building_name") int buildingName) {
         return "";
     }
+
+
 }

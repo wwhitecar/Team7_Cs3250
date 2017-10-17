@@ -10,7 +10,7 @@ public interface BuildingServices {
 
     Iterable<BuildingDto> listAllBuilding();
 
-    BuildingDto getBuildingById(Integer id);
+    BuildingDto getBuildingByName(Integer name);
 
     BuildingDto saveBuilding(BuildingDto product);
 

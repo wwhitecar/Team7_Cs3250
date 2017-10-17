@@ -1,6 +1,7 @@
 package com.team7.app.business.dto;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class BuildingDto {
@@ -16,8 +17,8 @@ public class BuildingDto {
      * The course number to identify a course by more then
      * just the name.
      */
-    @ManyToOne
-    private RoomDto room;
+    @OneToMany(mappedBy="building")
+    private Set<RoomDto> rooms;
 
     /**
      * Empty Constructer.
@@ -28,13 +29,13 @@ public class BuildingDto {
 
     /**
      * Param constructer.
-     * @param buildingName - course to be tied to this building
-     * @param room - professor of the class/building
+     * @param buildingName - building name
+     * @param rooms - all the rooms the building has
      */
     public BuildingDto( final String buildingName,
-                       final RoomDto room) {
+                       final Set rooms) {
         this.buildingName = buildingName;
-        this.room = room;
+        this.rooms = rooms;
     }
 
     /**
@@ -50,8 +51,8 @@ public class BuildingDto {
      * Getter for coursenumber.
      * @return number for the course.
      */
-    public RoomDto getRoomNumber() {
-        return room;
+    public Set getRooms() {
+        return rooms;
     }
 
 }

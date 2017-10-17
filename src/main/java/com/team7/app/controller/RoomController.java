@@ -43,6 +43,7 @@ public class RoomController {
                              final @RequestParam("Last Name")int roomCapacity) {
         RoomDto room = new RoomDto(roomNumber, roomCapacity);
         roomServices.saveRoom(room);
+
         if (!readRoomByNumber(roomNumber).equals("Unable to find Student")) {
             return (room.toString()  + " Added Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
