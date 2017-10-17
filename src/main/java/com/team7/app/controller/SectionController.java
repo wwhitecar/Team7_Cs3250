@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller that will talk to the section webpages and the
+ * databaes to assure proper transfer of data.
+ */
 @RestController
 @RequestMapping(value = "/section")
 public class SectionController {
@@ -63,6 +67,7 @@ public class SectionController {
     /**
      * Will pull information from the webpages to create a
      * new class to be store into the database.
+     * @param sectionNumber - id for the section
      * @param courseNumber - course specific number
      * @param professorId - professor teaching the section
      * @return state of the create request
@@ -73,10 +78,12 @@ public class SectionController {
             final @RequestParam("course") int courseNumber,
             final @RequestParam("professor") int professorId) {
         CourseDto course = courseServices.getCourseById(courseNumber);
-        ProfessorDto professor = professorServices.getProfessorById(professorId);
+        ProfessorDto professor =
+                professorServices.getProfessorById(professorId);
         SectionDto section = new SectionDto(sectionNumber, course, professor);
         sectionServices.saveSection(section);
-        if (!readSectionByNumber(sectionNumber).equals("Unable to find Section")) {
+        if (!readSectionByNumber(sectionNumber)
+                .equals("Unable to find Section")) {
             return (section.toString() + " Added Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
         }
@@ -98,12 +105,14 @@ public class SectionController {
             final @RequestParam("course") int courseNumber,
             final @RequestParam("professor") int professorId) {
         CourseDto course = courseServices.getCourseById(courseNumber);
-        ProfessorDto professor = professorServices.getProfessorById(professorId);
+        ProfessorDto professor
+                = professorServices.getProfessorById(professorId);
         SectionDto section = new SectionDto(sectionNumber, course, professor);
         sectionServices.saveSection(section);
         if (!readSectionByNumber(sectionNumber).equals("Unable to find Section"
                 + "<br/> <a href=" + "/" + ">Go Back to main screen</a>")) {
-            return (section.toString() + " Updated Section Successfully <br/> <a href="
+            return (section.toString()
+                    + " Updated Section Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
         }
         return ("Success");

@@ -218,7 +218,7 @@ public class WebPageController {
      * @return String of the page name.
      */
     @RequestMapping("/section")
-    public String sectionCreate (final Map<String, Object> model) {
+    public String sectionCreate(final Map<String, Object> model) {
         model.put("title", title);
         model.put("courses", courseServices.listAllCourse());
         model.put("professors", professorServices.listAllProfessor());
@@ -231,7 +231,7 @@ public class WebPageController {
      * @return String of the page name.
      */
     @RequestMapping("/section/update")
-    public String sectionUpdate (final Map<String, Object> model) {
+    public String sectionUpdate(final Map<String, Object> model) {
         model.put("title", title);
         model.put("courses", courseServices.listAllCourse());
         model.put("professors", professorServices.listAllProfessor());

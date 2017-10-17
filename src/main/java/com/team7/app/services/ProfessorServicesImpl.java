@@ -11,30 +11,58 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProfessorServicesImpl implements ProfessorServices {
+
+    /**
+     * Professor repository to allow us to be able to communicate
+     * with the the database without jdbc implementation.
+     */
     private ProfessorRepository professorRepository;
 
+    /**
+     * Autowired so spring can make  a bean and use it.
+     * @param pRepository - repo to be used by spring
+     */
     @Autowired
-    public void setProfessorRepository(ProfessorRepository professorRepository) {
-        this.professorRepository = professorRepository;
+    public void setProfessorRepository(final ProfessorRepository pRepository) {
+        this.professorRepository = pRepository;
     }
 
+    /**
+     * Creates a list of all professors that are currently in the
+     * database.
+     * @return list of all professors in the database
+     */
     @Override
     public Iterable<ProfessorDto> listAllProfessor() {
         return professorRepository.findAll();
     }
 
+    /**
+     * Finds a professors that resides in the database.
+     * @param id - id number for the professors we are looking for.
+     * @return the professors that we are looking for
+     */
     @Override
-    public ProfessorDto getProfessorById(Integer id) {
+    public ProfessorDto getProfessorById(final Integer id) {
         return professorRepository.findOne(id);
     }
 
+    /**
+     * Adds a professor to the database.
+     * @param professor to be added.
+     * @return the course that was added to the database.
+     */
     @Override
-    public ProfessorDto saveProfessor(ProfessorDto professor) {
+    public ProfessorDto saveProfessor(final ProfessorDto professor) {
         return professorRepository.save(professor);
     }
 
+    /**
+     * Delete a professor that is in the database.
+     * @param id of the professor to be removed
+     */
     @Override
-    public void deleteProfessor(Integer id) {
+    public void deleteProfessor(final Integer id) {
         professorRepository.delete(id);
     }
 }

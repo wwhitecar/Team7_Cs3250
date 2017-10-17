@@ -11,30 +11,58 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class StudentServicesImpl implements StudentServices {
+
+    /**
+     * Student repository to allow us to be able to communicate
+     * with the the database without jdbc implementation.
+     */
     private StudentRepository studentRepository;
 
+    /**
+     * Autowired so spring can make a bean and use it.
+     * @param studRepository - repo to be used by spring
+     */
     @Autowired
-    public void setStudentRepository(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
+    public void setStudentRepository(final StudentRepository studRepository) {
+        this.studentRepository = studRepository;
     }
 
+    /**
+     * Creates a list of all students that are currently in the
+     * database.
+     * @return list of all students in the database
+     */
     @Override
     public Iterable<StudentDto> listAllStudent() {
         return studentRepository.findAll();
     }
 
+    /**
+     * Finds a student that resides in the database.
+     * @param id - id number for the student we are looking for.
+     * @return the student that we are looking for
+     */
     @Override
-    public StudentDto getStudentById(Integer id) {
+    public StudentDto getStudentById(final Integer id) {
         return studentRepository.findOne(id);
     }
 
+    /**
+     * Adds a professor to the database.
+     * @param student to be added.
+     * @return the student that was added to the database.
+     */
     @Override
-    public StudentDto saveStudent(StudentDto student) {
+    public StudentDto saveStudent(final StudentDto student) {
         return studentRepository.save(student);
     }
 
+    /**
+     * Delete a student that is in the database.
+     * @param id of the student to be removed
+     */
     @Override
-    public void deleteStudent(Integer id) {
+    public void deleteStudent(final Integer id) {
         studentRepository.delete(id);
     }
 }

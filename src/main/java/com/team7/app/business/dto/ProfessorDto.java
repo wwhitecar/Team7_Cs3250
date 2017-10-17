@@ -28,7 +28,8 @@ public class ProfessorDto {
     /**
      * Empty constructor.
      */
-    public ProfessorDto(){}
+    public ProfessorDto() {
+    }
 
     /**
      * Full param constructor.

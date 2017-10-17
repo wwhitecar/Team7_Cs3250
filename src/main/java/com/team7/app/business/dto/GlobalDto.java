@@ -54,6 +54,9 @@ public class GlobalDto {
      */
     public enum HoursPerLevel {
 
+        /**
+         * Global Enums.
+         */
         Freshman(29), Sophomore(59), Junior(89), Senior(120);
 
         /**
