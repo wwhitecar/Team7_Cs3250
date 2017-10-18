@@ -2,6 +2,7 @@ package com.team7.app.controller;
 
 import com.team7.app.services.GlobalServices;
 import com.team7.app.business.dto.GlobalDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,9 +17,8 @@ import java.util.Map;
 @RestController
 public class GlobalController {
 
-
-
-    private GlobalServices globalServices;
+    @Autowired
+    protected GlobalServices globalServices;
 
     public void setGlobalService(final GlobalServices gService) {this.globalServices = gService;}
 
@@ -36,9 +36,9 @@ public class GlobalController {
         GlobalDto global = new GlobalDto(schoolName, creditHours);
         globalServices.saveGlobal(global);
         if(!readGlobalByName(schoolName).equals("Unable to find School")) {
-            return (global + "Added Successfully <br/> <a href=" + "/" + ">Go Back to main screen</a>");
+            return (global.toString() + "Added Successfully <br/> <a href=" + "/" + ">Go Back to main screen</a>");
         }
-        return ("Success");
+        return ("Failed to add School name");
     }
 
     /**
@@ -51,7 +51,7 @@ public class GlobalController {
             final @RequestParam("School Name") String name) {
         GlobalDto global = globalServices.getGlobalByName(name);
         if (global == null) {
-            return "Unable to find Course";
+            return "Unable to find School";
         }
         return (global + " <br/> <a href=" + "/" + ">Go Back to main screen</a>");
     }
@@ -69,7 +69,7 @@ public class GlobalController {
         GlobalDto global = new GlobalDto(schoolName, creditHours);
         globalServices.saveGlobal(global);
         if (!readGlobalByName(schoolName).equals("Unable to find school")) {
-            return (global + " Added Successfully <br/> <a href=" + "/" + ">Go Back to main screen</a>");
+            return (global.toString() + " Added Successfully <br/> <a href=" + "/" + ">Go Back to main screen</a>");
         }
         return ("Unable to find school");
     }

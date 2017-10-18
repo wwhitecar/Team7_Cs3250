@@ -25,6 +25,11 @@ public class GlobalDto {
      */
     public GlobalDto() {
 
+
+    }
+
+    public String toString(){
+        return "global";
     }
 
     /**
@@ -83,6 +88,8 @@ public class GlobalDto {
          * @param hours - hours student currently has.
          * @return students current level
          */
+
+
  //       public static HoursPerLevel getHours(final int hours) {
   //          HoursPerLevel credits = Freshman;
   //          for (HoursPerLevel h : values()) {
