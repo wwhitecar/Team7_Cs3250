@@ -1,5 +1,8 @@
 package com.team7.app.controller;
 
+import com.team7.app.business.dto.CourseDto;
+import com.team7.app.services.CourseServicesImpl;
+import com.team7.app.services.GlobalServicesImpl;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -23,44 +26,47 @@ import com.team7.app.controller.GlobalController;
 public class GlobalControllerTest {
 
     @Mock
-    private NamedParameterJdbcTemplate mockTemplate;
+    GlobalServicesImpl globalMock;
+
     GlobalController globalController = new GlobalController();
 
+    GlobalDto global;
+
     @Before
-    public void before() { }
+    public void before(){
+        globalController.globalServices = globalMock;
+        global = new GlobalDto("metro", 3);
+    }
 
 
     @Test
     public void createGlobalTest() {
-        assertTrue(globalController.createGlobal("Metropolitan State University", 15).equals("Success"));
+        List<GlobalDto> listGlobal = new ArrayList<>();
+        listGlobal.add(global);
+        when(globalMock.listAllGlobals()).thenReturn(listGlobal);
+        assertEquals(globalController.createGlobal("metro",3), ("Failed to add School name"));
     }
 
     @Test
     public void updateGlobalTest() {
-        assertTrue(globalController.updateGlobalByName("Metropolitan State University", 15).equals("Unable to update"));
-        when(mockTemplate.update(anyString(), anyMapOf(String.class, Object.class))).thenReturn(1);
-        assertEquals(globalController.updateGlobalByName("Harvard", 40), "Update Successful");
+        List<GlobalDto> listGlobal = new ArrayList<>();
+        listGlobal.add(global);
+        when(globalMock.listAllGlobals()).thenReturn(listGlobal);
+        assertEquals(globalController.updateGlobalByName("metro",3), ("global" +" Added Successfully <br/> <a href=" + "/" + ">Go Back to main screen</a>"));
     }
+
 
     @Test
     public void deleteGlobalTest() {
-        assertTrue(true);
-
-        when(mockTemplate.update(anyString(), anyMapOf(String.class, Object.class))).thenReturn(1);
-        assertEquals(globalController.deleteGlobalByName("Metropolitan State University"), "Successfully Removed");
-
+        assertEquals(globalController.deleteGlobalByName("Harvard"), "Removed School"
+                + "<br/> <a href=" + "/" + ">Go Back to main screen<a/>");
     }
 
     @Test
     public void readGlobalTest() {
-        assertTrue(true);
-        GlobalDto global = new GlobalDto("Metropolitan State University", 15);
-        List<GlobalDto> result = new ArrayList<>();
-        result.add(global);
- //       when(mockTemplate.query(anyString(), anyMapOf(String.class, Object.class),
- //               any(GlobalRowMapper.class))).thenReturn(result);
-
-        assertEquals(globalController.readGlobalByName("Metropolitan State University"), "");
+        assertEquals(globalController.readGlobalByName("Harvard"), "Unable to find School");
+        when(globalMock.getGlobalByName(anyString())).thenReturn(global);
+        assertEquals(globalController.readGlobalByName("Harvard"), global + " <br/> <a href=" + "/" + ">Go Back to main screen</a>");
 
     }
 }
