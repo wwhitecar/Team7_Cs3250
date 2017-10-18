@@ -20,31 +20,16 @@ public class BuildingController {
      * Services to be used by hibernate to correctly add
      * information to the database.
      */
-    private BuildingServices buildingServices;
+    @Autowired
+    protected BuildingServices buildingServices;
 
     /**
      * Services to be used by hibernate to correctly add
      * information to the database.
      */
-    private RoomServices roomServices;
-
-    /**
-     * Bean to be used throughout the professor class.
-     * @param rServices - bean to be created
-     */
     @Autowired
-    public void setRoomService(final RoomServices rServices) {
-        this.roomServices = rServices;
-    }
+    protected RoomServices roomServices;
 
-    /**
-     * Bean to be used throughout the course controller class.
-     * @param bServices - bean to be created
-     */
-    @Autowired
-    public void setBuildingServices(final BuildingServices bServices) {
-        this.buildingServices = bServices;
-    }
     /**
      * Will pull information from the webpages to create a
      * new class to be store into the database.

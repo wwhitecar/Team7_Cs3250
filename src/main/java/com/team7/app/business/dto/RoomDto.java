@@ -17,6 +17,11 @@ public class RoomDto {
     private int roomNumber;
 
     /**
+     *  Buillding the room belongs to.
+     */
+    private BuildingDto building;
+
+    /**
      * Capacity of room.
      */
     private int roomCapacity;
@@ -24,9 +29,11 @@ public class RoomDto {
     /**
      *  many rooms have a building
      */
-    @ManyToOne
-    @JoinColumn(name="building_name", nullable=false)
-    private BuildingDto building;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "building_name", nullable = false)
+    private BuildingDto getBuildingByName() {
+        return building;
+    }
 
     /**
      * Empty Constructer.
@@ -65,9 +72,10 @@ public class RoomDto {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STOCK_ID", nullable = false)
-    public BuildingDto getBuilding() {
-        return this.building;
+    public BuildingDto getBuilding(BuildingDto building) {
+        return this.building = building;
     }
+
 
     public void setBuilding(BuildingDto building) {
         this.building = building;

@@ -14,6 +14,7 @@ public class BuildingDto {
     @Id
     private String buildingName;
 
+    @OneToMany
     private Set<RoomDto> Rooms = new HashSet<RoomDto>(0);
 
     /**
@@ -21,6 +22,7 @@ public class BuildingDto {
      * just the name.
      */
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "building")
+    //@Column(name = "building_name", unique = true, nullable = false)
     public Set<RoomDto> getBuildingRooms() {
         return this.Rooms;
     }
@@ -50,7 +52,7 @@ public class BuildingDto {
      *
      * @return name of the building.
      */
-    public String getBuildingName() {
+    public String getBuildingByName() {
         return buildingName;
     }
 
