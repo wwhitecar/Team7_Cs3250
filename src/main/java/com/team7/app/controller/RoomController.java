@@ -1,5 +1,6 @@
 package com.team7.app.controller;
 
+import com.team7.app.business.dto.BuildingDto;
 import com.team7.app.business.dto.RoomDto;
 import com.team7.app.services.RoomServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,9 @@ public class RoomController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String createRoom(final @RequestParam("Room Number")int roomNumber,
-                             final @RequestParam("Last Name")int roomCapacity) {
-        RoomDto room = new RoomDto(roomNumber, roomCapacity);
+                             final @RequestParam("Last Name")int roomCapacity,
+                             final @RequestParam("Building Name")BuildingDto buildingName) {
+        RoomDto room = new RoomDto(roomNumber, roomCapacity, buildingName);
         roomServices.saveRoom(room);
 
         if (!readRoomByNumber(roomNumber).equals("Unable to find Student")) {
@@ -75,8 +77,9 @@ public class RoomController {
      */
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String updateRoomByNumber(final @RequestParam("room Number")int roomNumber,
-                                     final @RequestParam("room Capacity")int roomCapacity) {
-        RoomDto room = new RoomDto(roomNumber, roomCapacity);
+                                     final @RequestParam("room Capacity")int roomCapacity,
+                                     final @RequestParam("building Name")BuildingDto buildingName) {
+        RoomDto room = new RoomDto(roomNumber, roomCapacity, buildingName);
         roomServices.saveRoom(room);
         return ("Successfully updated: <br/>"
                 + readRoomByNumber(room.getRoomNumber()));

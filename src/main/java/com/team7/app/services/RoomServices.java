@@ -15,9 +15,5 @@ public interface RoomServices {
 
     RoomDto saveRoom(RoomDto product);
 
-    Set getRooms(Set rooms);
-
-    Set setRooms(Set Rooms);
-
     void deleteRoom(Integer roomNumber);
 }

@@ -33,6 +33,7 @@ public class RoomServicesImpl implements RoomServices {
         return roomRepository.save(room);
     }
 
+
     @Override
     public void deleteRoom(Integer roomNumber) {
         roomRepository.delete(roomNumber);

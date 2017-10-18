@@ -10,9 +10,9 @@ public interface BuildingServices {
 
     Iterable<BuildingDto> listAllBuilding();
 
-    BuildingDto getBuildingByName(Integer name);
+    BuildingDto getBuildingByName(String name);
 
     BuildingDto saveBuilding(BuildingDto product);
 
-    void deleteBuilding(Integer id);
+    void deleteBuildingByName(String id);
 }

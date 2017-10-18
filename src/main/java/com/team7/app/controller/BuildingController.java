@@ -53,13 +53,12 @@ public class BuildingController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String createBuilding(
-            final @RequestParam ("building_name") String buildingName,
-            final @RequestParam ("room") Set rooms) {
-        Set Arooms = roomServices.getRooms(rooms);
-        BuildingDto building = new BuildingDto(buildingName, Arooms);
+            final @RequestParam ("building_name") String buildingName) {
+        BuildingDto building = new BuildingDto(buildingName);
         buildingServices.saveBuilding(building);
         return ("Success");
     }
+
 
     /**
      * Will pull information from the webpages to update a
@@ -69,10 +68,8 @@ public class BuildingController {
      */
     @RequestMapping(value = "/updatebuilding", method = RequestMethod.POST)
     public String updateBuilding(
-            final @RequestParam ("building_name") String buildingName,
-            final @RequestParam ("rooms") Set rooms){
-        Set Arooms = roomServices.getRooms(rooms);
-        BuildingDto building = new BuildingDto(buildingName, Arooms);
+            final @RequestParam ("building_name") String buildingName){
+        BuildingDto building = new BuildingDto(buildingName);
         buildingServices.saveBuilding(building);
         return ("Success");
     }
@@ -85,7 +82,7 @@ public class BuildingController {
      */
     @RequestMapping(value = "/getbuilding", method = RequestMethod.GET)
     public String readBuildingByName(
-            final @RequestParam("building_name") int buildingName) {
+            final @RequestParam("building_name") String buildingName) {
         return "";
     }
 

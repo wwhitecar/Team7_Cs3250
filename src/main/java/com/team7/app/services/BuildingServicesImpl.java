@@ -20,8 +20,8 @@ public class BuildingServicesImpl implements BuildingServices {
     }
 
     @Override
-    public BuildingDto getBuildingById(Integer id) {
-        return buildingRepository.findOne(id);
+    public BuildingDto getBuildingByName(String name) {
+        return buildingRepository.findOne(name);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class BuildingServicesImpl implements BuildingServices {
     }
 
     @Override
-    public void deleteBuilding(Integer id) {
-        buildingRepository.delete(id);
+    public void deleteBuildingByName(String name) {
+        buildingRepository.delete(name);
     }
 }
