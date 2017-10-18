@@ -1,13 +1,18 @@
 package com.team7.app.business.dto;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Class to store globals for the application.
  */
+@Entity
 public class GlobalDto {
 
     /**
      * Name of the School.
      */
+    @Id
     private String schoolName;
 
     /**

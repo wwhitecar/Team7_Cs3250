@@ -36,8 +36,8 @@ public class StudentController {
                              final @RequestParam("First Name")String firstName,
                              final @RequestParam("Last Name")String lastName) {
         StudentDto student = new StudentDto(firstName, lastName, id);
-        studentServices.saveStudent(student);
-        if (!readStudentById(id).equals("Unable to find Student")) {
+        student = studentServices.saveStudent(student);
+        if (student != null) {
             return (student.toString()  + " Added Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
         }
