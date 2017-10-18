@@ -1,4 +1,4 @@
-package team7.app;
+package com.team7.app;
 
 import com.team7.Application;
 import org.junit.Test;

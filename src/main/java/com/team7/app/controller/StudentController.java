@@ -21,16 +21,8 @@ public class StudentController {
      * Services to be used by hibernate to correctly add
      * information to the database.
      */
-    private StudentServices studentServices;
-
-    /**
-     * Bean to be used throughout the professor class.
-     * @param studService - bean to be created
-     */
     @Autowired
-    public void setProductService(final StudentServices studService) {
-        this.studentServices = studService;
-    }
+    protected StudentServices studentServices;
 
     /**
      * Creates a student and puts it in the database.
@@ -44,8 +36,8 @@ public class StudentController {
                              final @RequestParam("First Name")String firstName,
                              final @RequestParam("Last Name")String lastName) {
         StudentDto student = new StudentDto(firstName, lastName, id);
-        studentServices.saveStudent(student);
-        if (!readStudentById(id).equals("Unable to find Student")) {
+        student = studentServices.saveStudent(student);
+        if (student != null) {
             return (student.toString()  + " Added Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
         }

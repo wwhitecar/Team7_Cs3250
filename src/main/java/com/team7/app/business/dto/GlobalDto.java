@@ -1,13 +1,18 @@
 package com.team7.app.business.dto;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Class to store globals for the application.
  */
+@Entity
 public class GlobalDto {
 
     /**
      * Name of the School.
      */
+    @Id
     private String schoolName;
 
     /**
@@ -20,6 +25,11 @@ public class GlobalDto {
      */
     public GlobalDto() {
 
+
+    }
+
+    public String toString(){
+        return "global";
     }
 
     /**
@@ -54,6 +64,9 @@ public class GlobalDto {
      */
     public enum HoursPerLevel {
 
+        /**
+         * Global Enums.
+         */
         Freshman(29), Sophomore(59), Junior(89), Senior(120);
 
         /**
@@ -75,6 +88,8 @@ public class GlobalDto {
          * @param hours - hours student currently has.
          * @return students current level
          */
+
+
  //       public static HoursPerLevel getHours(final int hours) {
   //          HoursPerLevel credits = Freshman;
   //          for (HoursPerLevel h : values()) {

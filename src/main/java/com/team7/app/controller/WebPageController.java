@@ -1,5 +1,9 @@
 package com.team7.app.controller;
 
+import com.team7.app.services.CourseServices;
+import com.team7.app.services.ProfessorServices;
+import com.team7.app.services.SectionServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +22,27 @@ public class WebPageController {
      */
     @Value("${app.welcome.title}")
     private String title = "";
+
+    /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
+    @Autowired
+    protected CourseServices courseServices;
+
+    /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
+    @Autowired
+    protected ProfessorServices professorServices;
+
+    /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
+    @Autowired
+    protected SectionServices sectionServices;
 
     /**
      * Mapping for a web page.
@@ -168,8 +193,46 @@ public class WebPageController {
      * @return String of the page name.
      */
     @RequestMapping("/section")
-    public String sectionCreate (final Map<String, Object> model) {
+    public String sectionCreate(final Map<String, Object> model) {
         model.put("title", title);
+        model.put("courses", courseServices.listAllCourse());
+        model.put("professors", professorServices.listAllProfessor());
         return "sectionCreate";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/section/update")
+    public String sectionUpdate(final Map<String, Object> model) {
+        model.put("title", title);
+        model.put("courses", courseServices.listAllCourse());
+        model.put("professors", professorServices.listAllProfessor());
+        model.put("sections", sectionServices.listAllSection());
+        return "sectionUpdate";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/section/sectionRead")
+    public String sectionRead(final Map<String, Object> model) {
+        model.put("title", title);
+        return "sectionRead";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/section/sectionDelete")
+    public String sectionDelete(final Map<String, Object> model) {
+        model.put("title", title);
+        return "sectionDelete";
     }
 }

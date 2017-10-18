@@ -1,7 +1,14 @@
 package com.team7.app.business.dto;
 
-import javax.persistence.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+/**
+ * Sections that will store professor and course
+ * for classes.
+ */
 @Entity
 public class SectionDto {
 
@@ -34,15 +41,16 @@ public class SectionDto {
 
     /**
      * Param constructer.
-     * @param course - course to be tied to this section
-     * @param professor - professor of the class/section
+     * @param sNumber - identification for this section
+     * @param courseDto - course to be tied to this section
+     * @param professorDto - professor of the class/section
      */
-    public SectionDto( final int sectionNumber,
-                       final CourseDto course,
-                       final ProfessorDto professor) {
-        this.sectionNumber = sectionNumber;
-        this.course = course;
-        this.professor = professor;
+    public SectionDto(final int sNumber,
+                       final CourseDto courseDto,
+                       final ProfessorDto professorDto) {
+        this.sectionNumber = sNumber;
+        this.course = courseDto;
+        this.professor = professorDto;
     }
 
     /**
@@ -58,7 +66,7 @@ public class SectionDto {
      * Getter for coursenumber.
      * @return number for the course.
      */
-    public CourseDto getCourseNumber() {
+    public CourseDto getCourse() {
         return course;
     }
 
@@ -70,4 +78,13 @@ public class SectionDto {
         return professor;
     }
 
+    /**
+     * Overrides the tostring method.
+     * @return the new string of information
+     */
+    @Override
+    public String toString() {
+        return "Course: </br>" + course.toString()
+                + "</br>Professor: </br>" + professor.toString();
+    }
 }
