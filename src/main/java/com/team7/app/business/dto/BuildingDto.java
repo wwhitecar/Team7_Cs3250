@@ -13,23 +13,23 @@ public class BuildingDto {
      */
     @Id
     private String buildingName;
-
-    @OneToMany
-    private Set<RoomDto> Rooms = new HashSet<RoomDto>(0);
-
-    /**
-     * The course number to identify a course by more then
-     * just the name.
-     */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "building")
-    //@Column(name = "building_name", unique = true, nullable = false)
-    public Set<RoomDto> getBuildingRooms() {
-        return this.Rooms;
-    }
-
-    public void setBuildingRooms(Set<RoomDto> Rooms) {
-        this.Rooms = Rooms;
-    }
+//
+//    @OneToMany
+//    private Set<RoomDto> Rooms = new HashSet<RoomDto>(0);
+//
+//    /**
+//     * The course number to identify a course by more then
+//     * just the name.
+//     */
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "building_name")
+//    @Column(name = "building_name", unique = true, nullable = false)
+//    public Set<RoomDto> getBuildingRooms() {
+//        return this.Rooms;
+//    }
+//
+//    public void setBuildingRooms(Set<RoomDto> Rooms) {
+//        this.Rooms = Rooms;
+//    }
 
     /**
      * Empty Constructer.

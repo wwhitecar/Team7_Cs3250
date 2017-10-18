@@ -19,7 +19,7 @@ public class RoomDto {
     /**
      *  Buillding the room belongs to.
      */
-    private BuildingDto building;
+    private String building;
 
     /**
      * Capacity of room.
@@ -31,7 +31,7 @@ public class RoomDto {
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_name", nullable = false)
-    private BuildingDto getBuildingByName() {
+    private String getBuildingByName() {
         return building;
     }
 
@@ -47,7 +47,7 @@ public class RoomDto {
      */
     public RoomDto(final int rNumber,
                    final int rCapacity,
-                   final BuildingDto building) {
+                   final String building) {
         this.roomNumber = rNumber;
         this.roomCapacity = rCapacity;
         this.building = building;
@@ -70,14 +70,7 @@ public class RoomDto {
         return roomCapacity;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "STOCK_ID", nullable = false)
-    public BuildingDto getBuilding(BuildingDto building) {
-        return this.building = building;
-    }
-
-
-    public void setBuilding(BuildingDto building) {
+    public void setBuilding(String building) {
         this.building = building;
     }
 

@@ -42,7 +42,7 @@ public class RoomController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String createRoom(final @RequestParam("Room Number")int roomNumber,
                              final @RequestParam("Last Name")int roomCapacity,
-                             final @RequestParam("Building Name")BuildingDto buildingName) {
+                             final @RequestParam("Building Name")String buildingName) {
         RoomDto room = new RoomDto(roomNumber, roomCapacity, buildingName);
         roomServices.saveRoom(room);
 
@@ -78,7 +78,7 @@ public class RoomController {
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String updateRoomByNumber(final @RequestParam("room Number")int roomNumber,
                                      final @RequestParam("room Capacity")int roomCapacity,
-                                     final @RequestParam("building Name")BuildingDto buildingName) {
+                                     final @RequestParam("building Name")String buildingName) {
         RoomDto room = new RoomDto(roomNumber, roomCapacity, buildingName);
         roomServices.saveRoom(room);
         return ("Successfully updated: <br/>"
