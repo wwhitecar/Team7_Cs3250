@@ -52,8 +52,8 @@ public class CourseController {
             return (course.toString() + " Added Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
         }
-        return ("Unable to create Course, <br/> <a href=" +
-                                    "/" + ">Go Back to main screen</a>");
+        return ("Unable to create Course, <br/> <a href="
+                + "/" + ">Go Back to main screen</a>");
     }
 
     /**
@@ -66,7 +66,7 @@ public class CourseController {
     public String readCourseByNumber(
             final @RequestParam("course_number") int courseNumber) {
         CourseDto course = courseServices.getCourseById(courseNumber);
-        if (course == null){
+        if (course == null) {
             return "Unable to find Course";
         }
         return (course.toString() + "<br/> <a href="

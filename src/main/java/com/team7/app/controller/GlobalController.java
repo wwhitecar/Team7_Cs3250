@@ -1,14 +1,12 @@
 package com.team7.app.controller;
 
-import com.team7.app.services.GlobalServices;
 import com.team7.app.business.dto.GlobalDto;
+import com.team7.app.services.GlobalServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
-import java.util.HashMap;
-import java.util.Map;
-
+import org.springframework.web.bind.annotation.RestController;
 /**
  * Global class controller to talk to the database.
  */
@@ -17,10 +15,12 @@ import java.util.Map;
 public class GlobalController {
 
 
-
+    /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
+    @Autowired
     private GlobalServices globalServices;
-
-    public void setGlobalService(final GlobalServices gService) {this.globalServices = gService;}
 
     /**
      * Mapping to create a new global value in database.
