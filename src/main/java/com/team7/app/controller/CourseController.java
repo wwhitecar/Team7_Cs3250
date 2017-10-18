@@ -47,12 +47,13 @@ public class CourseController {
 
         CourseDto course = new CourseDto(department, courseNumber, credits,
                 description, learningObjective, prereqs, coreqs);
-        courseServices.saveCourse(course);
-        if (!readCourseByNumber(courseNumber).equals("Unable to find Course")) {
+        course = courseServices.saveCourse(course);
+        if (course != null) {
             return (course.toString() + " Added Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
         }
-        return ("Success");
+        return ("Unable to create Course, <br/> <a href=" +
+                                    "/" + ">Go Back to main screen</a>");
     }
 
     /**
@@ -65,7 +66,7 @@ public class CourseController {
     public String readCourseByNumber(
             final @RequestParam("course_number") int courseNumber) {
         CourseDto course = courseServices.getCourseById(courseNumber);
-        if (course == null) {
+        if (course == null){
             return "Unable to find Course";
         }
         return (course.toString() + "<br/> <a href="
@@ -95,9 +96,9 @@ public class CourseController {
             final @RequestParam("coreqs") int coreqs) {
         CourseDto course = new CourseDto(department, courseNumber, credits,
                 description, learningObjective, prereqs, coreqs);
-        courseServices.saveCourse(course);
-        if (!readCourseByNumber(courseNumber).equals("Unable to find Course")) {
-            return (course.toString() + " Added Successfully <br/> <a href="
+        course = courseServices.saveCourse(course);
+        if (course != null) {
+            return (course.toString() + " Updated Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
         }
         return ("Unable to find Course");
