@@ -49,8 +49,6 @@ public class WebPageControllerTest {
         wPC.courseServices = courseMock;
         wPC.professorServices = profMock;
         wPC.sectionServices = sectMock;
-
-
     }
 
     @Test
@@ -127,6 +125,39 @@ public class WebPageControllerTest {
         when(courseMock.listAllCourse()).thenReturn(listCourse);
         when(profRepo.findAll()).thenReturn(listProf);
         assertTrue(wPC.sectionUpdate(model).equals("sectionUpdate"));
+    }
+
+    @Test
+    public void sectionCreateTest() {
+        List<CourseDto> listCourse = new ArrayList();
+        listCourse.add(new CourseDto());
+        List<ProfessorDto> listProf = new ArrayList<>();
+        when(profMock.listAllProfessor()).thenReturn(listProf);
+        when(courseMock.listAllCourse()).thenReturn(listCourse);
+        when(profRepo.findAll()).thenReturn(listProf);
+        assertTrue(wPC.sectionCreate(model).equals("sectionCreate"));
+    }
+
+    @Test
+    public void sectionReadTest() {
+        List<CourseDto> listCourse = new ArrayList();
+        listCourse.add(new CourseDto());
+        List<ProfessorDto> listProf = new ArrayList<>();
+        when(profMock.listAllProfessor()).thenReturn(listProf);
+        when(courseMock.listAllCourse()).thenReturn(listCourse);
+        when(profRepo.findAll()).thenReturn(listProf);
+        assertTrue(wPC.sectionRead(model).equals("sectionRead"));
+    }
+
+    @Test
+    public void sectionDeleteTest() {
+        List<CourseDto> listCourse = new ArrayList();
+        listCourse.add(new CourseDto());
+        List<ProfessorDto> listProf = new ArrayList<>();
+        when(profMock.listAllProfessor()).thenReturn(listProf);
+        when(courseMock.listAllCourse()).thenReturn(listCourse);
+        when(profRepo.findAll()).thenReturn(listProf);
+        assertTrue(wPC.sectionDelete(model).equals("sectionDelete"));
     }
 
 }
