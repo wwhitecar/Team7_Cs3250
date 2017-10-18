@@ -21,16 +21,8 @@ public class ProfessorController {
      * Services to be used by hibernate to correctly add
      * information to the database.
      */
-    private ProfessorServices professorServices;
-
-    /**
-     * Bean to be used throughout the professor class.
-     * @param profService - bean to be created
-     */
     @Autowired
-    public void setProfessorService(final ProfessorServices profService) {
-        this.professorServices = profService;
-    }
+    protected ProfessorServices professorServices;
 
     /**
      * Creates a professor and puts it in the database.
@@ -63,9 +55,8 @@ public class ProfessorController {
         if (professor == null) {
             return "Unable to find Professor";
         }
-        String string = "/";
         return professor.toString()  + "<br/> <a href="
-                + string + ">Go Back to main screen</a>";
+                + "/" + ">Go Back to main screen</a>";
     }
 
     /**
@@ -94,7 +85,7 @@ public class ProfessorController {
     public String deleteProfessorById(final @RequestParam("Id") Integer id) {
         professorServices.deleteProfessor(id);
         if (readProfessorById(id).equals("Unable to find Professor")) {
-            return ("Removed Student"
+            return ("Removed Professor"
                     + "<br/> <a href=" + "/"
                     + ">Go Back to main screen</a>");
         }

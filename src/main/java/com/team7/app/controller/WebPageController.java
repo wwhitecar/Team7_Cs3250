@@ -27,47 +27,22 @@ public class WebPageController {
      * Services to be used by hibernate to correctly add
      * information to the database.
      */
-    private CourseServices courseServices;
+    @Autowired
+    protected CourseServices courseServices;
 
     /**
      * Services to be used by hibernate to correctly add
      * information to the database.
      */
-    private ProfessorServices professorServices;
+    @Autowired
+    protected ProfessorServices professorServices;
 
     /**
      * Services to be used by hibernate to correctly add
      * information to the database.
      */
-    private SectionServices sectionServices;
-
-
-    /**
-     * Bean to be used throughout the controller class.
-     * @param cService - bean to be created
-     */
     @Autowired
-    public void setCourseService(final CourseServices cService) {
-        this.courseServices = cService;
-    }
-
-    /**
-     * Bean to be used throughout the controller class.
-     * @param pService - bean to be created
-     */
-    @Autowired
-    public void setProfessorService(final ProfessorServices pService) {
-        this.professorServices = pService;
-    }
-
-    /**
-     * Bean to be used throughout the course controller class.
-     * @param sServices - bean to be created
-     */
-    @Autowired
-    public void setSectionServices(final SectionServices sServices) {
-        this.sectionServices = sServices;
-    }
+    protected SectionServices sectionServices;
 
     /**
      * Mapping for a web page.

@@ -16,16 +16,9 @@ public class SectionServicesImpl implements SectionServices {
      * Section repository to allow us to be able to communicate
      * with the the database without jdbc implementation.
      */
-    private SectionRepository sectionRepository;
-
-    /**
-     * Autowired so spring can make a bean and use it.
-     * @param sRepository - repo to be used by spring
-     */
     @Autowired
-    public void setSectionRepository(final SectionRepository sRepository) {
-        this.sectionRepository = sRepository;
-    }
+    protected SectionRepository sectionRepository;
+
 
     /**
      * Creates a list of all sections that are currently in the

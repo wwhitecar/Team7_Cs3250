@@ -24,45 +24,22 @@ public class SectionController {
      * Services to be used by hibernate to correctly add/remove
      * information to the database.
      */
-    private SectionServices sectionServices;
+    @Autowired
+    protected SectionServices sectionServices;
 
     /**
      * Services to be used by hibernate to correctly add/remove
      * information to the database.
      */
-    private CourseServices courseServices;
+    @Autowired
+    protected CourseServices courseServices;
 
     /**
      * Services to be used by hibernate to correctly add/remove
      * information to the database.
      */
-    private ProfessorServices professorServices;
-
-    /**
-     * Bean to be used throughout the professor class.
-     * @param profService - bean to be created
-     */
     @Autowired
-    public void setProfessorService(final ProfessorServices profService) {
-        this.professorServices = profService;
-    }
-    /**
-     * Bean to be used throughout the course controller class.
-     * @param cService - bean to be created
-     */
-    @Autowired
-    public void setCourseService(final CourseServices cService) {
-        this.courseServices = cService;
-    }
-
-    /**
-     * Bean to be used throughout the course controller class.
-     * @param sServices - bean to be created
-     */
-    @Autowired
-    public void setSectionServices(final SectionServices sServices) {
-        this.sectionServices = sServices;
-    }
+    protected ProfessorServices professorServices;
 
     /**
      * Will pull information from the webpages to create a
@@ -81,9 +58,8 @@ public class SectionController {
         ProfessorDto professor =
                 professorServices.getProfessorById(professorId);
         SectionDto section = new SectionDto(sectionNumber, course, professor);
-        sectionServices.saveSection(section);
-        if (!readSectionByNumber(sectionNumber)
-                .equals("Unable to find Section")) {
+        section = sectionServices.saveSection(section);
+        if (section != null) {
             return (section.toString() + " Added Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
         }
@@ -108,14 +84,14 @@ public class SectionController {
         ProfessorDto professor
                 = professorServices.getProfessorById(professorId);
         SectionDto section = new SectionDto(sectionNumber, course, professor);
-        sectionServices.saveSection(section);
-        if (!readSectionByNumber(sectionNumber).equals("Unable to find Section"
-                + "<br/> <a href=" + "/" + ">Go Back to main screen</a>")) {
+        section = sectionServices.saveSection(section);
+        if (section != null) {
             return (section.toString()
                     + " Updated Section Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
         }
-        return ("Success");
+        return ("Failed to update <br/> <a href=" +
+                                    "/" + ">Go Back to main screen</a>");
     }
 
 
