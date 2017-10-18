@@ -58,9 +58,8 @@ public class SectionController {
         ProfessorDto professor =
                 professorServices.getProfessorById(professorId);
         SectionDto section = new SectionDto(sectionNumber, course, professor);
-        sectionServices.saveSection(section);
-        if (!readSectionByNumber(sectionNumber)
-                .equals("Unable to find Section")) {
+        section = sectionServices.saveSection(section);
+        if (section != null) {
             return (section.toString() + " Added Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
         }
@@ -85,14 +84,14 @@ public class SectionController {
         ProfessorDto professor
                 = professorServices.getProfessorById(professorId);
         SectionDto section = new SectionDto(sectionNumber, course, professor);
-        sectionServices.saveSection(section);
-        if (!readSectionByNumber(sectionNumber).equals("Unable to find Section"
-                + "<br/> <a href=" + "/" + ">Go Back to main screen</a>")) {
+        section = sectionServices.saveSection(section);
+        if (section != null) {
             return (section.toString()
                     + " Updated Section Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
         }
-        return ("Success");
+        return ("Failed to update <br/> <a href=" +
+                                    "/" + ">Go Back to main screen</a>");
     }
 
 
