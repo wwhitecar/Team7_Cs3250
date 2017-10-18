@@ -22,11 +22,6 @@ public class RoomDto {
     private int roomCapacity;
 
     /**
-     *  Set of all rooms
-     */
-    private Set roomSet;
-
-    /**
      *  many rooms have a building
      */
     @ManyToOne
@@ -44,12 +39,13 @@ public class RoomDto {
      * @param rCapacity - room capacity
      */
     public RoomDto(final int rNumber,
-                   final int rCapacity) {
+                   final int rCapacity,
+                   final BuildingDto building) {
         this.roomNumber = rNumber;
         this.roomCapacity = rCapacity;
+        this.building = building;
     }
 
-    public Set setRoom() {roomSet.add(getRoomNumber());}
 
     /**
      * Get the number of the room.
@@ -67,6 +63,15 @@ public class RoomDto {
         return roomCapacity;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "STOCK_ID", nullable = false)
+    public BuildingDto getBuilding() {
+        return this.building;
+    }
+
+    public void setBuilding(BuildingDto building) {
+        this.building = building;
+    }
 
     /**
      * Overrides the to string method.

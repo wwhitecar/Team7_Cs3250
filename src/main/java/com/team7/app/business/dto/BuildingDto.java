@@ -1,6 +1,7 @@
 package com.team7.app.business.dto;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,12 +14,20 @@ public class BuildingDto {
     @Id
     private String buildingName;
 
+    private Set<RoomDto> Rooms = new HashSet<RoomDto>(0);
+
     /**
      * The course number to identify a course by more then
      * just the name.
      */
-    @OneToMany(mappedBy="building")
-    private Set<RoomDto> rooms;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "building")
+    public Set<RoomDto> getBuildingRooms() {
+        return this.Rooms;
+    }
+
+    public void setBuildingRooms(Set<RoomDto> Rooms) {
+        this.Rooms = Rooms;
+    }
 
     /**
      * Empty Constructer.
@@ -29,30 +38,22 @@ public class BuildingDto {
 
     /**
      * Param constructer.
+     *
      * @param buildingName - building name
-     * @param rooms - all the rooms the building has
      */
-    public BuildingDto( final String buildingName,
-                       final Set rooms) {
+    public BuildingDto(final String buildingName) {
         this.buildingName = buildingName;
-        this.rooms = rooms;
     }
 
     /**
      * Getter for buildingName.
+     *
      * @return name of the building.
      */
     public String getBuildingName() {
         return buildingName;
     }
 
-
-    /**
-     * Getter for coursenumber.
-     * @return number for the course.
-     */
-    public Set getRooms() {
-        return rooms;
-    }
-
 }
+
+
