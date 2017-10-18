@@ -35,8 +35,9 @@ public class GlobalController {
 
         GlobalDto global = new GlobalDto(schoolName, creditHours);
         globalServices.saveGlobal(global);
-        if(!readGlobalByName(schoolName).equals("Unable to find School")) {
-            return (global + "Added Successfully <br/> <a href=" + "/" + ">Go Back to main screen</a>");
+        if (!readGlobalByName(schoolName).equals("Unable to find School")) {
+            return (global + "Added Successfully <br/> <a href="
+                    + "/" + ">Go Back to main screen</a>");
         }
         return ("Success");
     }
@@ -53,7 +54,8 @@ public class GlobalController {
         if (global == null) {
             return "Unable to find Course";
         }
-        return (global + " <br/> <a href=" + "/" + ">Go Back to main screen</a>");
+        return (global + " <br/> <a href="
+                + "/" + ">Go Back to main screen</a>");
     }
 
     /**
@@ -69,7 +71,8 @@ public class GlobalController {
         GlobalDto global = new GlobalDto(schoolName, creditHours);
         globalServices.saveGlobal(global);
         if (!readGlobalByName(schoolName).equals("Unable to find school")) {
-            return (global + " Added Successfully <br/> <a href=" + "/" + ">Go Back to main screen</a>");
+            return (global + " Added Successfully <br/> <a href="
+                    + "/" + ">Go Back to main screen</a>");
         }
         return ("Unable to find school");
     }
@@ -83,10 +86,12 @@ public class GlobalController {
     public String deleteGlobalByName(
             final @RequestParam("School Name") String schoolName) {
         globalServices.deleteGlobal(schoolName);
-        if(readGlobalByName(schoolName).equals("Unable to find School")) {
-            return ("Removed School" + "<br/> <a href=" + "/" + ">Go Back to main screen<a/>");
+        if (readGlobalByName(schoolName).equals("Unable to find School")) {
+            return ("Removed School" + "<br/> <a href="
+                    + "/" + ">Go Back to main screen<a/>");
         }
-        return ("Unable to remove school, please try again" + "<br/> <a href=" + "/" + ">Go Back to main screen</a>");
+        return ("Unable to remove school, please try again"
+                + "<br/> <a href=" + "/" + ">Go Back to main screen</a>");
     }
 
 }

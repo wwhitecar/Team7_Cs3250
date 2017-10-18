@@ -2,13 +2,13 @@ package com.team7.app.services;
 
 import com.team7.app.business.dto.GlobalDto;
 import com.team7.app.repositories.GlobalRepository;
-import jdk.nashorn.internal.objects.Global;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-
-
+/**
+ * Implementation to communicate to the database.
+ * JDBC implementation.
+ */
 @Service
 public class GlobalServicesImpl implements GlobalServices {
 
@@ -34,7 +34,9 @@ public class GlobalServicesImpl implements GlobalServices {
      * @return list of all globals in the database
      */
     @Override
-    public Iterable<GlobalDto> listAllGlobals() { return globalRepository.findAll();}
+    public Iterable<GlobalDto> listAllGlobals() {
+        return globalRepository.findAll();
+    }
 
     /**
      * Finds a global that resides in the database.
@@ -42,7 +44,9 @@ public class GlobalServicesImpl implements GlobalServices {
      * @return the school we are looking for
      */
     @Override
-    public GlobalDto getGlobalByName(String name) {return globalRepository.findOne(name);}
+    public GlobalDto getGlobalByName(final String name) {
+        return globalRepository.findOne(name);
+    }
 
 
     /**
@@ -51,14 +55,18 @@ public class GlobalServicesImpl implements GlobalServices {
      * @return the global that was added to the database.
      */
     @Override
-    public GlobalDto saveGlobal(final GlobalDto global) {return globalRepository.save(global);}
+    public GlobalDto saveGlobal(final GlobalDto global) {
+        return globalRepository.save(global);
+    }
 
     /**
      * Delete a global that is in the database.
      * @param name of the course
      */
     @Override
-    public void deleteGlobal(final String name) {globalRepository.delete(name);}
+    public void deleteGlobal(final String name) {
+        globalRepository.delete(name);
+    }
 
 }
 

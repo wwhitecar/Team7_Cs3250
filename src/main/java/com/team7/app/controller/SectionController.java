@@ -90,8 +90,8 @@ public class SectionController {
                     + " Updated Section Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
         }
-        return ("Failed to update <br/> <a href=" +
-                                    "/" + ">Go Back to main screen</a>");
+        return ("Failed to update <br/> <a href="
+                + "/" + ">Go Back to main screen</a>");
     }
 
 
