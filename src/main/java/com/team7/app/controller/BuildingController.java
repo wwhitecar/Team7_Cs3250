@@ -86,5 +86,19 @@ public class BuildingController {
         return "";
     }
 
-
+    /**
+     * Delete a user that is in the database.
+     * @param buildingName - number of the room to delete in database
+     * @return String to be displayed to user after deleting them
+     */
+    @RequestMapping(value = "/id/", method = RequestMethod.GET)
+    public String deleteBuildingByName(final @RequestParam("room number") String buildingName) {
+        buildingServices.deleteBuildingByName(buildingName);
+        if (readBuildingByName(buildingName).equals("Unable to find Building")) {
+            return ("Removed Room"
+                    + "<br/> <a href=" + "/"
+                    + ">Go Back to main screen</a>");
+        }
+        return "Unable to find student, plz try again";
+    }
 }
