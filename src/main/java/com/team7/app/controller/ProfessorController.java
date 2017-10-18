@@ -55,9 +55,8 @@ public class ProfessorController {
         if (professor == null) {
             return "Unable to find Professor";
         }
-        String string = "/";
         return professor.toString()  + "<br/> <a href="
-                + string + ">Go Back to main screen</a>";
+                + "/" + ">Go Back to main screen</a>";
     }
 
     /**

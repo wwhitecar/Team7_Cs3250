@@ -26,9 +26,6 @@ import java.util.Map;
 public class WebPageControllerTest {
 
     @Mock
-    CourseRepository cRepo;
-
-    @Mock
     ProfessorRepository profRepo;
 
     @Mock
