@@ -85,7 +85,7 @@ public class ProfessorController {
     public String deleteProfessorById(final @RequestParam("Id") Integer id) {
         professorServices.deleteProfessor(id);
         if (readProfessorById(id).equals("Unable to find Professor")) {
-            return ("Removed Student"
+            return ("Removed Professor"
                     + "<br/> <a href=" + "/"
                     + ">Go Back to main screen</a>");
         }

@@ -13,6 +13,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -64,11 +65,17 @@ public class ProfessorControllerTest {
 
     @Test
     public void ProfessorReadTest() {
-        List<ProfessorDto> listProf = new ArrayList<>();
-        listProf.add(prof);
-        when(profMock.listAllProfessor()).thenReturn(listProf);
-        Assert.assertEquals(professorController.readProfessorById(33)),(listProf.get(0).toString() + "<br/> <a href="
+        assertEquals(professorController.readProfessorById(33),("Unable to find Professor"));
+        when(profMock.getProfessorById(anyInt())).thenReturn(prof);
+        assertEquals(professorController.readProfessorById(33), prof.toString() + "<br/> <a href="
                 + "/" + ">Go Back to main screen</a>");
+    }
+
+    @Test
+    public void deleteProfessorTest(){
+        assertEquals(professorController.deleteProfessorById(33),"Removed Professor"
+                + "<br/> <a href=" + "/"
+                + ">Go Back to main screen</a>");
     }
 
 }
