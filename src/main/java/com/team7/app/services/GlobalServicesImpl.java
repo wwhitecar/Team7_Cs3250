@@ -17,17 +17,8 @@ public class GlobalServicesImpl implements GlobalServices {
      * Global repository to allow us to be able to communicate
      * with the database without jbdc implementation.
      */
-    private GlobalRepository globalRepository;
-
-
-    /**
-     * Autowired so spring can make a bean and use it.
-     * @param gRepository - repo to be used by spring
-     */
     @Autowired
-    public void setGlobalRepository(final GlobalRepository gRepository) {
-        this.globalRepository = gRepository;
-    }
+    protected GlobalRepository globalRepository;
 
     /**
      * Creates a list of all globals that are currently in the database.
