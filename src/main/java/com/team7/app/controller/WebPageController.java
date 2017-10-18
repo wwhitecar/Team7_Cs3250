@@ -44,7 +44,6 @@ public class WebPageController {
     @Autowired
     protected SectionServices sectionServices;
 
-
     /**
      * Mapping for a web page.
      * @param model - attributes to be injected to page.

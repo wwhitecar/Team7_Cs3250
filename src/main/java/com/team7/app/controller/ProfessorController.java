@@ -21,16 +21,8 @@ public class ProfessorController {
      * Services to be used by hibernate to correctly add
      * information to the database.
      */
-    private ProfessorServices professorServices;
-
-    /**
-     * Bean to be used throughout the professor class.
-     * @param profService - bean to be created
-     */
     @Autowired
-    public void setProfessorService(final ProfessorServices profService) {
-        this.professorServices = profService;
-    }
+    protected ProfessorServices professorServices;
 
     /**
      * Creates a professor and puts it in the database.

@@ -16,16 +16,8 @@ public class StudentServicesImpl implements StudentServices {
      * Student repository to allow us to be able to communicate
      * with the the database without jdbc implementation.
      */
-    private StudentRepository studentRepository;
-
-    /**
-     * Autowired so spring can make a bean and use it.
-     * @param studRepository - repo to be used by spring
-     */
     @Autowired
-    public void setStudentRepository(final StudentRepository studRepository) {
-        this.studentRepository = studRepository;
-    }
+    protected StudentRepository studentRepository;
 
     /**
      * Creates a list of all students that are currently in the

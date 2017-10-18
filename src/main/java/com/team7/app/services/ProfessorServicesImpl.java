@@ -16,16 +16,8 @@ public class ProfessorServicesImpl implements ProfessorServices {
      * Professor repository to allow us to be able to communicate
      * with the the database without jdbc implementation.
      */
-    private ProfessorRepository professorRepository;
-
-    /**
-     * Autowired so spring can make  a bean and use it.
-     * @param pRepository - repo to be used by spring
-     */
     @Autowired
-    public void setProfessorRepository(final ProfessorRepository pRepository) {
-        this.professorRepository = pRepository;
-    }
+    protected ProfessorRepository professorRepository;
 
     /**
      * Creates a list of all professors that are currently in the

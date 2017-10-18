@@ -20,16 +20,8 @@ public class CourseController {
      * Services to be used by hibernate to correctly add
      * information to the database.
      */
-    private CourseServices courseServices;
-
-    /**
-     * Bean to be used throughout the course controller class.
-     * @param cService - bean to be created
-     */
     @Autowired
-    public void setCourseService(final CourseServices cService) {
-        this.courseServices = cService;
-    }
+    protected CourseServices courseServices;
 
     /**
      * Will pull information from the webpages to create a

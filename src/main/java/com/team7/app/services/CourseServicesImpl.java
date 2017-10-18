@@ -16,17 +16,8 @@ public class CourseServicesImpl implements CourseServices {
      * Course repository to allow us to be able to communicate
      * with the the database without jdbc implementation.
      */
-    private CourseRepository courseRepository;
-
-
-    /**
-     * Autowired so spring can make  a bean and use it.
-     * @param cRepository - repo to be used by spring
-     */
     @Autowired
-    public void setCourseRepository(final CourseRepository cRepository) {
-        this.courseRepository = cRepository;
-    }
+    protected CourseRepository courseRepository;
 
     /**
      * Creates a list of all courses that are currently in the

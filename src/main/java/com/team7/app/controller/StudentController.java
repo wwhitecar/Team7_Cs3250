@@ -21,16 +21,8 @@ public class StudentController {
      * Services to be used by hibernate to correctly add
      * information to the database.
      */
-    private StudentServices studentServices;
-
-    /**
-     * Bean to be used throughout the professor class.
-     * @param studService - bean to be created
-     */
     @Autowired
-    public void setProductService(final StudentServices studService) {
-        this.studentServices = studService;
-    }
+    protected StudentServices studentServices;
 
     /**
      * Creates a student and puts it in the database.
