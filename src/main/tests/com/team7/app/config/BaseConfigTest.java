@@ -1,4 +1,4 @@
-package team7.app.config;
+package com.team7.app.config;
 
 import com.team7.app.config.BaseConfig;
 import org.junit.Test;

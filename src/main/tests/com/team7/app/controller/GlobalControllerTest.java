@@ -1,4 +1,4 @@
-package team7.app.controller;
+package com.team7.app.controller;
 
 import org.junit.Test;
 import org.junit.Before;

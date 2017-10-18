@@ -1,4 +1,4 @@
-package team7.app.controller;
+package com.team7.app.controller;
 
 import com.team7.app.controller.StudentController;
 import com.team7.app.services.StudentServices;

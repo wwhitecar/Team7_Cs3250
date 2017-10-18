@@ -1,4 +1,4 @@
-package team7.app.business.dto;
+package com.team7.app.business.dto;
 
 
 import com.team7.app.business.dto.GlobalDto;
