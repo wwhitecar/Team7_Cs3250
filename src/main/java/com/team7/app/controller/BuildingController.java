@@ -76,7 +76,7 @@ public class BuildingController {
      * @param buildingName - course number that we will search for in the db
      * @return the information for the provided course
      */
-    @RequestMapping(value = "/readbuilding", method = RequestMethod.GET)
+    @RequestMapping(value = "/readbuilding", method = RequestMethod.POST)
     public String readBuildingByName(
             final @RequestParam("building_name") String buildingName) {
         BuildingDto building = buildingServices.getBuildingByName((buildingName));

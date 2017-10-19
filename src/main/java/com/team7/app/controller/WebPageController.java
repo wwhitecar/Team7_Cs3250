@@ -244,7 +244,6 @@ public class WebPageController {
         return "sectionDelete";
     }
     
-//;LKADJSF;LAJDF;LAKSJDF;LASJDF;SADJF;LASKJDF;LASKJDF
     /**
      * Mapping for a web page.
      * @param model - attributes to be injected to page.
@@ -261,7 +260,7 @@ public class WebPageController {
      * @param model - attributes to be injected to page.
      * @return String of the page name.
      */
-    @RequestMapping("building/buildingRead")
+    @RequestMapping("building/readbuilding")
     public String readBuilding(final Map<String, Object> model) {
         model.put("title", title);
         return "buildingRead";
@@ -272,7 +271,7 @@ public class WebPageController {
      * @param model - attributes to be injected to page.
      * @return String of the page name.
      */
-    @RequestMapping("building/buildingUpdate")
+    @RequestMapping("building/updatebuilding")
     public String updateBuilding(final Map<String, Object> model) {
         model.put("title", title);
         return "buildingUpdate";
