@@ -68,7 +68,11 @@ public class BuildingController {
     @RequestMapping(value = "/readbuilding", method = RequestMethod.GET)
     public String readBuildingByName(
             final @RequestParam("building_name") String buildingName) {
-        return "";
+    	BuildingDto building = buildingServices.getBuildingByName((buildingName));
+        if (building != null) {
+            return building.toString();
+        }
+        return "Unable to find Building";
     }
 
     /**
