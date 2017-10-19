@@ -1,5 +1,6 @@
 package com.team7.app.controller;
 
+import com.team7.app.services.BuildingServices;
 import com.team7.app.services.CourseServices;
 import com.team7.app.services.ProfessorServices;
 import com.team7.app.services.SectionServices;
@@ -43,6 +44,13 @@ public class WebPageController {
      */
     @Autowired
     protected SectionServices sectionServices;
+    
+    /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
+    @Autowired
+    protected BuildingServices buildingServices;
 
     /**
      * Mapping for a web page.
@@ -235,4 +243,53 @@ public class WebPageController {
         model.put("title", title);
         return "sectionDelete";
     }
+    
+//;LKADJSF;LAJDF;LAKSJDF;LASJDF;SADJF;LASKJDF;LASKJDF
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/building/")
+    public String createBuilding(final Map<String, Object> model) {
+        model.put("title", title);
+        return "buildingCreate";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("building/buildingRead")
+    public String readBuilding(final Map<String, Object> model) {
+        model.put("title", title);
+        return "buildingRead";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("building/buildingUpdate")
+    public String updateBuilding(final Map<String, Object> model) {
+        model.put("title", title);
+        return "buildingUpdate";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/building/deletebuilding")
+    public String deleteBuilding(final Map<String, Object> model) {
+        model.put("title", title);
+        model.put("building_name", buildingServices.listAllBuilding());
+
+        return "buildingDelete";
+    }
+    
+    
 }

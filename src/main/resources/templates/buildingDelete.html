@@ -1,0 +1,14 @@
+{{>layout/header}}
+<body>
+<form id = "1" action="/building/deletebuilding" method="GET">
+<select form = "1" name = "building_name" required>
+{{#building_name}}
+<option>{{buildingName}}</option>
+{{/building_name}}
+</select>
+<br/>
+
+    <input type="submit" name="doit" value="Delete Building" />
+</form>
+</body>
+{{>layout/footer}}

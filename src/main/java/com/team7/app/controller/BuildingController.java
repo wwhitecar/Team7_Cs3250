@@ -65,7 +65,7 @@ public class BuildingController {
      * @param buildingName - course number that we will search for in the db
      * @return the information for the provided course
      */
-    @RequestMapping(value = "/getbuilding", method = RequestMethod.GET)
+    @RequestMapping(value = "/readbuilding", method = RequestMethod.GET)
     public String readBuildingByName(
             final @RequestParam("building_name") String buildingName) {
         return "";
@@ -76,8 +76,8 @@ public class BuildingController {
      * @param buildingName - number of the room to delete in database
      * @return String to be displayed to user after deleting them
      */
-    @RequestMapping(value = "/id/", method = RequestMethod.GET)
-    public String deleteBuildingByName(final @RequestParam("room number") String buildingName) {
+    @RequestMapping(value = "/deletebuilding/", method = RequestMethod.GET)
+    public String deleteBuildingByName(final @RequestParam("building_name") String buildingName) {
         buildingServices.deleteBuildingByName(buildingName);
         if (readBuildingByName(buildingName).equals("Unable to find Building")) {
             return ("Removed Room"

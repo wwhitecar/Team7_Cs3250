@@ -1,0 +1,12 @@
+{{>layout/header}}
+<body>
+<form action="/building/getbuilding" method="GET">
+    <label>
+        Building Name:<br/> <input type="text" name="building_name" required size="30" />
+    </label>
+    <br/>
+    <input type="submit" name="doit" value="Read Building Name" />
+</form>
+
+</body>
+{{>layout/footer}}
