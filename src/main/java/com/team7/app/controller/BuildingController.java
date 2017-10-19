@@ -40,8 +40,14 @@ public class BuildingController {
     public String createBuilding(
             final @RequestParam ("building_name") String buildingName) {
         BuildingDto building = new BuildingDto(buildingName);
-        buildingServices.saveBuilding(building);
-        return ("Success");
+        building = buildingServices.saveBuilding(building);
+        if (building != null) {
+            return "Successfully created Building"
+                    + "<br/> <a href=" + "/"
+                    + ">Go Back to main screen</a>";
+        }
+        return ("Unable to create Builing" + "<br/> <a href=" + "/"
+                + ">Go Back to main screen</a>");
     }
 
 
@@ -55,8 +61,13 @@ public class BuildingController {
     public String updateBuilding(
             final @RequestParam ("building_name") String buildingName){
         BuildingDto building = new BuildingDto(buildingName);
-        buildingServices.saveBuilding(building);
-        return ("Success");
+        building = buildingServices.saveBuilding(building);
+        if (building != null){
+            return ("Unable to add Building" + "<br/> <a href=" + "/"
+                    + ">Go Back to main screen</a>");
+        }
+        return ("Successfully Added" + "<br/> <a href=" + "/"
+                + ">Go Back to main screen</a>");
     }
 
     /**
@@ -68,7 +79,7 @@ public class BuildingController {
     @RequestMapping(value = "/readbuilding", method = RequestMethod.GET)
     public String readBuildingByName(
             final @RequestParam("building_name") String buildingName) {
-    	BuildingDto building = buildingServices.getBuildingByName((buildingName));
+        BuildingDto building = buildingServices.getBuildingByName((buildingName));
         if (building != null) {
             return building.toString();
         }
@@ -84,7 +95,7 @@ public class BuildingController {
     public String deleteBuildingByName(final @RequestParam("building_name") String buildingName) {
         buildingServices.deleteBuildingByName(buildingName);
         if (readBuildingByName(buildingName).equals("Unable to find Building")) {
-            return ("Removed Room"
+            return ("Removed Building"
                     + "<br/> <a href=" + "/"
                     + ">Go Back to main screen</a>");
         }
