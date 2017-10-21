@@ -43,9 +43,9 @@ public class BuildingController {
         BuildingDto building = new BuildingDto(buildingName);
         building = buildingService.saveBuilding(building);
         if (building != null) {
-            return "Successfully created Building"
+            return ("Successfully created Building"
                     + "<br/> <a href=" + "/"
-                    + ">Go Back to main screen</a>";
+                    + ">Go Back to main screen</a>");
         }
         return ("Unable to create Builing" + "<br/> <a href=" + "/"
                 + ">Go Back to main screen</a>");
@@ -73,10 +73,6 @@ public class BuildingController {
         building.setBuildingName(changedName);
 
         building = buildingService.saveBuilding(building);
-        if (building == null) {
-            return ("Unable to updated Building" + "<br/> <a href=" + "/"
-                    + ">Go Back to main screen</a>");
-        }
         return ("Successfully Updated" + "<br/> <a href=" + "/"
                 + ">Go Back to main screen</a>");
     }
@@ -97,10 +93,7 @@ public class BuildingController {
             }
         }
         BuildingDto building = buildingService.getBuildingByName((id));
-        if (building != null) {
-            return building.toString();
-        }
-        return "Unable to find Building";
+        return building.toString();
     }
 
     /**
@@ -119,12 +112,8 @@ public class BuildingController {
         }
 
         buildingService.deleteBuildingByName(id);
-        if (readBuildingByName(buildingName)
-                .equals("Unable to find Building")) {
-            return ("Removed Building"
-                    + "<br/> <a href=" + "/"
-                    + ">Go Back to main screen</a>");
-        }
-        return "Unable to find student, plz try again";
+        return ("Removed Building"
+                + "<br/> <a href=" + "/"
+                + ">Go Back to main screen</a>");
     }
 }

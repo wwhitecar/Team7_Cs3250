@@ -25,7 +25,7 @@ public class BuildingServicesImpl implements BuildingServices {
      * @param buildingRepo - buildingRepo to be used for testing
      */
     public void setBuildingRepository(final BuildingRepository buildingRepo) {
-        this.buildingRepository = buildingRepository;
+        this.buildingRepository = buildingRepo;
     }
 
     /**
