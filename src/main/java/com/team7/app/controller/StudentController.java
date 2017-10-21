@@ -22,7 +22,15 @@ public class StudentController {
      * information to the database.
      */
     @Autowired
-    protected StudentServices studentServices;
+    private StudentServices studentService;
+
+    /**
+     * Setter for StudentServices, for testing purposes only.
+     * @param studentServ - service to be used
+     */
+    public void setStudentService(final StudentServices studentServ) {
+        this.studentService = studentServ;
+    }
 
     /**
      * Creates a student and puts it in the database.
@@ -36,7 +44,7 @@ public class StudentController {
                              final @RequestParam("First Name")String firstName,
                              final @RequestParam("Last Name")String lastName) {
         StudentDto student = new StudentDto(firstName, lastName, id);
-        student = studentServices.saveStudent(student);
+        student = studentService.saveStudent(student);
         if (student != null) {
             return (student.toString()  + " Added Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
@@ -51,7 +59,7 @@ public class StudentController {
      */
     @RequestMapping(value = "/student_id")
       public String readStudentById(final @RequestParam("Id") Integer id) {
-          StudentDto student = studentServices.getStudentById(id);
+          StudentDto student = studentService.getStudentById(id);
           if (student == null) {
               return "Unable to find Student";
           }
@@ -72,7 +80,7 @@ public class StudentController {
                               final @RequestParam("First Name")String firstName,
                               final @RequestParam("Last Name")String lastName) {
           StudentDto student = new StudentDto(firstName, lastName, id);
-          studentServices.saveStudent(student);
+          studentService.saveStudent(student);
           return ("Successfully updated: <br/>"
                   + readStudentById(student.getId()));
       }
@@ -84,7 +92,7 @@ public class StudentController {
      */
     @RequestMapping(value = "/id/", method = RequestMethod.GET)
     public String deleteStudentById(final @RequestParam("Id") Integer id) {
-        studentServices.deleteStudent(id);
+        studentService.deleteStudent(id);
         String string = "/";
         if (readStudentById(id).equals("Unable to find Student")) {
             return ("Removed Student"

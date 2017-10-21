@@ -24,7 +24,7 @@ public class CourseServicesImplTest {
     @Before
     public void before(){
         courseServ = new CourseServicesImpl();
-        courseServ.courseRepository = cRepo;
+        courseServ.setCourseRepository(cRepo);
     }
 
     @Test

@@ -21,7 +21,15 @@ public class CourseController {
      * information to the database.
      */
     @Autowired
-    protected CourseServices courseServices;
+    private CourseServices courseService;
+
+    /**
+     * Setter for courseService for testing purposes.
+     * @param courseServ - service to be used for testing
+     */
+    public void setCourseService(final CourseServices courseServ) {
+        this.courseService = courseServ;
+    }
 
     /**
      * Will pull information from the webpages to create a
@@ -47,7 +55,7 @@ public class CourseController {
 
         CourseDto course = new CourseDto(department, courseNumber, credits,
                 description, learningObjective, prereqs, coreqs);
-        course = courseServices.saveCourse(course);
+        course = courseService.saveCourse(course);
         if (course != null) {
             return (course.toString() + " Added Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
@@ -65,7 +73,7 @@ public class CourseController {
     @RequestMapping(value = "/getcourse", method = RequestMethod.GET)
     public String readCourseByNumber(
             final @RequestParam("course_number") int courseNumber) {
-        CourseDto course = courseServices.getCourseById(courseNumber);
+        CourseDto course = courseService.getCourseById(courseNumber);
         if (course == null) {
             return "Unable to find Course";
         }
@@ -96,7 +104,7 @@ public class CourseController {
             final @RequestParam("coreqs") int coreqs) {
         CourseDto course = new CourseDto(department, courseNumber, credits,
                 description, learningObjective, prereqs, coreqs);
-        course = courseServices.saveCourse(course);
+        course = courseService.saveCourse(course);
         if (course != null) {
             return (course.toString() + " Updated Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
@@ -113,7 +121,7 @@ public class CourseController {
     @RequestMapping (value = "/deletecourse", method = RequestMethod.GET)
     public String deleteCourseByNumber(
             final @RequestParam("course_number") int courseNumber) {
-        courseServices.deleteCourse(courseNumber);
+        courseService.deleteCourse(courseNumber);
         if (readCourseByNumber(courseNumber).equals("Unable to find Course")) {
             return ("Removed Course"
                     + "<br/> <a href=" + "/"

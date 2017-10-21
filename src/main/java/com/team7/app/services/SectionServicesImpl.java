@@ -17,7 +17,15 @@ public class SectionServicesImpl implements SectionServices {
      * with the the database without jdbc implementation.
      */
     @Autowired
-    protected SectionRepository sectionRepository;
+    private SectionRepository sectionRepository;
+
+    /**
+     * Setter for SectionService, for testing purposes only.
+     * @param sectionRepo - service to be used
+     */
+    public void setSectionRepository(final SectionRepository sectionRepo) {
+        this.sectionRepository = sectionRepo;
+    }
 
 
     /**

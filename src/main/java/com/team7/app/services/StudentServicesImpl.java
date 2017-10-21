@@ -17,7 +17,15 @@ public class StudentServicesImpl implements StudentServices {
      * with the the database without jdbc implementation.
      */
     @Autowired
-    protected StudentRepository studentRepository;
+    private StudentRepository studentRepository;
+
+    /**
+     * Setter for StudentRepo, for testing purposes only.
+     * @param studentRepo - service to be used
+     */
+    public void setStudentService(final StudentRepository studentRepo) {
+        this.studentRepository = studentRepo;
+    }
 
     /**
      * Creates a list of all students that are currently in the

@@ -17,7 +17,15 @@ public class CourseServicesImpl implements CourseServices {
      * with the the database without jdbc implementation.
      */
     @Autowired
-    protected CourseRepository courseRepository;
+    private CourseRepository courseRepository;
+
+    /**
+     * Setter for courseRepository for testing purposes.
+     * @param courseRepo - mock for testing
+     */
+    public void setCourseRepository(final CourseRepository courseRepo) {
+        this.courseRepository = courseRepo;
+    }
 
     /**
      * Creates a list of all courses that are currently in the

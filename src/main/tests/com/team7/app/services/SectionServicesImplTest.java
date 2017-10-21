@@ -24,7 +24,7 @@ public class SectionServicesImplTest {
     @Before
     public void before(){
         sectionServ = new SectionServicesImpl();
-        sectionServ.sectionRepository = sRepo;
+        sectionServ.setSectionRepository(sRepo);
     }
 
     @Test

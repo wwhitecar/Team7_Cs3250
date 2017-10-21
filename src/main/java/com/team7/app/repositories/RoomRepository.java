@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * Inherits our crud operations to be used by the ProfessorDto.
  */
-public interface RoomRepository extends CrudRepository<RoomDto, Integer>{
+public interface RoomRepository extends CrudRepository<RoomDto, Integer> {
 }
 

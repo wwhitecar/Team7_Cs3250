@@ -25,21 +25,45 @@ public class SectionController {
      * information to the database.
      */
     @Autowired
-    protected SectionServices sectionServices;
+    private SectionServices sectionService;
 
     /**
      * Services to be used by hibernate to correctly add/remove
      * information to the database.
      */
     @Autowired
-    protected CourseServices courseServices;
+    private CourseServices courseService;
 
     /**
      * Services to be used by hibernate to correctly add/remove
      * information to the database.
      */
     @Autowired
-    protected ProfessorServices professorServices;
+    private ProfessorServices professorService;
+
+    /**
+     * Setter for ProfessorService, for testing purposes only.
+     * @param courseServ - service to be used
+     */
+    public void setCourseService(final CourseServices courseServ) {
+        this.courseService = courseServ;
+    }
+
+    /**
+     * Setter for ProfessorService, for testing purposes only.
+     * @param professorServ - service to be used
+     */
+    public void setProfessorService(final ProfessorServices professorServ) {
+        this.professorService = professorServ;
+    }
+
+    /**
+     * Setter for SectionService, for testing purposes only.
+     * @param sectionServ - service to be used
+     */
+    public void setSectionService(final SectionServices sectionServ) {
+        this.sectionService = sectionServ;
+    }
 
     /**
      * Will pull information from the webpages to create a
@@ -54,11 +78,11 @@ public class SectionController {
             final @RequestParam ("section_number") int sectionNumber,
             final @RequestParam("course") int courseNumber,
             final @RequestParam("professor") int professorId) {
-        CourseDto course = courseServices.getCourseById(courseNumber);
+        CourseDto course = courseService.getCourseById(courseNumber);
         ProfessorDto professor =
-                professorServices.getProfessorById(professorId);
+                professorService.getProfessorById(professorId);
         SectionDto section = new SectionDto(sectionNumber, course, professor);
-        section = sectionServices.saveSection(section);
+        section = sectionService.saveSection(section);
         if (section != null) {
             return (section.toString() + " Added Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
@@ -80,11 +104,11 @@ public class SectionController {
             final @RequestParam ("section_number") int sectionNumber,
             final @RequestParam("course") int courseNumber,
             final @RequestParam("professor") int professorId) {
-        CourseDto course = courseServices.getCourseById(courseNumber);
+        CourseDto course = courseService.getCourseById(courseNumber);
         ProfessorDto professor
-                = professorServices.getProfessorById(professorId);
+                = professorService.getProfessorById(professorId);
         SectionDto section = new SectionDto(sectionNumber, course, professor);
-        section = sectionServices.saveSection(section);
+        section = sectionService.saveSection(section);
         if (section != null) {
             return (section.toString()
                     + " Updated Section Successfully <br/> <a href="
@@ -104,7 +128,7 @@ public class SectionController {
     @RequestMapping(value = "/getsection", method = RequestMethod.GET)
     public String readSectionByNumber(
             final @RequestParam("section_number") int sectionNumber) {
-        SectionDto  section = sectionServices.getSectionById(sectionNumber);
+        SectionDto  section = sectionService.getSectionById(sectionNumber);
         if (section == null) {
             return "Unable to find Section" + "<br/> <a href="
                     + "/" + ">Go Back to main screen</a>";
@@ -122,7 +146,7 @@ public class SectionController {
     @RequestMapping (value = "/deleteSection", method = RequestMethod.GET)
     public String deleteCourseByNumber(
             final @RequestParam("section_number") int sectionNumber) {
-        sectionServices.deleteSection(sectionNumber);
+        sectionService.deleteSection(sectionNumber);
             return ("Removed Section"
                     + "<br/> <a href=" + "/"
                     + ">Go Back to main screen</a>");

@@ -1,6 +1,5 @@
 package com.team7.app.controller;
 
-import com.team7.app.business.dto.BuildingDto;
 import com.team7.app.business.dto.RoomDto;
 import com.team7.app.services.RoomServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +36,13 @@ public class RoomController {
      * Creates a room and puts it in the database.
      * @param roomNumber - number of the room.
      * @param roomCapacity - capacity of the room.
+     * @param buildingName - name of the building
      * @return message to be displayed after entry
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String createRoom(final @RequestParam("Room Number")int roomNumber,
-                             final @RequestParam("Last Name")int roomCapacity,
-                             final @RequestParam("Building Name")String buildingName) {
+                     final @RequestParam("Last Name")int roomCapacity,
+                     final @RequestParam("Building Name")String buildingName) {
         RoomDto room = new RoomDto(roomNumber, roomCapacity, buildingName);
         roomServices.saveRoom(room);
 
@@ -59,7 +59,8 @@ public class RoomController {
      * @return information about the room found
      */
     @RequestMapping(value = "/room_number")
-    public String readRoomByNumber(final @RequestParam("room_number") Integer roomNumber) {
+    public String readRoomByNumber(
+            final @RequestParam("room_number") Integer roomNumber) {
         RoomDto room = roomServices.getRoomByNumber(roomNumber);
         if (room == null) {
             return "Unable to find Room";
@@ -73,12 +74,14 @@ public class RoomController {
      * Update a user already in the database.
      * @param roomNumber - first name of the professor
      * @param roomCapacity - the last name of the professor.
+     * @param buildingName - name of the building
      * @return String to be displayed to user after trying to update
      */
     @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public String updateRoomByNumber(final @RequestParam("room Number")int roomNumber,
-                                     final @RequestParam("room Capacity")int roomCapacity,
-                                     final @RequestParam("building Name")String buildingName) {
+    public String updateRoomByNumber(
+            final @RequestParam("room Number")int roomNumber,
+            final @RequestParam("room Capacity")int roomCapacity,
+            final @RequestParam("building Name")String buildingName) {
         RoomDto room = new RoomDto(roomNumber, roomCapacity, buildingName);
         roomServices.saveRoom(room);
         return ("Successfully updated: <br/>"
@@ -91,7 +94,8 @@ public class RoomController {
      * @return String to be displayed to user after deleting them
      */
     @RequestMapping(value = "/id/", method = RequestMethod.GET)
-    public String deleteRoomByNumber(final @RequestParam("room number") Integer roomNumber) {
+    public String deleteRoomByNumber(
+            final @RequestParam("room number") Integer roomNumber) {
         roomServices.deleteRoom(roomNumber);
         if (readRoomByNumber(roomNumber).equals("Unable to find Room")) {
             return ("Removed Room"

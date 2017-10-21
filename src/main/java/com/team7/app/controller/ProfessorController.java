@@ -22,7 +22,15 @@ public class ProfessorController {
      * information to the database.
      */
     @Autowired
-    protected ProfessorServices professorServices;
+    private ProfessorServices professorService;
+
+    /**
+     * Setter for Professor Service for testing purposes.
+     * @param profService - mock to be used
+     */
+    public void setProfessorService(final ProfessorServices profService) {
+        this.professorService = profService;
+    }
 
     /**
      * Creates a professor and puts it in the database.
@@ -36,7 +44,7 @@ public class ProfessorController {
                          final @RequestParam("First Name")String firstName,
                          final @RequestParam("Last Name")String lastName) {
         ProfessorDto professor = new ProfessorDto(firstName, lastName, id);
-        professorServices.saveProfessor(professor);
+        professorService.saveProfessor(professor);
         if (!readProfessorById(id).equals("Unable to find Student")) {
             return (professor.toString()  + " Added Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
@@ -51,7 +59,7 @@ public class ProfessorController {
      */
     @RequestMapping(value = "/professor_id")
     public String readProfessorById(final @RequestParam("Id") Integer id) {
-        ProfessorDto professor = professorServices.getProfessorById(id);
+        ProfessorDto professor = professorService.getProfessorById(id);
         if (professor == null) {
             return "Unable to find Professor";
         }
@@ -71,7 +79,7 @@ public class ProfessorController {
                               final @RequestParam("First Name")String firstName,
                               final @RequestParam("Last Name")String lastName) {
         ProfessorDto professor = new ProfessorDto(firstName, lastName, id);
-        professorServices.saveProfessor(professor);
+        professorService.saveProfessor(professor);
         return ("Successfully updated: <br/>"
                 + readProfessorById(professor.getId()));
     }
@@ -83,7 +91,7 @@ public class ProfessorController {
      */
     @RequestMapping(value = "/id/", method = RequestMethod.GET)
     public String deleteProfessorById(final @RequestParam("Id") Integer id) {
-        professorServices.deleteProfessor(id);
+        professorService.deleteProfessor(id);
         if (readProfessorById(id).equals("Unable to find Professor")) {
             return ("Removed Professor"
                     + "<br/> <a href=" + "/"

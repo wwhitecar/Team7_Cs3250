@@ -24,7 +24,7 @@ public class StudentServicesImplTest {
     @Before
     public void before() {
         studServ = new StudentServicesImpl();
-        studServ.studentRepository = sRepo;
+        studServ.setStudentService(sRepo);
     }
 
     @Test

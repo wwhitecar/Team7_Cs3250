@@ -37,9 +37,9 @@ public class SectionControllerTest {
     @Before
     public void before() {
         sectionController = new SectionController();
-        sectionController.sectionServices = sectMock;
-        sectionController.courseServices = courseMock;
-        sectionController.professorServices = profMock;
+        sectionController.setSectionService(sectMock);
+        sectionController.setCourseService(courseMock);
+        sectionController.setProfessorService(profMock);
 
         course = new CourseDto("Math", 1234,
                 4, "stuff", "other stuff", 0000, 0000);

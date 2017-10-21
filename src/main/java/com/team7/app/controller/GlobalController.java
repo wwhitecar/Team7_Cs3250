@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 /**
  * Global class controller to talk to the database.
  */
@@ -16,8 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class GlobalController {
 
 
+    /**
+     * Global Service to communicate with the database.
+     */
     @Autowired
-    protected GlobalServices globalServices;
+    private GlobalServices globalService;
+
+    /**
+     * Setter for globalService for testing purposes.
+     * @param globalServ - mock to be used
+     */
+    public void setGlobalService(final GlobalServices globalServ) {
+        this.globalService = globalServ;
+    }
 
     /**
      * Mapping to create a new global value in database.
@@ -31,10 +43,11 @@ public class GlobalController {
             final @RequestParam("credit_Hour") int creditHours)  { //change var
 
         GlobalDto global = new GlobalDto(schoolName, creditHours);
-        globalServices.saveGlobal(global);
+        globalService.saveGlobal(global);
 
-        if(!readGlobalByName(schoolName).equals("Unable to find School")) {
-            return (global.toString() + "Added Successfully <br/> <a href=" + "/" + ">Go Back to main screen</a>");
+        if (!readGlobalByName(schoolName).equals("Unable to find School")) {
+            return (global.toString() + "Added Successfully <br/> <a href="
+                    + "/" + ">Go Back to main screen</a>");
         }
         return ("Failed to add School name");
     }
@@ -47,7 +60,7 @@ public class GlobalController {
     @RequestMapping(value = "/getglobal", method = RequestMethod.GET)
     public String readGlobalByName(
             final @RequestParam("School Name") String name) {
-        GlobalDto global = globalServices.getGlobalByName(name);
+        GlobalDto global = globalService.getGlobalByName(name);
         if (global == null) {
             return "Unable to find School";
         }
@@ -66,10 +79,10 @@ public class GlobalController {
             final @RequestParam("School Name") String schoolName,
             final @RequestParam("credit_Hour") int creditHours) {
         GlobalDto global = new GlobalDto(schoolName, creditHours);
-        globalServices.saveGlobal(global);
+        globalService.saveGlobal(global);
         if (!readGlobalByName(schoolName).equals("Unable to find school")) {
-
-            return (global.toString() + " Added Successfully <br/> <a href=" + "/" + ">Go Back to main screen</a>");
+            return (global.toString() + " Added Successfully <br/> <a href="
+                    + "/" + ">Go Back to main screen</a>");
         }
         return ("Unable to find school");
     }
@@ -82,7 +95,7 @@ public class GlobalController {
     @RequestMapping(value = "/deleteglobal", method = RequestMethod.GET)
     public String deleteGlobalByName(
             final @RequestParam("School Name") String schoolName) {
-        globalServices.deleteGlobal(schoolName);
+        globalService.deleteGlobal(schoolName);
         if (readGlobalByName(schoolName).equals("Unable to find School")) {
             return ("Removed School" + "<br/> <a href="
                     + "/" + ">Go Back to main screen<a/>");

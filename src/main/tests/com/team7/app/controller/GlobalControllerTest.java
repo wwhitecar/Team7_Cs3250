@@ -1,26 +1,19 @@
 package com.team7.app.controller;
 
-import com.team7.app.business.dto.CourseDto;
-import com.team7.app.services.CourseServicesImpl;
+import com.team7.app.business.dto.GlobalDto;
 import com.team7.app.services.GlobalServicesImpl;
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.team7.app.business.dto.GlobalDto;
-import com.team7.app.controller.GlobalController;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GlobalControllerTest {
@@ -34,7 +27,7 @@ public class GlobalControllerTest {
 
     @Before
     public void before(){
-        globalController.globalServices = globalMock;
+        globalController.setGlobalService(globalMock);
         global = new GlobalDto("metro", 3);
     }
 

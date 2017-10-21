@@ -29,7 +29,7 @@ public class CourseControllerTest {
 
     @Before
     public void before(){
-        courseController.courseServices = courseMock;
+        courseController.setCourseService(courseMock);
         course = new CourseDto("Math", 1234,
                 4, "stuff", "other stuff", 0000, 0000);
     }
