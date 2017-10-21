@@ -2,13 +2,16 @@
 <body>
 <h1>Update Building Name</h1>
 <h2>Please enter a Course Id</h2>
-<form action="/building/updatebuilding" method="GET">
-    <label>Name of Building to change:
-    <br/>Building Name:<br/> <input type="text" name="building_name" required size="30" /></label>
-    <br/>
+<form action="/building/updatebuilding" method="POST">
+    <label>Name of Building to change:</label>
+        <select name = "building_name" required>
+            {{#buildings}}
+            <option>{{buildingName}}</option>
+            {{/buildings}}
+        </select>
     <p>New Building Information:</p><br/>
 <label>
-            <br/>Building Name: <br/> <input type="text" name="building_name" required size="30" /></label>
+            <br/>Building Name: <br/> <input type="text" name="new_building_name" required size="30" /></label>
  
     <input type="submit" name="doit" value="Update Building Name" />
 </form>

@@ -6,5 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * Inherits our crud operations to be used by the CourseDto.
  */
-public interface BuildingRepository extends CrudRepository<BuildingDto, String> {
+public interface BuildingRepository extends
+        CrudRepository<BuildingDto, Integer> {
 }

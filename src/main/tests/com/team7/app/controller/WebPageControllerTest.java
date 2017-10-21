@@ -2,8 +2,6 @@ package com.team7.app.controller;
 
 import com.team7.app.business.dto.CourseDto;
 import com.team7.app.business.dto.ProfessorDto;
-import com.team7.app.controller.WebPageController;
-import com.team7.app.repositories.CourseRepository;
 import com.team7.app.repositories.ProfessorRepository;
 import com.team7.app.services.CourseServicesImpl;
 import com.team7.app.services.ProfessorServicesImpl;
@@ -14,13 +12,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class WebPageControllerTest {
@@ -43,9 +41,9 @@ public class WebPageControllerTest {
     public void Before() {
         wPC = new WebPageController();
         model = new HashMap<>();
-        wPC.courseServices = courseMock;
-        wPC.professorServices = profMock;
-        wPC.sectionServices = sectMock;
+        wPC.setCourseService(courseMock);
+        wPC.setProfessorService(profMock);
+        wPC.setSectionService(sectMock);
     }
 
     @Test

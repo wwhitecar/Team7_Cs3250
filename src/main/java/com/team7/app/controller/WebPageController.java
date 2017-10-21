@@ -29,28 +29,60 @@ public class WebPageController {
      * information to the database.
      */
     @Autowired
-    protected CourseServices courseServices;
+    private CourseServices courseService;
 
     /**
      * Services to be used by hibernate to correctly add
      * information to the database.
      */
     @Autowired
-    protected ProfessorServices professorServices;
+    private ProfessorServices professorService;
 
     /**
      * Services to be used by hibernate to correctly add
      * information to the database.
      */
     @Autowired
-    protected SectionServices sectionServices;
-    
+    private SectionServices sectionService;
+
     /**
      * Services to be used by hibernate to correctly add
      * information to the database.
      */
     @Autowired
-    protected BuildingServices buildingServices;
+    private BuildingServices buildingService;
+
+    /**
+     * Setter for ProfessorService, for testing purposes only.
+     * @param courseServ - service to be used
+     */
+    public void setCourseService(final CourseServices courseServ) {
+        this.courseService = courseServ;
+    }
+
+    /**
+     * Setter for ProfessorService, for testing purposes only.
+     * @param professorServ - service to be used
+     */
+    public void setProfessorService(final ProfessorServices professorServ) {
+        this.professorService = professorServ;
+    }
+
+    /**
+     * Setter for SectionService, for testing purposes only.
+     * @param sectionServ - service to be used
+     */
+    public void setSectionService(final SectionServices sectionServ) {
+        this.sectionService = sectionServ;
+    }
+
+    /**
+     * Setter for BuildingService, for testing purposes only.
+     * @param buildingServ - service to be used
+     */
+    public void setBuildingService(final BuildingServices buildingServ) {
+        this.buildingService = buildingServ;
+    }
 
     /**
      * Mapping for a web page.
@@ -203,8 +235,8 @@ public class WebPageController {
     @RequestMapping("/section")
     public String sectionCreate(final Map<String, Object> model) {
         model.put("title", title);
-        model.put("courses", courseServices.listAllCourse());
-        model.put("professors", professorServices.listAllProfessor());
+        model.put("courses", courseService.listAllCourse());
+        model.put("professors", professorService.listAllProfessor());
         return "sectionCreate";
     }
 
@@ -216,9 +248,9 @@ public class WebPageController {
     @RequestMapping("/section/update")
     public String sectionUpdate(final Map<String, Object> model) {
         model.put("title", title);
-        model.put("courses", courseServices.listAllCourse());
-        model.put("professors", professorServices.listAllProfessor());
-        model.put("sections", sectionServices.listAllSection());
+        model.put("courses", courseService.listAllCourse());
+        model.put("professors", professorService.listAllProfessor());
+        model.put("sections", sectionService.listAllSection());
         return "sectionUpdate";
     }
 
@@ -243,7 +275,7 @@ public class WebPageController {
         model.put("title", title);
         return "sectionDelete";
     }
-    
+
     /**
      * Mapping for a web page.
      * @param model - attributes to be injected to page.
@@ -274,6 +306,7 @@ public class WebPageController {
     @RequestMapping("building/updatebuilding")
     public String updateBuilding(final Map<String, Object> model) {
         model.put("title", title);
+        model.put("buildings", buildingService.listAllBuilding());
         return "buildingUpdate";
     }
 
@@ -285,10 +318,7 @@ public class WebPageController {
     @RequestMapping("/building/deletebuilding")
     public String deleteBuilding(final Map<String, Object> model) {
         model.put("title", title);
-        model.put("building_name", buildingServices.listAllBuilding());
-
+        model.put("building_name", buildingService.listAllBuilding());
         return "buildingDelete";
     }
-    
-    
 }
