@@ -44,9 +44,9 @@ public class RoomController {
                      final @RequestParam("Last Name")int roomCapacity,
                      final @RequestParam("Building Name")String buildingName) {
         RoomDto room = new RoomDto(roomNumber, roomCapacity, buildingName);
-        roomServices.saveRoom(room);
+        room = roomServices.saveRoom(room);
 
-        if (!readRoomByNumber(roomNumber).equals("Unable to find Student")) {
+        if (room != null) {
             return (room.toString()  + " Added Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
         }
@@ -65,9 +65,9 @@ public class RoomController {
         if (room == null) {
             return "Unable to find Room";
         }
-        String string = "/";
+
         return room.toString()  + "<br/> <a href="
-                + string + ">Go Back to main screen</a>";
+                + "/" + ">Go Back to main screen</a>";
     }
 
     /**
@@ -83,7 +83,10 @@ public class RoomController {
             final @RequestParam("room Capacity")int roomCapacity,
             final @RequestParam("building Name")String buildingName) {
         RoomDto room = new RoomDto(roomNumber, roomCapacity, buildingName);
-        roomServices.saveRoom(room);
+        room = roomServices.saveRoom(room);
+        if (room == null) {
+            return "Unable to find Room";
+        }
         return ("Successfully updated: <br/>"
                 + readRoomByNumber(room.getRoomNumber()));
     }

@@ -35,7 +35,7 @@ public class RoomDto {
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_name", nullable = false)
-    private String getBuildingByName() {
+    public String getBuildingByName() {
         return building;
     }
 
