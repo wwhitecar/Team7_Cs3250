@@ -23,7 +23,7 @@
 }
 
 .dropdown {
-    float: right;
+    float: left;
     position: relative;
     display: inline-block;
     
@@ -36,7 +36,7 @@
     min-width: 160px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    right: 0;
+    right: 10;
     z-index: 1;
 }
 
@@ -99,5 +99,17 @@
       <a href="read.html">Read Student</a>
     </div>
   </div>
+
+    <div class="dropdown">
+        <button onclick="myRoomFunction()" class="dropbtn">Room</button>
+        <div id="myRoomDropdown" class="dropdown-content">
+            <a href="roomCreate.html">Create Room</a>
+            <a href="roomUpdate.html">Update Room</a>
+            <a href="roomDelete.html">Delete Room</a>
+            <a href="roomRead.html">Read Room</a>
+        </div>
+    </div>
+    <br>
+    <br>
 </head>
 <!--  this is header -->
