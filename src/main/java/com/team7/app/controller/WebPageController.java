@@ -232,7 +232,7 @@ public class WebPageController {
      * @param model - attributes to be injected to page.
      * @return String of the page name.
      */
-    @RequestMapping("/section")
+    @RequestMapping("/sectionCreate")
     public String sectionCreate(final Map<String, Object> model) {
         model.put("title", title);
         model.put("courses", courseService.listAllCourse());
@@ -245,7 +245,7 @@ public class WebPageController {
      * @param model - attributes to be injected to page.
      * @return String of the page name.
      */
-    @RequestMapping("/section/update")
+    @RequestMapping("/sectionUpdate")
     public String sectionUpdate(final Map<String, Object> model) {
         model.put("title", title);
         model.put("courses", courseService.listAllCourse());
@@ -259,7 +259,7 @@ public class WebPageController {
      * @param model - attributes to be injected to page.
      * @return String of the page name.
      */
-    @RequestMapping("/section/sectionRead")
+    @RequestMapping("/sectionRead")
     public String sectionRead(final Map<String, Object> model) {
         model.put("title", title);
         return "sectionRead";
@@ -270,7 +270,7 @@ public class WebPageController {
      * @param model - attributes to be injected to page.
      * @return String of the page name.
      */
-    @RequestMapping("/section/sectionDelete")
+    @RequestMapping("/sectionDelete")
     public String sectionDelete(final Map<String, Object> model) {
         model.put("title", title);
         return "sectionDelete";
@@ -281,7 +281,7 @@ public class WebPageController {
      * @param model - attributes to be injected to page.
      * @return String of the page name.
      */
-    @RequestMapping("/building/")
+    @RequestMapping("/buildingCreate")
     public String createBuilding(final Map<String, Object> model) {
         model.put("title", title);
         return "buildingCreate";
@@ -292,7 +292,7 @@ public class WebPageController {
      * @param model - attributes to be injected to page.
      * @return String of the page name.
      */
-    @RequestMapping("building/readbuilding")
+    @RequestMapping("/buildingRead")
     public String readBuilding(final Map<String, Object> model) {
         model.put("title", title);
         return "buildingRead";
@@ -303,7 +303,7 @@ public class WebPageController {
      * @param model - attributes to be injected to page.
      * @return String of the page name.
      */
-    @RequestMapping("building/updatebuilding")
+    @RequestMapping("/buildingUpdate")
     public String updateBuilding(final Map<String, Object> model) {
         model.put("title", title);
         model.put("buildings", buildingService.listAllBuilding());
@@ -315,7 +315,7 @@ public class WebPageController {
      * @param model - attributes to be injected to page.
      * @return String of the page name.
      */
-    @RequestMapping("/building/deletebuilding")
+    @RequestMapping("/buildingDelete")
     public String deleteBuilding(final Map<String, Object> model) {
         model.put("title", title);
         model.put("building_name", buildingService.listAllBuilding());
