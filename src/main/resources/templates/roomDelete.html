@@ -1,0 +1,22 @@
+{{>layout/header}}
+<body>
+<form action="/room/id/" method="POST">
+    <label>
+        <br/>Room Number:<br/> <input type="number" name="Id" required size="30" />
+    </label>
+    <br/>
+    <label>Building Name: <br/>
+        <select required name="Building Name">
+
+            {{#buildings}}
+            <option>
+                {{buildingName}}
+            </option>
+            {{/buildings}}
+        </select>
+    </label>
+    <br/>
+    <input type="submit" name="doit" value="Delete Room" />
+</form>
+</body>
+{{>layout/footer}}

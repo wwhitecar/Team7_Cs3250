@@ -1,0 +1,26 @@
+{{>layout/header}}
+<body>
+<h1>Update Data for Room</h1>
+<h2>Please enter a Building Name and Room Number</h2>
+<form id="update" action="/room/update" method="GET">
+    <label>Cant change Room Number
+        <br/>Room Number:<br/> <input type="number" name="Room Number" required size="30" /></label>
+    <br/>
+    <p>New Building and/or Room Capacity:</p><br/>
+    <label>Building Name: <br/>
+        <select required name="Building Name">
+
+            {{#buildings}}
+            <option>
+                {{buildingName}}
+            </option>
+            {{/buildings}}
+        </select>
+    </label>
+    <br/>
+    <label>
+        <br/>Room Capacity: <br/> <input type="number" name="Room Capacity" required size="30" /></label>
+    <input type="submit" name="doit" value="Update Professor" />
+</form>
+</body>
+{{>layout/footer}}

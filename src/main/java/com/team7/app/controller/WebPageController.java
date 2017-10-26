@@ -1,9 +1,6 @@
 package com.team7.app.controller;
 
-import com.team7.app.services.BuildingServices;
-import com.team7.app.services.CourseServices;
-import com.team7.app.services.ProfessorServices;
-import com.team7.app.services.SectionServices;
+import com.team7.app.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -53,6 +50,13 @@ public class WebPageController {
     private BuildingServices buildingService;
 
     /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
+    @Autowired
+    private RoomServices roomService;
+
+    /**
      * Setter for ProfessorService, for testing purposes only.
      * @param courseServ - service to be used
      */
@@ -82,6 +86,14 @@ public class WebPageController {
      */
     public void setBuildingService(final BuildingServices buildingServ) {
         this.buildingService = buildingServ;
+    }
+
+    /**
+     * Setter for RoomService, for testing purposes only.
+     * @param roomServ - serivce to be used
+     */
+    public void setRoomService(final RoomServices roomServ) {
+        this.roomService = roomServ;
     }
 
     /**
@@ -321,4 +333,51 @@ public class WebPageController {
         model.put("building_name", buildingService.listAllBuilding());
         return "buildingDelete";
     }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/roomCreate")
+    public String createRoom(final Map<String, Object> model) {
+        model.put("title", title);
+        model.put("buildings", buildingService.listAllBuilding());
+        return "roomCreate";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attribute to be injected to page.
+     * @return String of the page name
+     */
+    @RequestMapping("/roomDelete")
+    public String deleteRoom(final Map<String, Object> model) {
+        model.put("title", title);
+        return "roomDelete";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attribute to be injected to page.
+     * @return String of the page name
+     */
+    @RequestMapping("/roomUpdate")
+    public String updateRoom(final Map<String, Object> model) {
+        model.put("title", title);
+        model.put("buildings", buildingService.listAllBuilding());
+        return "roomUpdate";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attribute to be injected to page.
+     * @return String of the page name
+     */
+    @RequestMapping("/roomRead")
+    public String readRoom(final Map<String, Object> model) {
+        model.put("title", title);
+        return "roomRead";
+    }
+
 }

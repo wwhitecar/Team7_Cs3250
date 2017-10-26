@@ -41,7 +41,7 @@ public class RoomController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String createRoom(final @RequestParam("Room Number")int roomNumber,
-                     final @RequestParam("Last Name")int roomCapacity,
+                     final @RequestParam("Room Capacity")int roomCapacity,
                      final @RequestParam("Building Name")String buildingName) {
         RoomDto room = new RoomDto(roomNumber, roomCapacity, buildingName);
         room = roomServices.saveRoom(room);
@@ -58,7 +58,7 @@ public class RoomController {
      * @param roomNumber - number of the room
      * @return information about the room found
      */
-    @RequestMapping(value = "/room_number")
+    @RequestMapping(value = "/room_number", method = RequestMethod.GET)
     public String readRoomByNumber(
             final @RequestParam("room_number") Integer roomNumber) {
         RoomDto room = roomServices.getRoomByNumber(roomNumber);
@@ -79,9 +79,9 @@ public class RoomController {
      */
     @RequestMapping(value = "/update", method = RequestMethod.GET)
     public String updateRoomByNumber(
-            final @RequestParam("room Number")int roomNumber,
-            final @RequestParam("room Capacity")int roomCapacity,
-            final @RequestParam("building Name")String buildingName) {
+            final @RequestParam("Room Number")int roomNumber,
+            final @RequestParam("Room Capacity")int roomCapacity,
+            final @RequestParam("Building Name")String buildingName) {
         RoomDto room = new RoomDto(roomNumber, roomCapacity, buildingName);
         room = roomServices.saveRoom(room);
         if (room == null) {
@@ -96,7 +96,7 @@ public class RoomController {
      * @param roomNumber - number of the room to delete in database
      * @return String to be displayed to user after deleting them
      */
-    @RequestMapping(value = "/id/", method = RequestMethod.GET)
+    @RequestMapping(value = "/id/", method = RequestMethod.POST)
     public String deleteRoomByNumber(
             final @RequestParam("room number") Integer roomNumber) {
         roomServices.deleteRoom(roomNumber);
