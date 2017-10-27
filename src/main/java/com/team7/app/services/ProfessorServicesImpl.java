@@ -17,7 +17,15 @@ public class ProfessorServicesImpl implements ProfessorServices {
      * with the the database without jdbc implementation.
      */
     @Autowired
-    protected ProfessorRepository professorRepository;
+    private ProfessorRepository professorRepository;
+
+    /**
+     * Setter for professor Repo for testing purposes.
+     * @param profRepo - mock to be used
+     */
+    public void setProfessorRepository(final ProfessorRepository profRepo) {
+        this.professorRepository = profRepo;
+    }
 
     /**
      * Creates a list of all professors that are currently in the

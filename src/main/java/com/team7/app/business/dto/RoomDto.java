@@ -1,10 +1,13 @@
 package com.team7.app.business.dto;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.FetchType;
 
 /**
- * User for the database to keep track of.
+ * Room for the database to keep track of.
  * Entity tag is for adding something to the database.
  */
 @Entity
@@ -27,30 +30,32 @@ public class RoomDto {
     private int roomCapacity;
 
     /**
-     *  many rooms have a building
+     *  many rooms have a building.
+     *  @return building the room is in
      */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_name", nullable = false)
-    private String getBuildingByName() {
+    public String getBuildingByName() {
         return building;
     }
 
     /**
      * Empty Constructer.
      */
-    public RoomDto() {}
+    public RoomDto() { }
 
     /**
      * Full param constructer.
      * @param rNumber - room number
      * @param rCapacity - room capacity
+     * @param buildingName - name of building
      */
     public RoomDto(final int rNumber,
                    final int rCapacity,
-                   final String building) {
+                   final String buildingName) {
         this.roomNumber = rNumber;
         this.roomCapacity = rCapacity;
-        this.building = building;
+        this.building = buildingName;
     }
 
 
@@ -68,10 +73,6 @@ public class RoomDto {
      */
     public int getRoomCapacity() {
         return roomCapacity;
-    }
-
-    public void setBuilding(String building) {
-        this.building = building;
     }
 
     /**

@@ -8,11 +8,30 @@ import com.team7.app.business.dto.BuildingDto;
  */
 public interface BuildingServices {
 
+    /**
+     * Creates a list of all buildings that are currently in the
+     * database.
+     * @return list of all buildings in the database
+     */
     Iterable<BuildingDto> listAllBuilding();
 
-    BuildingDto getBuildingByName(String name);
+    /**
+     * Finds a building that resides in the database.
+     * @param id - id number for the building we are looking for.
+     * @return the building that we are looking for
+     */
+    BuildingDto getBuildingByName(int id);
 
-    BuildingDto saveBuilding(BuildingDto product);
+    /**
+     * Adds a building to the database.
+     * @param building - to be added.
+     * @return the building that was added to the database.
+     */
+    BuildingDto saveBuilding(BuildingDto building);
 
-    void deleteBuildingByName(String id);
+    /**
+     * Delete a building that is in the database.
+     * @param id - buildings id to be removed
+     */
+    void deleteBuildingByName(int id);
 }

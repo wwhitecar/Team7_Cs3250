@@ -18,7 +18,15 @@ public class GlobalServicesImpl implements GlobalServices {
      * with the database without jbdc implementation.
      */
     @Autowired
-    protected GlobalRepository globalRepository;
+    private GlobalRepository globalRepository;
+
+    /**
+     * Setter for globalRepository for testing purposes.
+     * @param globalRepo - mock to be used
+     */
+    public void setGlobalRepository(final GlobalRepository globalRepo) {
+        this.globalRepository = globalRepo;
+    }
 
     /**
      * Creates a list of all globals that are currently in the database.

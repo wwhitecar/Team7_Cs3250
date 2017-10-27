@@ -24,7 +24,7 @@ public class GlobalServicesImplTest {
     @Before
     public void before() {
         globalServ = new GlobalServicesImpl();
-        globalServ.globalRepository = gRepo;
+        globalServ.setGlobalRepository(gRepo);
     }
 
     @Test

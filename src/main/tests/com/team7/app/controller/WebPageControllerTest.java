@@ -1,10 +1,10 @@
 package com.team7.app.controller;
 
+import com.team7.app.business.dto.BuildingDto;
 import com.team7.app.business.dto.CourseDto;
 import com.team7.app.business.dto.ProfessorDto;
-import com.team7.app.controller.WebPageController;
-import com.team7.app.repositories.CourseRepository;
 import com.team7.app.repositories.ProfessorRepository;
+import com.team7.app.services.BuildingServices;
 import com.team7.app.services.CourseServicesImpl;
 import com.team7.app.services.ProfessorServicesImpl;
 import com.team7.app.services.SectionServices;
@@ -14,13 +14,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class WebPageControllerTest {
@@ -33,8 +34,12 @@ public class WebPageControllerTest {
 
     @Mock
     CourseServicesImpl courseMock;
+
     @Mock
     SectionServices sectMock;
+
+    @Mock
+    BuildingServices buildingMock;
 
     WebPageController wPC;
     Map<String, Object> model;
@@ -43,9 +48,10 @@ public class WebPageControllerTest {
     public void Before() {
         wPC = new WebPageController();
         model = new HashMap<>();
-        wPC.courseServices = courseMock;
-        wPC.professorServices = profMock;
-        wPC.sectionServices = sectMock;
+        wPC.setCourseService(courseMock);
+        wPC.setProfessorService(profMock);
+        wPC.setSectionService(sectMock);
+        wPC.setBuildingService(buildingMock);
     }
 
     @Test
@@ -155,6 +161,30 @@ public class WebPageControllerTest {
         when(courseMock.listAllCourse()).thenReturn(listCourse);
         when(profRepo.findAll()).thenReturn(listProf);
         assertTrue(wPC.sectionDelete(model).equals("sectionDelete"));
+    }
+
+    @Test
+    public void createBuildingTest(){
+        assertEquals(wPC.createBuilding(model), "buildingCreate");
+    }
+
+    @Test
+    public void readBuildingTest(){
+        assertEquals(wPC.readBuilding(model), "buildingRead");
+    }
+
+    @Test
+    public void updateBuildingTest(){
+        List<BuildingDto> buildingList = new ArrayList<>();
+        when(buildingMock.listAllBuilding()).thenReturn(buildingList);
+        assertEquals(wPC.updateBuilding(model), "buildingUpdate");
+    }
+
+    @Test
+    public void deleteBuildingTest() {
+        List<BuildingDto> buildingList = new ArrayList<>();
+        when(buildingMock.listAllBuilding()).thenReturn(buildingList);
+        assertEquals(wPC.deleteBuilding(model), "buildingDelete");
     }
 
 }

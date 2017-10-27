@@ -34,7 +34,7 @@ public class StudentControllerTest {
     public void before(){
         studentController = new StudentController();
         model = new HashMap<>();
-        studentController.studentServices = studentMock;
+        studentController.setStudentService(studentMock);
     }
 
     @Test

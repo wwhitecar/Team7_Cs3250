@@ -1,30 +1,22 @@
 package com.team7.app.controller;
 
-import com.team7.app.business.dto.CourseDto;
-import com.team7.app.controller.ProfessorController;
-import com.team7.app.services.ProfessorServices;
+import com.team7.app.business.dto.ProfessorDto;
 import com.team7.app.services.ProfessorServicesImpl;
-import org.junit.Assert;
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.anyMapOf;
-import static org.mockito.Mockito.any;
-import com.team7.app.business.dto.ProfessorDto;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProfessorControllerTest {
@@ -42,7 +34,7 @@ public class ProfessorControllerTest {
     public void before(){
         professorController = new ProfessorController();
         model = new HashMap<>();
-        professorController.professorServices = profMock;
+        professorController.setProfessorService(profMock);
     }
 
     @Test

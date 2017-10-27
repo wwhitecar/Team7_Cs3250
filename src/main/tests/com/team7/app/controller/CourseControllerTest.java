@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyInt;
@@ -18,9 +17,6 @@ import static org.mockito.Mockito.when;
 public class CourseControllerTest {
 
     @Mock
-    private NamedParameterJdbcTemplate mockTemplate;
-
-    @Mock
     CourseServicesImpl courseMock;
 
     CourseController courseController = new CourseController();
@@ -29,7 +25,7 @@ public class CourseControllerTest {
 
     @Before
     public void before(){
-        courseController.courseServices = courseMock;
+        courseController.setCourseService(courseMock);
         course = new CourseDto("Math", 1234,
                 4, "stuff", "other stuff", 0000, 0000);
     }

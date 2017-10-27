@@ -28,7 +28,12 @@ public class GlobalDto {
 
     }
 
-    public String toString(){
+    /**
+     * Override the toString method.
+     * @return new string with chosen information.
+     */
+    @Override
+    public String toString() {
         return "global";
     }
 

@@ -1,0 +1,17 @@
+{{>layout/header}}
+<body>
+<h1>Team 7</h1>
+<h2>Create Building Page</h2>
+<br/>
+<form action="/building/" method="POST">
+    <div>
+        <label>
+            <br/>Building Name: <br/> <input type="text" name="building_name" required size="30" /></label>
+        <br/>
+        <input type="submit" name="doit" value="Create Building" />
+    </div>
+</form>
+
+<a href="/">Return to home Screen</a>
+</body>
+{{>layout/footer}}

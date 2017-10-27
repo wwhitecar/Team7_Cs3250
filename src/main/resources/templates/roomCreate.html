@@ -1,0 +1,33 @@
+{{>layout/header}}
+<body>
+<h1>Team 7</h1>
+<h2>Create a Room</h2>
+<br/>
+<form action="/room/" method="POST">
+    <div>
+        <label>
+            <br/>Room Number: <br/> <input type="number" name="Room Number" required size="30" /></label>
+        <br/>
+        <label>
+            <br/>Room Capacity: <br/> <input type="number" name="Room Capacity" required size="30" /></label>
+        <br/>
+        <label>
+            <br/>Building Name: <br/>
+            <select required name="Building Name">
+
+                {{#buildings}}
+                <option>
+                    {{buildingName}}
+                </option>
+                {{/buildings}}
+            </select>
+        </label>
+        <br/>
+        <input type="submit" name="doit" value="Create Room" />
+
+    </div>
+</form>
+
+<a href="/">Return to home Screen</a>
+</body>
+{{>layout/footer}}
