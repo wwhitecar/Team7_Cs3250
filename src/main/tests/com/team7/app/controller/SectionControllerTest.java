@@ -52,15 +52,14 @@ public class SectionControllerTest {
 
     @Test
     public void createSectionTest() throws Exception {
-        assertEquals(sectionController.createSection(1234, 789, 456),
-                "Unable to find Section, plz try again </br> <a href="
-                + "/" + "> Back to Section menu </a>");
-
+        List<ProfessorDto> listy = new ArrayList<>();
+        listy.add(professor);
+        when(profMock.listAllProfessor()).thenReturn(listy);
         when(profMock.getProfessorById(anyInt())).thenReturn(professor);
         when(courseMock.getCourseById(anyInt())).thenReturn(course);
         when(sectMock.saveSection(anyObject())).thenReturn(section);
 
-        assertEquals(sectionController.createSection(1234, 789, 456), section.toString() + " Added Successfully <br/> <a href="
+        assertEquals(sectionController.createSection(1234, 789, "Harry Hook"), section.toString() + " Added Successfully <br/> <a href="
                 + "/" + ">Go Back to main screen</a>");
     }
 
