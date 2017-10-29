@@ -4,10 +4,7 @@ import com.team7.app.business.dto.BuildingDto;
 import com.team7.app.business.dto.CourseDto;
 import com.team7.app.business.dto.ProfessorDto;
 import com.team7.app.repositories.ProfessorRepository;
-import com.team7.app.services.BuildingServices;
-import com.team7.app.services.CourseServicesImpl;
-import com.team7.app.services.ProfessorServicesImpl;
-import com.team7.app.services.SectionServices;
+import com.team7.app.services.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,6 +38,9 @@ public class WebPageControllerTest {
     @Mock
     BuildingServices buildingMock;
 
+    @Mock
+    RoomServices roomMock;
+
     WebPageController wPC;
     Map<String, Object> model;
 
@@ -52,6 +52,7 @@ public class WebPageControllerTest {
         wPC.setProfessorService(profMock);
         wPC.setSectionService(sectMock);
         wPC.setBuildingService(buildingMock);
+        wPC.setRoomService(roomMock);
     }
 
     @Test
@@ -187,4 +188,27 @@ public class WebPageControllerTest {
         assertEquals(wPC.deleteBuilding(model), "buildingDelete");
     }
 
+    @Test
+    public void createRoomTest(){
+        List<BuildingDto> buildingList = new ArrayList<>();
+        when(buildingMock.listAllBuilding()).thenReturn(buildingList);
+        assertEquals(wPC.createRoom(model), "roomCreate");
+    }
+
+    @Test
+    public void deleteRoomTest(){
+        assertEquals(wPC.deleteRoom(model), "roomDelete");
+    }
+
+    @Test
+    public void updateRoomTest(){
+        List<BuildingDto> buildingList = new ArrayList<>();
+        when(buildingMock.listAllBuilding()).thenReturn(buildingList);
+        assertEquals(wPC.updateRoom(model), "roomUpdate");
+    }
+
+    @Test
+    public void readRoomTest(){
+        assertEquals(wPC.readRoom(model), "roomRead");
+    }
 }
