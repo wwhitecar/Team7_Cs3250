@@ -16,7 +16,7 @@ public class SemesterTest {
     public void before(){
         schedule = new ScheduleDto();
         semester = new SemesterDto(null);
-        semesterTwo = new SemesterDto(new ScheduleDto());
+        semesterTwo = new SemesterDto(schedule);
 
     }
 
@@ -27,7 +27,7 @@ public class SemesterTest {
 
     @Test(expected = NullPointerException.class)
     public void getSchedualTest(){
-        assertTrue(semester.getSchedule() == null);
         assertEquals(semesterTwo.getSchedule(), schedule);
+        assertTrue(semester.getSchedule() == null);
     }
 }

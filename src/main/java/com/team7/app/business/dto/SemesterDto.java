@@ -42,10 +42,10 @@ public class SemesterDto {
      * @throws NullPointerException if schedule is null
      */
     public ScheduleDto getSchedule() throws NullPointerException {
-        if (schedule == null) {
+        if (this.schedule == null) {
             throw new NullPointerException();
         }
-        return schedule;
+        return this.schedule;
     }
 
     /**
