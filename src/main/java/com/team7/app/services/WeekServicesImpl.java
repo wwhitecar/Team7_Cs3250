@@ -30,4 +30,22 @@ public class WeekServicesImpl implements WeekServices {
      */
     @Override
     public Iterable<WeekDto> listAllWeeks() { return weekRepository.findAll(); }
+
+    /**
+     *
+     */
+    @Override
+    public WeekDto getWeekByNumber(final Integer Id) { return weekRepository.findOne(Id);}
+
+    /**
+     *
+     */
+    @Override
+    public WeekDto saveWeek(final WeekDto week) { return weekRepository.save(week); }
+
+    /**
+     *
+     */
+    @Override
+    public void deleteWeekByNumber(final Integer id) { weekRepository.delete(id);}
 }
