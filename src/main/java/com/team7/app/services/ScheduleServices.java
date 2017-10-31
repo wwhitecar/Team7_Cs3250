@@ -1,6 +1,6 @@
 package com.team7.app.services;
 
-import com.team7.app.business.dto.BuildingDto;
+import com.team7.app.business.dto.ScheduleDto;
 
 /**
  * Interface that will communicate with the database.
@@ -9,29 +9,29 @@ import com.team7.app.business.dto.BuildingDto;
 public interface ScheduleServices {
 
     /**
-     * Creates a list of all buildings that are currently in the
+     * Creates a list of all schedules that are currently in the
      * database.
-     * @return list of all buildings in the database
+     * @return list of all schedule in the database
      */
-    Iterable<BuildingDto> listAllBuilding();
+    Iterable<ScheduleDto> listAllSchedule();
 
     /**
      * Finds a building that resides in the database.
-     * @param id - id number for the building we are looking for.
-     * @return the building that we are looking for
+     * @param id - id number for the schedule we are looking for.
+     * @return the schedule that we are looking for
      */
-    BuildingDto getBuildingByName(int id);
+    ScheduleDto getScheduleByName(int id);
 
     /**
-     * Adds a building to the database.
-     * @param building - to be added.
+     * Adds a schedule to the database.
+     * @param schedule - to be added.
      * @return the building that was added to the database.
      */
-    BuildingDto saveBuilding(BuildingDto building);
+    ScheduleDto saveSchedule(ScheduleDto schedule);
 
     /**
-     * Delete a building that is in the database.
-     * @param id - buildings id to be removed
+     * Delete a schedule that is in the database.
+     * @param id - schedule id to be removed
      */
-    void deleteBuildingByName(int id);
+    void deleteScheduleByName(int id);
 }
