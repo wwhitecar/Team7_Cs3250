@@ -2,29 +2,6 @@ spring:
   profiles:
     active: default
 
-sql:
-  insertUserSql: insert into users (student_id, first_name, last_name) values (:student_id,:first_name,:last_name)
-  getUserByIdSql: select * from users where student_id = :student_id
-  deleteUserByIdSql: delete from users where student_id = :student_id
-  updateUserByIdSql: update users set first_name = :first_name, last_name = :last_name where student_id = :student_id
-
-sqlcourse:
-  insertCourseSql: insert into courses (department, course_number, credits, description, learning_objective, prereqs, coreqs) values (:description, :course_number, :credits, :description, :learning_objective, :prereqs, :coreqs)
-  getCourseByNumber: select * from courses where course_number =:courseNumber
-  deleteCourseByNumber: delete from courses where course_number
-  updateCourseByNumber : update courses set department = :department, credits = :credits, description =:description, learning_objectives = :learning_objectives, prereqs = :prereqs, coreqs = :coreqs
-
-sqlsection:
-  insertSectionSql: insert into sections (section_number, course_number, professor) values (:section_number :course_number, :professor)
-  getSectionByNumber: select * from sections where section_number = :sectionNumber
-  deleteSectionByNumber: delete from sections where section_number = :sectionNumber
-
-sqlprofessor:
-  insertProfessorSql: insert into professors (professor_id, first_name, last_name) values (:professor_id, :first_name, :last_name)
-  getProfessorByIdSql: select * from professors where professor_id = :professor_id
-  deleteProfessorByIdSql: delete from professors where professor_id = :professor_id
-  updateProfessorByIdSql: update professors set first_name = :first_name, last_name = :last_name where professor_id = :professor_id
-
 schedule:
   database:
     url: jdbc:mysql://localhost:3306/schedule
@@ -45,4 +22,4 @@ schedule:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     test-on-borrow: true
-    validation-query: SELECT 1
+validation-query: SELECT 1

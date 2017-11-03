@@ -1,39 +1,56 @@
 package com.team7.app.business.dto;
 
-import javax.persistence.JoinColumn;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+/**
+ * Sections that will store professor and course
+ * for classes.
+ */
+@Entity
 public class SectionDto {
 
     /**
      * The course number to identify a course by more then
      * just the name.
      */
+    @Id
     private int sectionNumber;
-
 
     /**
      * The course number to identify a course by more then
      * just the name.
      */
-    private int courseNumber;
+    @ManyToOne
+    private CourseDto course;
 
     /**
      * The professor?
      */
-    private String professor;
+    @ManyToOne
+    private ProfessorDto professor;
+
+    /**
+     * Empty Constructer.
+     */
+    public SectionDto() {
+
+    }
 
     /**
      * Param constructer.
-     * @param courseNumber -coursenumber
-     * @param professor - professor of the class/section
+     * @param sNumber - identification for this section
+     * @param courseDto - course to be tied to this section
+     * @param professorDto - professor of the class/section
      */
-    public SectionDto(final int sectionNumber,
-                      final int courseNumber,
-                      final String professor) {
-        this.sectionNumber = sectionNumber;
-        this.courseNumber = courseNumber;
-        this.professor = professor;
+    public SectionDto(final int sNumber,
+                      final CourseDto courseDto,
+                      final ProfessorDto professorDto) {
+        this.sectionNumber = sNumber;
+        this.course = courseDto;
+        this.professor = professorDto;
     }
 
     /**
@@ -49,16 +66,25 @@ public class SectionDto {
      * Getter for coursenumber.
      * @return number for the course.
      */
-    public int getCourseNumber() {
-        return courseNumber;
+    public CourseDto getCourse() {
+        return course;
     }
 
     /**
      * Getter for the prof of the section.
      * @return the professor of the section.
      */
-    public String getProfessor() {
+    public ProfessorDto getProfessor() {
         return professor;
     }
 
+    /**
+     * Overrides the tostring method.
+     * @return the new string of information
+     */
+    @Override
+    public String toString() {
+        return "Course: </br>" + course.toString()
+                + "</br>Professor: </br>" + professor.toString();
+    }
 }

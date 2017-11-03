@@ -1,9 +1,6 @@
 package com.team7.app.business.dto;
 
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -54,7 +51,6 @@ public class CourseDto {
      * Empty Constructer.
      */
     public CourseDto() { }
-
 
     /**
      * Full param constructer.
@@ -123,7 +119,7 @@ public class CourseDto {
      * Getter for the prereqs of the course.
      * @return prereqs of the course
      */
-    public String getPrereqs() {
+    public int getPrereqs() {
         return prereqs;
     }
 
@@ -131,7 +127,21 @@ public class CourseDto {
      * The coreqs requird for the course.
      * @return corequs for thee course
      */
-    public Object getCoreqs() {
+    public int getCoreqs() {
         return coreqs;
+    }
+
+    /**
+     * Overiding the tostring function.
+     */
+    @Override
+    public String toString() {
+        return ("Course Information: <br /> Dept: " + getDepartment()
+                + "<br /> Course Number: " + getCourseNumber()
+                + "<br /> Credits : " + getCredits()
+                + "<br /> Description: " + getDescription()
+                + "<br /> Learning Objective: " + getLearningObjectives()
+                + "<br /> Prereqs: " + getPrereqs()
+                + "<br />Coreqs: " + getCoreqs());
     }
 }
