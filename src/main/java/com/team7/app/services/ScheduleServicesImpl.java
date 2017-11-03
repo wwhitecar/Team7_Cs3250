@@ -1,7 +1,7 @@
 package com.team7.app.services;
 
-import com.team7.app.business.dto.BuildingDto;
-import com.team7.app.repositories.BuildingRepository;
+import com.team7.app.business.dto.ScheduleDto;
+import com.team7.app.repositories.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,60 +10,60 @@ import org.springframework.stereotype.Service;
  * JDBC implementation.
  */
 @Service
-public class ScheduleServicesImpl implements BuildingServices {
+public class ScheduleServicesImpl implements ScheduleServices {
 
     /**
-     * Building repository to allow us to be able to communicate
+     * Schedule repository to allow us to be able to communicate
      * with the the database without jdbc implementation.
      */
     @Autowired
-    private BuildingRepository buildingRepository;
+    private ScheduleRepository scheduleRepository;
 
     /**
-     * Setter for BuildingRepository, used for testing purposes
+     * Setter for ScheduleRepository, used for testing purposes
      * only.
-     * @param buildingRepo - buildingRepo to be used for testing
+     * @param scheduleRepo - scheduleRepo to be used for testing
      */
-    public void setBuildingRepository(final BuildingRepository buildingRepo) {
-        this.buildingRepository = buildingRepo;
+    public void setScheduleRepository(final ScheduleRepository scheduleRepo) {
+        this.scheduleRepository = scheduleRepo;
     }
 
     /**
-     * Creates a list of all buildings that are currently in the
+     * Creates a list of all schedules that are currently in the
      * database.
-     * @return list of all buildings in the database
+     * @return list of all schedules in the database
      */
     @Override
-    public Iterable<BuildingDto> listAllBuilding() {
-        return buildingRepository.findAll();
+    public Iterable<ScheduleDto> listAllSchedule() {
+        return scheduleRepository.findAll();
     }
 
     /**
-     * Finds a building that resides in the database.
-     * @param id - id number for the building we are looking for.
-     * @return the building that we are looking for
+     * Finds a schedule that resides in the database.
+     * @param id - id number for the schedule we are looking for.
+     * @return the schedule that we are looking for
      */
     @Override
-    public BuildingDto getBuildingByName(final int id) {
-        return buildingRepository.findOne(id);
+    public ScheduleDto getScheduleByName(final int id) {
+        return scheduleRepository.findOne(id);
     }
 
     /**
-     * Adds a building to the database.
-     * @param building - to be added.
-     * @return the building that was added to the database.
+     * Adds a schedule to the database.
+     * @param schedule - to be added.
+     * @return the schedule that was added to the database.
      */
     @Override
-    public BuildingDto saveBuilding(final BuildingDto building) {
-        return buildingRepository.save(building);
+    public ScheduleDto saveSchedule(final ScheduleDto schedule) {
+        return scheduleRepository.save(schedule);
     }
 
     /**
-     * Delete a building that is in the database.
+     * Delete a schedule that is in the database.
      * @param id - buildings id to be removed
      */
     @Override
-    public void deleteBuildingByName(final int id) {
-        buildingRepository.delete(id);
+    public void deleteScheduleByName(final int id) {
+        scheduleRepository.delete(id);
     }
 }

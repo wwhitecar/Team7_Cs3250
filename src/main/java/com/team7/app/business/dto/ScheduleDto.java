@@ -24,7 +24,7 @@ public class ScheduleDto {
      * The course number to identify a course by more then
      * just the name.
      */
-    private String buildingName;
+    private String scheduleName;
 //
 //    @OneToMany
 //    private Set<RoomDto> Rooms = new HashSet<RoomDto>(0);
@@ -52,31 +52,31 @@ public class ScheduleDto {
 
     /**
      * Param constructer.
-     * @param nameOfBuilding - building name
+     * @param nameOfSchedule - building name
      */
-    public ScheduleDto(final String nameOfBuilding) {
-        this.buildingName = nameOfBuilding;
+    public ScheduleDto(final String nameOfSchedule) {
+        this.scheduleName = nameOfSchedule;
     }
 
     /**
-     * Getter for buildingName.
-     * @return name of the building.
+     * Getter for ScheduleName.
+     * @return name of the Schedule.
      */
-    public String getBuildingByName() {
-        return buildingName;
+    public String getScheduleByName() {
+        return scheduleName;
     }
 
     /**
      * Setter for buildingName.
-     * @param buildName - the new building name
+     * @param scheduleName - the new schedule name
      */
-    public void setBuildingName(final String buildName) {
-        this.buildingName = buildName;
+    public void setScheduleName(final String scheduleName) {
+        this.scheduleName = scheduleName;
     }
 
     /**
      * Getter for dBKey.
-     * @return id of the building
+     * @return id of the schedule
      */
     public int getDbKey() {
         return dbKey;

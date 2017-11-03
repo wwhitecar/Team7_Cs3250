@@ -2,6 +2,7 @@ package com.team7.app.controller;
 
 import com.team7.app.business.dto.BuildingDto;
 import com.team7.app.services.BuildingServices;
+import com.team7.app.services.ScheduleServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * and html pages.
  */
 @RestController
-@RequestMapping(value = "/building")
+@RequestMapping(value = "/schedule")
 public class ScheduleController {
 
     /**
@@ -21,24 +22,24 @@ public class ScheduleController {
      * information to the database.
      */
     @Autowired
-    private BuildingServices buildingService;
+    private ScheduleServices scheduleService;
 
     /**
-     * Setter for buildingServices mapping purposes.
+     * Setter for scheduleServices mapping purposes.
      * @param service - service to be used for building services
      */
-    public void setBuildingServices(final BuildingServices service) {
-        this.buildingService = service;
+    public void setScheduleServices(final ScheduleServices service) {
+        this.scheduleService = service;
     }
 
     /**
      * Will pull information from the webpages to create a
      * new class to be store into the database.
-     * @param buildingName - professor teaching the building
+     * @param scheduleName - professor teaching the building
      * @return state of the create request
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String createBuilding(
+    public String createSchedule(
             final @RequestParam ("building_name") String buildingName) {
         BuildingDto building = new BuildingDto(buildingName);
         building = buildingService.saveBuilding(building);
@@ -60,7 +61,7 @@ public class ScheduleController {
      * @return state of the create request
      */
     @RequestMapping(value = "/updatebuilding", method = RequestMethod.POST)
-    public String updateBuilding(
+    public String updateSchedule(
             final @RequestParam ("building_name") String buildingName,
             final @RequestParam ("new_building_name") String changedName) {
 
@@ -84,7 +85,7 @@ public class ScheduleController {
      * @return the information for the provided course
      */
     @RequestMapping(value = "/readbuilding", method = RequestMethod.POST)
-    public String readBuildingByName(
+    public String readScheduleByName(
             final @RequestParam("building_name") String buildingName) {
         int id = 0;
         for (BuildingDto building : buildingService.listAllBuilding()) {
@@ -102,7 +103,7 @@ public class ScheduleController {
      * @return String to be displayed to user after deleting them
      */
     @RequestMapping(value = "/deletebuilding/", method = RequestMethod.GET)
-    public String deleteBuildingByName(
+    public String deleteScheduleByName(
             final @RequestParam("building_name") String buildingName) {
         int id = 0;
         for (BuildingDto building : buildingService.listAllBuilding()) {
