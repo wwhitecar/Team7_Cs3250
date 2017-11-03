@@ -1,8 +1,5 @@
 package com.team7.app.business.dto;
 
-import com.team7.app.business.dto.CourseDto;
-import com.team7.app.business.dto.ProfessorDto;
-import com.team7.app.business.dto.SectionDto;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,14 +12,16 @@ public class SectionDtoTest {
     SectionDto sectionTwo;
     CourseDto course;
     ProfessorDto professor;
+    RoomDto room;
 
     @Before
     public void before(){
         course = new CourseDto("Computer Science", 3210, 4,
                 "Learn stuffs", "Be better at computer", 0000, 0000);
         professor = new ProfessorDto("Donald", "Trump", 123);
+        room = new RoomDto(250, 35, "Science Building");
         sectionOne = new SectionDto();
-        sectionTwo = new SectionDto(123, course, professor);
+        sectionTwo = new SectionDto(123, course, professor, room);
     }
 
     @Test

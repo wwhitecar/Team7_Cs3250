@@ -33,6 +33,12 @@ public class SectionDto {
     private ProfessorDto professor;
 
     /**
+     * The room that is associated with this section.
+     */
+    @ManyToOne
+    private RoomDto room;
+
+    /**
      * Empty Constructer.
      */
     public SectionDto() {
@@ -47,10 +53,12 @@ public class SectionDto {
      */
     public SectionDto(final int sNumber,
                        final CourseDto courseDto,
-                       final ProfessorDto professorDto) {
+                       final ProfessorDto professorDto,
+                       final RoomDto roomDto) {
         this.sectionNumber = sNumber;
         this.course = courseDto;
         this.professor = professorDto;
+        this.room = roomDto;
     }
 
     /**
@@ -86,5 +94,13 @@ public class SectionDto {
     public String toString() {
         return "Course: </br>" + course.toString()
                 + "</br>Professor: </br>" + professor.toString();
+    }
+
+    /**
+     * Getter for the room of this section.
+     * @return the room for this section.
+     */
+    public RoomDto getRoom() {
+        return room;
     }
 }

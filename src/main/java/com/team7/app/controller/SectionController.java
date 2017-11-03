@@ -2,9 +2,11 @@ package com.team7.app.controller;
 
 import com.team7.app.business.dto.CourseDto;
 import com.team7.app.business.dto.ProfessorDto;
+import com.team7.app.business.dto.RoomDto;
 import com.team7.app.business.dto.SectionDto;
 import com.team7.app.services.CourseServices;
 import com.team7.app.services.ProfessorServices;
+import com.team7.app.services.RoomServices;
 import com.team7.app.services.SectionServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +44,13 @@ public class SectionController {
     private ProfessorServices professorService;
 
     /**
+     * Services to be used by hibernate to correctly add/remove
+     * information to the database.
+     */
+    @Autowired
+    private RoomServices roomService;
+
+    /**
      * Setter for ProfessorService, for testing purposes only.
      * @param courseServ - service to be used
      */
@@ -55,6 +64,14 @@ public class SectionController {
      */
     public void setProfessorService(final ProfessorServices professorServ) {
         this.professorService = professorServ;
+    }
+
+    /**
+     * Setter for RoomService, for testing purposes only.
+     * @param roomServ - room to be used
+     */
+    public void setRoomService(final RoomServices roomServ) {
+        this.roomService = roomServ;
     }
 
     /**
@@ -77,11 +94,13 @@ public class SectionController {
     public String createSection(
             final @RequestParam ("section_number") int sectionNumber,
             final @RequestParam("course") int courseNumber,
-            final @RequestParam("professor") int professorId) {
+            final @RequestParam("professor") int professorId,
+            final @RequestParam ("room_number") int roomNumber) {
         CourseDto course = courseService.getCourseById(courseNumber);
         ProfessorDto professor =
                 professorService.getProfessorById(professorId);
-        SectionDto section = new SectionDto(sectionNumber, course, professor);
+        RoomDto room = roomService.getRoomByNumber(roomNumber);
+        SectionDto section = new SectionDto(sectionNumber, course, professor, room);
         section = sectionService.saveSection(section);
         if (section != null) {
             return (section.toString() + " Added Successfully <br/> <a href="
@@ -103,11 +122,13 @@ public class SectionController {
     public String updateSection(
             final @RequestParam ("section_number") int sectionNumber,
             final @RequestParam("course") int courseNumber,
-            final @RequestParam("professor") int professorId) {
+            final @RequestParam("professor") int professorId,
+            final @RequestParam ("room_number") int roomNumber) {
         CourseDto course = courseService.getCourseById(courseNumber);
         ProfessorDto professor
                 = professorService.getProfessorById(professorId);
-        SectionDto section = new SectionDto(sectionNumber, course, professor);
+        RoomDto room = roomService.getRoomByNumber(roomNumber);
+        SectionDto section = new SectionDto(sectionNumber, course, professor, room);
         section = sectionService.saveSection(section);
         if (section != null) {
             return (section.toString()

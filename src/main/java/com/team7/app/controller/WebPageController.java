@@ -249,6 +249,7 @@ public class WebPageController {
         model.put("title", title);
         model.put("courses", courseService.listAllCourse());
         model.put("professors", professorService.listAllProfessor());
+        model.put("rooms", roomService.listAllRoom());
         return "sectionCreate";
     }
 
@@ -262,6 +263,7 @@ public class WebPageController {
         model.put("title", title);
         model.put("courses", courseService.listAllCourse());
         model.put("professors", professorService.listAllProfessor());
+        model.put("rooms", roomService.listAllRoom());
         model.put("sections", sectionService.listAllSection());
         return "sectionUpdate";
     }
