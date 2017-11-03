@@ -70,27 +70,25 @@ public class SectionController {
      * new class to be store into the database.
      * @param sectionNumber - id for the section
      * @param courseNumber - course specific number
-     * @param professorName - professor teaching the section
+     * @param professorId - professor teaching the section
      * @return state of the create request
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String createSection(
             final @RequestParam ("section_number") int sectionNumber,
             final @RequestParam("course") int courseNumber,
-            final @RequestParam("professor") String professorName) {
-        ProfessorDto professor = null;
-        for(ProfessorDto prof : professorService.listAllProfessor()){
-            if((prof.getFirstName()+ " " + prof.getLastName()).equals(professorName)){
-                professor = professorService.getProfessorById(prof.getId());
-            }
-        }
+            final @RequestParam("professor") int professorId) {
         CourseDto course = courseService.getCourseById(courseNumber);
-        professor =
-                professorService.getProfessorById(professor.getId());
+        ProfessorDto professor =
+                professorService.getProfessorById(professorId);
         SectionDto section = new SectionDto(sectionNumber, course, professor);
         section = sectionService.saveSection(section);
-        return (section.toString() + " Added Successfully <br/> <a href="
-                + "/" + ">Go Back to main screen</a>");
+        if (section != null) {
+            return (section.toString() + " Added Successfully <br/> <a href="
+                    + "/" + ">Go Back to main screen</a>");
+        }
+        return ("Unable to find Section, plz try again </br> <a href="
+                + "/" + "> Back to Section menu </a>");
     }
 
     /**
