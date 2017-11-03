@@ -3,11 +3,10 @@ package com.team7.app.controller;
 import com.team7.app.business.dto.BuildingDto;
 import com.team7.app.business.dto.CourseDto;
 import com.team7.app.business.dto.ProfessorDto;
+import com.team7.app.business.dto.RoomDto;
 import com.team7.app.repositories.ProfessorRepository;
-import com.team7.app.services.BuildingServices;
-import com.team7.app.services.CourseServicesImpl;
-import com.team7.app.services.ProfessorServicesImpl;
-import com.team7.app.services.SectionServices;
+import com.team7.app.repositories.RoomRepository;
+import com.team7.app.services.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,6 +40,9 @@ public class WebPageControllerTest {
     @Mock
     BuildingServices buildingMock;
 
+    @Mock
+    RoomServices roomMock;
+
     WebPageController wPC;
     Map<String, Object> model;
 
@@ -52,6 +54,7 @@ public class WebPageControllerTest {
         wPC.setProfessorService(profMock);
         wPC.setSectionService(sectMock);
         wPC.setBuildingService(buildingMock);
+        wPC.setRoomService(roomMock);
     }
 
     @Test
@@ -124,9 +127,11 @@ public class WebPageControllerTest {
         List<CourseDto> listCourse = new ArrayList();
         listCourse.add(new CourseDto());
         List<ProfessorDto> listProf = new ArrayList<>();
+        List<RoomDto> listRoom = new ArrayList<>();
         when(profMock.listAllProfessor()).thenReturn(listProf);
         when(courseMock.listAllCourse()).thenReturn(listCourse);
         when(profRepo.findAll()).thenReturn(listProf);
+        when(roomMock.listAllRoom()).thenReturn(listRoom);
         assertTrue(wPC.sectionUpdate(model).equals("sectionUpdate"));
     }
 
@@ -135,9 +140,11 @@ public class WebPageControllerTest {
         List<CourseDto> listCourse = new ArrayList();
         listCourse.add(new CourseDto());
         List<ProfessorDto> listProf = new ArrayList<>();
+        List<RoomDto> listRoom = new ArrayList<>();
         when(profMock.listAllProfessor()).thenReturn(listProf);
         when(courseMock.listAllCourse()).thenReturn(listCourse);
         when(profRepo.findAll()).thenReturn(listProf);
+        when(roomMock.listAllRoom()).thenReturn(listRoom);
         assertTrue(wPC.sectionCreate(model).equals("sectionCreate"));
     }
 
@@ -146,9 +153,11 @@ public class WebPageControllerTest {
         List<CourseDto> listCourse = new ArrayList();
         listCourse.add(new CourseDto());
         List<ProfessorDto> listProf = new ArrayList<>();
+        List<RoomDto> listRoom = new ArrayList<>();
         when(profMock.listAllProfessor()).thenReturn(listProf);
         when(courseMock.listAllCourse()).thenReturn(listCourse);
         when(profRepo.findAll()).thenReturn(listProf);
+        when(roomMock.listAllRoom()).thenReturn(listRoom);
         assertTrue(wPC.sectionRead(model).equals("sectionRead"));
     }
 
@@ -157,9 +166,11 @@ public class WebPageControllerTest {
         List<CourseDto> listCourse = new ArrayList();
         listCourse.add(new CourseDto());
         List<ProfessorDto> listProf = new ArrayList<>();
+        List<RoomDto> listRoom = new ArrayList<>();
         when(profMock.listAllProfessor()).thenReturn(listProf);
         when(courseMock.listAllCourse()).thenReturn(listCourse);
         when(profRepo.findAll()).thenReturn(listProf);
+        when(roomMock.listAllRoom()).thenReturn(listRoom);
         assertTrue(wPC.sectionDelete(model).equals("sectionDelete"));
     }
 

@@ -24,6 +24,15 @@
         <option name="professor">{{Id}} </option>
         {{/professors}}
     </select>
+
+    <br/>
+    <label>New Room:</label>
+    <select name="room_number" form="update" required>
+        {{#rooms}}
+        <option>{{roomNumber}}</option>
+        {{/rooms}}
+    </select>
+
 </form>
 </body>
 {{>layout/footer}}

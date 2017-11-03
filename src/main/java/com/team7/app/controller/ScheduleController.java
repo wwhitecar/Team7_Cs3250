@@ -1,6 +1,7 @@
 package com.team7.app.controller;
 
 import com.team7.app.business.dto.BuildingDto;
+import com.team7.app.business.dto.ScheduleDto;
 import com.team7.app.services.BuildingServices;
 import com.team7.app.services.ScheduleServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +41,10 @@ public class ScheduleController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String createSchedule(
-            final @RequestParam ("building_name") String buildingName) {
-        BuildingDto building = new BuildingDto(buildingName);
-        building = buildingService.saveBuilding(building);
-        if (building != null) {
+            final @RequestParam ("building_name") String scheduleName) {
+        ScheduleDto schedule = new ScheduleDto(scheduleName);
+        schedule = scheduleService.saveSchedule(schedule);
+        if (schedule != null) {
             return ("Successfully created Building"
                     + "<br/> <a href=" + "/"
                     + ">Go Back to main screen</a>");
@@ -65,15 +66,13 @@ public class ScheduleController {
             final @RequestParam ("building_name") String buildingName,
             final @RequestParam ("new_building_name") String changedName) {
 
-        BuildingDto building = null;
-        for (BuildingDto element : buildingService.listAllBuilding()) {
-            if (element.getBuildingByName().equals(buildingName)) {
-                building = element;
+        ScheduleDto schedule = null;
+        for (ScheduleDto element : scheduleService.listAllSchedule()) {
+            if (element.getScheduleByName().equals(buildingName)) {
+                schedule = element;
             }
         }
-        building.setBuildingName(changedName);
 
-        building = buildingService.saveBuilding(building);
         return ("Successfully Updated" + "<br/> <a href=" + "/"
                 + ">Go Back to main screen</a>");
     }
@@ -88,13 +87,7 @@ public class ScheduleController {
     public String readScheduleByName(
             final @RequestParam("building_name") String buildingName) {
         int id = 0;
-        for (BuildingDto building : buildingService.listAllBuilding()) {
-            if (building.getBuildingByName().equals(buildingName)) {
-                id = building.getDbKey();
-            }
-        }
-        BuildingDto building = buildingService.getBuildingByName((id));
-        return building.toString();
+        return "";
     }
 
     /**
@@ -106,13 +99,6 @@ public class ScheduleController {
     public String deleteScheduleByName(
             final @RequestParam("building_name") String buildingName) {
         int id = 0;
-        for (BuildingDto building : buildingService.listAllBuilding()) {
-            if (building.getBuildingByName().equals(buildingName)) {
-                id = building.getDbKey();
-            }
-        }
-
-        buildingService.deleteBuildingByName(id);
         return ("Removed Building"
                 + "<br/> <a href=" + "/"
                 + ">Go Back to main screen</a>");

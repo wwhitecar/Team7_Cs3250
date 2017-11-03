@@ -5,4 +5,7 @@ import javax.persistence.Id;
 
 @Entity
 public class WeekDto {
+
+    @Id
+    int weekNumber;
 }
