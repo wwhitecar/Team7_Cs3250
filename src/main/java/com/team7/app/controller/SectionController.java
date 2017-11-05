@@ -97,8 +97,7 @@ public class SectionController {
             final @RequestParam("professor") int professorId,
             final @RequestParam ("room_number") int roomNumber) {
         CourseDto course = courseService.getCourseById(courseNumber);
-        ProfessorDto professor =
-                professorService.getProfessorById(professorId);
+        ProfessorDto professor = professorService.getProfessorById(professorId);
         RoomDto room = roomService.getRoomByNumber(roomNumber);
         SectionDto section = new SectionDto(sectionNumber, course, professor, room);
         section = sectionService.saveSection(section);
