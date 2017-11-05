@@ -57,6 +57,13 @@ public class WebPageController {
     private RoomServices roomService;
 
     /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
+    @Autowired
+    private ScheduleServices scheduleService;
+
+    /**
      * Setter for ProfessorService, for testing purposes only.
      * @param courseServ - service to be used
      */
@@ -94,6 +101,14 @@ public class WebPageController {
      */
     public void setRoomService(final RoomServices roomServ) {
         this.roomService = roomServ;
+    }
+
+    /**
+     * Setter for ScheduleService, for testing purposes only.
+     * @param scheduleServ - serivce to be used
+     */
+    public void setScheduleService(final ScheduleServices scheduleServ) {
+        this.scheduleService = scheduleServ;
     }
 
     /**
@@ -381,5 +396,62 @@ public class WebPageController {
         model.put("title", title);
         return "roomRead";
     }
+
+
+
+
+
+
+
+
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/scheduleCreate")
+    public String createSchedule(final Map<String, Object> model) {
+        model.put("title", title);
+        return "scheduleCreate";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/scheduleRead")
+    public String readSchedule(final Map<String, Object> model) {
+        model.put("title", title);
+        return "buildingRead";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/scheduleUpdate")
+    public String updateSchedule(final Map<String, Object> model) {
+        model.put("title", title);
+        model.put("schedules", scheduleService.listAllSchedule());
+        return "scheduleUpdate";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/scheduleDelete")
+    public String deleteSchedule(final Map<String, Object> model) {
+        model.put("title", title);
+        model.put("schedule_name", scheduleService.listAllSchedule());
+        return "buildingDelete";
+    }
+
+
+
 
 }
