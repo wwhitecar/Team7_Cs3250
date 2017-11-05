@@ -24,7 +24,7 @@ public class ScheduleDto {
     private String scheduleName;
 
     @ManyToOne
-    private SectionDto section;
+    private SectionDto sectionDto;
 //
 //    @OneToMany
 //    private Set<RoomDto> Rooms = new HashSet<RoomDto>(0);
@@ -56,8 +56,9 @@ public class ScheduleDto {
      */
     public ScheduleDto(final String nameOfSchedule, final SectionDto sectionDto) {
         this.scheduleName = nameOfSchedule;
-        this.sectionDto = section;
+        this.sectionDto = sectionDto;
     }
+
 
     /**
      * Getter for ScheduleName.
@@ -68,7 +69,7 @@ public class ScheduleDto {
     }
 
     public SectionDto getSection() {
-        return section;
+        return sectionDto;
     }
 
     /**

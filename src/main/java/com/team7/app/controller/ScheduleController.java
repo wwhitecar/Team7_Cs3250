@@ -1,6 +1,7 @@
 package com.team7.app.controller;
 
 import com.team7.app.business.dto.ScheduleDto;
+import com.team7.app.business.dto.SectionDto;
 import com.team7.app.services.ScheduleServices;
 import com.team7.app.services.SectionServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +56,10 @@ public class ScheduleController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String createSchedule(
-            final @RequestParam ("schedule_name") String scheduleName) {
-        ScheduleDto schedule = new ScheduleDto(scheduleName);
+            final @RequestParam ("schedule_name") String scheduleName,
+            final @RequestParam ("section") int sectionId) {
+        SectionDto section = sectionService.getSectionById(sectionId);
+        ScheduleDto schedule = new ScheduleDto(scheduleName,section);
         schedule = scheduleService.saveSchedule(schedule);
         if (schedule != null) {
             return ("Successfully created Schedule"
@@ -72,12 +75,12 @@ public class ScheduleController {
      * Will pull information from the webpages to update a
      * Schedule to be store into the database.
      * @param scheduleName - old name to be changed
-     * @param changedName - new name we are chagning the building name too
+     * @param changedName - new name we are chagning the schedule name too
      * @return state of the create request
      */
     @RequestMapping(value = "/updateSchedule", method = RequestMethod.POST)
     public String updateSchedule(
-            final @RequestParam ("schedule_name") String buildingName,
+            final @RequestParam ("schedule_name") String scheduleName,
             final @RequestParam ("new_schedule_name") String changedName) {
 
         ScheduleDto schedule = null;
