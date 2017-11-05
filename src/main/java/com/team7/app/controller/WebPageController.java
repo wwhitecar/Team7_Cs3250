@@ -57,6 +57,13 @@ public class WebPageController {
     private RoomServices roomService;
 
     /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
+    @Autowired
+    private DayServices dayService;
+
+    /**
      * Setter for ProfessorService, for testing purposes only.
      * @param courseServ - service to be used
      */
@@ -94,6 +101,14 @@ public class WebPageController {
      */
     public void setRoomService(final RoomServices roomServ) {
         this.roomService = roomServ;
+    }
+
+    /**
+     * Setter for RoomService, for testing purposes only.
+     * @param dayServ - serivce to be used
+     */
+    public void setDayService(final DayServices dayServ) {
+        this.dayService = dayServ;
     }
 
     /**
@@ -379,5 +394,52 @@ public class WebPageController {
         model.put("title", title);
         return "roomRead";
     }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/dayCreate")
+    public String createDay(final Map<String, Object> model) {
+        model.put("title", title);
+        model.put("days", dayService.listAllDays());
+        return "dayCreate";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attribute to be injected to page.
+     * @return String of the page name
+     */
+    @RequestMapping("/dayRead")
+    public String readDay(final Map<String, Object> model) {
+        model.put("title", title);
+        return "dayRead";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attribute to be injected to page.
+     * @return String of the page name
+     */
+    @RequestMapping("/dayUpdate")
+    public String updateDay(final Map<String, Object> model) {
+        model.put("title", title);
+        model.put("days", dayService.listAllDays());
+        return "roomUpdate";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attribute to be injected to page.
+     * @return String of the page name
+     */
+    @RequestMapping("/dayDelete")
+    public String deleteDay(final Map<String, Object> model) {
+        model.put("title", title);
+        return "dayDelete";
+    }
+
 
 }

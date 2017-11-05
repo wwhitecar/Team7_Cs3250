@@ -1,9 +1,6 @@
 package com.team7.app.business.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Map;
 
 import static javax.swing.UIManager.put;
@@ -13,7 +10,7 @@ import static javax.swing.UIManager.put;
  * database.
  */
 @Entity
-public class DaysDto {
+public class DayDto {
 
     /**
      * Id for the database that is auto generated
@@ -21,7 +18,7 @@ public class DaysDto {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int DaysDbKey;
+    private int DayDbKey;
 
     /**
      * The course number to identify a course by more then
@@ -33,12 +30,30 @@ public class DaysDto {
      * Map to hold hours and boolean availability
      * just the name.
      */
-    private Map<Integer, Boolean> daysMap;
+    @ElementCollection //from the persistence class
+    private Map<Integer, Boolean> dayMap;
+
+    /**
+     * Week number that the day is in
+     */
+    private int week;
+
+    /**
+     *  A day has many weeks
+     *  @return week the day is in
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "week_number", nullable = false)
+    public int getWeekByNumber() {
+        return week;
+    }
+
 
     /**
      * Empty Constructer.
      */
-    public DaysDto() { }
+    public DayDto() { }
+
 
     /**
      * Setting the initial map with hours in
@@ -66,7 +81,7 @@ public class DaysDto {
      * Param constructer.
      * @param dayOfTheWeek - building name
      */
-    public DaysDto(final String dayOfTheWeek) {
+    public DayDto(final String dayOfTheWeek) {
         this.dayName = dayOfTheWeek;
     }
 
@@ -82,7 +97,7 @@ public class DaysDto {
      * Setter for buildingName.
      * @param dayOfTheWeek - the new building name
      */
-    public void setDayByName(final String dayOfTheWeek) {
+    public void setDayName(final String dayOfTheWeek) {
         this.dayName = dayOfTheWeek;
     }
 
@@ -91,14 +106,16 @@ public class DaysDto {
      * @return id of the building
      */
     public int getDayDbKey() {
-        return DaysDbKey;
+        return DayDbKey;
     }
 
     /**
      * Getter for dBKey.
      * @return id of the building
      */
-    public Map getDaysMap() {return daysMap; }
+    public Map getDayMap() {return dayMap; }
+
+
 }
 
 
