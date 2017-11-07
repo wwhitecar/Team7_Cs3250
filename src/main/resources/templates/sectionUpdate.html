@@ -6,9 +6,9 @@
 <form id="update" action="/section/updatesection" method="POST">
     <label>Can't change Section id.
         <br/>Section Id <select name="section_number"/></label>
-        {{#sections}}
-            <option>{{sectionNumber}}</option>
-        {{/sections}}
+    {{#sections}}
+    <option>{{sectionNumber}}</option>
+    {{/sections}}
     <input type="submit" name="doit" value="Update Section" />
     <br/>
     <label>New Course:</label>
@@ -22,6 +22,7 @@
     <select name="professor" form="update" required>
         {{#professors}}
         <option name="professor">{{firstName}} {{lastName}}</option>
+
         {{/professors}}
     </select>
 

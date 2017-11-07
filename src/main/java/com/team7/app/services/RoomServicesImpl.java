@@ -16,7 +16,7 @@ public class RoomServicesImpl implements RoomServices {
      * Room Repo to allow communcation to the database.
      */
     @Autowired
-    public RoomRepository roomRepository;
+    private RoomRepository roomRepository;
 
     /**
      * Setter for room Repository for testint purposes.

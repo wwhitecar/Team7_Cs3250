@@ -1,0 +1,13 @@
+{{>layout/header}}
+<body>
+<form action="/day/deleteday/" method="GET">
+    <select name = "day_name" required>
+        {{#day_name}}
+        <option>{{dayName}}</option>
+        {{/day_name}}
+    </select>
+    <br/>
+    <input type="submit" name="doit" value="Delete Day" />
+</form>
+</body>
+{{>layout/footer}}

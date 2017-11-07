@@ -45,11 +45,8 @@ public class ProfessorController {
                          final @RequestParam("Last Name")String lastName) {
         ProfessorDto professor = new ProfessorDto(firstName, lastName, id);
         professorService.saveProfessor(professor);
-        if (!readProfessorById(id).equals("Unable to find Student")) {
-            return (professor.toString()  + " Added Successfully <br/> <a href="
-                    + "/" + ">Go Back to main screen</a>");
-        }
-        return ("Error adding Professor for some reason");
+        return (professor.toString()  + " Added Successfully <br/> <a href="
+                + "/" + ">Go Back to main screen</a>");
     }
 
     /**
@@ -92,11 +89,9 @@ public class ProfessorController {
     @RequestMapping(value = "/id/", method = RequestMethod.GET)
     public String deleteProfessorById(final @RequestParam("Id") Integer id) {
         professorService.deleteProfessor(id);
-        if (readProfessorById(id).equals("Unable to find Professor")) {
-            return ("Removed Professor"
-                    + "<br/> <a href=" + "/"
+        return ("Removed Professor"
+                  + "<br/> <a href=" + "/"
                     + ">Go Back to main screen</a>");
-        }
-        return "Unable to find student, plz try again";
+
     }
 }

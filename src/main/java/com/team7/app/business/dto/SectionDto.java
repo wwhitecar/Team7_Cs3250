@@ -53,9 +53,9 @@ public class SectionDto {
      * @param roomDto - room associated with this section.
      */
     public SectionDto(final int sNumber,
-                       final CourseDto courseDto,
-                       final ProfessorDto professorDto,
-                       final RoomDto roomDto) {
+        final CourseDto courseDto,
+        final ProfessorDto professorDto,
+        final RoomDto roomDto) {
         this.sectionNumber = sNumber;
         this.course = courseDto;
         this.professor = professorDto;
@@ -105,3 +105,4 @@ public class SectionDto {
         return room;
     }
 }
+

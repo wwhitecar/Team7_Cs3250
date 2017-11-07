@@ -68,7 +68,6 @@ public class SectionControllerTest {
         when(courseMock.getCourseById(anyInt())).thenReturn(course);
         when(sectMock.saveSection(anyObject())).thenReturn(section);
         when(roomMock.getRoomByNumber(anyInt())).thenReturn(room);
-
         assertEquals(sectionController.createSection(1234, 789, "Harry Hook", 250), section.toString() + " Added Successfully <br/> <a href="
                 + "/" + ">Go Back to main screen</a>");
     }
@@ -91,11 +90,13 @@ public class SectionControllerTest {
         when(courseMock.getCourseById(anyInt())).thenReturn(course);
         when(roomMock.getRoomByNumber(anyInt())).thenReturn(room);
         when(sectMock.saveSection(anyObject())).thenReturn(section);
-
+        List<ProfessorDto> listy = new ArrayList<>();
+        listy.add(professor);
+        when(profMock.listAllProfessor()).thenReturn(listy);
         assertEquals(sectionController.updateSection(1234, 456, "Harry Hook", 250),
                 section.toString()
-                + " Updated Section Successfully <br/> <a href="
-                + "/" + ">Go Back to main screen</a>");
+                        + " Updated Section Successfully <br/> <a href="
+                        + "/" + ">Go Back to main screen</a>");
 
     }
 
