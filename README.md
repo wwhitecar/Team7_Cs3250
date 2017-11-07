@@ -35,6 +35,8 @@ STEPS TO GET DATABASE UP AND RUNNING:
 12. Verify you can see data within the database by clicking the lightning icon on the top bar to run the query
 13. Profit
 
+14. Testing
+
 
 
 
