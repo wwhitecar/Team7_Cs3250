@@ -42,7 +42,6 @@ public class WebPageControllerTest {
 
     @Mock
     SemesterServices semesterMock;
-
     WebPageController wPC;
     Map<String, Object> model;
 
@@ -223,4 +222,26 @@ public class WebPageControllerTest {
         assertEquals(wPC.deleteSemester(model), "semesterDelete");
     }
 
+    public void createRoomTest(){
+        List<BuildingDto> buildingList = new ArrayList<>();
+        when(buildingMock.listAllBuilding()).thenReturn(buildingList);
+        assertEquals(wPC.createRoom(model), "roomCreate");
+    }
+
+    @Test
+    public void deleteRoomTest(){
+        assertEquals(wPC.deleteRoom(model), "roomDelete");
+    }
+
+    @Test
+    public void updateRoomTest(){
+        List<BuildingDto> buildingList = new ArrayList<>();
+        when(buildingMock.listAllBuilding()).thenReturn(buildingList);
+        assertEquals(wPC.updateRoom(model), "roomUpdate");
+    }
+
+    @Test
+    public void readRoomTest(){
+        assertEquals(wPC.readRoom(model), "roomRead");
+    }
 }

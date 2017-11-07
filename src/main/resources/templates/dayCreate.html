@@ -1,0 +1,17 @@
+{{>layout/header}}
+<body>
+<h1>Team 7</h1>
+<h2>Create Day Page</h2>
+<br/>
+<form action="/day/" method="POST">
+    <div>
+        <label>
+            <br/>Day Name: <br/> <input type="text" name="day_name" required size="30" /></label>
+        <br/>
+        <input type="submit" name="doit" value="Create Day" />
+    </div>
+</form>
+
+<a href="/">Return to home Screen</a>
+</body>
+{{>layout/footer}}

@@ -95,6 +95,7 @@ public class SectionController {
     public String createSection(
             final @RequestParam ("section_number") int sectionNumber,
             final @RequestParam("course") int courseNumber,
+
             final @RequestParam("professor") String professorName,
             final @RequestParam ("room_number") int roomNumber) {
         CourseDto course = courseService.getCourseById(courseNumber);
@@ -170,9 +171,9 @@ public class SectionController {
     public String deleteCourseByNumber(
             final @RequestParam("section_number") int sectionNumber) {
         sectionService.deleteSection(sectionNumber);
-            return ("Removed Section"
-                    + "<br/> <a href=" + "/"
-                    + ">Go Back to main screen</a>");
+        return ("Removed Section"
+                + "<br/> <a href=" + "/"
+                + ">Go Back to main screen</a>");
 
     }
 }

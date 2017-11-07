@@ -69,6 +69,9 @@ public class WebPageController {
      */
     @Autowired
     private ScheduleServices scheduleService;
+  
+    @Autowired
+    private DayServices dayService;
 
     /**
      * Setter for ProfessorService, for testing purposes only.
@@ -124,6 +127,13 @@ public class WebPageController {
      */
     public void setScheduleService(final ScheduleServices scheduleServ) {
         this.scheduleService = scheduleServ;
+    }
+     /**
+     * Setter for RoomService, for testing purposes only.
+     * @param dayServ - serivce to be used
+     */
+    public void setDayService(final DayServices dayServ) {
+        this.dayService = dayServ;
     }
 
     /**
@@ -411,15 +421,7 @@ public class WebPageController {
         model.put("title", title);
         return "roomRead";
     }
-
-
-
-
-
-
-
-
-
+      
     /**
      * Mapping for a web page.
      * @param model - attributes to be injected to page.
@@ -441,17 +443,24 @@ public class WebPageController {
         model.put("title", title);
         return "buildingRead";
     }
-
+      
     /**
      * Mapping for a web page.
      * @param model - attributes to be injected to page.
      * @return String of the page name.
      */
+
     @RequestMapping("/scheduleUpdate")
     public String updateSchedule(final Map<String, Object> model) {
         model.put("title", title);
         model.put("schedules", scheduleService.listAllSchedule());
         return "scheduleUpdate";
+    }
+    @RequestMapping("/dayCreate")
+    public String createDay(final Map<String, Object> model) {
+        model.put("title", title);
+        model.put("days", dayService.listAllDays());
+        return "dayCreate";
     }
 
     /**
@@ -464,9 +473,15 @@ public class WebPageController {
         model.put("title", title);
         model.put("schedule_name", scheduleService.listAllSchedule());
         return "buildingDelete";
+    }/**
+     * @param model - attribute to be injected to page.
+     * @return String of the page name
+     */
+    @RequestMapping("/dayRead")
+    public String readDay(final Map<String, Object> model) {
+        model.put("title", title);
+        return "dayRead";
     }
-
-
 
     /**
      * Mapping for a web page.
@@ -477,6 +492,13 @@ public class WebPageController {
     public String readSemester(final Map<String, Object> model) {
         model.put("title", title);
         return "semesterRead";
+     }
+      
+    @RequestMapping("/dayUpdate")
+    public String updateDay(final Map<String, Object> model) {
+        model.put("title", title);
+        model.put("days", dayService.listAllDays());
+        return "roomUpdate";
     }
 
     /**
@@ -513,4 +535,14 @@ public class WebPageController {
         model.put("semesters", semesterService.listAllSemesters());
         return "semesterUpdate";
     }
+    /**
+     * @param model - attribute to be injected to page.
+     * @return String of the page name
+     */
+    @RequestMapping("/dayDelete")
+    public String deleteDay(final Map<String, Object> model) {
+        model.put("title", title);
+        return "dayDelete";
+    }
+
 }

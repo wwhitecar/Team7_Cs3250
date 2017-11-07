@@ -4,7 +4,7 @@ spring:
 
 schedule:
   database:
-    url: jdbc:mysql://localhost:3306/schedule?autoReconnect=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/schedule
     username: root
     password: otis.missouri
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -17,9 +17,10 @@ spring:
 
 schedule:
   database:
-    url: jdbc:mysql://localhost:3306/schedule?autoReconnect=true&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/schedule?
     username: root
-    password: otis.missouri
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     test-on-borrow: true
-    validation-query: SELECT 1
+validation-query: SELECT 1
+
