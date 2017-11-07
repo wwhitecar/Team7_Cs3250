@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class SectionDtoTest {
@@ -46,6 +47,11 @@ public class SectionDtoTest {
     public void toStringTest() throws Exception {
         String answer = sectionTwo.toString();
         assertTrue(answer != "");
+    }
+
+    @Test
+    public void getRoomTest() {
+        assertNotNull(sectionTwo.getRoom());
     }
 
 }

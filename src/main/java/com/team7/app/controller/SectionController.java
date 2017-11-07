@@ -87,26 +87,30 @@ public class SectionController {
      * new class to be store into the database.
      * @param sectionNumber - id for the section
      * @param courseNumber - course specific number
-     * @param professorId - professor teaching the section
+     * @param professorName - professor teaching the section
+     * @param roomNumber - room course will be taught in
      * @return state of the create request
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String createSection(
             final @RequestParam ("section_number") int sectionNumber,
             final @RequestParam("course") int courseNumber,
-            final @RequestParam("professor") int professorId,
+            final @RequestParam("professor") String professorName,
             final @RequestParam ("room_number") int roomNumber) {
         CourseDto course = courseService.getCourseById(courseNumber);
-        ProfessorDto professor = professorService.getProfessorById(professorId);
+        ProfessorDto professor = null;
+        for (ProfessorDto prof: professorService.listAllProfessor()) {
+            if (professorName.equals(prof.getFirstName()
+                    + " " + prof.getLastName())) {
+                professor = professorService.getProfessorById(prof.getId());
+            }
+        }
         RoomDto room = roomService.getRoomByNumber(roomNumber);
-        SectionDto section = new SectionDto(sectionNumber, course, professor, room);
+        SectionDto section = new SectionDto(sectionNumber,
+                course, professor, room);
         section = sectionService.saveSection(section);
-        if (section != null) {
             return (section.toString() + " Added Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
-        }
-        return ("Unable to find Section, plz try again </br> <a href="
-                + "/" + "> Back to Section menu </a>");
     }
 
     /**
@@ -114,28 +118,31 @@ public class SectionController {
      * section to be store into the database.
      * @param sectionNumber - the number for the course
      * @param courseNumber - course specific number
-     * @param professorId - professor teaching the section
+     * @param professorName - professor teaching the section
+     * @param roomNumber - room course will be taught in
      * @return state of the create request
      */
     @RequestMapping(value = "/updatesection", method = RequestMethod.POST)
     public String updateSection(
             final @RequestParam ("section_number") int sectionNumber,
             final @RequestParam("course") int courseNumber,
-            final @RequestParam("professor") int professorId,
+            final @RequestParam("professor") String professorName,
             final @RequestParam ("room_number") int roomNumber) {
         CourseDto course = courseService.getCourseById(courseNumber);
-        ProfessorDto professor
-                = professorService.getProfessorById(professorId);
-        RoomDto room = roomService.getRoomByNumber(roomNumber);
-        SectionDto section = new SectionDto(sectionNumber, course, professor, room);
-        section = sectionService.saveSection(section);
-        if (section != null) {
-            return (section.toString()
-                    + " Updated Section Successfully <br/> <a href="
-                    + "/" + ">Go Back to main screen</a>");
+        ProfessorDto professor = null;
+        for (ProfessorDto prof: professorService.listAllProfessor()) {
+            if (professorName.equals(prof.getLastName()
+                    + " " + prof.getLastName())) {
+                professor = professorService.getProfessorById(prof.getId());
+            }
         }
-        return ("Failed to update <br/> <a href="
-                + "/" + ">Go Back to main screen</a>");
+        RoomDto room = roomService.getRoomByNumber(roomNumber);
+        SectionDto section
+                = new SectionDto(sectionNumber, course, professor, room);
+        section = sectionService.saveSection(section);
+        return (section.toString()
+               + " Updated Section Successfully <br/> <a href="
+               + "/" + ">Go Back to main screen</a>");
     }
 
 
@@ -149,10 +156,6 @@ public class SectionController {
     public String readSectionByNumber(
             final @RequestParam("section_number") int sectionNumber) {
         SectionDto  section = sectionService.getSectionById(sectionNumber);
-        if (section == null) {
-            return "Unable to find Section" + "<br/> <a href="
-                    + "/" + ">Go Back to main screen</a>";
-        }
         return (section.toString() + "<br/> <a href="
                 + "/" + ">Go Back to main screen</a>");
     }

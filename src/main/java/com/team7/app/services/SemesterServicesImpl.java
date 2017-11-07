@@ -3,11 +3,13 @@ package com.team7.app.services;
 import com.team7.app.business.dto.SemesterDto;
 import com.team7.app.repositories.SemesterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Interface that will communicate with the database.
  * Basically our old JDBC templates.
  */
+@Service
 public class SemesterServicesImpl implements SemesterServices {
 
     /**

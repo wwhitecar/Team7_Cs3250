@@ -1,9 +1,6 @@
 package com.team7.app.controller;
 
-import com.team7.app.business.dto.BuildingDto;
-import com.team7.app.business.dto.CourseDto;
-import com.team7.app.business.dto.ProfessorDto;
-import com.team7.app.business.dto.RoomDto;
+import com.team7.app.business.dto.*;
 import com.team7.app.repositories.ProfessorRepository;
 import com.team7.app.repositories.RoomRepository;
 import com.team7.app.services.*;
@@ -43,6 +40,9 @@ public class WebPageControllerTest {
     @Mock
     RoomServices roomMock;
 
+    @Mock
+    SemesterServices semesterMock;
+
     WebPageController wPC;
     Map<String, Object> model;
 
@@ -55,6 +55,7 @@ public class WebPageControllerTest {
         wPC.setSectionService(sectMock);
         wPC.setBuildingService(buildingMock);
         wPC.setRoomService(roomMock);
+        wPC.setSemesterService(semesterMock);
     }
 
     @Test
@@ -196,6 +197,30 @@ public class WebPageControllerTest {
         List<BuildingDto> buildingList = new ArrayList<>();
         when(buildingMock.listAllBuilding()).thenReturn(buildingList);
         assertEquals(wPC.deleteBuilding(model), "buildingDelete");
+    }
+
+    @Test
+    public void createSemesterTest(){
+        assertEquals(wPC.createSemester(model), "semesterCreate");
+    }
+
+    @Test
+    public void readSemesterTest(){
+        assertEquals(wPC.readSemester(model), "semesterRead");
+    }
+
+    @Test
+    public void updateSemesterTest(){
+        List<SemesterDto> semesterList = new ArrayList<>();
+        when(semesterMock.listAllSemesters()).thenReturn(semesterList);
+        assertEquals(wPC.updateSemester(model), "semesterUpdate");
+    }
+
+    @Test
+    public void deleteSemesterTest() {
+        List<SemesterDto> semesterList = new ArrayList<>();
+        when(semesterMock.listAllSemesters()).thenReturn(semesterList);
+        assertEquals(wPC.deleteSemester(model), "semesterDelete");
     }
 
 }

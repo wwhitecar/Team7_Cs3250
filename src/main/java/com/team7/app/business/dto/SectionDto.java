@@ -1,6 +1,6 @@
 package com.team7.app.business.dto;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -23,19 +23,19 @@ public class SectionDto {
      * The course number to identify a course by more then
      * just the name.
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private CourseDto course;
 
     /**
      * The professor?
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private ProfessorDto professor;
 
     /**
      * The room that is associated with this section.
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private RoomDto room;
 
     /**
@@ -50,6 +50,7 @@ public class SectionDto {
      * @param sNumber - identification for this section
      * @param courseDto - course to be tied to this section
      * @param professorDto - professor of the class/section
+     * @param roomDto - room associated with this section.
      */
     public SectionDto(final int sNumber,
                        final CourseDto courseDto,

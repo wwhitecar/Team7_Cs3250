@@ -1,0 +1,18 @@
+{{>layout/header}}
+<body>
+<h1>Update Semester Name</h1>
+<h2>Please enter a Course Id</h2>
+<form action="/semester/updateSemester" method="POST">
+    <label>Name of Semster to change:</label>
+    <select name = "currentName" required>
+        {{#semesters}}
+        <option>{{semesterName}}</option>
+        {{/semesters}}
+    </select>
+    <label>New Semester Information:</label><br/>
+    <label>
+        Semester Name: <br/> <input type="text" name="newName" required size="30" /></label>
+    <br/>
+    <input type="submit" name="doit" value="Update Semester" />
+</form>
+{{>layout/footer}}

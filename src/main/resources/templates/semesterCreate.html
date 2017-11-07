@@ -1,0 +1,17 @@
+{{>layout/header}}
+<body>
+<h1>Team 7</h1>
+<h2>Create Semester Page</h2>
+<br/>
+<form action="/semester/" method="POST">
+    <div>
+        <label>
+            <br/>Semester Name: <br/> <input type="text" name="semesterName" required size="30" /></label>
+        <br/>
+        <input type="submit" name="doit" value="Create Semester" />
+    </div>
+</form>
+
+<a href="/">Return to home Screen</a>
+</body>
+{{>layout/footer}}

@@ -33,6 +33,13 @@ public class WebPageController {
      * information to the database.
      */
     @Autowired
+    private SemesterServices semesterService;
+
+    /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
+    @Autowired
     private ProfessorServices professorService;
 
     /**
@@ -69,6 +76,14 @@ public class WebPageController {
      */
     public void setCourseService(final CourseServices courseServ) {
         this.courseService = courseServ;
+    }
+
+    /**
+     * Setter for SemesterService, for testing purposes only.
+     * @param semServ - service to be used
+     */
+    public void setSemesterService(final SemesterServices semServ) {
+        this.semesterService = semServ;
     }
 
     /**
@@ -453,5 +468,49 @@ public class WebPageController {
 
 
 
+    /**
+     * Mapping for a web page.
+     * @param model - attribute to be injected to page.
+     * @return String of the page name
+     */
+    @RequestMapping("/semesterRead")
+    public String readSemester(final Map<String, Object> model) {
+        model.put("title", title);
+        return "semesterRead";
+    }
 
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/semesterDelete")
+    public String deleteSemester(final Map<String, Object> model) {
+        model.put("title", title);
+        model.put("semesters", semesterService.listAllSemesters());
+        return "semesterDelete";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/semesterCreate")
+    public String createSemester(final Map<String, Object> model) {
+        model.put("title", title);
+        return "semesterCreate";
+    }
+
+    /**
+     * Mapping for a web page.
+     * @param model - attributes to be injected to page.
+     * @return String of the page name.
+     */
+    @RequestMapping("/semesterUpdate")
+    public String updateSemester(final Map<String, Object> model) {
+        model.put("title", title);
+        model.put("semesters", semesterService.listAllSemesters());
+        return "semesterUpdate";
+    }
 }

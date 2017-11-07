@@ -14,6 +14,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
@@ -58,24 +61,20 @@ public class SectionControllerTest {
 
     @Test
     public void createSectionTest() throws Exception {
-        assertEquals(sectionController.createSection(1234, 789, 456, 250),
-                "Unable to find Section, plz try again </br> <a href="
-                + "/" + "> Back to Section menu </a>");
-
+        List<ProfessorDto> listy = new ArrayList<>();
+        listy.add(professor);
+        when(profMock.listAllProfessor()).thenReturn(listy);
         when(profMock.getProfessorById(anyInt())).thenReturn(professor);
         when(courseMock.getCourseById(anyInt())).thenReturn(course);
         when(sectMock.saveSection(anyObject())).thenReturn(section);
         when(roomMock.getRoomByNumber(anyInt())).thenReturn(room);
 
-        assertEquals(sectionController.createSection(1234, 789, 456, 250), section.toString() + " Added Successfully <br/> <a href="
+        assertEquals(sectionController.createSection(1234, 789, "Harry Hook", 250), section.toString() + " Added Successfully <br/> <a href="
                 + "/" + ">Go Back to main screen</a>");
     }
 
     @Test
     public void readSectionByIdTest() throws Exception {
-        assertEquals(sectionController.readSectionByNumber(1234), "Unable to find Section" + "<br/> <a href="
-                + "/" + ">Go Back to main screen</a>");
-
         when(sectMock.getSectionById(anyInt())).thenReturn(section);
 
         assertEquals(sectionController.readSectionByNumber(1234), section.toString() + "<br/> <a href="
@@ -85,16 +84,15 @@ public class SectionControllerTest {
 
     @Test
     public void updateSectionByIdTest() throws Exception {
-        assertEquals(sectionController.updateSection(1234, 789, 456, 250),
-                "Failed to update <br/> <a href=" +
-                "/" + ">Go Back to main screen</a>");
-
+        List<ProfessorDto> listy = new ArrayList<>();
+        listy.add(professor);
+        when(profMock.listAllProfessor()).thenReturn(listy);
         when(profMock.getProfessorById(anyInt())).thenReturn(professor);
         when(courseMock.getCourseById(anyInt())).thenReturn(course);
         when(roomMock.getRoomByNumber(anyInt())).thenReturn(room);
         when(sectMock.saveSection(anyObject())).thenReturn(section);
 
-        assertEquals(sectionController.updateSection(1234, 456, 789, 250),
+        assertEquals(sectionController.updateSection(1234, 456, "Harry Hook", 250),
                 section.toString()
                 + " Updated Section Successfully <br/> <a href="
                 + "/" + ">Go Back to main screen</a>");

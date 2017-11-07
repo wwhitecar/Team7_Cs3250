@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class SemesterTest {
@@ -15,8 +16,8 @@ public class SemesterTest {
     @Before
     public void before(){
         schedule = new ScheduleDto();
-        semester = new SemesterDto(null);
-        semesterTwo = new SemesterDto(schedule);
+        semester = new SemesterDto();
+        semesterTwo = new SemesterDto("Fall 2020");
 
     }
 
@@ -25,9 +26,13 @@ public class SemesterTest {
         assertTrue(semester.getDbKey() == 0);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void getSchedualTest(){
-        assertEquals(semesterTwo.getSchedule(), schedule);
-        assertTrue(semester.getSchedule() == null);
+        assertEquals(semesterTwo.getSemesterName(), "Fall 2020");
+    }
+
+    @Test
+    public void getSectionsTest() {
+        assertNotNull(semesterTwo.getSections());
     }
 }
