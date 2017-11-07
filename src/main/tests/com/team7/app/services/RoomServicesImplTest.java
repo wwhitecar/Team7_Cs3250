@@ -24,7 +24,7 @@ public class RoomServicesImplTest {
     @Before
     public void before() {
         roomServ = new RoomServicesImpl();
-        roomServ.roomRepository = rRepo;
+        roomServ.setRoomRepository(rRepo);
 
     }
 

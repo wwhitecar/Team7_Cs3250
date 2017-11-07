@@ -70,25 +70,27 @@ public class SectionController {
      * new class to be store into the database.
      * @param sectionNumber - id for the section
      * @param courseNumber - course specific number
-     * @param professorId - professor teaching the section
+     * @param professorName - professor teaching the section
      * @return state of the create request
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String createSection(
             final @RequestParam ("section_number") int sectionNumber,
             final @RequestParam("course") int courseNumber,
-            final @RequestParam("professor") int professorId) {
+            final @RequestParam("professor") String professorName) {
+        ProfessorDto professor = null;
+        for(ProfessorDto prof : professorService.listAllProfessor()){
+            if((prof.getFirstName()+ " " + prof.getLastName()).equals(professorName)){
+                professor = professorService.getProfessorById(prof.getId());
+            }
+        }
         CourseDto course = courseService.getCourseById(courseNumber);
-        ProfessorDto professor =
-                professorService.getProfessorById(professorId);
+        professor =
+                professorService.getProfessorById(professor.getId());
         SectionDto section = new SectionDto(sectionNumber, course, professor);
         section = sectionService.saveSection(section);
-        if (section != null) {
-            return (section.toString() + " Added Successfully <br/> <a href="
-                    + "/" + ">Go Back to main screen</a>");
-        }
-        return ("Unable to find Section, plz try again </br> <a href="
-                + "/" + "> Back to Section menu </a>");
+        return (section.toString() + " Added Successfully <br/> <a href="
+                + "/" + ">Go Back to main screen</a>");
     }
 
     /**
@@ -96,26 +98,27 @@ public class SectionController {
      * section to be store into the database.
      * @param sectionNumber - the number for the course
      * @param courseNumber - course specific number
-     * @param professorId - professor teaching the section
+     * @param professorName - professor teaching the section
      * @return state of the create request
      */
     @RequestMapping(value = "/updatesection", method = RequestMethod.POST)
     public String updateSection(
             final @RequestParam ("section_number") int sectionNumber,
             final @RequestParam("course") int courseNumber,
-            final @RequestParam("professor") int professorId) {
+            final @RequestParam("professor") String professorName) {
+        ProfessorDto professor = null;
+        for(ProfessorDto prof : professorService.listAllProfessor()){
+            if((prof.getFirstName()+ " " + prof.getLastName()).equals(professorName)){
+                professor = professorService.getProfessorById(prof.getId());
+            }
+        }
         CourseDto course = courseService.getCourseById(courseNumber);
-        ProfessorDto professor
-                = professorService.getProfessorById(professorId);
         SectionDto section = new SectionDto(sectionNumber, course, professor);
         section = sectionService.saveSection(section);
-        if (section != null) {
-            return (section.toString()
-                    + " Updated Section Successfully <br/> <a href="
-                    + "/" + ">Go Back to main screen</a>");
-        }
-        return ("Failed to update <br/> <a href="
+        return (section.toString()
+                + " Updated Section Successfully <br/> <a href="
                 + "/" + ">Go Back to main screen</a>");
+
     }
 
 
@@ -147,9 +150,9 @@ public class SectionController {
     public String deleteCourseByNumber(
             final @RequestParam("section_number") int sectionNumber) {
         sectionService.deleteSection(sectionNumber);
-            return ("Removed Section"
-                    + "<br/> <a href=" + "/"
-                    + ">Go Back to main screen</a>");
+        return ("Removed Section"
+                + "<br/> <a href=" + "/"
+                + ">Go Back to main screen</a>");
 
     }
 }

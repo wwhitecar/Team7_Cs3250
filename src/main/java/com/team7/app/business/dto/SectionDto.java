@@ -46,8 +46,8 @@ public class SectionDto {
      * @param professorDto - professor of the class/section
      */
     public SectionDto(final int sNumber,
-                       final CourseDto courseDto,
-                       final ProfessorDto professorDto) {
+                      final CourseDto courseDto,
+                      final ProfessorDto professorDto) {
         this.sectionNumber = sNumber;
         this.course = courseDto;
         this.professor = professorDto;

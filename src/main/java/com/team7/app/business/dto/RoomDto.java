@@ -81,9 +81,6 @@ public class RoomDto {
      */
     @Override
     public String toString() {
-        if (roomNumber == 0 || roomCapacity == 0) {
-            return "room not set up correctly";
-        }
         return "Room Number: " + roomNumber + " Room Capacity" + roomCapacity;
     }
 }

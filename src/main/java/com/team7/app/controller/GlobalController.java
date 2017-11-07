@@ -80,11 +80,8 @@ public class GlobalController {
             final @RequestParam("credit_Hour") int creditHours) {
         GlobalDto global = new GlobalDto(schoolName, creditHours);
         globalService.saveGlobal(global);
-        if (!readGlobalByName(schoolName).equals("Unable to find school")) {
-            return (global.toString() + " Added Successfully <br/> <a href="
-                    + "/" + ">Go Back to main screen</a>");
-        }
-        return ("Unable to find school");
+        return (global.toString() + " Added Successfully <br/> <a href="
+                + "/" + ">Go Back to main screen</a>");
     }
 
     /**
@@ -96,12 +93,8 @@ public class GlobalController {
     public String deleteGlobalByName(
             final @RequestParam("School Name") String schoolName) {
         globalService.deleteGlobal(schoolName);
-        if (readGlobalByName(schoolName).equals("Unable to find School")) {
-            return ("Removed School" + "<br/> <a href="
+        return ("Removed School" + "<br/> <a href="
                     + "/" + ">Go Back to main screen<a/>");
-        }
-        return ("Unable to remove school, please try again"
-                + "<br/> <a href=" + "/" + ">Go Back to main screen</a>");
     }
 
 }
