@@ -21,9 +21,19 @@
     <label>New Professor:</label>
     <select name="professor" form="update" required>
         {{#professors}}
-        <option type ="string" name="professor">{{firstName}} {{lastName}}</option>
+        <option name="professor">{{firstName}} {{lastName}}</option>
+
         {{/professors}}
     </select>
+
+    <br/>
+    <label>New Room:</label>
+    <select name="room_number" form="update" required>
+        {{#rooms}}
+        <option>{{roomNumber}}</option>
+        {{/rooms}}
+    </select>
+
 </form>
 </body>
 {{>layout/footer}}

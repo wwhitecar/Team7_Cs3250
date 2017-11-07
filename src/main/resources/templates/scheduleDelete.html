@@ -1,0 +1,13 @@
+{{>layout/header}}
+<body>
+    <form action="/schedule/deleteschedule/" method="GET">
+        <select name = "schedule_name" required>
+            {{#schedule_name}}
+                <option>{{scheduleName}}</option>
+            {{/schedule_name}}
+        </select>
+        <br/>
+        <input type="submit" name="doit" value="Delete Schedule" />
+    </form>
+</body>
+{{>layout/footer}}

@@ -1,0 +1,18 @@
+{{>layout/header}}
+<body>
+<h1>Update Schedule Name</h1>
+<h2>Please enter a Schedule Id</h2>
+<form action="/schedule/updateSchedule" method="POST">
+    <label>Name of Schedule to change:</label>
+        <select name = "schedule_name" required>
+            {{#schedules}}
+            <option>{{scheduleName}}</option>
+            {{/schedules}}
+        </select>
+    <p>New Schedule Information:</p><br/>
+<label>
+            <br/>Schedule Name: <br/> <input type="text" name="new_schedule_name" required size="30" /></label>
+ 
+    <input type="submit" name="doit" value="Update Schedule Name" />
+</form>
+{{>layout/footer}}
