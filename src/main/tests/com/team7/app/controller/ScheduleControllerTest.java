@@ -26,7 +26,7 @@ public class ScheduleControllerTest {
     CourseServicesImpl courseMock;
 
     @Mock
-    SectionServices sectMock;
+    SectionServicesImpl sectMock;
 
     @Mock
     RoomServices roomMock;
@@ -46,20 +46,10 @@ public class ScheduleControllerTest {
 
     @Before
     public void before() {
+
         scheduleController.setScheduleServices(scheduleMock);
+        scheduleController.setSectionService(sectMock);
         schedule = new ScheduleDto("Schedule Name", section);
-        sectionController = new SectionController();
-        sectionController.setSectionService(sectMock);
-        sectionController.setCourseService(courseMock);
-        sectionController.setProfessorService(profMock);
-        sectionController.setRoomService(roomMock);
-
-
-        course = new CourseDto("Math", 1234,
-                4, "stuff", "other stuff", 0000, 0000);
-        professor = new ProfessorDto("Harry", "Hook", 8675309);
-        room = new RoomDto(250, 35, "Science Building");
-        section = new SectionDto(1234, course, professor, room);
     }
 
     @Test
@@ -75,37 +65,37 @@ public class ScheduleControllerTest {
                         + ">Go Back to main screen</a>"));
     }
 
-//    @Test
-//    public void updateBuilding() throws Exception {
-//        List<BuildingDto> listy = new ArrayList<>();
-//        listy.add(building);
-//        when(buildingMock.listAllBuilding()).thenReturn(listy);
-//        when(buildingMock.getBuildingByName(anyInt())).thenReturn(building);
-//        assertEquals(buildingController.updateBuilding("Building Name", "New Building Name"),
-//                ("Successfully Updated" + "<br/> <a href=" + "/"
-//                        + ">Go Back to main screen</a>"));
-//    }
-//
-//    @Test
-//    public void readBuildingByName() throws Exception {
-//        List<BuildingDto> listy = new ArrayList<>();
-//        listy.add(building);
-//        when(buildingMock.listAllBuilding()).thenReturn(listy);
-//        when(buildingMock.getBuildingByName(anyInt())).thenReturn(building);
-//        assertEquals(buildingController.readBuildingByName("Building Name"),
-//                building.toString());
-//    }
-//
-//    @Test
-//    public void deleteBuildingByName() throws Exception {
-//        List<BuildingDto> listy = new ArrayList<>();
-//        listy.add(building);
-//        when(buildingMock.listAllBuilding()).thenReturn(listy);
-//
-//        assertEquals(buildingController.deleteBuildingByName("Building Name"),
-//                ("Removed Building"
-//                        + "<br/> <a href=" + "/"
-//                        + ">Go Back to main screen</a>"));
-//    }
+    @Test
+    public void updateSchedule() throws Exception {
+        List<ScheduleDto> listy = new ArrayList<>();
+        listy.add(schedule);
+        when(scheduleMock.listAllSchedule()).thenReturn(listy);
+        when(scheduleMock.getScheduleByName(anyInt())).thenReturn(schedule);
+        assertEquals(scheduleController.updateSchedule("Building Name", "New Building Name"),
+                ("Successfully Updated" + "<br/> <a href=" + "/"
+                        + ">Go Back to main screen</a>"));
+    }
+
+    @Test
+    public void readScheduleByName() throws Exception {
+        List<ScheduleDto> listy = new ArrayList<>();
+        listy.add(schedule);
+        when(scheduleMock.listAllSchedule()).thenReturn(listy);
+        when(scheduleMock.getScheduleByName(anyInt())).thenReturn(schedule);
+        assertEquals(scheduleController.readScheduleByName("Building Name"),
+                schedule.toString());
+    }
+
+    @Test
+    public void deleteScheduleByName() throws Exception {
+        List<ScheduleDto> listy = new ArrayList<>();
+        listy.add(schedule);
+        when(scheduleMock.listAllSchedule()).thenReturn(listy);
+
+        assertEquals(scheduleController.deleteScheduleByName("Schedule Name"),
+               ("Removed Schedule"
+                        + "<br/> <a href=" + "/"
+                        + ">Go Back to main screen</a>"));
+    }
 
 }
