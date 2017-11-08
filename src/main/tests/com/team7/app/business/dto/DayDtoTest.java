@@ -37,7 +37,7 @@ public class DayDtoTest {
 
     @Test
     public void getDayMap() {
-        assertEquals(day.getDayMap().size(), (12));
+        assertEquals(day.getDayMap().size(), (13));
     }
 
 }
