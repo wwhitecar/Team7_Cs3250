@@ -8,6 +8,14 @@
         <label>
             <br/>Schedule Name: <br/> <input type="text" name="schedule_name" required size="30" /></label>
         <br/>
+        <label>
+            <br/><br/> Section: <br/></label>
+        <select name="section" required>
+            {{#sections}}
+            <option>{{sectionNumber}}</option>
+            {{/sections}}
+        </select>
+        <br/>
         <input type="submit" name="doit" value="Create Schedule" />
     </div>
 </form>

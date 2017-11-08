@@ -430,6 +430,7 @@ public class WebPageController {
     @RequestMapping("/scheduleCreate")
     public String createSchedule(final Map<String, Object> model) {
         model.put("title", title);
+        model.put("sections", sectionService.listAllSection());
         return "scheduleCreate";
     }
 
@@ -472,7 +473,7 @@ public class WebPageController {
     public String deleteSchedule(final Map<String, Object> model) {
         model.put("title", title);
         model.put("schedule_name", scheduleService.listAllSchedule());
-        return "buildingDelete";
+        return "scheduleDelete";
     }/**
      * @param model - attribute to be injected to page.
      * @return String of the page name

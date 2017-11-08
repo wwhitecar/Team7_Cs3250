@@ -116,7 +116,14 @@ public class ScheduleController {
     public String deleteScheduleByName(
             final @RequestParam("schedule_name") String scheduleName) {
         int id = 0;
-        return ("Removed Building"
+        for (ScheduleDto schedule : scheduleService.listAllSchedule()) {
+            if (schedule.getScheduleByName().equals(scheduleName)) {
+                id = schedule.getDbKey();
+            }
+        }
+
+        scheduleService.deleteScheduleByName(id);
+        return ("Removed Schedule"
                 + "<br/> <a href=" + "/"
                 + ">Go Back to main screen</a>");
     }
