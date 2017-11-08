@@ -60,8 +60,8 @@ public class DayDto {
      * military time.
      * boolean is availability of the time
      */
-    public Map setDaysMap(final Map hours) {{
-        hours.put(800, true);
+    public Map setDaysMap() {{
+        dayMap.put(800, true);
         put(900, true);
         put(1000, true);
         put(1100, true);
@@ -74,7 +74,7 @@ public class DayDto {
         put(1800, true);
         put(1900, true);
         put(2000, true);
-        return hours;
+        return dayMap;
     }};
 
     /**
