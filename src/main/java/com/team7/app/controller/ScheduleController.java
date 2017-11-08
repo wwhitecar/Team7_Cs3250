@@ -104,7 +104,13 @@ public class ScheduleController {
     public String readScheduleByName(
             final @RequestParam("schedule_name") String scheduleName) {
         int id = 0;
-        return "";
+        for (ScheduleDto schedule : scheduleService.listAllSchedule()) {
+            if (schedule.getScheduleByName().equals(scheduleName)) {
+                id = schedule.getDbKey();
+            }
+        }
+        ScheduleDto schedule = scheduleService.getScheduleByName((id));
+        return schedule.toString();
     }
 
     /**

@@ -39,5 +39,4 @@ public class DayDtoTest {
     public void getDayMap() {
         assertEquals(day.getDayMap().size(), (13));
     }
-
 }
