@@ -42,6 +42,10 @@ public class WebPageControllerTest {
 
     @Mock
     SemesterServices semesterMock;
+
+    @Mock
+    ScheduleServices scheduleMock;
+
     WebPageController wPC;
     Map<String, Object> model;
 
@@ -55,6 +59,7 @@ public class WebPageControllerTest {
         wPC.setBuildingService(buildingMock);
         wPC.setRoomService(roomMock);
         wPC.setSemesterService(semesterMock);
+        wPC.setScheduleService(scheduleMock);
     }
 
     @Test
@@ -243,5 +248,29 @@ public class WebPageControllerTest {
     @Test
     public void readRoomTest(){
         assertEquals(wPC.readRoom(model), "roomRead");
+    }
+
+    @Test
+    public void createScheduleTest(){
+        assertEquals(wPC.createSchedule(model), "scheduleCreate");
+    }
+
+    @Test
+    public void readScheduleTest(){
+        assertEquals(wPC.readSchedule(model), "buildingRead");
+    }
+
+    @Test
+    public void updateScheduleTest(){
+        List<ScheduleDto> scheduleList = new ArrayList<>();
+        when(scheduleMock.listAllSchedule()).thenReturn(scheduleList);
+        assertEquals(wPC.updateSchedule(model), "scheduleUpdate");
+    }
+
+    @Test
+    public void deleteScheduleTest() {
+        List<ScheduleDto> scheduleList = new ArrayList<>();
+        when(scheduleMock.listAllSchedule()).thenReturn(scheduleList);
+        assertEquals(wPC.deleteSchedule(model), "scheduleDelete");
     }
 }

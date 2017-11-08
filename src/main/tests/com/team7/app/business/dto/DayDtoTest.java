@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class DayDtoTest {
@@ -33,5 +34,10 @@ public class DayDtoTest {
     public void getDbKeyTest() {
         assertNotNull(day.getDayDbKey());
     }
+
+//    @Test
+//    public void getDayMap() {
+//        assertEquals(day.getDayMap().size(), (12));
+//    }
 
 }
