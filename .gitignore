@@ -2,3 +2,4 @@
 .idea/
 Team7Project/.gitignore
 src/main/resources/application.yml
+team7-app.iml
