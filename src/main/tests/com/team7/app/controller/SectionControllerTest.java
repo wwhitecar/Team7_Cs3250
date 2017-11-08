@@ -90,7 +90,7 @@ public class SectionControllerTest {
         when(courseMock.getCourseById(anyInt())).thenReturn(course);
         when(roomMock.getRoomByNumber(anyInt())).thenReturn(room);
         when(sectMock.saveSection(anyObject())).thenReturn(section);
-        List<ProfessorDto> listy = new ArrayList<>();
+        //List<ProfessorDto> listy = new ArrayList<>();
         listy.add(professor);
         when(profMock.listAllProfessor()).thenReturn(listy);
         assertEquals(sectionController.updateSection(1234, 456, "Harry Hook", 250),

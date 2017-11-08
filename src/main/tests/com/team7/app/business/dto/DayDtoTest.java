@@ -31,7 +31,7 @@ public class DayDtoTest {
 
     @Test
     public void getDbKeyTest() {
-        assertNotNull(day.getDbKey());
+        assertNotNull(day.getDayDbKey());
     }
 
 }
