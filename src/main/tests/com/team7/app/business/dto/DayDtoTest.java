@@ -35,9 +35,8 @@ public class DayDtoTest {
         assertNotNull(day.getDayDbKey());
     }
 
-//    @Test
-//    public void getDayMap() {
-//        assertEquals(day.getDayMap().size(), (12));
-//    }
-
+    @Test
+    public void getDayMap() {
+        assertEquals(day.getDayMap().size(), (13));
+    }
 }

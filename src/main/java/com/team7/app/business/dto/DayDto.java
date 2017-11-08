@@ -1,6 +1,7 @@
 package com.team7.app.business.dto;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.Map;
 
 import static javax.swing.UIManager.put;
@@ -31,7 +32,7 @@ public class DayDto {
      * just the name.
      */
     @ElementCollection //from the persistence class
-    private Map<Integer, Boolean> dayMap;
+    private HashMap<Integer, Boolean> dayMap;
 
     /**
      * Week number that the day is in
@@ -60,22 +61,23 @@ public class DayDto {
      * military time.
      * boolean is availability of the time
      */
-    public Map setDaysMap(final Map hours) {{
-        hours.put(800, true);
-        put(900, true);
-        put(1000, true);
-        put(1100, true);
-        put(1200, true);
-        put(1300, true);
-        put(1400, true);
-        put(1500, true);
-        put(1600, true);
-        put(1700, true);
-        put(1800, true);
-        put(1900, true);
-        put(2000, true);
-        return hours;
-    }};
+    public Map setDaysMap() {
+        dayMap = new HashMap<Integer, Boolean>();
+        dayMap.put(800, true);
+        dayMap.put(900, true);
+        dayMap.put(1000, true);
+        dayMap.put(1100, true);
+        dayMap.put(1200, true);
+        dayMap.put(1300, true);
+        dayMap.put(1400, true);
+        dayMap.put(1500, true);
+        dayMap.put(1600, true);
+        dayMap.put(1700, true);
+        dayMap.put(1800, true);
+        dayMap.put(1900, true);
+        dayMap.put(2000, true);
+        return dayMap;
+    };
 
     /**
      * Param constructer.
@@ -113,8 +115,9 @@ public class DayDto {
      * Getter for dBKey.
      * @return id of the building
      */
-    public Map getDayMap() {return dayMap; }
-
+    public HashMap getDayMap() {
+        setDaysMap();
+        return dayMap; }
 
 }
 

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 /**
  * Day controller to pass information between the database
  * and html pages.
@@ -42,6 +44,7 @@ public class DayController {
             final @RequestParam ("day_name") String dayName) {
         DayDto day = new DayDto(dayName);
         day = dayService.saveDay(day);
+        day.setDaysMap();
         if (day != null) {
             return ("Successfully created day"
                     + "<br/> <a href=" + "/"
