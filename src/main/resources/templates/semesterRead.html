@@ -1,0 +1,13 @@
+{{>layout/header}}
+<body>
+<form action="/semester/getSemester" method="GET">
+    <br/>
+    <label>
+        Semester Name:<br/> <input type="text" name="semesterName" required size="30" />
+    </label>
+    <br/>
+    <input type="submit" name="doit" value="Read Semester" />
+</form>
+
+</body>
+{{>layout/footer}}

@@ -21,7 +21,15 @@
             <option name="professor">{{firstName}} {{lastName}}</option>
             {{/professors}}
         </select>
+
         <br/>
+        <br/>
+        <label>New Room:</label>
+        <select name="room_number" required>
+            {{#rooms}}
+            <option>{{roomNumber}}</option>
+            {{/rooms}}
+        </select>
         <br/>
         <input type="submit" name="doit" value="Create Section" />
     </div>

@@ -1,0 +1,14 @@
+{{>layout/header}}
+<body>
+<form action="/semester/deleteSemester/" method="GET">
+    <br/>
+    <select name = "semesterName" required>
+        {{#semesters}}
+        <option>{{semesterName}}</option>
+        {{/semesters}}
+    </select>
+    <br/>
+    <input type="submit" name="doit" value="Delete Semester" />
+</form>
+</body>
+{{>layout/footer}}
