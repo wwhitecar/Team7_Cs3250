@@ -20,7 +20,7 @@ public interface WeekServices {
      * @param id - id number for the semester we are looking for.
      * @return the week that we are looking for
      */
-    WeekDto getWeekByNumber(Integer id);
+    WeekDto getWeekByDbKey(Integer id);
 
     /**
      * Adds a week to the database.
@@ -33,5 +33,5 @@ public interface WeekServices {
      * Delete a week that is in the database.
      * @param id - week id to be removed
      */
-    void deleteWeekByNumber(Integer id);
+    void deleteWeekByDbKey(Integer id);
 }
