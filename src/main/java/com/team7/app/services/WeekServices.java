@@ -33,5 +33,5 @@ public interface WeekServices {
      * Delete a week that is in the database.
      * @param id - week id to be removed
      */
-    void deleteWeekByNumber(Integer id);
+    void deleteWeekByDbKey(Integer id);
 }

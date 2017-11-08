@@ -35,7 +35,7 @@ public class WeekServicesImpl implements WeekServices {
      *
      */
     @Override
-    public WeekDto getWeekByNumber(final Integer Id) { return weekRepository.findOne(Id);}
+    public WeekDto getWeekByDbKey(final Integer Id) { return weekRepository.findOne(Id);}
 
     /**
      *
@@ -47,5 +47,5 @@ public class WeekServicesImpl implements WeekServices {
      *
      */
     @Override
-    public void deleteWeekByNumber(final Integer id) { weekRepository.delete(id);}
+    public void deleteWeekByDbKey(final Integer id) { weekRepository.delete(id);}
 }
