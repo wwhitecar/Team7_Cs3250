@@ -28,29 +28,28 @@ public class StudentServicesImplTest {
     }
 
     @Test
-    public void listAllProfessorList(){
+    public void listAllStudentsList(){
         Iterable<StudentDto> studentList = new ArrayList<>();
         when(sRepo.findAll()).thenReturn(studentList);
         assertNotNull(studServ.listAllStudent());
     }
 
     @Test
-    public void getCourseByIdTest(){
+    public void getStudentByIdTest(){
         StudentDto student = new StudentDto();
-
         when(sRepo.findOne(anyInt())).thenReturn(student);
         assertNotNull(studServ.getStudentById(123));
     }
 
     @Test
-    public void saveCourseTest(){
+    public void saveStudentTest(){
         StudentDto student = new StudentDto();
         when(sRepo.save(student)).thenReturn(student);
         assertNotNull(studServ.saveStudent(student));
     }
 
     @Test
-    public void deleteCourseTest(){
+    public void deleteStudentTest(){
         studServ.deleteStudent(123);
     }
 }

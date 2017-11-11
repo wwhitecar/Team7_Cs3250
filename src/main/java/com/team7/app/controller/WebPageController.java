@@ -499,7 +499,7 @@ public class WebPageController {
     public String updateDay(final Map<String, Object> model) {
         model.put("title", title);
         model.put("days", dayService.listAllDays());
-        return "roomUpdate";
+        return "dayUpdate";
     }
 
     /**
