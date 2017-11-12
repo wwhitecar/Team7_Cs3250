@@ -13,7 +13,7 @@ public class WeekDtoTest {
 
     @Before
     public void before () {
-        week = new WeekDto();
+        //week = new WeekDto();
     }
 
     @Test

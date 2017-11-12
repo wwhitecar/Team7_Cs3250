@@ -32,23 +32,7 @@ public class DayDto {
      * just the name.
      */
     @ElementCollection //from the persistence class
-    private HashMap<Integer, Boolean> dayMap;
-
-    /**
-     * Week number that the day is in
-     */
-    private int week;
-
-    /**
-     *  A day has many weeks
-     *  @return week the day is in
-     */
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "week_number", nullable = false)
-    public int getWeekByNumber() {
-        return week;
-    }
-
+    private Map<Integer, Boolean> dayMap;
 
     /**
      * Empty Constructer.
@@ -84,6 +68,7 @@ public class DayDto {
      * @param dayOfTheWeek - building name
      */
     public DayDto(final String dayOfTheWeek) {
+        this.dayMap = setDaysMap();
         this.dayName = dayOfTheWeek;
     }
 
@@ -115,7 +100,7 @@ public class DayDto {
      * Getter for dBKey.
      * @return id of the building
      */
-    public HashMap getDayMap() {
+    public Map getDayMap() {
         setDaysMap();
         return dayMap; }
 

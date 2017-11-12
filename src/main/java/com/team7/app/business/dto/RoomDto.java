@@ -1,10 +1,13 @@
 package com.team7.app.business.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.FetchType;
+import com.team7.app.services.DayServices;
+import com.team7.app.services.WeekServices;
+import com.team7.app.services.WeekServicesImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Room for the database to keep track of.
@@ -29,6 +32,15 @@ public class RoomDto {
      */
     private int roomCapacity;
 
+    @Autowired
+    private static DayServices ds;
+
+    /**
+     * A week for this room.
+     */
+    @OneToOne
+     private WeekDto week;
+
     /**
      *  many rooms have a building.
      *  @return building the room is in
@@ -49,10 +61,13 @@ public class RoomDto {
      * @param rNumber - room number
      * @param rCapacity - room capacity
      * @param buildingName - name of building
+     * @param roomWeek - the week for this room.
      */
     public RoomDto(final int rNumber,
                    final int rCapacity,
-                   final String buildingName) {
+                   final String buildingName,
+                   final WeekDto roomWeek) {
+        this.week = roomWeek;
         this.roomNumber = rNumber;
         this.roomCapacity = rCapacity;
         this.building = buildingName;
@@ -74,6 +89,7 @@ public class RoomDto {
     public int getRoomCapacity() {
         return roomCapacity;
     }
+
 
     /**
      * Overrides the to string method.

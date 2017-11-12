@@ -1,12 +1,21 @@
 package com.team7.app.controller;
 
+import com.team7.app.business.dto.DayDto;
 import com.team7.app.business.dto.RoomDto;
+import com.team7.app.business.dto.WeekDto;
+import com.team7.app.services.DayServices;
 import com.team7.app.services.RoomServices;
+import com.team7.app.services.WeekServices;
+import com.team7.app.services.WeekServicesImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.persistence.Transient;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class that will communicate with both the webapplication
@@ -21,13 +30,23 @@ public class RoomController {
      * Services to be used by hibernate to correctly add
      * information to the database.
      */
+    @Autowired
     private RoomServices roomServices;
+
+    /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
+    @Autowired
+    private WeekServices weekServices;
+
+    @Autowired
+    private static DayServices dayServices;
 
     /**
      * Bean to be used throughout the room class.
      * @param roomService - bean to be created
      */
-    @Autowired
     public void setRoomService(final RoomServices roomService) {
         this.roomServices = roomService;
     }
@@ -43,7 +62,9 @@ public class RoomController {
     public String createRoom(final @RequestParam("Room Number")int roomNumber,
                      final @RequestParam("Room Capacity")int roomCapacity,
                      final @RequestParam("Building Name")String buildingName) {
-        RoomDto room = new RoomDto(roomNumber, roomCapacity, buildingName);
+        WeekDto week = new WeekDto();
+        weekServices.saveWeek(week);
+        RoomDto room = new RoomDto(roomNumber, roomCapacity, buildingName, week);
         room = roomServices.saveRoom(room);
 
         if (room != null) {

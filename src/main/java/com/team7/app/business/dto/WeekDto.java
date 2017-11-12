@@ -1,9 +1,10 @@
 package com.team7.app.business.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.team7.app.services.DayServices;
+import com.team7.app.services.DayServicesImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.*;
 
 
 @Entity
@@ -11,34 +12,38 @@ public class WeekDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int WeekDbKey;
+    private int WeekDbKey;
 
-    private int weekNum;
-
-
-
+    @OneToOne
     private DayDto mon;
+
+    @OneToOne
     private DayDto tues;
+
+    @OneToOne
     private DayDto wed;
+
+    @OneToOne
     private DayDto thurs;
+
+    @OneToOne
     private DayDto fri;
+
+    @OneToOne
     private DayDto sat;
+
+    @OneToOne
     private DayDto sun;
 
-
+    @Autowired
+    @Transient
+    private static DayServices ds;
 
     public WeekDto() {
-         mon = new DayDto("monday");
-        tues = new DayDto("tuesday");
-         wed = new DayDto("wednesday");
-         thurs = new DayDto("thursday");
-        fri = new DayDto("friday");
-         sat = new DayDto("saturday");
-         sun = new DayDto("sunday");
 
     }
 
-    public int getWeekNum() { return weekNum; }
+    //public int getWeekNum() { return weekNum; }
 
     public DayDto getDayofWeek(String dayName) {
 
