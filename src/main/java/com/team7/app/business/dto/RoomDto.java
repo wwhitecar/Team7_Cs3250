@@ -61,6 +61,20 @@ public class RoomDto {
      * @param rNumber - room number
      * @param rCapacity - room capacity
      * @param buildingName - name of building
+     */
+    public RoomDto(final int rNumber,
+                   final int rCapacity,
+                   final String buildingName) {
+        this.roomNumber = rNumber;
+        this.roomCapacity = rCapacity;
+        this.building = buildingName;
+    }
+
+    /**
+     * Full param constructer.
+     * @param rNumber - room number
+     * @param rCapacity - room capacity
+     * @param buildingName - name of building
      * @param roomWeek - the week for this room.
      */
     public RoomDto(final int rNumber,
