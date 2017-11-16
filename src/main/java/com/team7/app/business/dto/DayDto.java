@@ -18,7 +18,7 @@ public class DayDto {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer dayDbKey;
+    private int dayDbKey;
 
     /**
      * The course number to identify a course by more then
@@ -34,15 +34,11 @@ public class DayDto {
     private Map<Integer, Boolean> dayMap;
 
     /**
-     * Week number that the day is in
-     */
-    private int week;
-
-
-    /**
      * Empty Constructer.
      */
-    public DayDto() { }
+    public DayDto() {
+        this.dayMap = setDaysMap();
+    }
 
 
     /**
@@ -105,7 +101,6 @@ public class DayDto {
      * @return id of the building
      */
     public Map getDayMap() {
-        setDaysMap();
         return dayMap; }
 }
 
