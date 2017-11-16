@@ -69,14 +69,16 @@ public class DayDto {
      * @param dayOfTheWeek - building name
      */
     public DayDto(final String dayOfTheWeek) {
+
+        this.dayMap = setDaysMap();
         this.dayName = dayOfTheWeek;
     }
 
     /**
-     * Getter for buildingName.
-     * @return name of the building.
+     * Getter for dayName.
+     * @return name of the day.
      */
-    public String getDayByName() {
+    public String getDayName() {
         return dayName;
     }
 

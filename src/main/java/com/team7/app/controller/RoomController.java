@@ -63,7 +63,25 @@ public class RoomController {
                      final @RequestParam("Room Capacity")int roomCapacity,
                      final @RequestParam("Building Name")String buildingName) {
         List<DayDto> listy = new ArrayList<>();
-        DayDto day = new DayDto();
+        DayDto day = new DayDto("monday");
+        dayServices.saveDay(day);
+        listy.add((day));
+        day = new DayDto("tuesday");
+        dayServices.saveDay(day);
+        listy.add((day));
+        day = new DayDto("wednesday");
+        dayServices.saveDay(day);
+        listy.add((day));
+        day = new DayDto("thursday");
+        dayServices.saveDay(day);
+        listy.add((day));
+        day = new DayDto("friday");
+        dayServices.saveDay(day);
+        listy.add((day));
+        day = new DayDto("saturday");
+        dayServices.saveDay(day);
+        listy.add((day));
+        day = new DayDto("sunday");
         dayServices.saveDay(day);
         listy.add((day));
 
@@ -125,7 +143,24 @@ public class RoomController {
     @RequestMapping(value = "/id/", method = RequestMethod.POST)
     public String deleteRoomByNumber(
             final @RequestParam("room number") Integer roomNumber) {
+        RoomDto room = roomServices.getRoomByNumber(roomNumber);
         roomServices.deleteRoom(roomNumber);
+        weekServices.deleteWeekByDbKey(room.getWeek().getWeekDbKey());
+        dayServices.deleteDayByName(
+                room.getWeek().getDayofWeek("monday").getDayDbKey());
+        dayServices.deleteDayByName(
+                room.getWeek().getDayofWeek("tuesday").getDayDbKey());
+        dayServices.deleteDayByName(
+                room.getWeek().getDayofWeek("wednesday").getDayDbKey());
+        dayServices.deleteDayByName(
+                room.getWeek().getDayofWeek("thursday").getDayDbKey());
+        dayServices.deleteDayByName(
+                room.getWeek().getDayofWeek("friday").getDayDbKey());
+        dayServices.deleteDayByName(
+                room.getWeek().getDayofWeek("saturday").getDayDbKey());
+        dayServices.deleteDayByName(
+                room.getWeek().getDayofWeek("sunday").getDayDbKey());
+
         if (readRoomByNumber(roomNumber).equals("Unable to find Room")) {
             return ("Removed Room"
                     + "<br/> <a href=" + "/"
