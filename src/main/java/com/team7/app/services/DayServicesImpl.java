@@ -55,6 +55,11 @@ public class DayServicesImpl implements DayServices {
      */
     @Override
     public DayDto saveDay(final DayDto day) {
+        if(day != null)
+            System.out.println("here");
+
+        if(day != dayRepository.save(day))
+            System.out.println("error");
         return dayRepository.save(day);
     }
 

@@ -41,7 +41,7 @@ public class RoomController {
     private WeekServices weekServices;
 
     @Autowired
-    private static DayServices dayServices;
+    private DayServices dayServices;
 
     /**
      * Bean to be used throughout the room class.
@@ -62,7 +62,12 @@ public class RoomController {
     public String createRoom(final @RequestParam("Room Number")int roomNumber,
                      final @RequestParam("Room Capacity")int roomCapacity,
                      final @RequestParam("Building Name")String buildingName) {
-        WeekDto week = new WeekDto();
+        List<DayDto> listy = new ArrayList<>();
+        DayDto day = new DayDto();
+        dayServices.saveDay(day);
+        listy.add((day));
+
+        WeekDto week = new WeekDto(listy);
         weekServices.saveWeek(week);
         RoomDto room = new RoomDto(roomNumber, roomCapacity, buildingName, week);
         room = roomServices.saveRoom(room);

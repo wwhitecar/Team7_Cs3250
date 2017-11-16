@@ -1,10 +1,9 @@
 package com.team7.app.business.dto;
 
+
 import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
-
-import static javax.swing.UIManager.put;
 
 /**
  * Buildings that will be stored into the
@@ -19,7 +18,7 @@ public class DayDto {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int DayDbKey;
+    private Integer dayDbKey;
 
     /**
      * The course number to identify a course by more then
@@ -33,6 +32,12 @@ public class DayDto {
      */
     @ElementCollection //from the persistence class
     private Map<Integer, Boolean> dayMap;
+
+    /**
+     * Week number that the day is in
+     */
+    private int week;
+
 
     /**
      * Empty Constructer.
@@ -68,7 +73,6 @@ public class DayDto {
      * @param dayOfTheWeek - building name
      */
     public DayDto(final String dayOfTheWeek) {
-        this.dayMap = setDaysMap();
         this.dayName = dayOfTheWeek;
     }
 
@@ -93,7 +97,7 @@ public class DayDto {
      * @return id of the building
      */
     public int getDayDbKey() {
-        return DayDbKey;
+        return dayDbKey;
     }
 
     /**
@@ -103,7 +107,6 @@ public class DayDto {
     public Map getDayMap() {
         setDaysMap();
         return dayMap; }
-
 }
 
 

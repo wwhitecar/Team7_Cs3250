@@ -29,7 +29,7 @@ public class DayControllerTest {
     @Before
     public void before(){
         dayController.setDaysServices(dayMock);
-        day = new DayDto("Day Name");
+    //    day = new DayDto("Day Name");
     }
 
     @Test
