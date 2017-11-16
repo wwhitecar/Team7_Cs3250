@@ -86,4 +86,8 @@ public class WeekDto {
 
     public int getWeekDbKey() {return WeekDbKey; }
 
+    public void setWeekDbkey(int key) {
+        this.WeekDbKey = key;
+    }
+
 }

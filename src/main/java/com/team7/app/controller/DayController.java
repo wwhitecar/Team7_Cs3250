@@ -40,12 +40,12 @@ public class DayController {
      * @return state of the create request
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public DayDto createDay(
+    public String createDay(
             final @RequestParam ("day_name") String dayName) {
         DayDto day = new DayDto();
-        day = dayService.saveDay(day);
-        //day.setDaysMap();
-        return day;
+        return ("Successfully created day" +
+                                         "<br/> <a href=" + "/"
+                                        + ">Go Back to main screen</a>");
     }
 
 
@@ -84,11 +84,11 @@ public class DayController {
     public String readDayByName(
             final @RequestParam("day_name") String dayName) {
         int id = 0;
-   //     for (DayDto day : dayService.listAllDays()) {
-   //         if (day.getDayByName().equals(dayName)) {
-   //             id = day.getDayDbKey();
-   //         }
-   //     }
+        for (DayDto day : dayService.listAllDays()) {
+            if (day.getDayName().equals(dayName)) {
+                id = day.getDayDbKey();
+            }
+        }
         DayDto day = dayService.getDayByName((id));
         return day.toString();
     }

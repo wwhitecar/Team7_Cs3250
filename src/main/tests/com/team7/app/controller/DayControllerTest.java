@@ -29,15 +29,11 @@ public class DayControllerTest {
     @Before
     public void before(){
         dayController.setDaysServices(dayMock);
-    //    day = new DayDto("Day Name");
+        day = new DayDto("Day Name");
     }
 
     @Test
     public void createDay() throws Exception {
-        assertEquals(dayController.createDay("Day Name"),
-                ("Unable to create Builing" + "<br/> <a href=" + "/"
-                        + ">Go Back to main screen</a>"));
-
         when(dayMock.saveDay(anyObject())).thenReturn(day);
         assertEquals(dayController.createDay("Day Name"),
                 ("Successfully created day"
@@ -52,8 +48,7 @@ public class DayControllerTest {
         when(dayMock.listAllDays()).thenReturn(dayList);
         when(dayMock.getDayByName(anyInt())).thenReturn(day);
         assertEquals(dayController.updateDay("Day Name", "New Day Name"),
-                ("Successfully Updated" + "<br/> <a href=" + "/"
-                        + ">Go Back to main screen</a>"));
+                ("Successfully Updated<br/> <a href=/>Go Back to main screen</a>"));
     }
 
     @Test

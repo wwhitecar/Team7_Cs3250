@@ -45,6 +45,22 @@ public class RoomController {
 
     /**
      * Bean to be used throughout the room class.
+     * @param weekService - bean to be created
+     */
+    public void setWeekService(final WeekServices weekService) {
+        this.weekServices = weekService;
+    }
+
+    /**
+     * Bean to be used throughout the room class.
+     * @param dayService - bean to be created
+     */
+    public void setDayService(final DayServices dayService) {
+        this.dayServices = dayService;
+    }
+
+    /**
+     * Bean to be used throughout the room class.
      * @param roomService - bean to be created
      */
     public void setRoomService(final RoomServices roomService) {
@@ -161,11 +177,8 @@ public class RoomController {
         dayServices.deleteDayByName(
                 room.getWeek().getDayofWeek("sunday").getDayDbKey());
 
-        if (readRoomByNumber(roomNumber).equals("Unable to find Room")) {
-            return ("Removed Room"
-                    + "<br/> <a href=" + "/"
-                    + ">Go Back to main screen</a>");
-        }
-        return "Unable to find student, plz try again";
+        return ("Removed Room"
+               + "<br/> <a href=" + "/"
+               + ">Go Back to main screen</a>");
     }
 }
