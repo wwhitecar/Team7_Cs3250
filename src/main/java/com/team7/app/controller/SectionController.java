@@ -97,7 +97,15 @@ public class SectionController {
             final @RequestParam("course") int courseNumber,
 
             final @RequestParam("professor") String professorName,
-            final @RequestParam ("room_number") int roomNumber) {
+            final @RequestParam ("room_number") int roomNumber,
+            final @RequestParam ("Day") String day,
+            final @RequestParam ("Time") String time) {
+        RoomDto room = roomService.getRoomByNumber(roomNumber);
+        if (day != "" && time != "") {
+            if(!checkConflict(room, day, time)) {
+                return "Conflict, please go back and try again";
+            }
+        }
         CourseDto course = courseService.getCourseById(courseNumber);
         ProfessorDto professor = null;
         for (ProfessorDto prof: professorService.listAllProfessor()) {
@@ -106,12 +114,21 @@ public class SectionController {
                 professor = professorService.getProfessorById(prof.getId());
             }
         }
-        RoomDto room = roomService.getRoomByNumber(roomNumber);
         SectionDto section = new SectionDto(sectionNumber,
                 course, professor, room);
         section = sectionService.saveSection(section);
+        room.getWeek().getDayofWeek(day).toggelValue(Integer.parseInt(time));
+        System.out.println(room.getWeek().getDayofWeek(day).getDayMap().get(Integer.parseInt(time)));
+
             return (section.toString() + " Added Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
+    }
+
+    private boolean checkConflict(final RoomDto room,
+                     final String dayName, final String time) {
+        boolean value = (Boolean) room.getWeek().getDayofWeek(dayName).getDayMap().get(Integer.parseInt(time));
+
+        return value;
     }
 
     /**

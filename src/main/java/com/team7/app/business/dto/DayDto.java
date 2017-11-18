@@ -104,6 +104,13 @@ public class DayDto {
      */
     public Map getDayMap() {
         return dayMap; }
+
+    /**
+     * Change the value of the time to false.
+     */
+    public void toggelValue(final Integer time){
+        dayMap.replace(time, false);
+    }
 }
 
 
