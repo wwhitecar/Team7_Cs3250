@@ -1,0 +1,42 @@
+{{>layout/header}}
+<body>
+<h1>Team 7</h1>
+<h2>Register Student Page</h2>
+<br/>
+<form action="/schedule/" method="POST">
+    <div>
+        <label>
+            <br/>Schedule Name: <br/> <input type="text" name="schedule_name" required size="30" /></label>
+        <br/>
+        <label>
+            <br/><br/> Student name: <br/></label>
+        <select name="students" required>
+            {{#students}}
+            <option>{{firstName}} {{lastName}}</option>
+            {{/students}}
+        </select>
+        <br/>
+        <label>
+            <br/><br/> Section: <br/></label>
+        <select name="section" required>
+            {{#sections}}
+            <option>{{sectionNumber}}</option>
+            {{/sections}}
+        </select>
+        <br/>
+
+        <label>
+            <br/><br/> Section Test: <br/></label>
+        <select name="section" required>
+            {{#sections}}
+            <option> Section Number: {{sectionNumber}} Course Number: {{course.getCourseNumber}} Course Name: {{course.getDescription}} Course Department: {{course.getDepartment}} Credits: {{course.getCredits}}</option>
+            {{/sections}}
+        </select>
+        <br/>
+        <input type="submit" name="doit" value="Register" />
+    </div>
+</form>
+
+<a href="/">Return to home Screen</a>
+</body>
+{{>layout/footer}}

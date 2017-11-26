@@ -47,6 +47,13 @@ public class WebPageController {
      * information to the database.
      */
     @Autowired
+    private StudentServices studentService;
+
+    /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
+    @Autowired
     private SectionServices sectionService;
 
     /**
@@ -544,6 +551,15 @@ public class WebPageController {
     public String deleteDay(final Map<String, Object> model) {
         model.put("title", title);
         return "dayDelete";
+    }
+
+    @RequestMapping("/registerStudent")
+    public String registerStudent(final Map<String, Object> model) {
+        model.put("title", title);
+        model.put("students", studentService.listAllStudent());
+        model.put("sections", sectionService.listAllSection());
+        model.put("courses", courseService.listAllCourse());
+        return "registerStudent";
     }
 
 }
