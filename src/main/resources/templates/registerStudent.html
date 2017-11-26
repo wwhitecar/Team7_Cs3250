@@ -29,10 +29,21 @@
             <br/><br/> Section Test: <br/></label>
         <select name="section" required>
             {{#sections}}
-            <option> Section Number: {{sectionNumber}} Course Number: {{course.getCourseNumber}} Course Name: {{course.getDescription}} Course Department: {{course.getDepartment}} Credits: {{course.getCredits}}</option>
+            <option> <b>Section Number:</b> {{sectionNumber}} <b>Course Number:</b> {{course.getCourseNumber}} <b>Course Name:</b> {{course.getDescription}} <b>Course Department:</b> {{course.getDepartment}} <b>Credits:</b> {{course.getCredits}}</option>
             {{/sections}}
         </select>
         <br/>
+
+        <label>
+            <br/><br/> Section Radio Test: <br/></label>
+        <select name="section" required>
+            {{#sections}}
+            <option> <b>Section Number:</b> {{sectionNumber}} <b>Course Number:</b> {{course.getCourseNumber}} <b>Course Name:</b> {{course.getDescription}} <b>Course Department:</b> {{course.getDepartment}} <b>Credits:</b> {{course.getCredits}} <b>Room: {{room.getRoomNumber}}</b></option>
+            {{/sections}}
+        </select>
+        <br/>
+
+
         <input type="submit" name="doit" value="Register" />
     </div>
 </form>
