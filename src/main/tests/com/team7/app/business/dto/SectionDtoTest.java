@@ -22,7 +22,7 @@ public class SectionDtoTest {
         professor = new ProfessorDto("Donald", "Trump", 123);
         room = new RoomDto(250, 35, "Science Building");
         sectionOne = new SectionDto();
-        sectionTwo = new SectionDto(123, course, professor, room);
+        sectionTwo = new SectionDto(123, course, professor, room, "Saturday", 900);
     }
 
     @Test

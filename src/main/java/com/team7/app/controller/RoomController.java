@@ -79,25 +79,25 @@ public class RoomController {
                      final @RequestParam("Room Capacity")int roomCapacity,
                      final @RequestParam("Building Name")String buildingName) {
         List<DayDto> listy = new ArrayList<>();
-        DayDto day = new DayDto("monday");
+        DayDto day = new DayDto("Monday");
         dayServices.saveDay(day);
         listy.add((day));
-        day = new DayDto("tuesday");
+        day = new DayDto("Tuesday");
         dayServices.saveDay(day);
         listy.add((day));
-        day = new DayDto("wednesday");
+        day = new DayDto("Wednesday");
         dayServices.saveDay(day);
         listy.add((day));
-        day = new DayDto("thursday");
+        day = new DayDto("Thursday");
         dayServices.saveDay(day);
         listy.add((day));
-        day = new DayDto("friday");
+        day = new DayDto("Friday");
         dayServices.saveDay(day);
         listy.add((day));
-        day = new DayDto("saturday");
+        day = new DayDto("Saturday");
         dayServices.saveDay(day);
         listy.add((day));
-        day = new DayDto("sunday");
+        day = new DayDto("Sunday");
         dayServices.saveDay(day);
         listy.add((day));
 

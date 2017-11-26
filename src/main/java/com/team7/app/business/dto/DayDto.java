@@ -62,7 +62,7 @@ public class DayDto {
         dayMap.put(1900, true);
         dayMap.put(2000, true);
         return dayMap;
-    };
+    }
 
     /**
      * Param constructer.
@@ -108,7 +108,7 @@ public class DayDto {
     /**
      * Change the value of the time to false.
      */
-    public void toggelValue(final Integer time){
+    public void toggleValue(final Integer time){
         dayMap.replace(time, false);
     }
 }

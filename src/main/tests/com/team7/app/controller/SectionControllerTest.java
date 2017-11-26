@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.when;
@@ -69,7 +70,7 @@ public class SectionControllerTest {
                 4, "stuff", "other stuff", 0000, 0000);
         professor = new ProfessorDto("Harry", "Hook", 8675309);
         room = new RoomDto(250, 35, "Science Building", new WeekDto(listy));
-        section = new SectionDto(1234, course, professor, room);
+        section = new SectionDto(1234, course, professor, room, "Firday", 900);
     }
 
     @Test
@@ -85,7 +86,14 @@ public class SectionControllerTest {
                         + "/" + ">Go Back to main screen</a>",
                 sectionController.createSection(1234, 789, "Higher me", 250, "Monday", "900"));
         assertEquals("Conflict, please go back and try again",
-                sectionController.createSection(1234, 789, "Higher me", 250, "Monday", "900"));
+                sectionController.createSection(1234, 789, "Higher me", 250, "monday", "900"));
+        assertEquals(section.toString() + " Added Successfully <br/> <a href="
+                        + "/" + ">Go Back to main screen</a>",
+                sectionController.createSection(1234, 789, "Higher me", 250, "Monday", "1000"));
+        assertNotEquals(section.toString() + " Added Successfully <br/> <a href="
+                        + "/" + ">Go Back to main screen</a>",
+                sectionController.createSection(1234, 789, "Higher me", 250, "Monday", "1000"));
+
     }
 
     @Test
@@ -97,7 +105,7 @@ public class SectionControllerTest {
         when(courseMock.getCourseById(anyInt())).thenReturn(course);
         when(sectMock.saveSection(anyObject())).thenReturn(section);
         when(roomMock.getRoomByNumber(anyInt())).thenReturn(room);
-        assertEquals(sectionController.createSection(1234, 789, "Harry Hook", 250, "", ""), section.toString() + " Added Successfully <br/> <a href="
+        assertEquals(sectionController.createSection(1234, 789, "Harry Hook", 250, "Monday", "800"), section.toString() + " Added Successfully <br/> <a href="
                 + "/" + ">Go Back to main screen</a>");
     }
 
@@ -120,7 +128,7 @@ public class SectionControllerTest {
         when(roomMock.getRoomByNumber(anyInt())).thenReturn(room);
         when(sectMock.saveSection(anyObject())).thenReturn(section);
         when(profMock.listAllProfessor()).thenReturn(listy);
-        assertEquals(sectionController.updateSection(1234, 456, "Harry Hook", 250),
+        assertEquals(sectionController.updateSection(1234, 456, "Harry Hook", 250, "Thursday", "1600"),
                 section.toString()
                         + " Updated Section Successfully <br/> <a href="
                         + "/" + ">Go Back to main screen</a>");

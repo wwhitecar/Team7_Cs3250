@@ -56,7 +56,7 @@ public class WeekDto {
 
         DayDto day = new DayDto();
 
-        switch(dayName) {
+        switch(dayName.toLowerCase()) {
             case "monday":
                 day = mon;
                 break;
