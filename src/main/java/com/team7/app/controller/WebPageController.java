@@ -558,7 +558,6 @@ public class WebPageController {
         model.put("title", title);
         model.put("students", studentService.listAllStudent());
         model.put("sections", sectionService.listAllSection());
-        model.put("courses", courseService.listAllCourse());
         return "registerStudent";
     }
 
