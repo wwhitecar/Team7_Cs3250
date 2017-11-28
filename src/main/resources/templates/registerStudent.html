@@ -9,7 +9,7 @@
             <br/><br/> Student name: <br/></label>
         <select name="student_name" required>
             {{#students}}
-            <option>{{id}} {{firstName}} {{lastName}}</option>
+            <option>Student ID: {{id}} First Name: {{firstName}} Last Name: {{lastName}}</option>
             {{/students}}
         </select>
         <br/>
@@ -18,7 +18,8 @@
             <br/><br/> Section Test: <br/></label>
         <select name="section" required>
             {{#sections}}
-            <option> <b>Section Number:</b> {{sectionNumber}} <b>Course Number:</b> {{course.getCourseNumber}} <b>Course Name:</b> {{course.getDescription}} <b>Course Department:</b> {{course.getDepartment}} <b>Credits:</b> {{course.getCredits}}</option>
+            <option> Section Number: {{sectionNumber}} Course Number: {{course.getCourseNumber}} Course Name: {{course.getDescription}} Course Department: {{course.getDepartment}} Credits: {{course.getCredits}}</option>
+
             {{/sections}}
         </select>
         <br/>

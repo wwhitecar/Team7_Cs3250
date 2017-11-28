@@ -61,8 +61,10 @@ public class ScheduleController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String createSchedule(
-            final @RequestParam ("student_name") int studentId,
-            final @RequestParam ("section") int sectionId) {
+            final @RequestParam ("student_name") String studentString,
+            final @RequestParam ("section") String sectionString) {
+        int sectionId = parseInt(sectionString);
+        int studentId = parseInt(studentString);
         SectionDto section = sectionService.getSectionById(sectionId);
         StudentDto student = studentService.getStudentById(studentId);
         ScheduleDto schedule = new ScheduleDto(student,section);
@@ -138,5 +140,11 @@ public class ScheduleController {
         return ("Removed Schedule"
                 + "<br/> <a href=" + "/"
                 + ">Go Back to main screen</a>");
+    }
+
+    public int parseInt(String value){
+        String[] splitBySpaces = value.split(" ");
+        int retVal = Integer.parseInt(splitBySpaces[2]);
+        return retVal;
     }
 }
