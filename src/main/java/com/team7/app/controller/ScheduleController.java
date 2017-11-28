@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.StringTokenizer;
+
 /**
  * Building controller to pass information between the database
  * and html pages.
@@ -51,6 +53,32 @@ public class ScheduleController {
      */
     public void setScheduleServices(final ScheduleServices service) {
         this.scheduleService = service;
+    }
+
+    public int getStudentId(
+            final @RequestParam ("student_name") String student)
+    {
+        StringTokenizer st = new StringTokenizer(student);
+        while(st.hasMoreElements())
+        {
+            try{
+                return Integer.parseInt(st.nextToken());
+            }catch(Exception e){/* if not a integer do nothing */}
+        }
+        return -1;
+    }
+
+    public int getSectionId(
+            final @RequestParam ("section") String section)
+    {
+        StringTokenizer st = new StringTokenizer(section);
+        while(st.hasMoreElements())
+        {
+            try{
+                return Integer.parseInt(st.nextToken());
+            }catch(Exception e){/* if not a integer do nothing */}
+        }
+        return -1;
     }
 
     /**
@@ -139,4 +167,7 @@ public class ScheduleController {
                 + "<br/> <a href=" + "/"
                 + ">Go Back to main screen</a>");
     }
+
+
+
 }
