@@ -50,11 +50,17 @@ public class ScheduleControllerTest {
 
     @Before
     public void before() {
-
+        student = new StudentDto("Alex", "Whitlatch", 45678);
+        course = new CourseDto("Computer Science", 3210, 4,
+                "Learn stuffs", "Be better at computer", 0000, 0000);
+        professor = new ProfessorDto("Donald", "Trump", 123);
+        room = new RoomDto(250, 35, "Science Building");
+        section = new SectionDto(123, course, professor, room);
+        schedule = new ScheduleDto(student, section);
         scheduleController.setScheduleServices(scheduleMock);
         scheduleController.setSectionService(sectMock);
         scheduleController.setStudentServices(studentMock);
-        schedule = new ScheduleDto(student, section);
+
     }
 
     @Test
@@ -71,24 +77,13 @@ public class ScheduleControllerTest {
     }
 
     @Test
-    public void updateSchedule() throws Exception {
-        List<ScheduleDto> listy = new ArrayList<>();
-        listy.add(schedule);
-        when(scheduleMock.listAllSchedule()).thenReturn(listy);
-        when(scheduleMock.getScheduleByName(anyInt())).thenReturn(schedule);
-        assertEquals(scheduleController.updateSchedule("Building Name", "New Building Name"),
-                ("Successfully Updated" + "<br/> <a href=" + "/"
-                        + ">Go Back to main screen</a>"));
-    }
-
-    @Test
     public void readScheduleByName() throws Exception {
         List<ScheduleDto> listy = new ArrayList<>();
         listy.add(schedule);
         when(scheduleMock.listAllSchedule()).thenReturn(listy);
         when(scheduleMock.getScheduleByName(anyInt())).thenReturn(schedule);
-        assertEquals(scheduleController.readScheduleByName("Building Name"),
-                schedule.toString());
+        assertEquals(scheduleController.readScheduleByName("Student ID: 45678 Alex Whitlatch"),
+                "SCHEDULE INFORMATION</br>Section 1 </br>Section Number: 123</br>Course Information:</br>Department: Computer Science</br>Course Number: 3210</br>Course Description: Learn stuffs</br>Learning Objective :Be better at computer</br>Credits:4</br>Professor Information: </br> First Name: Donald</br>Last Name: Trump </br> </br> </br> Total Number of Credits this semester: 4");
     }
 
     @Test
@@ -97,7 +92,7 @@ public class ScheduleControllerTest {
         listy.add(schedule);
         when(scheduleMock.listAllSchedule()).thenReturn(listy);
 
-        assertEquals(scheduleController.deleteScheduleByName("Schedule Name"),
+        assertEquals(scheduleController.deleteScheduleByName("Student ID: 45678 First Name: Alex Last Name: Whitlatch Section Number: 123"),
                ("Removed Schedule"
                         + "<br/> <a href=" + "/"
                         + ">Go Back to main screen</a>"));
