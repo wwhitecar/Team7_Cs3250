@@ -103,6 +103,7 @@ public class ScheduleController extends ScheduleDto {
         sb.append("SCHEDULE INFORMATION</br>");
         int studentId = parseInt(studentName);
         int counter = 0;
+        int creditCounter = 0;
         for (ScheduleDto schedule : scheduleService.listAllSchedule()) {
             if (schedule.getStudentByName().getId() == studentId) {
                 counter = counter + 1;
@@ -115,7 +116,9 @@ public class ScheduleController extends ScheduleDto {
                 + "</br>Credits:" + schedule.getSection().getCourse().getCredits()
                 + "</br>Professor Information: </br> First Name: " + schedule.getSection().getProfessor().getFirstName()
                 + "</br>Last Name: " + schedule.getSection().getProfessor().getLastName() + " </br> </br> ");
+                creditCounter = creditCounter + schedule.getSection().getCourse().getCredits();
             }
+            sb.append("</br> Total Number of Credits this semester: " + creditCounter);
         }
         return sb.toString();
     }
