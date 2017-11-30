@@ -118,8 +118,8 @@ public class ScheduleController extends ScheduleDto {
                 + "</br>Last Name: " + schedule.getSection().getProfessor().getLastName() + " </br> </br> ");
                 creditCounter = creditCounter + schedule.getSection().getCourse().getCredits();
             }
-            sb.append("</br> Total Number of Credits this semester: " + creditCounter);
         }
+        sb.append("</br> Total Number of Credits this semester: " + creditCounter);
         return sb.toString();
     }
 
