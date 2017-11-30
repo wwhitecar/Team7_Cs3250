@@ -449,7 +449,8 @@ public class WebPageController {
     @RequestMapping("/scheduleRead")
     public String readSchedule(final Map<String, Object> model) {
         model.put("title", title);
-        return "buildingRead";
+        model.put("students", studentService.listAllStudent());
+        return "scheduleRead";
     }
       
     /**
@@ -479,7 +480,7 @@ public class WebPageController {
     @RequestMapping("/scheduleDelete")
     public String deleteSchedule(final Map<String, Object> model) {
         model.put("title", title);
-        model.put("schedule_name", scheduleService.listAllSchedule());
+        model.put("schedules", scheduleService.listAllSchedule());
         return "scheduleDelete";
     }/**
      * @param model - attribute to be injected to page.
