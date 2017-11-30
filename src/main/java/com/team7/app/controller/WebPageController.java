@@ -449,7 +449,8 @@ public class WebPageController {
     @RequestMapping("/scheduleRead")
     public String readSchedule(final Map<String, Object> model) {
         model.put("title", title);
-        return "buildingRead";
+        model.put("students", studentService.listAllStudent());
+        return "scheduleRead";
     }
       
     /**

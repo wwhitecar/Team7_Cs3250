@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/schedule")
-public class ScheduleController {
+public class ScheduleController extends ScheduleDto {
 
     /**
      * Services to be used by hibernate to correctly add
@@ -99,14 +99,23 @@ public class ScheduleController {
     @RequestMapping(value = "/readSchedule", method = RequestMethod.POST)
     public String readScheduleByName(
             final @RequestParam("student_name") String studentName) {
-        int id = 0;
+        StringBuilder sb = new StringBuilder();
+        int studentId = parseInt(studentName);
         for (ScheduleDto schedule : scheduleService.listAllSchedule()) {
-            if (schedule.getStudentByName().equals(studentName)) {
-                id = schedule.getDbKey();
+            if (schedule.getStudentByName().getId() == studentId) {
+                sb.append("Hello!").append("\r\n");
+                sb.append("\n");
+                sb.append("Section Number: " + schedule.getSection().getSectionNumber()
+                + "<\br>" + "Course Information:" + "\n Department: " + schedule.getSection().getCourse().getDepartment()
+                + "\n Course Number: " + schedule.getSection().getCourse().getCourseNumber()
+                + "\n Course Description: " + schedule.getSection().getCourse().getDescription()
+                + "\n Learning Objective :" + schedule.getSection().getCourse().getLearningObjectives()
+                + "\n Credits:" + schedule.getSection().getCourse().getCredits()
+                + "\n Professor Information: \r\n First Name: " + schedule.getSection().getProfessor().getFirstName()
+                + "\n Last Name: " + schedule.getSection().getProfessor().getLastName() + "\n");
             }
         }
-        ScheduleDto schedule = scheduleService.getScheduleByName((id));
-        return schedule.toString();
+        return sb.toString();
     }
 
     /**
