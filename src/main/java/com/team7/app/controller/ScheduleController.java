@@ -2,8 +2,10 @@ package com.team7.app.controller;
 
 import com.team7.app.business.dto.ScheduleDto;
 import com.team7.app.business.dto.SectionDto;
+import com.team7.app.business.dto.StudentDto;
 import com.team7.app.services.ScheduleServices;
 import com.team7.app.services.SectionServices;
+import com.team7.app.services.StudentServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +34,9 @@ public class ScheduleController {
     @Autowired
     private SectionServices sectionService;
 
+    @Autowired
+    private StudentServices studentService;
+
     /**
      * Setter for SectionService, for testing purposes only.
      * @param sectionServ - service to be used
@@ -56,10 +61,13 @@ public class ScheduleController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String createSchedule(
-            final @RequestParam ("schedule_name") String scheduleName,
-            final @RequestParam ("section") int sectionId) {
+            final @RequestParam ("student_name") String studentString,
+            final @RequestParam ("section") String sectionString) {
+        int sectionId = parseInt(sectionString);
+        int studentId = parseInt(studentString);
         SectionDto section = sectionService.getSectionById(sectionId);
-        ScheduleDto schedule = new ScheduleDto(scheduleName,section);
+        StudentDto student = studentService.getStudentById(studentId);
+        ScheduleDto schedule = new ScheduleDto(student,section);
         schedule = scheduleService.saveSchedule(schedule);
         if (schedule != null) {
             return ("Successfully created Schedule"
@@ -80,12 +88,12 @@ public class ScheduleController {
      */
     @RequestMapping(value = "/updateSchedule", method = RequestMethod.POST)
     public String updateSchedule(
-            final @RequestParam ("schedule_name") String scheduleName,
+            final @RequestParam ("student_name") String studentName,
             final @RequestParam ("new_schedule_name") String changedName) {
 
         ScheduleDto schedule = null;
         for (ScheduleDto element : scheduleService.listAllSchedule()) {
-            if (element.getScheduleByName().equals(scheduleName)) {
+            if (element.getStudentByName().equals(studentName)) {
                 schedule = element;
             }
         }
@@ -102,10 +110,10 @@ public class ScheduleController {
      */
     @RequestMapping(value = "/readSchedule", method = RequestMethod.POST)
     public String readScheduleByName(
-            final @RequestParam("schedule_name") String scheduleName) {
+            final @RequestParam("student_name") String studentName) {
         int id = 0;
         for (ScheduleDto schedule : scheduleService.listAllSchedule()) {
-            if (schedule.getScheduleByName().equals(scheduleName)) {
+            if (schedule.getStudentByName().equals(studentName)) {
                 id = schedule.getDbKey();
             }
         }
@@ -120,10 +128,10 @@ public class ScheduleController {
      */
     @RequestMapping(value = "/deleteSchedule/", method = RequestMethod.GET)
     public String deleteScheduleByName(
-            final @RequestParam("schedule_name") String scheduleName) {
+            final @RequestParam("student_name") String studentName) {
         int id = 0;
         for (ScheduleDto schedule : scheduleService.listAllSchedule()) {
-            if (schedule.getScheduleByName().equals(scheduleName)) {
+            if (schedule.getStudentByName().equals(studentName)) {
                 id = schedule.getDbKey();
             }
         }
@@ -132,5 +140,11 @@ public class ScheduleController {
         return ("Removed Schedule"
                 + "<br/> <a href=" + "/"
                 + ">Go Back to main screen</a>");
+    }
+
+    public int parseInt(String value){
+        String[] splitBySpaces = value.split(" ");
+        int retVal = Integer.parseInt(splitBySpaces[2]);
+        return retVal;
     }
 }

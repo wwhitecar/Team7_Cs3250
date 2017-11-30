@@ -21,7 +21,8 @@ public class ScheduleDto {
      * The course number to identify a course by more then
      * just the name.
      */
-    private String scheduleName;
+    @ManyToOne
+    private StudentDto studentName;
 
     @ManyToOne
     private SectionDto sectionDto;
@@ -54,8 +55,8 @@ public class ScheduleDto {
      * Param constructer.
      * @param nameOfSchedule - building name
      */
-    public ScheduleDto(final String nameOfSchedule, final SectionDto sectionDto) {
-        this.scheduleName = nameOfSchedule;
+    public ScheduleDto(final StudentDto studentDto, final SectionDto sectionDto) {
+        this.studentName = studentDto;
         this.sectionDto = sectionDto;
     }
 
@@ -64,8 +65,8 @@ public class ScheduleDto {
      * Getter for ScheduleName.
      * @return name of the Schedule.
      */
-    public String getScheduleByName() {
-        return scheduleName;
+    public StudentDto getStudentByName() {
+        return studentName;
     }
 
     public SectionDto getSection() {
@@ -74,10 +75,10 @@ public class ScheduleDto {
 
     /**
      * Setter for buildingName.
-     * @param scheduleName - the new schedule name
+     * @param studentName - the new schedule name
      */
-    public void setScheduleName(final String scheduleName) {
-        this.scheduleName = scheduleName;
+    public void setStudentName(final StudentDto studentName) {
+        this.studentName = studentName;
     }
 
     /**
