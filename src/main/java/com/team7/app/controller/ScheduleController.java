@@ -37,6 +37,8 @@ public class ScheduleController {
     @Autowired
     private StudentServices studentService;
 
+
+
     /**
      * Setter for SectionService, for testing purposes only.
      * @param sectionServ - service to be used
@@ -51,6 +53,14 @@ public class ScheduleController {
      */
     public void setScheduleServices(final ScheduleServices service) {
         this.scheduleService = service;
+    }
+
+    /**
+     * Setter for scheduleServices mapping purposes.
+     * @param service - service to be used for building services
+     */
+    public void setStudentServices(final StudentServices studentServ) {
+        this.studentService = studentServ;
     }
 
     /**
@@ -79,28 +89,6 @@ public class ScheduleController {
     }
 
 
-    /**
-     * Will pull information from the webpages to update a
-     * Schedule to be store into the database.
-     * @param scheduleName - old name to be changed
-     * @param changedName - new name we are chagning the schedule name too
-     * @return state of the create request
-     */
-    @RequestMapping(value = "/updateSchedule", method = RequestMethod.POST)
-    public String updateSchedule(
-            final @RequestParam ("student_name") String studentName,
-            final @RequestParam ("new_schedule_name") String changedName) {
-
-        ScheduleDto schedule = null;
-        for (ScheduleDto element : scheduleService.listAllSchedule()) {
-            if (element.getStudentByName().equals(studentName)) {
-                schedule = element;
-            }
-        }
-
-        return ("Successfully Updated" + "<br/> <a href=" + "/"
-                + ">Go Back to main screen</a>");
-    }
 
     /**
      * Will quarry the data base to pull the specific schedule

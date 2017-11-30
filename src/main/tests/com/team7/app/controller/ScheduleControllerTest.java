@@ -29,6 +29,9 @@ public class ScheduleControllerTest {
     SectionServicesImpl sectMock;
 
     @Mock
+    StudentServicesImpl studentMock;
+
+    @Mock
     RoomServices roomMock;
 
     @Mock
@@ -43,23 +46,25 @@ public class ScheduleControllerTest {
     ProfessorDto professor;
     SectionDto section;
     RoomDto room;
+    StudentDto student;
 
     @Before
     public void before() {
 
         scheduleController.setScheduleServices(scheduleMock);
         scheduleController.setSectionService(sectMock);
-        schedule = new ScheduleDto("Schedule Name", section);
+        scheduleController.setStudentServices(studentMock);
+        schedule = new ScheduleDto(student, section);
     }
 
     @Test
     public void createSchedule() throws Exception {
-        assertEquals(scheduleController.createSchedule("Building Name", 3),
+        assertEquals(scheduleController.createSchedule("Student ID 0", "Section Number 0"),
                 ("Unable to create Schedule" + "<br/> <a href=" + "/"
                         + ">Go Back to main screen</a>"));
 
         when(scheduleMock.saveSchedule(anyObject())).thenReturn(schedule);
-        assertEquals(scheduleController.createSchedule("Schedule Name", 70),
+        assertEquals(scheduleController.createSchedule("Student ID 1", "Section Number 1"),
                 ("Successfully created Schedule"
                         + "<br/> <a href=" + "/"
                         + ">Go Back to main screen</a>"));
