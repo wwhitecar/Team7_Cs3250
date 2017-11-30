@@ -100,19 +100,21 @@ public class ScheduleController extends ScheduleDto {
     public String readScheduleByName(
             final @RequestParam("student_name") String studentName) {
         StringBuilder sb = new StringBuilder();
+        sb.append("SCHEDULE INFORMATION</br>");
         int studentId = parseInt(studentName);
+        int counter = 0;
         for (ScheduleDto schedule : scheduleService.listAllSchedule()) {
             if (schedule.getStudentByName().getId() == studentId) {
-                sb.append("Hello!").append("\r\n");
-                sb.append("\n");
-                sb.append("Section Number: " + schedule.getSection().getSectionNumber()
-                + "<\br>" + "Course Information:" + "\n Department: " + schedule.getSection().getCourse().getDepartment()
-                + "\n Course Number: " + schedule.getSection().getCourse().getCourseNumber()
-                + "\n Course Description: " + schedule.getSection().getCourse().getDescription()
-                + "\n Learning Objective :" + schedule.getSection().getCourse().getLearningObjectives()
-                + "\n Credits:" + schedule.getSection().getCourse().getCredits()
-                + "\n Professor Information: \r\n First Name: " + schedule.getSection().getProfessor().getFirstName()
-                + "\n Last Name: " + schedule.getSection().getProfessor().getLastName() + "\n");
+                counter = counter + 1;
+                sb.append("Section " + counter + " </br>");
+                sb.append("Section Number: " +schedule.getSection().getSectionNumber()
+                 + "</br>Course Information:" + "</br>Department: " + schedule.getSection().getCourse().getDepartment()
+                + "</br>Course Number: " + schedule.getSection().getCourse().getCourseNumber()
+                + "</br>Course Description: " + schedule.getSection().getCourse().getDescription()
+                + "</br>Learning Objective :" + schedule.getSection().getCourse().getLearningObjectives()
+                + "</br>Credits:" + schedule.getSection().getCourse().getCredits()
+                + "</br>Professor Information: </br> First Name: " + schedule.getSection().getProfessor().getFirstName()
+                + "</br>Last Name: " + schedule.getSection().getProfessor().getLastName() + " </br> </br> ");
             }
         }
         return sb.toString();
@@ -125,10 +127,12 @@ public class ScheduleController extends ScheduleDto {
      */
     @RequestMapping(value = "/deleteSchedule/", method = RequestMethod.GET)
     public String deleteScheduleByName(
-            final @RequestParam("student_name") String studentName) {
+            final @RequestParam("schedules") String studentName) {
+        int studentId = parseInt(studentName);
+        int sectionId = parseSpecialCaseInt(studentName);
         int id = 0;
         for (ScheduleDto schedule : scheduleService.listAllSchedule()) {
-            if (schedule.getStudentByName().equals(studentName)) {
+            if (schedule.getStudentByName().getId() == studentId && schedule.getSection().getSectionNumber() == sectionId) {
                 id = schedule.getDbKey();
             }
         }
@@ -142,6 +146,12 @@ public class ScheduleController extends ScheduleDto {
     public int parseInt(String value){
         String[] splitBySpaces = value.split(" ");
         int retVal = Integer.parseInt(splitBySpaces[2]);
+        return retVal;
+    }
+
+    public int parseSpecialCaseInt(String value) {
+        String[] splitBySpaces = value.split(" ");
+        int retVal = Integer.parseInt(splitBySpaces[11]);
         return retVal;
     }
 }
