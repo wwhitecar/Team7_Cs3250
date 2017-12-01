@@ -102,11 +102,16 @@ public class SectionControllerTest {
     public void createSectionTest() throws Exception {
         List<ProfessorDto> listy = new ArrayList<>();
         listy.add(professor);
+        List<SectionDto> sectionList = new ArrayList<>();
+        List<SemesterDto> semesterList = new ArrayList<>();
         when(profMock.listAllProfessor()).thenReturn(listy);
         when(profMock.getProfessorById(anyInt())).thenReturn(professor);
         when(courseMock.getCourseById(anyInt())).thenReturn(course);
         when(sectMock.saveSection(anyObject())).thenReturn(section);
         when(roomMock.getRoomByNumber(anyInt())).thenReturn(room);
+        when(semesterMock.listAllSemesters()).thenReturn(semesterList);
+        when(sectMock.listAllSection()).thenReturn(sectionList);
+        semesterList.add(new SemesterDto("Spring 2017"));
         assertEquals(sectionController.createSection(1234, 789, "Harry Hook", 250, "Monday", "800", "Spring 2017"), section.toString() + " Added Successfully <br/> <a href="
                 + "/" + ">Go Back to main screen</a>");
     }
