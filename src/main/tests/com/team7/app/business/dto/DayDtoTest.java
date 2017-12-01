@@ -1,3 +1,4 @@
+
 package com.team7.app.business.dto;
 
 import org.junit.Before;
@@ -20,14 +21,14 @@ public class DayDtoTest {
 
     @Test
     public void getDayByNameTest(){
-        assertTrue(day.getDayByName().equals("Day Name"));
+        assertTrue(day.getDayName().equals("Day Name"));
     }
 
     @Test
     public void setDayNameTest(){
-        assertTrue(day.getDayByName().equals("Day Name"));
+        assertTrue(day.getDayName().equals("Day Name"));
         day.setDayName("This is a new name");
-        assertTrue(day.getDayByName().equals("This is a new name"));
+        assertTrue(day.getDayName().equals("This is a new name"));
     }
 
     @Test

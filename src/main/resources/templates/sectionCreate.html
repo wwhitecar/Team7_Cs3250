@@ -24,11 +24,50 @@
 
         <br/>
         <br/>
-        <label>New Room:</label>
+        <label>Room: </label>
         <select name="room_number" required>
             {{#rooms}}
             <option>{{roomNumber}}</option>
+            <label>Day for the class:</label>
             {{/rooms}}
+        </select>
+        <br/>
+        <label>Semester: </label>
+        <select name="Semester" required>
+            {{#semesters}}
+                <option>{{semesterName}}</option>
+            {{/semesters}}
+        </select>
+        <br/>
+        <strong>KEEP IN MIND YOU CANT OVERLAP COURSES IN THE SAME ROOM AND TIME</strong><br/>
+        <strong>It will throw an error</strong><br/>
+        <label>Select Day or Day's for class</label>
+        <br/>
+        <select name="Day" required>
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+        </select>
+
+        <label>Select Time for the class</label>
+        <select name="Time" required>
+            <option>800 </option>
+            <option>900 </option>
+            <option>1000</option>
+            <option>1100</option>
+            <option>1200</option>
+            <option>1300 </option>
+            <option>1400 </option>
+            <option>1500 </option>
+            <option>1600 </option>
+            <option>1700 </option>
+            <option>1800 </option>
+            <option>1900 </option>
+            <option>2000 </option>
         </select>
         <br/>
         <input type="submit" name="doit" value="Create Section" />

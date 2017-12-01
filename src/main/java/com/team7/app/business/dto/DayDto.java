@@ -1,10 +1,9 @@
 package com.team7.app.business.dto;
 
+
 import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
-
-import static javax.swing.UIManager.put;
 
 /**
  * Buildings that will be stored into the
@@ -19,7 +18,7 @@ public class DayDto {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int DayDbKey;
+    private int dayDbKey;
 
     /**
      * The course number to identify a course by more then
@@ -37,7 +36,9 @@ public class DayDto {
     /**
      * Empty Constructer.
      */
-    public DayDto() { }
+    public DayDto() {
+        this.dayMap = setDaysMap();
+    }
 
 
     /**
@@ -61,22 +62,23 @@ public class DayDto {
         dayMap.put(1900, true);
         dayMap.put(2000, true);
         return dayMap;
-    };
+    }
 
     /**
      * Param constructer.
      * @param dayOfTheWeek - building name
      */
     public DayDto(final String dayOfTheWeek) {
+
         this.dayMap = setDaysMap();
         this.dayName = dayOfTheWeek;
     }
 
     /**
-     * Getter for buildingName.
-     * @return name of the building.
+     * Getter for dayName.
+     * @return name of the day.
      */
-    public String getDayByName() {
+    public String getDayName() {
         return dayName;
     }
 
@@ -93,7 +95,7 @@ public class DayDto {
      * @return id of the building
      */
     public int getDayDbKey() {
-        return DayDbKey;
+        return dayDbKey;
     }
 
     /**
@@ -101,9 +103,14 @@ public class DayDto {
      * @return id of the building
      */
     public Map getDayMap() {
-        setDaysMap();
         return dayMap; }
 
+    /**
+     * Change the value of the time to false.
+     */
+    public void toggleValue(final Integer time){
+        dayMap.replace(time, false);
+    }
 }
 
 

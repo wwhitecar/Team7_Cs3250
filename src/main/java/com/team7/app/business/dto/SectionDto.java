@@ -39,6 +39,16 @@ public class SectionDto {
     private RoomDto room;
 
     /**
+     * The time for this section.
+     */
+    private int time;
+
+    /**
+     * The day associated with this section.
+     */
+    private String day;
+
+    /**
      * Empty Constructer.
      */
     public SectionDto() {
@@ -51,15 +61,21 @@ public class SectionDto {
      * @param courseDto - course to be tied to this section
      * @param professorDto - professor of the class/section
      * @param roomDto - room associated with this section.
+     * @param dayName - name of the day for this section
+     * @param classTime - time of the course
      */
     public SectionDto(final int sNumber,
-        final CourseDto courseDto,
-        final ProfessorDto professorDto,
-        final RoomDto roomDto) {
+                      final CourseDto courseDto,
+                      final ProfessorDto professorDto,
+                      final RoomDto roomDto,
+                      final String dayName,
+                      final int classTime) {
         this.sectionNumber = sNumber;
         this.course = courseDto;
         this.professor = professorDto;
         this.room = roomDto;
+        this.time = classTime;
+        this.day = dayName;
     }
 
     /**
@@ -103,6 +119,22 @@ public class SectionDto {
      */
     public RoomDto getRoom() {
         return room;
+    }
+
+    /**
+     * Getter for the time of this section.
+     * @return the time for this course
+     */
+    public int getTime() {
+        return this.time;
+    }
+
+    /**
+     * Getter for the day of this section.
+     * @return the day for the section
+     */
+    public String getDay() {
+        return this.day;
     }
 }
 

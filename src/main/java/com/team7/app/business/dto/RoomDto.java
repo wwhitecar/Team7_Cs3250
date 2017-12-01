@@ -104,6 +104,13 @@ public class RoomDto {
         return roomCapacity;
     }
 
+    /**
+     * Getter for the week that is associated to this room.
+     */
+    public WeekDto getWeek() {
+        return this.week;
+    }
+
 
     /**
      * Overrides the to string method.

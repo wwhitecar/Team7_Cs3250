@@ -1,13 +1,7 @@
 package com.team7.app.controller;
 
-import com.team7.app.business.dto.CourseDto;
-import com.team7.app.business.dto.ProfessorDto;
-import com.team7.app.business.dto.RoomDto;
-import com.team7.app.business.dto.SectionDto;
-import com.team7.app.services.CourseServices;
-import com.team7.app.services.ProfessorServices;
-import com.team7.app.services.RoomServices;
-import com.team7.app.services.SectionServices;
+import com.team7.app.business.dto.*;
+import com.team7.app.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,6 +45,21 @@ public class SectionController {
     private RoomServices roomService;
 
     /**
+     * Services to be used by hibernate to correctly add/remove
+     * information to the database.
+     */
+    @Autowired
+    private SemesterServices semesterService;
+
+    /**
+     * Setter for ProfessorService, for testing purposes only.
+     * @param semServ - service to be used
+     */
+    public void setSemesterService(final SemesterServices semServ) {
+        this.semesterService = semServ;
+    }
+
+    /**
      * Setter for ProfessorService, for testing purposes only.
      * @param courseServ - service to be used
      */
@@ -89,6 +98,7 @@ public class SectionController {
      * @param courseNumber - course specific number
      * @param professorName - professor teaching the section
      * @param roomNumber - room course will be taught in
+     * @param semesterName - name of the semester the section is ot be added
      * @return state of the create request
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
@@ -97,7 +107,11 @@ public class SectionController {
             final @RequestParam("course") int courseNumber,
 
             final @RequestParam("professor") String professorName,
-            final @RequestParam ("room_number") int roomNumber) {
+            final @RequestParam ("room_number") int roomNumber,
+            final @RequestParam ("Day") String day,
+            final @RequestParam ("Time") String time,
+            final @RequestParam("Semester") String semesterName) {
+        RoomDto room = roomService.getRoomByNumber(roomNumber);
         CourseDto course = courseService.getCourseById(courseNumber);
         ProfessorDto professor = null;
         for (ProfessorDto prof: professorService.listAllProfessor()) {
@@ -106,14 +120,50 @@ public class SectionController {
                 professor = professorService.getProfessorById(prof.getId());
             }
         }
-        RoomDto room = roomService.getRoomByNumber(roomNumber);
+        SemesterDto semester = getSemester(semesterName);
+        if (semester == null) {
+            return "Cannot find semester, many errors, handle it";
+        }
+
+        if(checkConflict(room, professor, day, time)) {
+            return "Conflict, please go back and try again";
+        }
+        if(course.getCredits() > 2) {
+
+        }
         SectionDto section = new SectionDto(sectionNumber,
-                course, professor, room);
+                course, professor, room, day, Integer.parseInt(time));
         section = sectionService.saveSection(section);
-            return (section.toString() + " Added Successfully <br/> <a href="
+
+        semester.getSections().add(section);
+        return (section.toString() + " Added Successfully <br/> <a href="
                     + "/" + ">Go Back to main screen</a>");
     }
 
+    private SemesterDto getSemester(final String semesterName) {
+        for (SemesterDto semester : semesterService.listAllSemesters()) {
+            if(semester.getSemesterName().equals(semesterName)) {
+                return semester;
+            }
+        }
+        return null;
+    }
+
+    private boolean checkConflict(final RoomDto room,
+                                  final ProfessorDto professor,
+                     final String dayName, final String time) {
+        for (SectionDto section : sectionService.listAllSection()) {
+            if (section.getRoom().getBuildingByName().equals(room.getBuildingByName())
+                    && section.getRoom().getRoomNumber() == room.getRoomNumber()) {
+                if (section.getDay().equals(dayName)) {
+                    if (section.getTime() == Integer.parseInt(time)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
     /**
      * Will pull information from the webpages to update a
      * section to be store into the database.
@@ -128,7 +178,9 @@ public class SectionController {
             final @RequestParam ("section_number") int sectionNumber,
             final @RequestParam("course") int courseNumber,
             final @RequestParam("professor") String professorName,
-            final @RequestParam ("room_number") int roomNumber) {
+            final @RequestParam ("room_number") int roomNumber,
+            final @RequestParam ("Day") String day,
+            final @RequestParam ("Time") String time) {
         CourseDto course = courseService.getCourseById(courseNumber);
         ProfessorDto professor = null;
         for (ProfessorDto prof: professorService.listAllProfessor()) {
@@ -139,7 +191,7 @@ public class SectionController {
         }
         RoomDto room = roomService.getRoomByNumber(roomNumber);
         SectionDto section
-                = new SectionDto(sectionNumber, course, professor, room);
+                = new SectionDto(sectionNumber, course, professor, room, day, Integer.parseInt(time));
         section = sectionService.saveSection(section);
         return (section.toString()
                + " Updated Section Successfully <br/> <a href="
