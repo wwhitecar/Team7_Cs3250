@@ -143,6 +143,9 @@ public class WebPageController {
         this.dayService = dayServ;
     }
 
+    public void setStudentService(final StudentServices studentServ) { this.studentService = studentServ;
+    }
+
     /**
      * Mapping for a web page.
      * @param model - attributes to be injected to page.
