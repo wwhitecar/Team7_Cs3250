@@ -290,6 +290,7 @@ public class WebPageController {
         model.put("courses", courseService.listAllCourse());
         model.put("professors", professorService.listAllProfessor());
         model.put("rooms", roomService.listAllRoom());
+        model.put("semesters", semesterService.listAllSemesters());
         return "sectionCreate";
     }
 

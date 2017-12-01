@@ -24,12 +24,19 @@
 
         <br/>
         <br/>
-        <label>Room:</label>
+        <label>Room: </label>
         <select name="room_number" required>
             {{#rooms}}
             <option>{{roomNumber}}</option>
             <label>Day for the class:</label>
             {{/rooms}}
+        </select>
+        <br/>
+        <label>Semester: </label>
+        <select name="Semester" required>
+            {{#semesters}}
+                <option>{{semesterName}}</option>
+            {{/semesters}}
         </select>
         <br/>
         <strong>KEEP IN MIND YOU CANT OVERLAP COURSES IN THE SAME ROOM AND TIME</strong><br/>

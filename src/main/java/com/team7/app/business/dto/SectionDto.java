@@ -39,7 +39,7 @@ public class SectionDto {
     private RoomDto room;
 
     /**
-     * The time for this section
+     * The time for this section.
      */
     private int time;
 
@@ -119,6 +119,22 @@ public class SectionDto {
      */
     public RoomDto getRoom() {
         return room;
+    }
+
+    /**
+     * Getter for the time of this section.
+     * @return the time for this course
+     */
+    public int getTime() {
+        return this.time;
+    }
+
+    /**
+     * Getter for the day of this section.
+     * @return the day for the section
+     */
+    public String getDay() {
+        return this.day;
     }
 }
 

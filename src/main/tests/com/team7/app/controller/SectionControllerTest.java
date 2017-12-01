@@ -1,10 +1,7 @@
 package com.team7.app.controller;
 
 import com.team7.app.business.dto.*;
-import com.team7.app.services.CourseServicesImpl;
-import com.team7.app.services.ProfessorServicesImpl;
-import com.team7.app.services.RoomServices;
-import com.team7.app.services.SectionServices;
+import com.team7.app.services.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +31,8 @@ public class SectionControllerTest {
 
     @Mock
     RoomServices roomMock;
+    @Mock
+    SemesterServices semesterMock;
 
     SectionController sectionController;
     CourseDto course;
@@ -48,6 +47,7 @@ public class SectionControllerTest {
         sectionController.setCourseService(courseMock);
         sectionController.setProfessorService(profMock);
         sectionController.setRoomService(roomMock);
+        sectionController.setSemesterService(semesterMock);
 
         List<DayDto> listy = new ArrayList<>();
         DayDto day = new DayDto("monday");
@@ -76,24 +76,26 @@ public class SectionControllerTest {
     @Test
     public void checkConflictsTest(){
         List<ProfessorDto> listy = new ArrayList<>();
+        List<SectionDto> sectionList = new ArrayList<>();
+        sectionList.add(new SectionDto(8675309, course, professor, room, "Monday", 1000));
+        List<SemesterDto> semesterList = new ArrayList<>();
         listy.add(professor);
         when(profMock.listAllProfessor()).thenReturn(listy);
         when(profMock.getProfessorById(anyInt())).thenReturn(professor);
         when(courseMock.getCourseById(anyInt())).thenReturn(course);
         when(sectMock.saveSection(anyObject())).thenReturn(section);
         when(roomMock.getRoomByNumber(anyInt())).thenReturn(room);
-        assertEquals(section.toString() + " Added Successfully <br/> <a href="
-                        + "/" + ">Go Back to main screen</a>",
-                sectionController.createSection(1234, 789, "Higher me", 250, "Monday", "900"));
-        assertEquals("Conflict, please go back and try again",
-                sectionController.createSection(1234, 789, "Higher me", 250, "monday", "900"));
-        assertEquals(section.toString() + " Added Successfully <br/> <a href="
-                        + "/" + ">Go Back to main screen</a>",
-                sectionController.createSection(1234, 789, "Higher me", 250, "Monday", "1000"));
-        assertNotEquals(section.toString() + " Added Successfully <br/> <a href="
-                        + "/" + ">Go Back to main screen</a>",
-                sectionController.createSection(1234, 789, "Higher me", 250, "Monday", "1000"));
+        when(sectMock.listAllSection()).thenReturn(sectionList);
+        when(semesterMock.listAllSemesters()).thenReturn(semesterList);
+        assertEquals("Cannot find semester, many errors, handle it",
+                sectionController.createSection(1234, 789, "Higher me", 250, "Monday", "900", "Spring 2017"));
 
+        semesterList.add(new SemesterDto("Spring 2017"));
+        assertEquals("Conflict, please go back and try again",
+                sectionController.createSection(1234, 789, "Higher me", 250, "Monday", "1000", "Spring 2017"));
+        assertEquals(section.toString() + " Added Successfully <br/> <a href="
+                        + "/" + ">Go Back to main screen</a>",
+                sectionController.createSection(1234, 789, "Higher me", 250, "monday", "900", "Spring 2017"));
     }
 
     @Test
@@ -105,7 +107,7 @@ public class SectionControllerTest {
         when(courseMock.getCourseById(anyInt())).thenReturn(course);
         when(sectMock.saveSection(anyObject())).thenReturn(section);
         when(roomMock.getRoomByNumber(anyInt())).thenReturn(room);
-        assertEquals(sectionController.createSection(1234, 789, "Harry Hook", 250, "Monday", "800"), section.toString() + " Added Successfully <br/> <a href="
+        assertEquals(sectionController.createSection(1234, 789, "Harry Hook", 250, "Monday", "800", "Spring 2017"), section.toString() + " Added Successfully <br/> <a href="
                 + "/" + ">Go Back to main screen</a>");
     }
 
