@@ -1,0 +1,12 @@
+{{>layout/header}}
+<body>
+<br/>
+<form action="/section/getsection" method="GET">
+    <label>
+        Section Id:<br/> <input type="number" name="section_number" required size="30" />
+    </label>
+    <br/>
+    <input type="submit" name="doit" value="Get Section" />
+</form>
+
+{{>layout/footer}}

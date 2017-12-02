@@ -1,0 +1,40 @@
+{{>layout/header}}
+<body>
+<h1>Team 7</h1>
+<h2>Create a Section</h2>
+<form action="/section/" method="POST">
+    <div>
+        <label>
+            Please Choose a Section Number: <br/> <input type="number" name="section_number" required/></label>
+        <label>
+           <br/><br/> Course: <br/></label>
+        <select name="course" required>
+            {{#courses}}
+            <option>{{courseNumber}}</option>
+            {{/courses}}
+        </select>
+        <br/>
+        <label>
+            <br/>Professor:<br/></label>
+        <select name="professor" required>
+            {{#professors}}
+            <option name="professor">{{firstName}} {{lastName}}</option>
+            {{/professors}}
+        </select>
+
+        <br/>
+        <br/>
+        <label>New Room:</label>
+        <select name="room_number" required>
+            {{#rooms}}
+            <option>{{roomNumber}}</option>
+            {{/rooms}}
+        </select>
+        <br/>
+        <input type="submit" name="doit" value="Create Section" />
+    </div>
+</form>
+
+<a href="/">Return to home Screen</a>
+</body>
+{{>layout/footer}}

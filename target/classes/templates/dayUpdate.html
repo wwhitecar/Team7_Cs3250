@@ -1,0 +1,18 @@
+{{>layout/header}}
+<body>
+<h1>Update Day Name</h1>
+<h2>Please enter a Day Id</h2>
+<form action="/day/updateday" method="POST">
+    <label>Name of Day to change:</label>
+    <select name = "day_name" required>
+        {{#days}}
+        <option>{{dayName}}</option>
+        {{/days}}
+    </select>
+    <p>New Day Information:</p><br/>
+    <label>
+        <br/>Day Name: <br/> <input type="text" name="new_day_name" required size="30" /></label>
+
+    <input type="submit" name="doit" value="Update Day Name" />
+</form>
+{{>layout/footer}}

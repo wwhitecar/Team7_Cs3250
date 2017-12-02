@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<title>Team 7 Project</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/main.css" />
+<img src="https://pbs.twimg.com/media/CzpwhcjVEAA5hrk.jpg" style="width:704px;height:428px;">
+<h1> METROPOLITAN STATE UNIVERSITY OF DENVER </h1>
+<h2> DEFINITELY A SOLID BANNER APPLICATION </h2>
+<style>
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+.dropdown {
+    float: left;
+    position: relative;
+    display: inline-block;
+    
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    right: 10;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #f1f1f1}
+
+.show {display:block;}
+</style>
+  <div class="dropdown">
+    <button onclick="myBuildingFunction()" class="dropbtn">Buildings</button>
+    <div id="myBuildingDropdown" class="dropdown-content">
+      <a href="buildingCreate.html">Create Building</a>
+      <a href="buildingUpdate.html">Update Building</a>
+      <a href="buildingDelete.html">Delete Building</a>
+      <a href="buildingRead.html">Read Building</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+   <button onclick="myProfessorFunction()" class="dropbtn">Professors</button>
+   <div id="myProfessorDropdown" class="dropdown-content">
+     <a href="professorCreate.html">Create Professor</a>
+     <a href="professorUpdate.html">Update Professor</a>
+     <a href="professorDelete.html">Delete Professor</a>
+      <a href="professorRead.html">Read Professor</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <button onclick="myCourseFunction()" class="dropbtn">Courses</button>
+    <div id="myCourseDropdown" class="dropdown-content">
+      <a href="courseCreate.html">Create Course</a>
+     <a href="courseUpdate.html">Update Course</a>
+     <a href="courseDelete.html">Delete Course</a>
+     <a href="courseRead.html">Read Course</a>
+     </div>
+  </div>
+  <div class="dropdown">
+      <button onclick="mySectionFunction()" class="dropbtn">Sections</button>
+      <div id="mySectionDropdown" class="dropdown-content">
+        <a href="sectionCreate.html">Create Section</a>
+        <a href="sectionUpdate.html">Update Section</a>
+        <a href="sectionDelete.html">Delete Section</a>
+        <a href="sectionRead.html">Read Section</a>
+      </div>
+  </div>
+
+  <div class="dropdown">
+    <button onclick="myStudentFunction()" class="dropbtn">Student</button>
+    <div id="myStudentDropdown" class="dropdown-content">
+      <a href="create.html">Create Student</a>
+      <a href="update.html">Update Student</a>
+      <a href="delete.html">Delete Student</a>
+      <a href="read.html">Read Student</a>
+    </div>
+  </div>
+
+    <div class="dropdown">
+        <button onclick="mySemesterFunction()" class="dropbtn">Semester</button>
+        <div id="mySemesterDropdown" class="dropdown-content">
+            <a href="semesterCreate.html">Create Semester</a>
+            <a href="semesterUpdate.html">Update Semester</a>
+            <a href="semesterDelete.html">Delete Semester</a>
+            <a href="semesterRead.html">Read Semester</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button onclick="myRoomFunction()" class="dropbtn">Room</button>
+        <div id="myRoomDropdown" class="dropdown-content">
+            <a href="roomCreate.html">Create Room</a>
+            <a href="roomUpdate.html">Update Room</a>
+            <a href="roomDelete.html">Delete Room</a>
+            <a href="roomRead.html">Read Room</a>
+        </div>
+    </div>
+    <br>
+    <br>
+</head>
+<!--  this is header -->

@@ -1,0 +1,20 @@
+{{>layout/header}}
+<body>
+<h1>Update data a Student</h1>
+<h2>Please enter a Student Id</h2>
+<form action="/user/update" method="GET">
+    <label>Cannot change Student id
+    <br/>Student Id:<br/> <input type="number" name="Id" required size="30" /></label>
+    <br/>
+    <p>New Name:</p><br/>
+    <label>First Name: <br/>
+    <input type="text" name="First Name" required size="30" /></label>
+    <br/>
+    <label>
+        <br/>Last Name: <br/><input type="text" name="Last Name" required size="30" />
+    </label>
+    <input type="submit" name="doit" value="Update Student" />
+</form>
+
+</body>
+{{>layout/footer}}

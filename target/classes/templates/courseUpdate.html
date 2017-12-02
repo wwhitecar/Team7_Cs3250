@@ -1,0 +1,30 @@
+{{>layout/header}}
+<body>
+<h1>Update data a Course</h1>
+<h2>Please enter a Course Id</h2>
+<form action="/course/updatecourse" method="GET">
+    <label>Cannont change Course Number
+    <br/>Course Number:<br/> <input type="number" name="course_number" required size="30" /></label>
+    <br/>
+    <p>New Course Information:</p><br/>
+<label>
+            <br/>Department: <br/> <input type="text" name="department" required size="30" /></label>
+        <br/>
+        <label>
+            <br/>Credits:<br/> <input type="number" name="credits" required size="30" /></label>
+        <br/>
+                <label>
+            <br/>Description:<br/> <input type="text" name="description" required size="120" /></label>
+        <br/>
+                <label>
+            <br/>Learning Objective:<br/> <input type="text" name="learning_objective" required size="120" /></label>
+        <br/>
+                <label>
+            <br/>Prereqs:<br/> <input type="number" name="prereqs" required size="30" /></label>
+        <br/>
+                <label>
+            <br/>Coreqs:<br/> <input type="number" name="coreqs" required size="30" /></label>
+        <br/>
+    <input type="submit" name="doit" value="Update Course" />
+</form>
+{{>layout/footer}}

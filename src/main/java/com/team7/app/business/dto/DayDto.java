@@ -101,7 +101,9 @@ public class DayDto {
      * @return id of the building
      */
     public Map getDayMap() {
-        setDaysMap();
+        if (dayMap == null){
+            setDaysMap();
+        }
         return dayMap; }
 
 }

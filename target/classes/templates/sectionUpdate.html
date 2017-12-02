@@ -1,0 +1,39 @@
+{{>layout/header}}
+<body>
+<h1>Update data for Section</h1>
+<h2>Please enter a Section Id</h2>
+<h3> If option is empty it means there are not Elements populated.</h3>
+<form id="update" action="/section/updatesection" method="POST">
+    <label>Can't change Section id.
+        <br/>Section Id <select name="section_number"/></label>
+    {{#sections}}
+    <option>{{sectionNumber}}</option>
+    {{/sections}}
+    <input type="submit" name="doit" value="Update Section" />
+    <br/>
+    <label>New Course:</label>
+    <select name="course" form="update" required>
+        {{#courses}}
+        <option>{{courseNumber}}</option>
+        {{/courses}}
+    </select>
+    <br/>
+    <label>New Professor:</label>
+    <select name="professor" form="update" required>
+        {{#professors}}
+        <option name="professor">{{firstName}} {{lastName}}</option>
+
+        {{/professors}}
+    </select>
+
+    <br/>
+    <label>New Room:</label>
+    <select name="room_number" form="update" required>
+        {{#rooms}}
+        <option>{{roomNumber}}</option>
+        {{/rooms}}
+    </select>
+
+</form>
+</body>
+{{>layout/footer}}

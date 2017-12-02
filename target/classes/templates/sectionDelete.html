@@ -1,0 +1,11 @@
+{{>layout/header}}
+<body>
+<form action="/section/deleteSection/" method="GET">
+    <label>
+        Section Number:<br/> <input type="number" name="section_number" required />
+    </label>
+    <br/>
+    <input type="submit" name="doit" value="Delete Section" />
+</form>
+</body>
+{{>layout/footer}}

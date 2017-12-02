@@ -1,0 +1,12 @@
+{{>layout/header}}
+<body>
+<form action="/schedule/readschedule" method="GET">
+    <label>
+        Schedule Name:<br/> <input type="text" name="schedule_name" required size="30" />
+    </label>
+    <br/>
+    <input type="submit" name="doit" value="Read Schedule Name" />
+</form>
+
+</body>
+{{>layout/footer}}

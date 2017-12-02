@@ -1,0 +1,11 @@
+{{>layout/header}}
+<body>
+<form action="/course/deletecourse" method="GET">
+    <label>
+        Course Number:<br/> <input type="number" name="course_number" required size="30" />
+    </label>
+    <br/>
+    <input type="submit" name="doit" value="Delete Course" />
+</form>
+</body>
+{{>layout/footer}}

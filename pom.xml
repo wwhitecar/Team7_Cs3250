@@ -111,6 +111,13 @@
       <version>1.4.3.RELEASE</version>
       <scope>test</scope>
     </dependency>
+
+    <!-- Security Dependencies -->
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-security</artifactId>
+      </dependency>
+
   </dependencies>
 
   <build>

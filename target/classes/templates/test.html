@@ -1,0 +1,23 @@
+{{>layout/header}}
+<body>
+<h1>Team 7</h1>
+<h2>Create User Page</h2>
+<br/>
+<form action="/user/" method="POST">
+    <div>
+        <label>
+            <br/>First Name: <br/> <input type="text" name="First Name" required size="30" /></label>
+        <br/>
+        <label>
+            <br/>Last Name: <br/><input type="text" name="Last Name" required size="30" /></label>
+        <br/>
+        <label>
+            <br/>User Id:<br/> <input type="number" name="Id" required size="30" /></label>
+        <br/>
+        <input type="submit" name="doit" value="Create User" />
+    </div>
+</form>
+
+<a href="/">Return to home Screen</a>
+</body>
+{{>layout/footer}}

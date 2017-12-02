@@ -1,0 +1,12 @@
+{{>layout/header}}
+<body>
+<form action="/professor/getprofessor/" method="GET">
+    <label>
+        Professor Id:<br/> <input type="number" name="Id" required size="30" />
+    </label>
+    <br/>
+    <input type="submit" name="doit" value="Read Professor" />
+</form>
+
+</body>
+{{>layout/footer}}
