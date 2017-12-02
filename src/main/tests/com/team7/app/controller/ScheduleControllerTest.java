@@ -55,7 +55,7 @@ public class ScheduleControllerTest {
                 "Learn stuffs", "Be better at computer", 0000, 0000);
         professor = new ProfessorDto("Donald", "Trump", 123);
         room = new RoomDto(250, 35, "Science Building");
-        section = new SectionDto(123, course, professor, room);
+        section = new SectionDto(123, course, professor, room,"Monday", 400);
         schedule = new ScheduleDto(student, section);
         scheduleController.setScheduleServices(scheduleMock);
         scheduleController.setSectionService(sectMock);

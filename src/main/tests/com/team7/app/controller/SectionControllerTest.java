@@ -76,6 +76,7 @@ public class SectionControllerTest {
     @Test
     public void checkConflictsTest(){
         List<ProfessorDto> listy = new ArrayList<>();
+        listy.add(professor);
         List<SectionDto> sectionList = new ArrayList<>();
         sectionList.add(new SectionDto(8675309, course, professor, room, "Monday", 1000));
         List<SemesterDto> semesterList = new ArrayList<>();
@@ -88,14 +89,16 @@ public class SectionControllerTest {
         when(sectMock.listAllSection()).thenReturn(sectionList);
         when(semesterMock.listAllSemesters()).thenReturn(semesterList);
         assertEquals("Cannot find semester, many errors, handle it",
-                sectionController.createSection(1234, 789, "Higher me", 250, "Monday", "900", "Spring 2017"));
+                sectionController.createSection(1234, 789, "Harry Hook", 250, "Monday", "900", "Spring 2017"));
 
         semesterList.add(new SemesterDto("Spring 2017"));
         assertEquals("Conflict, please go back and try again",
-                sectionController.createSection(1234, 789, "Higher me", 250, "Monday", "1000", "Spring 2017"));
+                sectionController.createSection(1234, 789, "Harry Hook", 250, "Monday", "1000", "Spring 2017"));
         assertEquals(section.toString() + " Added Successfully <br/> <a href="
                         + "/" + ">Go Back to main screen</a>",
-                sectionController.createSection(1234, 789, "Higher me", 250, "monday", "900", "Spring 2017"));
+                sectionController.createSection(1234, 789, "Harry Hook", 250, "Monday", "900", "Spring 2017"));
+        assertEquals("Conflict, please go back and try again",
+                sectionController.createSection(1234, 789, "Harry Hook", 350, "Monday", "1000", "Spring 2017"));
     }
 
     @Test
