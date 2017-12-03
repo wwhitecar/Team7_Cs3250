@@ -77,6 +77,9 @@ public class ScheduleController extends ScheduleDto {
         int studentId = parseInt(studentString);
         SectionDto section = sectionService.getSectionById(sectionId);
         StudentDto student = studentService.getStudentById(studentId);
+        if (!checkScheduleConflict(studentId, sectionId)){
+            return ("Time conflict error!");
+        }
         ScheduleDto schedule = new ScheduleDto(student,section);
         schedule = scheduleService.saveSchedule(schedule);
         if (schedule != null) {
@@ -115,7 +118,8 @@ public class ScheduleController extends ScheduleDto {
                 + "</br>Learning Objective :" + schedule.getSection().getCourse().getLearningObjectives()
                 + "</br>Credits:" + schedule.getSection().getCourse().getCredits()
                 + "</br>Professor Information: </br> First Name: " + schedule.getSection().getProfessor().getFirstName()
-                + "</br>Last Name: " + schedule.getSection().getProfessor().getLastName() + " </br> </br> ");
+                + "</br>Last Name: " + schedule.getSection().getProfessor().getLastName()
+                + "</br>Time: " + schedule.getSection().getDay() + " at " + schedule.getSection().getTime() + " </br> </br> ");
                 creditCounter = creditCounter + schedule.getSection().getCourse().getCredits();
             }
         }
@@ -155,6 +159,26 @@ public class ScheduleController extends ScheduleDto {
     public int parseSpecialCaseInt(String value) {
         String[] splitBySpaces = value.split(" ");
         int retVal = Integer.parseInt(splitBySpaces[11]);
+        return retVal;
+    }
+
+    public boolean checkScheduleConflict(int studentId, int sectionId){
+        boolean retVal = true;
+        SectionDto section = sectionService.getSectionById(sectionId);
+        for (ScheduleDto schedule : scheduleService.listAllSchedule()) {
+            if (schedule.getStudentByName().getId() == studentId) {
+                System.out.println(schedule.getStudentByName().toString() + " STUDENT MATCH!!!!!");
+                System.out.println(schedule.getSection().getDay().toString() + " First Schedule     ---->    " + section.getDay().toString());
+                if(schedule.getSection().getDay().toString().equals(section.getDay().toString())) {
+                    System.out.println(schedule.getSection().getDay().toString() + " Days MATCH!!!!!");
+                    if (schedule.getSection().getTime() == section.getTime()) {
+                        System.out.println(schedule.getSection().getTime() + " TIME MATCH!!!!!");
+                        retVal = false;
+                        return retVal;
+                    }
+                }
+            }
+        }
         return retVal;
     }
 }
