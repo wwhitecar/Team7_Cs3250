@@ -1,9 +1,9 @@
 package com.team7.app.business.dto;
 
-
-import javax.persistence.*;
-import java.util.HashMap;
-import java.util.Map;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Buildings that will be stored into the
@@ -26,43 +26,43 @@ public class DayDto {
      */
     private String dayName;
 
-    /**
-     * Map to hold hours and boolean availability
-     * just the name.
-     */
-    @ElementCollection //from the persistence class
-    private Map<Integer, Boolean> dayMap;
+//    /**
+//     * Map to hold hours and boolean availability
+//     * just the name.
+//     */
+//    @ElementCollection //from the persistence class
+//    private Map<Integer, Boolean> dayMap;
 
-    /**
-     * Empty Constructer.
-     */
-    public DayDto() {
-        this.dayMap = setDaysMap();
-    }
+//    /**
+//     * Empty Constructer.
+//     */
+//    public DayDto() {
+//        this.dayMap = setDaysMap();
+//    }
 
 
-    /**
-     * Setting the initial map with hours in
-     * military time.
-     * boolean is availability of the time
-     */
-    public Map setDaysMap() {
-        dayMap = new HashMap<Integer, Boolean>();
-        dayMap.put(800, true);
-        dayMap.put(900, true);
-        dayMap.put(1000, true);
-        dayMap.put(1100, true);
-        dayMap.put(1200, true);
-        dayMap.put(1300, true);
-        dayMap.put(1400, true);
-        dayMap.put(1500, true);
-        dayMap.put(1600, true);
-        dayMap.put(1700, true);
-        dayMap.put(1800, true);
-        dayMap.put(1900, true);
-        dayMap.put(2000, true);
-        return dayMap;
-    }
+//    /**
+//     * Setting the initial map with hours in
+//     * military time.
+//     * boolean is availability of the time
+//     */
+//    public Map setDaysMap() {
+//        dayMap = new HashMap<Integer, Boolean>();
+//        dayMap.put(800, true);
+//        dayMap.put(900, true);
+//        dayMap.put(1000, true);
+//        dayMap.put(1100, true);
+//        dayMap.put(1200, true);
+//        dayMap.put(1300, true);
+//        dayMap.put(1400, true);
+//        dayMap.put(1500, true);
+//        dayMap.put(1600, true);
+//        dayMap.put(1700, true);
+//        dayMap.put(1800, true);
+//        dayMap.put(1900, true);
+//        dayMap.put(2000, true);
+//        return dayMap;
+//    }
 
     /**
      * Param constructer.
@@ -70,7 +70,7 @@ public class DayDto {
      */
     public DayDto(final String dayOfTheWeek) {
 
-        this.dayMap = setDaysMap();
+//        this.dayMap = setDaysMap();
         this.dayName = dayOfTheWeek;
     }
 
@@ -98,19 +98,19 @@ public class DayDto {
         return dayDbKey;
     }
 
-    /**
-     * Getter for dBKey.
-     * @return id of the building
-     */
-    public Map getDayMap() {
-        return dayMap; }
+//    /**
+//     * Getter for dBKey.
+//     * @return id of the building
+//     */
+//    public Map getDayMap() {
+//        return dayMap; }
 
-    /**
-     * Change the value of the time to false.
-     */
-    public void toggleValue(final Integer time){
-        dayMap.replace(time, false);
-    }
+//    /**
+//     * Change the value of the time to false.
+//     */
+//    public void toggleValue(final Integer time){
+//        dayMap.replace(time, false);
+//    }
 }
 
 

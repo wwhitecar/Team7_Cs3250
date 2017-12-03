@@ -1,6 +1,10 @@
 package com.team7.app.business.dto;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * Buildings that will be stored into the
@@ -24,6 +28,9 @@ public class ScheduleDto {
     @ManyToOne
     private StudentDto studentName;
 
+    /**
+     * The Dto.
+     */
     @ManyToOne
     private SectionDto sectionDto;
 //
@@ -53,9 +60,11 @@ public class ScheduleDto {
 
     /**
      * Param constructer.
-     * @param nameOfSchedule - building name
+     * @param sectionDto - section Dto
+     * @param studentDto - student Dto
      */
-    public ScheduleDto(final StudentDto studentDto, final SectionDto sectionDto) {
+    public ScheduleDto(final StudentDto studentDto,
+                       final SectionDto sectionDto) {
         this.studentName = studentDto;
         this.sectionDto = sectionDto;
     }
@@ -69,6 +78,10 @@ public class ScheduleDto {
         return studentName;
     }
 
+    /**
+     * Getter for sectionDto.
+     * @return section Dto.
+     */
     public SectionDto getSection() {
         return sectionDto;
     }

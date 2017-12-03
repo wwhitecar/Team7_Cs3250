@@ -6,14 +6,12 @@ import com.team7.app.business.dto.WeekDto;
 import com.team7.app.services.DayServices;
 import com.team7.app.services.RoomServices;
 import com.team7.app.services.WeekServices;
-import com.team7.app.services.WeekServicesImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +38,10 @@ public class RoomController {
     @Autowired
     private WeekServices weekServices;
 
+    /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
     @Autowired
     private DayServices dayServices;
 
@@ -103,7 +105,8 @@ public class RoomController {
 
         WeekDto week = new WeekDto(listy);
         weekServices.saveWeek(week);
-        RoomDto room = new RoomDto(roomNumber, roomCapacity, buildingName, week);
+        RoomDto room = new RoomDto(roomNumber,
+                roomCapacity, buildingName, week);
         room = roomServices.saveRoom(room);
 
         if (room != null) {
