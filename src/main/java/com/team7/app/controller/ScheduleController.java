@@ -77,6 +77,9 @@ public class ScheduleController extends ScheduleDto {
         int studentId = parseInt(studentString);
         SectionDto section = sectionService.getSectionById(sectionId);
         StudentDto student = studentService.getStudentById(studentId);
+        if(!checkSameSectionConflict(studentId, sectionId)){
+            return ("You are already registered for this class!");
+        }
         if (!checkScheduleConflict(studentId, sectionId)){
             return ("Time conflict error!");
         }
@@ -172,6 +175,20 @@ public class ScheduleController extends ScheduleDto {
                         retVal = false;
                         return retVal;
                     }
+                }
+            }
+        }
+        return retVal;
+    }
+
+    public boolean checkSameSectionConflict (int studentId, int sectionId){
+        boolean retVal = true;
+        SectionDto section = sectionService.getSectionById(sectionId);
+        for (ScheduleDto schedule : scheduleService.listAllSchedule()) {
+            if (schedule.getStudentByName().getId() == studentId) {
+                if (schedule.getSection().getSectionNumber() == section.getSectionNumber()) {
+                    retVal = false;
+                    return retVal;
                 }
             }
         }
