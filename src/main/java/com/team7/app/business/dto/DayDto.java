@@ -33,12 +33,11 @@ public class DayDto {
 //    @ElementCollection //from the persistence class
 //    private Map<Integer, Boolean> dayMap;
 
-//    /**
-//     * Empty Constructer.
-//     */
-//    public DayDto() {
-//        this.dayMap = setDaysMap();
-//    }
+    /**
+     * Empty Constructer.
+     */
+    public DayDto() {
+    }
 
 
 //    /**

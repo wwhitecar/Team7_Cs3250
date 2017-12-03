@@ -16,7 +16,7 @@ public class DayDtoTest {
     @Before
     public void before(){
         day = new DayDto("Day Name");
-        dayTwo = new DayDto();
+        dayTwo = new DayDto("Day");
     }
 
     @Test
@@ -36,8 +36,8 @@ public class DayDtoTest {
         assertNotNull(day.getDayDbKey());
     }
 
-    @Test
-    public void getDayMap() {
-        assertEquals(day.getDayMap().size(), (13));
-    }
+//    @Test
+//    public void getDayMap() {
+//        assertEquals(day.getDayMap().size(), (13));
+//    }
 }
