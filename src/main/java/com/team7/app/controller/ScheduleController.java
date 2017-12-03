@@ -167,12 +167,8 @@ public class ScheduleController extends ScheduleDto {
         SectionDto section = sectionService.getSectionById(sectionId);
         for (ScheduleDto schedule : scheduleService.listAllSchedule()) {
             if (schedule.getStudentByName().getId() == studentId) {
-                System.out.println(schedule.getStudentByName().toString() + " STUDENT MATCH!!!!!");
-                System.out.println(schedule.getSection().getDay().toString() + " First Schedule     ---->    " + section.getDay().toString());
                 if(schedule.getSection().getDay().toString().equals(section.getDay().toString())) {
-                    System.out.println(schedule.getSection().getDay().toString() + " Days MATCH!!!!!");
                     if (schedule.getSection().getTime() == section.getTime()) {
-                        System.out.println(schedule.getSection().getTime() + " TIME MATCH!!!!!");
                         retVal = false;
                         return retVal;
                     }
