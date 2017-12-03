@@ -60,13 +60,13 @@ public class ScheduleDto {
 
     /**
      * Param constructer.
-     * @param sectionDto - section Dto
+     * @param section - section Dto
      * @param studentDto - student Dto
      */
     public ScheduleDto(final StudentDto studentDto,
-                       final SectionDto sectionDto) {
+                       final SectionDto section) {
         this.studentName = studentDto;
-        this.sectionDto = sectionDto;
+        this.sectionDto = section;
     }
 
 
@@ -88,10 +88,10 @@ public class ScheduleDto {
 
     /**
      * Setter for buildingName.
-     * @param studentName - the new schedule name
+     * @param newStudentName - the new schedule name
      */
-    public void setStudentName(final StudentDto studentName) {
-        this.studentName = studentName;
+    public void setStudentName(final StudentDto newStudentName) {
+        this.studentName = newStudentName;
     }
 
     /**

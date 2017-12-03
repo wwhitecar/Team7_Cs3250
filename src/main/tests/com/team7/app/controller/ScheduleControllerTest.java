@@ -65,6 +65,8 @@ public class ScheduleControllerTest {
 
     @Test
     public void createSchedule() throws Exception {
+        List<ScheduleDto> listy = new ArrayList<>();
+        when(scheduleMock.listAllSchedule()).thenReturn(listy);
         assertEquals(scheduleController.createSchedule("Student ID 0", "Section Number 0"),
                 ("Unable to create Schedule" + "<br/> <a href=" + "/"
                         + ">Go Back to main screen</a>"));
@@ -83,7 +85,7 @@ public class ScheduleControllerTest {
         when(scheduleMock.listAllSchedule()).thenReturn(listy);
         when(scheduleMock.getScheduleByName(anyInt())).thenReturn(schedule);
         assertEquals(scheduleController.readScheduleByName("Student ID: 45678 Alex Whitlatch"),
-                "SCHEDULE INFORMATION</br>Section 1 </br>Section Number: 123</br>Course Information:</br>Department: Computer Science</br>Course Number: 3210</br>Course Description: Learn stuffs</br>Learning Objective :Be better at computer</br>Credits:4</br>Professor Information: </br> First Name: Donald</br>Last Name: Trump </br> </br> </br> Total Number of Credits this semester: 4");
+                "SCHEDULE INFORMATION</br>Section 1 </br>Section Number: 123</br>Course Information:</br>Department: Computer Science</br>Course Number: 3210</br>Course Description: Learn stuffs</br>Learning Objective :Be better at computer</br>Credits:4</br>Professor Information: </br> First Name: Donald</br>Last Name: Trump</br>Time: Monday at 400 </br> </br> </br> Total Number of Credits this semester: 4");
     }
 
     @Test

@@ -65,6 +65,26 @@ public class WeekDto {
     private DayDto sun;
 
     /**
+     * Consent for the number 3.
+     */
+    private final int three = 3;
+
+    /**
+     * Consent for the number 4.
+     */
+    private final int four = 4;
+
+    /**
+     * Consent for the number 5.
+     */
+    private final int five = 5;
+
+    /**
+     * Consent for the number 6.
+     */
+    private final int six = 6;
+
+    /**
      * empty constructor.
      */
     public WeekDto() {
@@ -79,10 +99,10 @@ public class WeekDto {
         this.mon = listy.get(0);
         this.tues = listy.get(1);
         this.wed = listy.get(2);
-        this.thurs = listy.get(3);
-        this.fri = listy.get(4);
-        this.sat = listy.get(5);
-        this.sun = listy.get(6);
+        this.thurs = listy.get(three);
+        this.fri = listy.get(four);
+        this.sat = listy.get(five);
+        this.sun = listy.get(six);
     }
 
     //public int getWeekNum() { return weekNum; }
