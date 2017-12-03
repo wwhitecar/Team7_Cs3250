@@ -186,7 +186,7 @@ public class ScheduleController extends ScheduleDto {
         SectionDto section = sectionService.getSectionById(sectionId);
         for (ScheduleDto schedule : scheduleService.listAllSchedule()) {
             if (schedule.getStudentByName().getId() == studentId) {
-                if (schedule.getSection().getSectionNumber() == section.getSectionNumber()) {
+                if (schedule.getSection().getCourse().getCourseNumber() == section.getCourse().getCourseNumber()) {
                     retVal = false;
                     return retVal;
                 }
