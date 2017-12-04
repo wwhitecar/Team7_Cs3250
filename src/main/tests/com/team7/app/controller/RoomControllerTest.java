@@ -62,6 +62,8 @@ public class RoomControllerTest {
         when(weekMock.saveWeek(anyObject())).thenReturn(new WeekDto());
        assertEquals(roomController.createRoom(1001, 41, "Science"), room.toString()  + " Added Successfully <br/> <a href="
                 + "/" + ">Go Back to main screen</a>");
+       when(roomMock.saveRoom(anyObject())).thenReturn(null);
+        assertEquals(roomController.createRoom(1001, 41, "Science"), "Error adding Room for some reason");
     }
 
     @Test

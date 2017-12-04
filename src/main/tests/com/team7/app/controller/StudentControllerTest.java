@@ -69,5 +69,7 @@ public class StudentControllerTest {
         assertEquals(studentController.deleteStudentById(33),"Removed Student"
                 + "<br/> <a href=" + "/"
                 + ">Go Back to main screen</a>");
+        when(studentMock.getStudentById(anyInt())).thenReturn(student);
+        assertEquals("Unable to remove student, plz try again", studentController.deleteStudentById(33));
     }
 }

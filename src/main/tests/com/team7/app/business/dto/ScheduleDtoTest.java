@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ScheduleDtoTest {
@@ -21,6 +22,9 @@ public class ScheduleDtoTest {
     @Test
     public void getDbKeyTest() {
         assertNotNull(schedule.getDbKey());
+        StudentDto newStudent = new StudentDto();
+        schedule.setStudentName(newStudent);
+        assertNotEquals(schedule.getStudentByName(), student);
     }
 
 }

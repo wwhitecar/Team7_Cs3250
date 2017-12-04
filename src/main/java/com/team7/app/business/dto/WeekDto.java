@@ -139,8 +139,7 @@ public class WeekDto {
                 day = sun;
                 break;
             default:
-                System.out.println("incorrect day string");
-
+                day = null;
         }
         return day;
 
