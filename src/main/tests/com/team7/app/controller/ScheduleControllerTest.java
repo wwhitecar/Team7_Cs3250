@@ -29,6 +29,9 @@ public class ScheduleControllerTest {
     SectionServicesImpl sectMock;
 
     @Mock
+    StudentServicesImpl studentMock;
+
+    @Mock
     RoomServices roomMock;
 
     @Mock
@@ -43,36 +46,35 @@ public class ScheduleControllerTest {
     ProfessorDto professor;
     SectionDto section;
     RoomDto room;
+    StudentDto student;
 
     @Before
     public void before() {
-
+        student = new StudentDto("Alex", "Whitlatch", 45678);
+        course = new CourseDto("Computer Science", 3210, 4,
+                "Learn stuffs", "Be better at computer", 0000, 0000);
+        professor = new ProfessorDto("Donald", "Trump", 123);
+        room = new RoomDto(250, 35, "Science Building");
+        section = new SectionDto(123, course, professor, room,"Monday", 400);
+        schedule = new ScheduleDto(student, section);
         scheduleController.setScheduleServices(scheduleMock);
         scheduleController.setSectionService(sectMock);
-        schedule = new ScheduleDto("Schedule Name", section);
+        scheduleController.setStudentServices(studentMock);
+
     }
 
     @Test
     public void createSchedule() throws Exception {
-        assertEquals(scheduleController.createSchedule("Building Name", 3),
+        List<ScheduleDto> listy = new ArrayList<>();
+        when(scheduleMock.listAllSchedule()).thenReturn(listy);
+        assertEquals(scheduleController.createSchedule("Student ID 0", "Section Number 0"),
                 ("Unable to create Schedule" + "<br/> <a href=" + "/"
                         + ">Go Back to main screen</a>"));
 
         when(scheduleMock.saveSchedule(anyObject())).thenReturn(schedule);
-        assertEquals(scheduleController.createSchedule("Schedule Name", 70),
+        assertEquals(scheduleController.createSchedule("Student ID 1", "Section Number 1"),
                 ("Successfully created Schedule"
                         + "<br/> <a href=" + "/"
-                        + ">Go Back to main screen</a>"));
-    }
-
-    @Test
-    public void updateSchedule() throws Exception {
-        List<ScheduleDto> listy = new ArrayList<>();
-        listy.add(schedule);
-        when(scheduleMock.listAllSchedule()).thenReturn(listy);
-        when(scheduleMock.getScheduleByName(anyInt())).thenReturn(schedule);
-        assertEquals(scheduleController.updateSchedule("Building Name", "New Building Name"),
-                ("Successfully Updated" + "<br/> <a href=" + "/"
                         + ">Go Back to main screen</a>"));
     }
 
@@ -82,8 +84,8 @@ public class ScheduleControllerTest {
         listy.add(schedule);
         when(scheduleMock.listAllSchedule()).thenReturn(listy);
         when(scheduleMock.getScheduleByName(anyInt())).thenReturn(schedule);
-        assertEquals(scheduleController.readScheduleByName("Building Name"),
-                schedule.toString());
+        assertEquals(scheduleController.readScheduleByName("Student ID: 45678 Alex Whitlatch"),
+                "SCHEDULE INFORMATION</br>Section 1 </br>Section Number: 123</br>Course Information:</br>Department: Computer Science</br>Course Number: 3210</br>Course Description: Learn stuffs</br>Learning Objective :Be better at computer</br>Credits:4</br>Professor Information: </br> First Name: Donald</br>Last Name: Trump</br>Time: Monday at 400 </br> </br> </br> Total Number of Credits this semester: 4");
     }
 
     @Test
@@ -92,7 +94,7 @@ public class ScheduleControllerTest {
         listy.add(schedule);
         when(scheduleMock.listAllSchedule()).thenReturn(listy);
 
-        assertEquals(scheduleController.deleteScheduleByName("Schedule Name"),
+        assertEquals(scheduleController.deleteScheduleByName("Student ID: 45678 First Name: Alex Last Name: Whitlatch Section Number: 123"),
                ("Removed Schedule"
                         + "<br/> <a href=" + "/"
                         + ">Go Back to main screen</a>"));

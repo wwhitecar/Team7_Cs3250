@@ -1,13 +1,14 @@
 package com.team7.app.business.dto;
 
 import com.team7.app.services.DayServices;
-import com.team7.app.services.WeekServices;
-import com.team7.app.services.WeekServicesImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  * Room for the database to keep track of.
@@ -32,6 +33,10 @@ public class RoomDto {
      */
     private int roomCapacity;
 
+    /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
     @Autowired
     private static DayServices ds;
 
@@ -102,6 +107,14 @@ public class RoomDto {
      */
     public int getRoomCapacity() {
         return roomCapacity;
+    }
+
+    /**
+     * Getter for the week that is associated to this room.
+     * @return  week gets returned
+     */
+    public WeekDto getWeek() {
+        return this.week;
     }
 
 

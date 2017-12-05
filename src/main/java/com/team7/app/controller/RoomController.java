@@ -6,14 +6,12 @@ import com.team7.app.business.dto.WeekDto;
 import com.team7.app.services.DayServices;
 import com.team7.app.services.RoomServices;
 import com.team7.app.services.WeekServices;
-import com.team7.app.services.WeekServicesImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +38,28 @@ public class RoomController {
     @Autowired
     private WeekServices weekServices;
 
+    /**
+     * Services to be used by hibernate to correctly add
+     * information to the database.
+     */
     @Autowired
-    private static DayServices dayServices;
+    private DayServices dayServices;
+
+    /**
+     * Bean to be used throughout the room class.
+     * @param weekService - bean to be created
+     */
+    public void setWeekService(final WeekServices weekService) {
+        this.weekServices = weekService;
+    }
+
+    /**
+     * Bean to be used throughout the room class.
+     * @param dayService - bean to be created
+     */
+    public void setDayService(final DayServices dayService) {
+        this.dayServices = dayService;
+    }
 
     /**
      * Bean to be used throughout the room class.
@@ -62,9 +80,33 @@ public class RoomController {
     public String createRoom(final @RequestParam("Room Number")int roomNumber,
                      final @RequestParam("Room Capacity")int roomCapacity,
                      final @RequestParam("Building Name")String buildingName) {
-        WeekDto week = new WeekDto();
+        List<DayDto> listy = new ArrayList<>();
+        DayDto day = new DayDto("Monday");
+        dayServices.saveDay(day);
+        listy.add((day));
+        day = new DayDto("Tuesday");
+        dayServices.saveDay(day);
+        listy.add((day));
+        day = new DayDto("Wednesday");
+        dayServices.saveDay(day);
+        listy.add((day));
+        day = new DayDto("Thursday");
+        dayServices.saveDay(day);
+        listy.add((day));
+        day = new DayDto("Friday");
+        dayServices.saveDay(day);
+        listy.add((day));
+        day = new DayDto("Saturday");
+        dayServices.saveDay(day);
+        listy.add((day));
+        day = new DayDto("Sunday");
+        dayServices.saveDay(day);
+        listy.add((day));
+
+        WeekDto week = new WeekDto(listy);
         weekServices.saveWeek(week);
-        RoomDto room = new RoomDto(roomNumber, roomCapacity, buildingName, week);
+        RoomDto room = new RoomDto(roomNumber,
+                roomCapacity, buildingName, week);
         room = roomServices.saveRoom(room);
 
         if (room != null) {
@@ -120,12 +162,26 @@ public class RoomController {
     @RequestMapping(value = "/id/", method = RequestMethod.POST)
     public String deleteRoomByNumber(
             final @RequestParam("room number") Integer roomNumber) {
+        RoomDto room = roomServices.getRoomByNumber(roomNumber);
         roomServices.deleteRoom(roomNumber);
-        if (readRoomByNumber(roomNumber).equals("Unable to find Room")) {
-            return ("Removed Room"
-                    + "<br/> <a href=" + "/"
-                    + ">Go Back to main screen</a>");
-        }
-        return "Unable to find student, plz try again";
+        weekServices.deleteWeekByDbKey(room.getWeek().getWeekDbKey());
+        dayServices.deleteDayByName(
+                room.getWeek().getDayofWeek("monday").getDayDbKey());
+        dayServices.deleteDayByName(
+                room.getWeek().getDayofWeek("tuesday").getDayDbKey());
+        dayServices.deleteDayByName(
+                room.getWeek().getDayofWeek("wednesday").getDayDbKey());
+        dayServices.deleteDayByName(
+                room.getWeek().getDayofWeek("thursday").getDayDbKey());
+        dayServices.deleteDayByName(
+                room.getWeek().getDayofWeek("friday").getDayDbKey());
+        dayServices.deleteDayByName(
+                room.getWeek().getDayofWeek("saturday").getDayDbKey());
+        dayServices.deleteDayByName(
+                room.getWeek().getDayofWeek("sunday").getDayDbKey());
+
+        return ("Removed Room"
+               + "<br/> <a href=" + "/"
+               + ">Go Back to main screen</a>");
     }
 }

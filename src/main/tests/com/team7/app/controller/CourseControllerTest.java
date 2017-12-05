@@ -60,6 +60,9 @@ public class CourseControllerTest {
         assertEquals(courseController.deleteCourseByNumber(1234), "Removed Course"
                 + "<br/> <a href=" + "/"
                 + ">Go Back to main screen</a>");
+        when(courseMock.getCourseById(anyObject())).thenReturn(course);
+        assertEquals(courseController.deleteCourseByNumber(1234), "Unable to remove course, plz try again"
+                + "<br/> <a href=" + "/" + ">Go Back to main screen</a>");
     }
 
     @Test

@@ -21,7 +21,7 @@ public class WeekServicesImpl implements WeekServices {
 
     /**
      *
-     *
+     * @param weekRepo repository for the week
      */
     public void setWeekService(final WeekRepository weekRepo) {
         this.weekRepository = weekRepo;
@@ -39,8 +39,8 @@ public class WeekServicesImpl implements WeekServices {
      *
      */
     @Override
-    public WeekDto getWeekByDbKey(final Integer Id) {
-        return weekRepository.findOne(Id);
+    public WeekDto getWeekByDbKey(final Integer id) {
+        return weekRepository.findOne(id);
     }
 
     /**

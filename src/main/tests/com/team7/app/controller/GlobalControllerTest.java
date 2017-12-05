@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.when;
 
@@ -38,6 +39,9 @@ public class GlobalControllerTest {
         listGlobal.add(global);
         when(globalMock.listAllGlobals()).thenReturn(listGlobal);
         assertEquals(globalController.createGlobal("metro",3), ("Failed to add School name"));
+        when(globalMock.getGlobalByName(anyObject())).thenReturn(global);
+        assertEquals(globalController.createGlobal("metro", 3), (global.toString() + "Added Successfully <br/> <a href="
+                + "/" + ">Go Back to main screen</a>"));
     }
 
     @Test

@@ -99,6 +99,6 @@ public class StudentController {
                     + "<br/> <a href=" + string
                     + ">Go Back to main screen</a>");
         }
-        return "Unable to find student, plz try again";
+        return "Unable to remove student, plz try again";
       }
 }

@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-
 /**
  * Day controller to pass information between the database
  * and html pages.
@@ -43,14 +41,8 @@ public class DayController {
     public String createDay(
             final @RequestParam ("day_name") String dayName) {
         DayDto day = new DayDto(dayName);
-        day = dayService.saveDay(day);
-        day.setDaysMap();
-        if (day != null) {
-            return ("Successfully created day"
-                    + "<br/> <a href=" + "/"
-                    + ">Go Back to main screen</a>");
-        }
-        return ("Unable to create Builing" + "<br/> <a href=" + "/"
+        return ("Successfully created day"
+                + "<br/> <a href=" + "/"
                 + ">Go Back to main screen</a>");
     }
 
@@ -68,12 +60,12 @@ public class DayController {
             final @RequestParam ("new_day_name") String changedName) {
 
         DayDto day = null;
-        for (DayDto element : dayService.listAllDays()) {
-            if (element.getDayByName().equals(dayName)) {
-                day = element;
-            }
-        }
-        day.setDayName(changedName);
+   //     for (DayDto element : dayService.listAllDays()) {
+   //         if (element.getDayByName().equals(dayName)) {
+   //             day = element;
+   //         }
+   //     }
+   //     day.setDayName(changedName);
 
         day = dayService.saveDay(day);
         return ("Successfully Updated" + "<br/> <a href=" + "/"
@@ -91,7 +83,7 @@ public class DayController {
             final @RequestParam("day_name") String dayName) {
         int id = 0;
         for (DayDto day : dayService.listAllDays()) {
-            if (day.getDayByName().equals(dayName)) {
+            if (day.getDayName().equals(dayName)) {
                 id = day.getDayDbKey();
             }
         }
@@ -108,11 +100,11 @@ public class DayController {
     public String deleteDayByName(
             final @RequestParam("day_name") String dayName) {
         int id = 0;
-        for (DayDto day : dayService.listAllDays()) {
-            if (day.getDayByName().equals(dayName)) {
-                id = day.getDayDbKey();
-            }
-        }
+   //     for (DayDto day : dayService.listAllDays()) {
+  //          if (day.getDayByName().equals(dayName)) {
+  //              id = day.getDayDbKey();
+  //          }
+  //      }
 
         dayService.deleteDayByName(id);
         return ("Removed Day"
