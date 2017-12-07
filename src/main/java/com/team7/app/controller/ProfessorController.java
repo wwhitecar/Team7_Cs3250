@@ -54,7 +54,7 @@ public class ProfessorController {
      * @param id - id of hte professor to be found in database
      * @return information about the professor found
      */
-    @RequestMapping(value = "/professor_id")
+    @RequestMapping(value = "/getprofessor")
     public String readProfessorById(final @RequestParam("Id") Integer id) {
         ProfessorDto professor = professorService.getProfessorById(id);
         if (professor == null) {

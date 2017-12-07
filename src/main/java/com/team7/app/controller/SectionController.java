@@ -189,11 +189,8 @@ public class SectionController {
             }
         }
         for (SectionDto section : sectionService.listAllSection()) {
-            System.out.println(section.getProfessor());
-            System.out.println(professor);
-            if (section.getProfessor().equals(professor)) {
-                if (section.getDay() == dayName) {
-                    System.out.println(section.getTime() + time);
+            if (section.getProfessor().getId() == professor.getId()) {
+                if (section.getDay().equals(dayName)) {
                     if (section.getTime() == Integer.parseInt(time)) {
                         return true;
                     }

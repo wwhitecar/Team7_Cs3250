@@ -40,7 +40,7 @@ public class DayController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String createDay(
             final @RequestParam ("day_name") String dayName) {
-        DayDto day = new DayDto(dayName);
+        //DayDto day = new DayDto(dayName);
         return ("Successfully created day"
                 + "<br/> <a href=" + "/"
                 + ">Go Back to main screen</a>");
@@ -67,7 +67,7 @@ public class DayController {
    //     }
    //     day.setDayName(changedName);
 
-        day = dayService.saveDay(day);
+        dayService.saveDay(day);
         return ("Successfully Updated" + "<br/> <a href=" + "/"
                 + ">Go Back to main screen</a>");
     }

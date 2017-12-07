@@ -67,22 +67,22 @@ public class WeekDto {
     /**
      * Consent for the number 3.
      */
-    private final int three = 3;
+    private static final int THREE = 3;
 
     /**
      * Consent for the number 4.
      */
-    private final int four = 4;
+    private static final int FOUR = 4;
 
     /**
      * Consent for the number 5.
      */
-    private final int five = 5;
+    private static final int FIVE = 5;
 
     /**
      * Consent for the number 6.
      */
-    private final int six = 6;
+    private static final int SIX = 6;
 
     /**
      * empty constructor.
@@ -99,10 +99,10 @@ public class WeekDto {
         this.mon = listy.get(0);
         this.tues = listy.get(1);
         this.wed = listy.get(2);
-        this.thurs = listy.get(three);
-        this.fri = listy.get(four);
-        this.sat = listy.get(five);
-        this.sun = listy.get(six);
+        this.thurs = listy.get(THREE);
+        this.fri = listy.get(FOUR);
+        this.sat = listy.get(FIVE);
+        this.sun = listy.get(SIX);
     }
 
     //public int getWeekNum() { return weekNum; }
