@@ -13,7 +13,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         httpSecurity.authorizeRequests()
                 .antMatchers("/").hasRole("USER")
                 .and()
-                    .formLogin();
+                    .formLogin().and().csrf().disable();
     }
 
     @Autowired
