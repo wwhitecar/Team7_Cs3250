@@ -44,7 +44,7 @@ public class ScheduleController extends ScheduleDto {
     /**
      * Constent to be used instead of a magic number.
      */
-    private final int eleven = 11;
+    private static final int ELEVEN = 11;
 
     /**
      * Setter for SectionService, for testing purposes only.
@@ -191,7 +191,7 @@ public class ScheduleController extends ScheduleDto {
      *///had to change string to final for checkstyle
     public int parseSpecialCaseInt(final String value) {
         String[] splitBySpaces = value.split(" ");
-        int retVal = Integer.parseInt(splitBySpaces[eleven]);
+        int retVal = Integer.parseInt(splitBySpaces[ELEVEN]);
         return retVal;
     }
 

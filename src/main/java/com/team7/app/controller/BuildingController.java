@@ -72,7 +72,7 @@ public class BuildingController {
         }
         building.setBuildingName(changedName);
 
-        building = buildingService.saveBuilding(building);
+        buildingService.saveBuilding(building);
         return ("Successfully Updated" + "<br/> <a href=" + "/"
                 + ">Go Back to main screen</a>");
     }
